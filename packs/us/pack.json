@@ -1,0 +1,30 @@
+{
+ "packId": "us",
+ "version": "0.1.0",
+ "country": "US",
+ "regionKind": "state",
+ "languages": [
+  "en"
+ ],
+ "defaultLanguage": "en",
+ "projection": {
+  "type": "planar",
+  "note": "Albers USA\u76f8\u5f53(\u713c\u304d\u8fbc\u307f\u6e08\u307f)\u3002\u5ea7\u6a19\u306f0..1000\u306e\u5e73\u9762"
+ },
+ "insets": [
+  {
+   "id": "US-AK",
+   "scale": 0.35
+  },
+  {
+   "id": "US-HI",
+   "scale": 1.0
+  }
+ ],
+ "attribution": "Made with Natural Earth (naturalearthdata.com)",
+ "license": {
+  "name": "Public Domain (Natural Earth)",
+  "commercialConfirmed": true,
+  "internalOnly": false
+ }
+}

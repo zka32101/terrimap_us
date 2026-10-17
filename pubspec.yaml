@@ -1,0 +1,42 @@
+name: terrimap_us
+description: "State Master – USA (仮)。51州（50州＋DC）の位置・州名・州都を覚える地図クイズ。"
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: ^2.2.0
+  flutter_riverpod: ^2.6.1
+  app_common_kit:
+    git:
+      url: https://github.com/zka32101/app_common_kit.git
+      ref: v3.11.0
+  terrimap_core:
+    git:
+      url: https://github.com/zka32101/terrimap_core
+      ref: main
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.0
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/icon/app_icon.png
+  remove_alpha_ios: true
+  min_sdk_android: 23
+
+flutter:
+  uses-material-design: true
+  assets:
+    - packs/us/pack.json
+    - packs/us/regions.json
+    - packs/us/geo.geojson
+    - packs/us/strings/en.json
