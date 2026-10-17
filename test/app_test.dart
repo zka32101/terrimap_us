@@ -60,6 +60,7 @@ void main() {
     await t.pump();
     expect(find.text('State Master – USA'), findsOneWidget);
     expect(find.text('0 / 51'), findsOneWidget);
+    expect(find.byKey(const Key('zoom_in')), findsOneWidget); // 極小の州(DC・RI等)を押せるよう拡大ボタン
 
     await t.tap(find.text('Quiz'));
     await t.pumpAndSettle();

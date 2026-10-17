@@ -119,6 +119,7 @@ class HomeScreen extends ConsumerWidget {
               Expanded(
                 child: RegionMapView(
                   pack: app.pack,
+                  showZoomControls: true,
                   onTap: (id) {
                     if (!isRegionUnlocked(id, premium: premium)) showUnlockSheet(context, app);
                   },

@@ -86,6 +86,7 @@ class _QuizScreenState extends State<QuizScreen> {
       case QuestionType.locateOnMap:
         return RegionMapView(
           pack: pack,
+          showZoomControls: true,
           onTap: _done ? null : _answer,
           colorOf: (id) {
             if (!_done) return const Color(0xFFECEFF1);
@@ -97,6 +98,7 @@ class _QuizScreenState extends State<QuizScreen> {
       case QuestionType.nameFromMap:
         return RegionMapView(
           pack: pack,
+          showZoomControls: true,
           colorOf: (id) => id == q.targetId ? const Color(0xFFFFB300) : const Color(0xFFECEFF1),
         );
       case QuestionType.silhouette:
@@ -105,6 +107,7 @@ class _QuizScreenState extends State<QuizScreen> {
       case QuestionType.nameFromCapital:
         return RegionMapView(
           pack: pack,
+          showZoomControls: true,
           colorOf: (id) => id == q.targetId && q.type == QuestionType.capitalFromName
               ? const Color(0xFFFFB300)
               : const Color(0xFFECEFF1),
