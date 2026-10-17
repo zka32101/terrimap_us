@@ -1,0 +1,208 @@
+{
+ "regions": [
+  {
+   "id": "US-AK",
+   "capitalId": "cap_US-AK"
+  },
+  {
+   "id": "US-AL",
+   "capitalId": "cap_US-AL"
+  },
+  {
+   "id": "US-AR",
+   "capitalId": "cap_US-AR"
+  },
+  {
+   "id": "US-AZ",
+   "capitalId": "cap_US-AZ"
+  },
+  {
+   "id": "US-CA",
+   "capitalId": "cap_US-CA"
+  },
+  {
+   "id": "US-CO",
+   "capitalId": "cap_US-CO"
+  },
+  {
+   "id": "US-CT",
+   "capitalId": "cap_US-CT"
+  },
+  {
+   "id": "US-DC",
+   "capitalId": "cap_US-DC"
+  },
+  {
+   "id": "US-DE",
+   "capitalId": "cap_US-DE"
+  },
+  {
+   "id": "US-FL",
+   "capitalId": "cap_US-FL"
+  },
+  {
+   "id": "US-GA",
+   "capitalId": "cap_US-GA"
+  },
+  {
+   "id": "US-HI",
+   "capitalId": "cap_US-HI"
+  },
+  {
+   "id": "US-IA",
+   "capitalId": "cap_US-IA"
+  },
+  {
+   "id": "US-ID",
+   "capitalId": "cap_US-ID"
+  },
+  {
+   "id": "US-IL",
+   "capitalId": "cap_US-IL"
+  },
+  {
+   "id": "US-IN",
+   "capitalId": "cap_US-IN"
+  },
+  {
+   "id": "US-KS",
+   "capitalId": "cap_US-KS"
+  },
+  {
+   "id": "US-KY",
+   "capitalId": "cap_US-KY"
+  },
+  {
+   "id": "US-LA",
+   "capitalId": "cap_US-LA"
+  },
+  {
+   "id": "US-MA",
+   "capitalId": "cap_US-MA"
+  },
+  {
+   "id": "US-MD",
+   "capitalId": "cap_US-MD"
+  },
+  {
+   "id": "US-ME",
+   "capitalId": "cap_US-ME"
+  },
+  {
+   "id": "US-MI",
+   "capitalId": "cap_US-MI"
+  },
+  {
+   "id": "US-MN",
+   "capitalId": "cap_US-MN"
+  },
+  {
+   "id": "US-MO",
+   "capitalId": "cap_US-MO"
+  },
+  {
+   "id": "US-MS",
+   "capitalId": "cap_US-MS"
+  },
+  {
+   "id": "US-MT",
+   "capitalId": "cap_US-MT"
+  },
+  {
+   "id": "US-NC",
+   "capitalId": "cap_US-NC"
+  },
+  {
+   "id": "US-ND",
+   "capitalId": "cap_US-ND"
+  },
+  {
+   "id": "US-NE",
+   "capitalId": "cap_US-NE"
+  },
+  {
+   "id": "US-NH",
+   "capitalId": "cap_US-NH"
+  },
+  {
+   "id": "US-NJ",
+   "capitalId": "cap_US-NJ"
+  },
+  {
+   "id": "US-NM",
+   "capitalId": "cap_US-NM"
+  },
+  {
+   "id": "US-NV",
+   "capitalId": "cap_US-NV"
+  },
+  {
+   "id": "US-NY",
+   "capitalId": "cap_US-NY"
+  },
+  {
+   "id": "US-OH",
+   "capitalId": "cap_US-OH"
+  },
+  {
+   "id": "US-OK",
+   "capitalId": "cap_US-OK"
+  },
+  {
+   "id": "US-OR",
+   "capitalId": "cap_US-OR"
+  },
+  {
+   "id": "US-PA",
+   "capitalId": "cap_US-PA"
+  },
+  {
+   "id": "US-RI",
+   "capitalId": "cap_US-RI"
+  },
+  {
+   "id": "US-SC",
+   "capitalId": "cap_US-SC"
+  },
+  {
+   "id": "US-SD",
+   "capitalId": "cap_US-SD"
+  },
+  {
+   "id": "US-TN",
+   "capitalId": "cap_US-TN"
+  },
+  {
+   "id": "US-TX",
+   "capitalId": "cap_US-TX"
+  },
+  {
+   "id": "US-UT",
+   "capitalId": "cap_US-UT"
+  },
+  {
+   "id": "US-VA",
+   "capitalId": "cap_US-VA"
+  },
+  {
+   "id": "US-VT",
+   "capitalId": "cap_US-VT"
+  },
+  {
+   "id": "US-WA",
+   "capitalId": "cap_US-WA"
+  },
+  {
+   "id": "US-WI",
+   "capitalId": "cap_US-WI"
+  },
+  {
+   "id": "US-WV",
+   "capitalId": "cap_US-WV"
+  },
+  {
+   "id": "US-WY",
+   "capitalId": "cap_US-WY"
+  }
+ ]
+}
