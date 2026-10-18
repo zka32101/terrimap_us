@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:terrimap_core/battle/battle_engine.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
+import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/battle/stage.dart';
 import 'package:terrimap_core/battle/stage_generator.dart';
 import 'package:terrimap_core/battle_ui/battle_session.dart';
@@ -14,15 +15,16 @@ import 'assist_dialog.dart';
 /// バトル画面（最小版）。盤面、HUD、施設の設置・強化・撤去・修理、スキル選択（クイズ連動）、結果。
 class BattleScreen extends StatefulWidget {
   final AppState app;
-  final String regionId;
+  final String regionId; // 種別に応じて 州・地方・エクストラ の id
   final Difficulty difficulty;
-  const BattleScreen({super.key, required this.app, required this.regionId, required this.difficulty});
+  final StageKind kind;
+  const BattleScreen({super.key, required this.app, required this.regionId, required this.difficulty, this.kind = StageKind.normal});
   @override
   State<BattleScreen> createState() => _BattleScreenState();
 }
 
 class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderStateMixin {
-  late final Stage _stage = StageGenerator(widget.app.pack).generate(widget.regionId, widget.difficulty);
+  late final Stage _stage = StageGenerator(widget.app.pack).generate(widget.regionId, widget.difficulty, kind: widget.kind);
   late final BattleSession _session = BattleSession(
     BattleEngine(_stage, profile: widget.app.pack.profile, pack: widget.app.pack, quizAssist: widget.app.quizAssist),
   );
@@ -69,6 +71,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     if (mounted) setState(() {});
     if (_session.isOver && !_resultShown) {
       _resultShown = true;
+      if (_session.won) widget.app.recordBattleClear(widget.kind, widget.regionId, widget.difficulty);
       WidgetsBinding.instance.addPostFrameCallback((_) => _showResult());
     }
   }
@@ -97,6 +100,19 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
         _message = ui.t('base.heal');
       default:
         break;
+    }
+  }
+
+  String get _title {
+    final app = widget.app, lang = app.lang, profile = app.pack.profile;
+    switch (widget.kind) {
+      case StageKind.normal:
+        return app.s.regionName(widget.regionId);
+      case StageKind.regional:
+        return profile?.groups[widget.regionId]?.nameIn(lang) ?? widget.regionId;
+      case StageKind.extra:
+        final e = profile?.extras.where((x) => x.id == widget.regionId).firstOrNull;
+        return e == null ? widget.regionId : (e.title[lang] ?? e.title['en'] ?? e.id);
     }
   }
 
@@ -189,7 +205,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
             onPressed: () {
               Navigator.pop(ctx);
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (_) => BattleScreen(app: widget.app, regionId: widget.regionId, difficulty: widget.difficulty),
+                builder: (_) => BattleScreen(app: widget.app, regionId: widget.regionId, difficulty: widget.difficulty, kind: widget.kind),
               ));
             },
             child: Text(ui.t('result.retry')),
@@ -210,10 +226,10 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    final app = widget.app, ui = _ui, st = _session.state;
+    final ui = _ui, st = _session.state;
     return Scaffold(
       appBar: AppBar(
-        title: Text('${app.s.regionName(widget.regionId)} · ${ui.t('difficulty.${widget.difficulty.name}')}', maxLines: 1, overflow: TextOverflow.ellipsis),
+        title: Text('$_title · ${ui.t('difficulty.${widget.difficulty.name}')}', maxLines: 1, overflow: TextOverflow.ellipsis),
         actions: [
           IconButton(
             key: const ValueKey('speed'),
@@ -265,7 +281,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
         Text('● ${st.coins}', key: const ValueKey('hud-coins')),
         Chip(
           visualDensity: VisualDensity.compact,
-          label: Text(ui.t('season.${_stage.season.name}')),
+          label: Text(ui.t('season.${_stage.seasonAt(st.phase == BattlePhase.wave ? st.wave : st.wave + 1).name}')),
         ),
         if (_weather != null)
           Chip(visualDensity: VisualDensity.compact, avatar: const Icon(Icons.cloud, size: 16), label: Text(ui.t('weather.$_weather'))),
@@ -304,11 +320,11 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
               child: Text('${_facilityName(t)} ${_engine.costOf(t)}'),
             ),
           ),
-        if (_engine.exclusiveCostOf() != null && !st.facilities.values.any((x) => x.exclusive != null))
+        if (_engine.exclusiveLeft(st).isNotEmpty && _engine.exclusiveCostOf(_engine.exclusiveLeft(st).first) != null)
           FilledButton(
             key: const ValueKey('place-exclusive'),
-            onPressed: st.coins >= _engine.exclusiveCostOf()! ? _session.placeExclusive : null,
-            child: Text('★ ${_exclusiveName(_stage.exclusiveFacility!)} ${_engine.exclusiveCostOf()}'),
+            onPressed: st.coins >= _engine.exclusiveCostOf(_engine.exclusiveLeft(st).first)! ? _session.placeExclusive : null,
+            child: Text('★ ${_exclusiveName(_engine.exclusiveLeft(st).first)} ${_engine.exclusiveCostOf(_engine.exclusiveLeft(st).first)}'),
           ),
       ]));
     } else if (f != null) {

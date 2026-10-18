@@ -2,6 +2,9 @@
 import 'package:flutter/services.dart' show AssetManifest, rootBundle;
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:terrimap_core/battle/battle_progress.dart';
+import 'package:terrimap_core/battle/difficulty.dart';
+import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/i18n/languages.dart';
 import 'package:terrimap_core/i18n/ui_strings.dart';
 import 'package:terrimap_core/pack/region_pack.dart';
@@ -12,6 +15,7 @@ import 'strings.dart';
 const _progressKey = 'progress_v1';
 const _langKey = 'lang';
 const _assistKey = 'quiz_assist';
+const _battleKey = 'battle_progress_v1';
 
 /// アプリ全体の状態: pack・進捗(端末に保存)・表示言語。
 class AppState extends ChangeNotifier {
@@ -22,8 +26,9 @@ class AppState extends ChangeNotifier {
   String _lang;
   bool _quizAssist;
   RegionProgress progress;
+  final BattleProgress battle; // バトルのクリア記録（地方決戦・エクストラの解放に使う）
 
-  AppState._(this.pack, this.store, this.prefs, this._lang, this.progress, this._battleJson, this._quizAssist);
+  AppState._(this.pack, this.store, this.prefs, this._lang, this.progress, this._battleJson, this._quizAssist, this.battle);
 
   static Future<AppState> load({SharedPreferences? prefs, AssetBundleLike? bundle}) async {
     final p = prefs ?? await SharedPreferences.getInstance();
@@ -48,7 +53,7 @@ class AppState extends ChangeNotifier {
     final deviceLang = PlatformDispatcher.instance.locale.languageCode;
     final lang = p.getString(_langKey) ?? resolveLanguage(deviceLang);
     final progress = await RegionProgress.load(store, pack.packId, pack.regions.map((r) => r.id));
-    return AppState._(pack, store, p, lang, progress, battle, p.getBool(_assistKey) ?? true);
+    return AppState._(pack, store, p, lang, progress, battle, p.getBool(_assistKey) ?? true, BattleProgress.fromJsonString(p.getString(_battleKey)));
   }
 
   String get lang => _lang;
@@ -69,6 +74,13 @@ class AppState extends ChangeNotifier {
   Future<void> setLang(String l) async {
     _lang = l;
     await prefs.setString(_langKey, l);
+    notifyListeners();
+  }
+
+  /// バトルのクリアを記録して保存する。
+  Future<void> recordBattleClear(StageKind kind, String id, Difficulty difficulty) async {
+    battle.recordClear(kind, id, difficulty);
+    await prefs.setString(_battleKey, battle.toJsonString());
     notifyListeners();
   }
 
