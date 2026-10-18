@@ -2,7 +2,10 @@
 import 'package:flutter/services.dart' show AssetManifest, rootBundle;
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+
 import 'package:terrimap_core/battle/battle_progress.dart';
+import 'package:terrimap_core/battle/replay.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/i18n/languages.dart';
@@ -16,6 +19,7 @@ const _progressKey = 'progress_v1';
 const _langKey = 'lang';
 const _assistKey = 'quiz_assist';
 const _battleKey = 'battle_progress_v1';
+const _dailyKey = 'daily_battle_v1';
 
 /// アプリ全体の状態: pack・進捗(端末に保存)・表示言語。
 class AppState extends ChangeNotifier {
@@ -74,6 +78,35 @@ class AppState extends ChangeNotifier {
   Future<void> setLang(String l) async {
     _lang = l;
     await prefs.setString(_langKey, l);
+    notifyListeners();
+  }
+
+  /// 今日の日付(UTC の yyyy-MM-dd)。テストで差し替える。
+  String Function() today = () => DateTime.now().toUtc().toIso8601String().substring(0, 10);
+
+  /// 今日のバトルの結果(日付→リプレイ)。直近の数日ぶんだけ残す。
+  Map<String, Replay> get _daily {
+    final raw = prefs.getString(_dailyKey);
+    if (raw == null) return {};
+    try {
+      return {
+        for (final e in (jsonDecode(raw) as Map<String, dynamic>).entries)
+          if (Replay.tryParse(e.value as String) != null) e.key: Replay.tryParse(e.value as String)!,
+      };
+    } catch (_) {
+      return {};
+    }
+  }
+
+  Replay? dailyReplay(String date) => _daily[date];
+
+  Future<void> saveDaily(String date, Replay r) async {
+    final all = _daily..[date] = r;
+    final keys = all.keys.toList()..sort();
+    for (final k in keys.take((keys.length - 7).clamp(0, keys.length))) {
+      all.remove(k);
+    }
+    await prefs.setString(_dailyKey, jsonEncode({for (final e in all.entries) e.key: e.value.toJsonString()}));
     notifyListeners();
   }
 

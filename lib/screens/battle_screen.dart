@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:terrimap_core/battle/battle_engine.dart';
+import 'package:terrimap_core/battle/daily_battle.dart';
+import 'package:terrimap_core/battle/replay.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/battle/stage.dart';
@@ -18,7 +21,8 @@ class BattleScreen extends StatefulWidget {
   final String regionId; // 種別に応じて 州・地方・エクストラ の id
   final Difficulty difficulty;
   final StageKind kind;
-  const BattleScreen({super.key, required this.app, required this.regionId, required this.difficulty, this.kind = StageKind.normal});
+  final DailyBattle? daily; // 今日のバトルのとき
+  const BattleScreen({super.key, required this.app, required this.regionId, required this.difficulty, this.kind = StageKind.normal, this.daily});
   @override
   State<BattleScreen> createState() => _BattleScreenState();
 }
@@ -34,6 +38,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   String _message = '';
   String? _weather;
   bool _resultShown = false;
+  Replay? _replay; // 終わったバトルの記録(今日のバトルの保存・共有に使う)
 
   BattleEngine get _engine => _session.engine;
   UiStrings get _ui => widget.app.ui;
@@ -72,6 +77,8 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     if (_session.isOver && !_resultShown) {
       _resultShown = true;
       if (_session.won) widget.app.recordBattleClear(widget.kind, widget.regionId, widget.difficulty);
+      _replay = _session.recorder.toReplay(packId: widget.app.pack.packId, kind: widget.kind, stageId: widget.regionId, difficulty: widget.difficulty);
+      if (widget.daily != null) widget.app.saveDaily(widget.daily!.date, _replay!);
       WidgetsBinding.instance.addPostFrameCallback((_) => _showResult());
     }
   }
@@ -190,6 +197,11 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text), duration: const Duration(seconds: 2)));
   }
 
+  Future<void> _copy(String text, String label) async {
+    await Clipboard.setData(ClipboardData(text: text));
+    _toast(label);
+  }
+
   void _showResult() {
     if (!mounted) return;
     final ui = _ui;
@@ -201,11 +213,23 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
         title: Text(_session.won ? ui.t('result.victory') : ui.t('result.defeat')),
         content: Text('${ui.t('result.waves', {'n': _session.won ? _stage.waves.length : (st.wave - 1).clamp(0, 99)})}\n${ui.t('result.score', {'n': st.score})}'),
         actions: [
+          if (widget.daily != null && _replay != null)
+            TextButton(
+              key: const ValueKey('share-daily'),
+              onPressed: () => _copy(widget.daily!.shareText(widget.app.s.t('appTitle'), _replay!.result, totalWaves: _stage.waves.length, maxBaseHp: _stage.baseHp), ui.t('daily.share')),
+              child: Text(ui.t('daily.share')),
+            ),
+          if (_replay != null)
+            TextButton(
+              key: const ValueKey('share-challenge'),
+              onPressed: () => _copy(_replay!.toShareCode(), ui.t('daily.challenge')),
+              child: Text(ui.t('daily.challenge')),
+            ),
           TextButton(
             onPressed: () {
               Navigator.pop(ctx);
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (_) => BattleScreen(app: widget.app, regionId: widget.regionId, difficulty: widget.difficulty, kind: widget.kind),
+                builder: (_) => BattleScreen(app: widget.app, regionId: widget.regionId, difficulty: widget.difficulty, kind: widget.kind, daily: widget.daily),
               ));
             },
             child: Text(ui.t('result.retry')),

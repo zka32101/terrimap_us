@@ -4,6 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terrimap_core/battle/battle_engine.dart';
+import 'package:terrimap_core/battle/replay.dart';
+import 'package:terrimap_core/battle/daily_battle.dart';
+import 'package:terrimap_core/battle/bot.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/battle/stage_generator.dart';
@@ -48,6 +51,8 @@ void main() {
     await t.tap(find.byKey(const ValueKey('battle')));
     await t.pump();
     await t.pump(const Duration(milliseconds: 400));
+    await t.ensureVisible(find.text(regionName));
+    await t.pump();
     await t.tap(find.text(regionName));
     await t.pump();
     await t.pump(const Duration(milliseconds: 400));
@@ -114,6 +119,74 @@ void main() {
     await t.pump(const Duration(milliseconds: 400));
     expect(find.byKey(const ValueKey('hud-wave')), findsOneWidget);
     expect(find.text('Wave 0/${e.waves}'), findsOneWidget);
+  });
+
+  Replay botReplay(AppState app, String id, Difficulty d) {
+    final e = BattleEngine(StageGenerator(app.pack).generate(id, d), profile: app.pack.profile, pack: app.pack);
+    final rec = ReplayRecorder(e);
+    BattleBot(e, BotProfile.expert, recorder: rec).play();
+    return rec.toReplay(packId: app.pack.packId, kind: StageKind.normal, stageId: id, difficulty: d);
+  }
+
+  test('今日のバトルの結果は端末に保存され、古い日は消える', () async {
+    final a = await AppState.load();
+    final r = botReplay(a, 'US-CA', Difficulty.easy);
+    await a.saveDaily('2026-10-01', r);
+    expect((await AppState.load()).dailyReplay('2026-10-01')!.result, r.result);
+    for (var d = 2; d <= 10; d++) {
+      await a.saveDaily('2026-10-${d.toString().padLeft(2, '0')}', r);
+    }
+    expect(a.dailyReplay('2026-10-01'), isNull); // 直近7日だけ
+    expect(a.dailyReplay('2026-10-10'), isNotNull);
+  });
+
+  testWidgets('今日のバトル: 選択画面に出て、始められる。終えた日は完了になる。無料の間は無料の州から選ぶ', (t) async {
+    await t.binding.setSurfaceSize(const Size(360, 1000));
+    addTearDown(() => t.binding.setSurfaceSize(null));
+    final app = await boot(t, assist: false);
+    app.today = () => '2026-10-18';
+    final d = DailyBattle.forDate(app.pack, '2026-10-18', allowedIds: freeRegionIds);
+    expect(freeRegionIds, contains(d.stageId));
+    await t.tap(find.byKey(const ValueKey('battle')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.text('Daily Battle'), findsOneWidget);
+    await t.tap(find.byKey(const ValueKey('daily-battle')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.byKey(const ValueKey('hud-wave')), findsOneWidget);
+    Navigator.of(t.element(find.byKey(const ValueKey('hud-wave')))).pop();
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+
+    await t.runAsync(() => app.saveDaily('2026-10-18', botReplay(app, d.stageId, d.difficulty)));
+    await t.pump();
+    expect(find.text('You finished today\'s battle.', findRichText: false, skipOffstage: false), findsNothing); // 文は「完了 + 結果」と続くので部分一致で確かめる
+    expect(find.textContaining('You finished today'), findsOneWidget);
+  });
+
+  testWidgets('挑戦コード: 正しいコードは確かめられて遊べる。壊れたコードは遊べない', (t) async {
+    await t.binding.setSurfaceSize(const Size(800, 1000));
+    addTearDown(() => t.binding.setSurfaceSize(null));
+    final app = await boot(t, assist: false);
+    final code = botReplay(app, 'US-CA', Difficulty.easy).toShareCode();
+    await t.tap(find.byKey(const ValueKey('battle')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    await t.tap(find.byKey(const ValueKey('challenge')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    await t.enterText(find.byKey(const ValueKey('challenge-code')), 'broken');
+    await t.pump();
+    expect(find.text('This replay could not be verified.'), findsOneWidget);
+    expect((t.widget(find.byKey(const ValueKey('challenge-play'))) as FilledButton).onPressed, isNull);
+    await t.enterText(find.byKey(const ValueKey('challenge-code')), code);
+    await t.pump();
+    expect(find.textContaining('California'), findsWidgets);
+    await t.tap(find.byKey(const ValueKey('challenge-play')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.byKey(const ValueKey('hud-wave')), findsOneWidget);
   });
 
   testWidgets('ホーム→バトル→州を選ぶ→設置→波の開始→HUDが進む', (t) async {
