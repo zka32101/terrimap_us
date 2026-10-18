@@ -44,6 +44,7 @@ class AppState extends ChangeNotifier {
       geoJson: await asset('geo.geojson'),
       stringsJsonByLang: {for (final l in Strings.supported) l: await asset('strings/$l.json')},
       profileJson: await asset('profile.json'),
+      factsJson: await asset('facts.json'),
     );
     // 画面の文言（コアに同梱。言語ごとのファイルがあるものだけ読む）
     final battle = <String, String>{};
@@ -62,6 +63,12 @@ class AppState extends ChangeNotifier {
 
   String get lang => _lang;
   Strings get s => Strings(_lang, pack);
+
+  /// 名所の名前（その言語になければ英語）。名所のデータがなければ空。
+  String landmarkName(String? id) {
+    final l = pack.facts?.landmarks.where((x) => x.id == id);
+    return l == null || l.isEmpty ? '' : l.first.nameIn(_lang);
+  }
 
   /// バトル画面の文言（その言語になければ英語）。
   UiStrings get ui => UiStrings.parse(_battleJson, lang: _lang);

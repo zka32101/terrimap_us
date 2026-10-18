@@ -1,0 +1,365 @@
+{
+ "v": 1,
+ "landmarks": [
+  {
+   "id": "grand_canyon",
+   "region": "US-AZ",
+   "name": {
+    "en": "Grand Canyon"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "golden_gate_bridge",
+   "region": "US-CA",
+   "name": {
+    "en": "Golden Gate Bridge"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "mesa_verde",
+   "region": "US-CO",
+   "name": {
+    "en": "Mesa Verde National Park"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "kennedy_space_center",
+   "region": "US-FL",
+   "name": {
+    "en": "Kennedy Space Center"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "diamond_head",
+   "region": "US-HI",
+   "name": {
+    "en": "Diamond Head (Oahu)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "empire_state_building",
+   "region": "US-NY",
+   "name": {
+    "en": "Empire State Building"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "lincoln_memorial",
+   "region": "US-DC",
+   "name": {
+    "en": "Lincoln Memorial"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "willis_tower",
+   "region": "US-IL",
+   "name": {
+    "en": "Willis Tower"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "fenway_park",
+   "region": "US-MA",
+   "name": {
+    "en": "Fenway Park"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "las_vegas_strip",
+   "region": "US-NV",
+   "name": {
+    "en": "Las Vegas Strip"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "devils_tower",
+   "region": "US-WY",
+   "name": {
+    "en": "Devils Tower"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "mount_rushmore",
+   "region": "US-SD",
+   "name": {
+    "en": "Mount Rushmore"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "space_needle",
+   "region": "US-WA",
+   "name": {
+    "en": "Space Needle"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "johnson_space_center",
+   "region": "US-TX",
+   "name": {
+    "en": "Johnson Space Center (Houston)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "arches_np",
+   "region": "US-UT",
+   "name": {
+    "en": "Arches National Park"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "theodore_roosevelt_np",
+   "region": "US-ND",
+   "name": {
+    "en": "Theodore Roosevelt National Park"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "acadia_np",
+   "region": "US-ME",
+   "name": {
+    "en": "Acadia National Park"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "denali",
+   "region": "US-AK",
+   "name": {
+    "en": "Denali"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "french_quarter",
+   "region": "US-LA",
+   "name": {
+    "en": "French Quarter (New Orleans)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "liberty_bell",
+   "region": "US-PA",
+   "name": {
+    "en": "Liberty Bell (Philadelphia)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "gateway_arch",
+   "region": "US-MO",
+   "name": {
+    "en": "Gateway Arch (St. Louis)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "grand_ole_opry",
+   "region": "US-TN",
+   "name": {
+    "en": "Grand Ole Opry (Nashville)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "mammoth_cave",
+   "region": "US-KY",
+   "name": {
+    "en": "Mammoth Cave National Park"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "crater_lake",
+   "region": "US-OR",
+   "name": {
+    "en": "Crater Lake"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "carlsbad_caverns",
+   "region": "US-NM",
+   "name": {
+    "en": "Carlsbad Caverns National Park"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "mackinac_island",
+   "region": "US-MI",
+   "name": {
+    "en": "Mackinac Island"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "rock_hall",
+   "region": "US-OH",
+   "name": {
+    "en": "Rock and Roll Hall of Fame (Cleveland)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "indy_speedway",
+   "region": "US-IN",
+   "name": {
+    "en": "Indianapolis Motor Speedway"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "mall_of_america",
+   "region": "US-MN",
+   "name": {
+    "en": "Mall of America"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "chimney_rock",
+   "region": "US-NE",
+   "name": {
+    "en": "Chimney Rock"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "georgia_aquarium",
+   "region": "US-GA",
+   "name": {
+    "en": "Georgia Aquarium (Atlanta)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "glacier_np",
+   "region": "US-MT",
+   "name": {
+    "en": "Glacier National Park"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "mount_washington",
+   "region": "US-NH",
+   "name": {
+    "en": "Mount Washington"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "lambeau_field",
+   "region": "US-WI",
+   "name": {
+    "en": "Lambeau Field (Green Bay)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "space_rocket_center",
+   "region": "US-AL",
+   "name": {
+    "en": "U.S. Space & Rocket Center (Huntsville)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  },
+  {
+   "id": "biltmore",
+   "region": "US-NC",
+   "name": {
+    "en": "Biltmore Estate (Asheville)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "National Park Service / 各施設・自治体の公式ページ"
+  }
+ ]
+}

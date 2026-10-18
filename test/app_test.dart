@@ -138,4 +138,38 @@ void main() {
     await app.setLang('en');
     expect(app.s.t('neighborOf'), 'Which state borders this one?');
   });
+
+  testWidgets('QuizScreen: 名所の問題 — 名所の名前が出て、その州を選ぶと正解。間違えると不正解', (t) async {
+    final app = await t.runAsync(AppState.load) as AppState;
+    await app.setLang('en');
+    expect(app.pack.facts, isNotNull);
+    final qs = QuizEngine(app.pack, seed: 5).generate(count: 2, types: [QuestionType.landmarkOf]);
+    expect(qs.every((q) => q.type == QuestionType.landmarkOf && q.subjectId != null), true);
+    List<bool>? result;
+    await t.pumpWidget(MaterialApp(
+      home: Builder(
+        builder: (ctx) => TextButton(
+          onPressed: () async => result = await Navigator.of(ctx)
+              .push<List<bool>>(MaterialPageRoute(builder: (_) => QuizScreen(app: app, questions: qs))),
+          child: const Text('go'),
+        ),
+      ),
+    ));
+    await t.tap(find.text('go'));
+    await t.pumpAndSettle();
+    expect(find.textContaining('In which state is this landmark?'), findsOneWidget);
+    expect(find.textContaining(app.landmarkName(qs[0].subjectId)), findsOneWidget); // 名所の名前が問題に出る
+
+    await t.tap(find.text(app.s.regionName(qs[0].correctId)));
+    await t.pumpAndSettle();
+    expect(find.text('Correct!'), findsOneWidget);
+    await t.tap(find.text('Next'));
+    await t.pumpAndSettle();
+    final wrong = qs[1].choiceIds.firstWhere((id) => id != qs[1].correctId);
+    await t.tap(find.text(app.s.regionName(wrong)));
+    await t.pumpAndSettle();
+    await t.tap(find.text('Finish'));
+    await t.pumpAndSettle();
+    expect(result, [true, false]);
+  });
 }
