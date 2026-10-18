@@ -15,6 +15,7 @@ import 'package:terrimap_core/battle/stage_generator.dart';
 import 'package:terrimap_core/battle_ui/battle_view.dart';
 import 'package:terrimap_core/quiz/quiz_engine.dart';
 import 'package:terrimap_us/app_state.dart';
+import 'package:terrimap_us/screens/achievements_screen.dart';
 import 'package:terrimap_us/screens/collection_screen.dart';
 import 'package:terrimap_us/main.dart';
 import 'package:terrimap_us/monetization.dart';
@@ -50,6 +51,29 @@ void main() {
     await t.pump();
     return app;
   }
+
+  testWidgets('実績: クリアで達成され、画面で見られる（開くと NEW が既読になる）。ステージ選択から開ける', (t) async {
+    await t.binding.setSurfaceSize(const Size(800, 900));
+    final app = await boot(t, assist: false);
+    expect(app.achievements.unlockedCount, 0);
+    expect(app.newAchievementCount, 0);
+    await t.runAsync(() => app.recordBattleClear(StageKind.normal, app.pack.regions.first.id, Difficulty.easy));
+    expect(app.achievements.unlockedIds, contains('firstClear'));
+    expect(app.newAchievementCount, greaterThan(0));
+    await t.tap(find.byKey(const ValueKey('battle')));
+    await t.pumpAndSettle();
+    expect(find.byKey(const ValueKey('achievements')), findsOneWidget);
+    await t.pumpWidget(MaterialApp(home: AchievementsScreen(app: app)));
+    await t.pump();
+    expect(find.byKey(const ValueKey('ach-firstClear')), findsOneWidget);
+    expect(find.text('First Victory'), findsOneWidget);
+    expect(find.text('NEW'), findsWidgets);
+    await t.pump();
+    await t.runAsync(() => Future.delayed(const Duration(milliseconds: 50)));
+    expect(app.newAchievementCount, 0);
+    expect((await t.runAsync(AppState.load) as AppState).seenAchievements, contains('firstClear'));
+    await t.pumpWidget(const SizedBox());
+  });
 
   testWidgets('コレクション: 州をクリアするとその州の名所カードが集まり、画面で見られる（開くと NEW が既読になる）', (t) async {
     await t.binding.setSurfaceSize(const Size(800, 900));

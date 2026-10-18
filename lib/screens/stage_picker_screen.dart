@@ -1,5 +1,6 @@
 import 'package:app_common_kit/app_common_kit.dart' hide SettingsScreen;
 import 'package:flutter/material.dart';
+import 'achievements_screen.dart';
 import 'collection_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -169,6 +170,16 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
             child: const Icon(Icons.collections_bookmark),
           ),
           onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => CollectionScreen(app: widget.app))),
+        ),
+        IconButton(
+          key: const ValueKey('achievements'),
+          tooltip: ui.t('ach.title'),
+          icon: Badge(
+            isLabelVisible: widget.app.newAchievementCount > 0,
+            label: Text('${widget.app.newAchievementCount}'),
+            child: const Icon(Icons.emoji_events),
+          ),
+          onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => AchievementsScreen(app: widget.app))),
         ),
         IconButton(key: const ValueKey('challenge'), tooltip: ui.t('daily.challenge'), icon: const Icon(Icons.link), onPressed: _challengeDialog),
       ]),
