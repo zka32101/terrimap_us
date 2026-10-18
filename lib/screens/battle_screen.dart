@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'boss_intro_card.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:terrimap_core/battle/battle_engine.dart';
@@ -39,6 +42,8 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   BattleEvent? _lastEvent;
   String _message = '';
   String? _weather;
+  bool _bossIntroShown = false, _bossIntroVisible = false; // エクストラのボスが出たとき、名前と事実の注記を1回だけ出す
+  Timer? _bossIntroTimer;
   List<String> _newCards = const []; // この勝利で集まった名所カード
   bool _resultShown = false;
   Replay? _replay; // 終わったバトルの記録(今日のバトルの保存・共有に使う)
@@ -60,6 +65,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   @override
   void dispose() {
     _ticker.dispose();
+    _bossIntroTimer?.cancel();
     _session.removeListener(_onChanged);
     _session.dispose();
     super.dispose();
@@ -104,6 +110,13 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
         _message = ui.t('weather.end', {'name': weatherName()});
       case BattleEventType.weatherBlocked:
         _message = ui.t('weather.blocked', {'name': weatherName()});
+      case BattleEventType.spawn:
+        if (e.isBoss && widget.kind == StageKind.extra && !_bossIntroShown) {
+          _bossIntroShown = _bossIntroVisible = true;
+          _bossIntroTimer = Timer(const Duration(seconds: 7), () {
+            if (mounted) setState(() => _bossIntroVisible = false);
+          });
+        }
       case BattleEventType.bossSkill:
         _message = ui.t('boss.${e.detail}');
       case BattleEventType.facilityDestroyed:
@@ -294,7 +307,8 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
           if (_message.isNotEmpty)
             Padding(padding: const EdgeInsets.symmetric(horizontal: 12), child: Text(_message, style: Theme.of(context).textTheme.bodySmall)),
           Expanded(
-            child: Padding(
+            child: Stack(children: [
+              Padding(
               padding: const EdgeInsets.all(8),
               child: BattleView(
                 key: const ValueKey('board'),
@@ -306,11 +320,25 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
                 weather: _weather,
                 onCellTap: _session.tapCell,
               ),
-            ),
+              ),
+              if (_bossIntroVisible) Positioned(top: 8, left: 8, right: 8, child: _bossIntro()),
+            ]),
           ),
           _panel(st),
         ]),
       ),
+    );
+  }
+
+  Widget _bossIntro() {
+    final app = widget.app, ui = _ui;
+    final extra = app.pack.profile?.extras.where((x) => x.id == widget.regionId).firstOrNull;
+    if (extra == null) return const SizedBox.shrink();
+    return BossIntroCard(
+      title: ui.t('stage.boss', {'name': extra.bossNameIn(app.lang)}),
+      basisLabel: ui.t('stage.basis.${extra.basis}'),
+      fact: extra.factIn(app.lang),
+      onClose: () => setState(() => _bossIntroVisible = false),
     );
   }
 
