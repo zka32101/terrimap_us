@@ -1,7 +1,10 @@
 import 'package:app_common_kit/app_common_kit.dart' hide SettingsScreen;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:terrimap_core/battle/daily_battle.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
+import 'package:terrimap_core/battle/replay.dart';
 import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/pack/country_profile.dart';
 
@@ -23,9 +26,88 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
   Difficulty _difficulty = Difficulty.normal;
   StageKind _kind = StageKind.normal;
 
-  void _play(StageKind kind, String id) => Navigator.of(context).push(MaterialPageRoute(
-        builder: (_) => BattleScreen(app: widget.app, regionId: id, difficulty: _difficulty, kind: kind),
+  void _play(StageKind kind, String id, {Difficulty? difficulty, DailyBattle? daily}) => Navigator.of(context).push(MaterialPageRoute(
+        builder: (_) => BattleScreen(app: widget.app, regionId: id, difficulty: difficulty ?? _difficulty, kind: kind, daily: daily),
       ));
+
+  /// 今日のバトル。無料の間は、無料の州だけから選ぶ。
+  DailyBattle _daily(bool premium) =>
+      DailyBattle.forDate(widget.app.pack, widget.app.today(), allowedIds: premium ? null : freeRegionIds);
+
+  Widget _dailyCard(bool premium) {
+    final app = widget.app, ui = app.ui;
+    final d = _daily(premium);
+    final done = app.dailyReplay(d.date);
+    return Card(
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      child: ListTile(
+        key: const ValueKey('daily-battle'),
+        leading: const Icon(Icons.today),
+        title: Text(ui.t('daily.title')),
+        subtitle: Text(done != null
+            ? '${ui.t('daily.done')}  ${done.result.won ? '✅' : '❌'} ♥${done.result.baseHp}'
+            : ui.t('daily.today', {'name': app.s.regionName(d.stageId), 'difficulty': ui.t('difficulty.${d.difficulty.name}')})),
+        trailing: done != null ? const Icon(Icons.check_circle, color: Colors.green) : const Icon(Icons.chevron_right),
+        onTap: done != null ? null : () => _play(d.kind, d.stageId, difficulty: d.difficulty, daily: d),
+      ),
+    );
+  }
+
+  /// 友だちの挑戦コードを貼って確かめ、同じステージで挑戦する。
+  Future<void> _challengeDialog() async {
+    final app = widget.app, ui = app.ui;
+    final ctl = TextEditingController();
+    await showDialog<void>(
+      context: context,
+      builder: (ctx) => StatefulBuilder(builder: (ctx, setS) {
+        final r = Replay.fromShareCode(ctl.text.trim());
+        final ok = r != null && r.packId == app.pack.packId && r.verify(app.pack);
+        return AlertDialog(
+          title: Text(ui.t('daily.challenge')),
+          content: Column(mainAxisSize: MainAxisSize.min, children: [
+            Text(ui.t('daily.challenge.hint')),
+            TextField(
+              key: const ValueKey('challenge-code'),
+              controller: ctl,
+              onChanged: (_) => setS(() {}),
+              maxLines: 2,
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                  key: const ValueKey('challenge-paste'),
+                  icon: const Icon(Icons.paste),
+                  onPressed: () async {
+                    final clip = (await Clipboard.getData(Clipboard.kTextPlain))?.text ?? '';
+                    ctl.text = clip.trim();
+                    setS(() {});
+                  },
+                ),
+              ),
+            ),
+            if (ctl.text.trim().isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Text(ok
+                    ? '${app.s.regionName(r.stageId)} · ${ui.t('difficulty.${r.difficulty.name}')}  ${r.result.won ? '✅' : '❌'} ♥${r.result.baseHp}'
+                    : ui.t('replay.invalid')),
+              ),
+          ]),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(ctx), child: Text(ui.t('result.back'))),
+            FilledButton(
+              key: const ValueKey('challenge-play'),
+              onPressed: ok && r.kind == StageKind.normal && isRegionUnlocked(r.stageId, premium: ref.read(entitlementServiceProvider).state.hasPremium)
+                  ? () {
+                      Navigator.pop(ctx);
+                      _play(r.kind, r.stageId, difficulty: r.difficulty);
+                    }
+                  : null,
+              child: Text(ui.t('stage.play')),
+            ),
+          ],
+        );
+      }),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +120,12 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
     final hasExtra = profile?.extras.isNotEmpty ?? false;
     final modes = [StageKind.normal, if (hasRegional) StageKind.regional, if (hasExtra) StageKind.extra];
     return Scaffold(
-      appBar: AppBar(title: Text(s.t('battle'))),
+      appBar: AppBar(title: Text(s.t('battle')), actions: [
+        IconButton(key: const ValueKey('challenge'), tooltip: ui.t('daily.challenge'), icon: const Icon(Icons.link), onPressed: _challengeDialog),
+      ]),
       body: SafeArea(
         child: Column(children: [
+          _dailyCard(premium),
           Padding(
             padding: const EdgeInsets.all(16),
             child: SegmentedButton<Difficulty>(
