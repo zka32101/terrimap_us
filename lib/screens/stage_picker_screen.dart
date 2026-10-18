@@ -41,15 +41,19 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
     final app = widget.app, ui = app.ui;
     final d = _daily(premium);
     final done = app.dailyReplay(d.date);
+    final streak = app.streak.currentOn(app.today());
     return Card(
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 8),
       child: ListTile(
         key: const ValueKey('daily-battle'),
         leading: const Icon(Icons.today),
         title: Text(ui.t('daily.title')),
-        subtitle: Text(done != null
-            ? '${ui.t('daily.done')}  ${done.result.won ? '✅' : '❌'} ♥${done.result.baseHp}'
-            : ui.t('daily.today', {'name': app.s.regionName(d.stageId), 'difficulty': ui.t('difficulty.${d.difficulty.name}')})),
+        subtitle: Text([
+          done != null
+              ? '${ui.t('daily.done')}  ${done.result.won ? '✅' : '❌'} ♥${done.result.baseHp}'
+              : ui.t('daily.today', {'name': app.s.regionName(d.stageId), 'difficulty': ui.t('difficulty.${d.difficulty.name}')}),
+          if (streak > 0) '🔥 $streak',
+        ].join('  ')),
         trailing: done != null ? const Icon(Icons.play_circle_outline, key: ValueKey('daily-watch')) : const Icon(Icons.chevron_right),
         onTap: done != null ? () => _watch(done) : () => _play(d.kind, d.stageId, difficulty: d.difficulty, daily: d),
       ),
