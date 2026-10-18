@@ -1,5 +1,6 @@
 import 'package:app_common_kit/app_common_kit.dart' hide SettingsScreen;
 import 'package:flutter/material.dart';
+import 'collection_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:terrimap_core/battle/daily_battle.dart';
@@ -137,6 +138,16 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
     final modes = [StageKind.normal, if (hasRegional) StageKind.regional, if (hasExtra) StageKind.extra];
     return Scaffold(
       appBar: AppBar(title: Text(s.t('battle')), actions: [
+        IconButton(
+          key: const ValueKey('collection'),
+          tooltip: ui.t('collection.title'),
+          icon: Badge(
+            isLabelVisible: widget.app.newCardCount > 0,
+            label: Text('${widget.app.newCardCount}'),
+            child: const Icon(Icons.collections_bookmark),
+          ),
+          onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => CollectionScreen(app: widget.app))),
+        ),
         IconButton(key: const ValueKey('challenge'), tooltip: ui.t('daily.challenge'), icon: const Icon(Icons.link), onPressed: _challengeDialog),
       ]),
       body: SafeArea(
