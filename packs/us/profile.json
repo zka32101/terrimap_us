@@ -849,5 +849,201 @@
     "en": "Cactus Nurse"
    }
   }
- }
+ },
+ "groups": {
+  "northeast": {
+   "name": {
+    "en": "Northeast",
+    "ja": "北東部"
+   },
+   "center": "US-PA",
+   "regions": [
+    "US-CT",
+    "US-ME",
+    "US-MA",
+    "US-NH",
+    "US-RI",
+    "US-VT",
+    "US-NJ",
+    "US-NY",
+    "US-PA"
+   ]
+  },
+  "midwest": {
+   "name": {
+    "en": "Midwest",
+    "ja": "中西部"
+   },
+   "center": "US-IL",
+   "regions": [
+    "US-IL",
+    "US-IN",
+    "US-MI",
+    "US-OH",
+    "US-WI",
+    "US-IA",
+    "US-KS",
+    "US-MN",
+    "US-MO",
+    "US-NE",
+    "US-ND",
+    "US-SD"
+   ]
+  },
+  "south": {
+   "name": {
+    "en": "South",
+    "ja": "南部"
+   },
+   "center": "US-GA",
+   "regions": [
+    "US-DE",
+    "US-DC",
+    "US-FL",
+    "US-GA",
+    "US-MD",
+    "US-NC",
+    "US-SC",
+    "US-VA",
+    "US-WV",
+    "US-AL",
+    "US-KY",
+    "US-MS",
+    "US-TN",
+    "US-AR",
+    "US-LA",
+    "US-OK",
+    "US-TX"
+   ]
+  },
+  "west": {
+   "name": {
+    "en": "West",
+    "ja": "西部"
+   },
+   "center": "US-CO",
+   "regions": [
+    "US-AZ",
+    "US-CO",
+    "US-ID",
+    "US-MT",
+    "US-NV",
+    "US-NM",
+    "US-UT",
+    "US-WY",
+    "US-AK",
+    "US-CA",
+    "US-HI",
+    "US-OR",
+    "US-WA"
+   ]
+  }
+ },
+ "extras": [
+  {
+   "id": "us_bunyan",
+   "basis": "legend",
+   "regions": [
+    "US-MN",
+    "US-WI",
+    "US-MI"
+   ],
+   "center": "US-WI",
+   "seasons": [
+    "winter",
+    "spring",
+    "summer",
+    "autumn"
+   ],
+   "weatherEvent": "flood",
+   "backdrop": "great_lakes",
+   "bossSkill": "summon",
+   "waves": 8,
+   "title": {
+    "en": "Paul Bunyan's Forest",
+    "ja": "ポール・バニヤンの森"
+   },
+   "summary": {
+    "en": "A giant lumberjack and his blue ox are the stars of tall tales from the north woods. Defend the lakes as giant animals and tree spirits roam.",
+    "ja": "北の森の法螺話には、巨人の木こりと青い牛が登場します。巨大な動物や木の精が歩きまわるなか、湖を守りましょう。"
+   },
+   "fact": {
+    "en": "Paul Bunyan is a folk hero of American logging tall tales, widely known through early 20th-century stories and advertising (around 1916). Babe the Blue Ox is part of the tale. These are tall tales, not history."
+   },
+   "bossName": {
+    "en": "The Giant Blue Ox",
+    "ja": "巨大な青い牛"
+   }
+  },
+  {
+   "id": "us_wright",
+   "basis": "biography",
+   "regions": [
+    "US-NC"
+   ],
+   "center": "US-NC",
+   "seasons": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+   ],
+   "weatherEvent": "tornado",
+   "backdrop": "atlantic_coast",
+   "bossSkill": "speedBurst",
+   "waves": 9,
+   "title": {
+    "en": "The Sky of the Wright Brothers",
+    "ja": "ライト兄弟の空"
+   },
+   "summary": {
+    "en": "Two brothers dreamed of flying. Hold the dunes as wind spirits race along the coast.",
+    "ja": "空を飛ぶ夢をもつ兄弟の物語。風の精が海岸を駆けぬけるなか、砂丘を守りましょう。"
+   },
+   "fact": {
+    "en": "On December 17, 1903, near Kitty Hawk, North Carolina, Orville and Wilbur Wright made the first powered, controlled airplane flights. The wind spirits here are an invention of the game."
+   },
+   "bossName": {
+    "en": "The Gale Spirit",
+    "ja": "疾風の精"
+   }
+  },
+  {
+   "id": "us_moon",
+   "basis": "history",
+   "regions": [
+    "US-FL",
+    "US-AL",
+    "US-MS",
+    "US-LA",
+    "US-TX"
+   ],
+   "center": "US-FL",
+   "seasons": [
+    "summer",
+    "autumn",
+    "winter",
+    "spring"
+   ],
+   "weatherEvent": "heatwave",
+   "backdrop": "tropics",
+   "bossSkill": "stunFacility",
+   "waves": 10,
+   "title": {
+    "en": "Reaching for the Moon",
+    "ja": "月をめざして"
+   },
+   "summary": {
+    "en": "Along the Gulf Coast, engineers built the rockets that carried people to the Moon. Defend the launch sites from star creatures.",
+    "ja": "メキシコ湾岸では、人を月へ運ぶロケットが作られました。星の生き物たちから、打ち上げの地を守りましょう。"
+   },
+   "fact": {
+    "en": "NASA's Apollo program landed the first humans on the Moon in 1969. Gulf Coast states hosted key sites: Kennedy Space Center (Florida), Johnson Space Center (Texas), Marshall Space Flight Center (Alabama), Stennis Space Center (Mississippi) and Michoud (Louisiana). The Moon Keeper is a fantasy figure."
+   },
+   "bossName": {
+    "en": "The Moon Keeper",
+    "ja": "月の番人"
+   }
+  }
+ ]
 }

@@ -114,6 +114,38 @@ if prof_path.exists():
                 if k not in allowed: err.append(f"profile.json: {key} の未知の{label} {k}")
                 if not (t or {}).get("skin"): err.append(f"profile.json: {key}.{k} の skin が空")
                 if not ((t or {}).get("name") or {}).get("en"): err.append(f"profile.json: {key}.{k} の name に英語がない")
+        xseen = set()
+        for e in (prof.get("extras") or []):
+            xid = e.get("id")
+            if xid in xseen: err.append(f"profile.json: extras の id が重複 {xid}")
+            xseen.add(xid)
+            if e.get("basis") not in ("legend", "biography", "history"): err.append(f"profile.json: extras.{xid} の basis は legend/biography/history")
+            regs = e.get("regions")
+            if not isinstance(regs, list) or not regs: err.append(f"profile.json: extras.{xid} の regions が空")
+            else:
+                for r in regs:
+                    if r not in set(ids): err.append(f"profile.json: extras.{xid} の未知の地域 {r}")
+                if e.get("center") not in regs: err.append(f"profile.json: extras.{xid} の center が regions にない")
+            ss = e.get("seasons")
+            if not isinstance(ss, list) or not ss or any(x not in ("spring", "summer", "autumn", "winter") for x in ss): err.append(f"profile.json: extras.{xid} の seasons が不正")
+            if e.get("weatherEvent") not in WEATHER: err.append(f"profile.json: extras.{xid} の weatherEvent が不正")
+            if e.get("bossSkill") not in ("speedBurst", "hpRegen", "summon", "stunFacility"): err.append(f"profile.json: extras.{xid} の bossSkill が不正")
+            w = e.get("waves")
+            if not isinstance(w, int) or not (8 <= w <= 10): err.append(f"profile.json: extras.{xid} の waves は8〜10")
+            for k in ("title", "summary", "fact", "bossName"):
+                if not (e.get(k) or {}).get("en"): err.append(f"profile.json: extras.{xid} の {k} に英語がない")
+            if e.get("backdrop") is not None and e["backdrop"] not in backdrops: err.append(f"profile.json: extras.{xid} の backdrop が theme.backdrops にない")
+        seen = {}
+        for gid, g in (prof.get("groups") or {}).items():
+            members = (g or {}).get("regions")
+            if not isinstance(members, list) or len(members) < 2:
+                err.append(f"profile.json: groups.{gid} の regions は2つ以上"); continue
+            for r in members:
+                if r not in set(ids): err.append(f"profile.json: groups.{gid} の未知の地域 {r}")
+                if r in seen: err.append(f"profile.json: {r} が groups.{seen[r]} と groups.{gid} の両方にある")
+                seen[r] = gid
+            if g.get("center") not in members: err.append(f"profile.json: groups.{gid} の center が regions にない")
+            if not (g.get("name") or {}).get("en"): err.append(f"profile.json: groups.{gid} の name に英語がない")
         for rid, t in (prof.get("regions") or {}).items():
             if t.get("weatherEvent") is not None and t["weatherEvent"] not in WEATHER: err.append(f"profile.json: {rid} の weatherEvent が不正")
             if t.get("backdrop") is not None and t["backdrop"] not in backdrops: err.append(f"profile.json: {rid} の backdrop が theme.backdrops にない")

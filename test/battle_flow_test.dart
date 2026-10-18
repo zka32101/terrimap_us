@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terrimap_core/battle/battle_engine.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
+import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/battle/stage_generator.dart';
 import 'package:terrimap_core/battle_ui/battle_view.dart';
 import 'package:terrimap_core/quiz/quiz_engine.dart';
@@ -60,6 +61,60 @@ void main() {
     await t.tapAt(box.topLeft + Offset(l.dx + (col + 0.5) * l.cell, l.dy + (row + 0.5) * l.cell));
     await t.pump();
   }
+
+  testWidgets('モード切替: 地方決戦は買い切り＋過半数クリア、エクストラは全州hardクリアで解放。題材と事実の注記を見せる', (t) async {
+    await t.binding.setSurfaceSize(const Size(360, 740));
+    addTearDown(() => t.binding.setSurfaceSize(null));
+    final app = await boot(t, assist: false);
+    await t.tap(find.byKey(const ValueKey('battle')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.byKey(const ValueKey('modes')), findsOneWidget);
+
+    await t.tap(find.text('Regions'));
+    await t.pump();
+    final g = app.pack.profile!.groups.values.first;
+    expect(find.byKey(ValueKey('region-${g.id}')), findsOneWidget);
+    expect(find.text('Unlock all states to play this stage.'), findsWidgets); // 無料版は買い切りが必要
+
+    await t.tap(find.text('Extra'));
+    await t.pump();
+    final e = app.pack.profile!.extras.first;
+    expect(find.byKey(ValueKey('extra-${e.id}')), findsOneWidget);
+    expect(find.text('Unlock all states to play this stage.'), findsWidgets);
+  });
+
+  testWidgets('購入済み＋全州hardクリアのあとは、エクストラの説明（事実の注記つき）から始められる', (t) async {
+    await t.binding.setSurfaceSize(const Size(360, 740));
+    addTearDown(() => t.binding.setSurfaceSize(null));
+    final app = await t.runAsync(AppState.load) as AppState;
+    await app.setLang('en');
+    for (final r in app.pack.regions) {
+      await t.runAsync(() => app.recordBattleClear(StageKind.normal, r.id, Difficulty.hard));
+    }
+    final fake = Monetization.fakeEntitlement();
+    await t.runAsync(() => fake.purchase(unlockProductId));
+    await t.pumpWidget(ProviderScope(
+      overrides: [entitlementServiceProvider.overrideWithValue(fake), optionalAdGateProvider.overrideWithValue(null)],
+      child: TerrimapApp(app: app),
+    ));
+    await t.pump();
+    await t.tap(find.byKey(const ValueKey('battle')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    await t.tap(find.text('Extra'));
+    await t.pump();
+    final e = app.pack.profile!.extras.first;
+    await t.tap(find.byKey(ValueKey('extra-${e.id}')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.byKey(const ValueKey('extra-fact')), findsOneWidget);
+    await t.tap(find.byKey(const ValueKey('extra-play')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.byKey(const ValueKey('hud-wave')), findsOneWidget);
+    expect(find.text('Wave 0/${e.waves}'), findsOneWidget);
+  });
 
   testWidgets('ホーム→バトル→州を選ぶ→設置→波の開始→HUDが進む', (t) async {
     await t.binding.setSurfaceSize(const Size(360, 740)); // 小さめのスマホ
