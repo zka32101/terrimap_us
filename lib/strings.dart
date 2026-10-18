@@ -24,6 +24,7 @@ class Strings {
       'nameFromCapital': 'Which state has this capital?',
       'silhouette': 'Which state has this shape?',
       'neighborOf': 'Which state borders this one?',
+      'landmarkOf': 'In which state is this landmark?',
       'correct': 'Correct!',
       'wrong': 'Not quite.',
       'next': 'Next',
