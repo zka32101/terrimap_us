@@ -31,7 +31,8 @@ class BattleScreen extends StatefulWidget {
 class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderStateMixin {
   late final Stage _stage = StageGenerator(widget.app.pack).generate(widget.regionId, widget.difficulty, kind: widget.kind);
   late final BattleSession _session = BattleSession(
-    BattleEngine(_stage, profile: widget.app.pack.profile, pack: widget.app.pack, quizAssist: widget.app.quizAssist),
+    BattleEngine(_stage, profile: widget.app.pack.profile, pack: widget.app.pack, quizAssist: widget.app.quizAssist,
+        reviewWeights: widget.daily == null ? widget.app.reviewWeights : null), // 毎日のバトルは全員同じ条件にする
   );
   late final Ticker _ticker;
   Duration _last = Duration.zero;
@@ -144,6 +145,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
         _session.paused = true;
         final ok = await showAssistQuestion(context, widget.app, q, title: ui.t('assist.skillTitle'), timeLimit: _engine.assistTimeLimit);
         _session.paused = false;
+        widget.app.record(q.targetId, correct: ok);
         _session.answerSkillQuiz(correct: ok);
         if (!ok) {
           if (mounted) _toast(ui.t('assist.skillWrong', {'name': ui.t('skill.${_session.state.skill}')}));
@@ -186,6 +188,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
         _session.paused = true;
         final ok = await showAssistQuestion(context, widget.app, q, title: ui.t('assist.repairTitle'), timeLimit: _engine.assistTimeLimit);
         _session.paused = false;
+        widget.app.record(q.targetId, correct: ok);
         final cost = _engine.repairCostOf(f);
         if (_session.repair(correct: ok)) {
           if (mounted) _toast(ok ? ui.t('assist.repairRight') : ui.t('assist.repairWrong', {'n': cost ?? 0}));
@@ -294,6 +297,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
                 selected: _session.selected,
                 selectedRange: _session.selectedFacility == null ? null : _engine.facilityStats(_session.selectedFacility!).range,
                 facilityMaxHp: _engine.maxHpOf,
+                weather: _weather,
                 onCellTap: _session.tapCell,
               ),
             ),

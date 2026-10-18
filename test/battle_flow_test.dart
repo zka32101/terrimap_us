@@ -141,6 +141,24 @@ void main() {
     expect(a.dailyReplay('2026-10-10'), isNotNull);
   });
 
+  test('毎日のバトルの連続記録: 続けると増え、空くと戻り、端末に保存される。復習の重みは間違えた州が重い', () async {
+    final a = await AppState.load();
+    final r = botReplay(a, a.pack.regions.first.id, Difficulty.easy);
+    a.today = () => '2026-10-02';
+    expect(a.streak.currentOn(a.today()), 0);
+    await a.saveDaily('2026-10-01', r);
+    await a.saveDaily('2026-10-02', r);
+    expect(a.streak.currentOn('2026-10-02'), 2);
+    expect((await AppState.load()).streak.current, 2);
+    expect(a.streak.currentOn('2026-10-05'), 0);
+    final ids = a.pack.regions.map((x) => x.id).toList();
+    await a.record(ids[0], correct: false);
+    await a.record(ids[1], correct: true);
+    final w = a.reviewWeights;
+    expect(w[ids[0]]! > w[ids[2]]!, true);
+    expect(w[ids[2]]! > w[ids[1]]!, true);
+  });
+
   testWidgets('今日のバトル: 選択画面に出て、始められる。終えた日は完了になる。無料の間は無料の州から選ぶ', (t) async {
     await t.binding.setSurfaceSize(const Size(360, 1000));
     addTearDown(() => t.binding.setSurfaceSize(null));
@@ -262,7 +280,7 @@ void main() {
   testWidgets('クイズ連動: 正解するとスキルを3つから選べて、選ぶとHUDに出る', (t) async {
     final app = await boot(t);
     final stage = StageGenerator(app.pack).generate('US-CA', Difficulty.normal);
-    final engine = BattleEngine(stage, profile: app.pack.profile, pack: app.pack);
+    final engine = BattleEngine(stage, profile: app.pack.profile, pack: app.pack, reviewWeights: app.reviewWeights);
     final q = engine.assistQuestion(engine.start())!;
     final correct = q.type == QuestionType.capitalFromName ? app.s.capitalName(q.correctId) : app.s.regionName(q.correctId);
 
