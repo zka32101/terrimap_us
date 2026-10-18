@@ -129,7 +129,10 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     return skin?.name[widget.app.lang] ?? _ui.t('facility.${t.name}');
   }
 
-  String _exclusiveName(String id) => id.split('_').map((w) => w.isEmpty ? w : w[0].toUpperCase() + w.substring(1)).join(' ');
+  /// 限定施設の名前。文言(exclusive.name.<id>)があればそれ、なければ id から組み立てる。
+  String _exclusiveName(String id) => _ui.has('exclusive.name.$id')
+      ? _ui.t('exclusive.name.$id')
+      : id.split('_').map((w) => w.isEmpty ? w : w[0].toUpperCase() + w.substring(1)).join(' ');
 
   // ── 操作 ──
 

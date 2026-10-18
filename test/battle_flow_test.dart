@@ -27,6 +27,7 @@ void main() {
     expect(a.ui.t('hud.wave', {'n': 1, 'total': 5}), 'Wave 1/5');
     await a.setLang('fr'); // 翻訳がまだなくても動く
     expect(a.ui.t('hud.base'), 'Base');
+    expect(a.ui.t('exclusive.name.tech_campus'), 'Tech Campus'); // 限定施設の名前も文言から
     expect(a.quizAssist, true);
     await a.setQuizAssist(false);
     expect((await AppState.load()).quizAssist, false);
