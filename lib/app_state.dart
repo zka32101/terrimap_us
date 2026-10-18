@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import 'package:terrimap_core/battle/battle_progress.dart';
+import 'package:terrimap_core/battle/collection.dart';
 import 'package:terrimap_core/battle/review.dart';
 import 'package:terrimap_core/daily/daily_streak.dart';
 import 'package:terrimap_core/battle/replay.dart';
@@ -23,6 +24,7 @@ const _assistKey = 'quiz_assist';
 const _battleKey = 'battle_progress_v1';
 const _dailyKey = 'daily_battle_v1';
 const _streakKey = 'daily_streak_v1';
+const _seenCardsKey = 'collection_seen_v1';
 
 /// アプリ全体の状態: pack・進捗(端末に保存)・表示言語。
 class AppState extends ChangeNotifier {
@@ -120,6 +122,21 @@ class AppState extends ChangeNotifier {
       return const DailyStreak();
     }
   }
+
+  /// 名所のコレクション（州をクリアすると、その州の名所が集まる）。
+  Collection get collection => Collection(pack.facts, battle);
+
+  /// 見たことのあるカード（NEW の表示に使う）。
+  Set<String> get seenCards => (prefs.getStringList(_seenCardsKey) ?? const <String>[]).toSet();
+
+  /// 今のカードを、すべて見たことにする（コレクション画面を開いたとき）。
+  Future<void> markCardsSeen() async {
+    await prefs.setStringList(_seenCardsKey, collection.unlockedIds.toList()..sort());
+    notifyListeners();
+  }
+
+  /// 名所の名前（コレクションの表示用）。
+  int get newCardCount => collection.unlockedIds.difference(seenCards).length;
 
   /// 復習: 間違えた州がバトルのクイズで出やすくなる重み。
   Map<String, double> get reviewWeights => battleReviewWeights(progress);

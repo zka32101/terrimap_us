@@ -39,6 +39,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   BattleEvent? _lastEvent;
   String _message = '';
   String? _weather;
+  List<String> _newCards = const []; // この勝利で集まった名所カード
   bool _resultShown = false;
   Replay? _replay; // 終わったバトルの記録(今日のバトルの保存・共有に使う)
 
@@ -78,7 +79,11 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     if (mounted) setState(() {});
     if (_session.isOver && !_resultShown) {
       _resultShown = true;
-      if (_session.won) widget.app.recordBattleClear(widget.kind, widget.regionId, widget.difficulty);
+      if (_session.won) {
+        final before = widget.app.collection.unlockedIds;
+        widget.app.recordBattleClear(widget.kind, widget.regionId, widget.difficulty); // 記録は同期で反映される
+        _newCards = [for (final c in widget.app.collection.cards) if (c.unlocked && !before.contains(c.landmark.id)) c.landmark.nameIn(widget.app.lang)];
+      }
       _replay = _session.recorder.toReplay(packId: widget.app.pack.packId, kind: widget.kind, stageId: widget.regionId, difficulty: widget.difficulty);
       if (widget.daily != null) widget.app.saveDaily(widget.daily!.date, _replay!);
       WidgetsBinding.instance.addPostFrameCallback((_) => _showResult());
@@ -218,7 +223,8 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
         title: Text(_session.won ? ui.t('result.victory') : ui.t('result.defeat')),
-        content: Text('${ui.t('result.waves', {'n': _session.won ? _stage.waves.length : (st.wave - 1).clamp(0, 99)})}\n${ui.t('result.score', {'n': st.score})}'),
+        content: Text('${ui.t('result.waves', {'n': _session.won ? _stage.waves.length : (st.wave - 1).clamp(0, 99)})}\n${ui.t('result.score', {'n': st.score})}'
+            '${_newCards.isEmpty ? '' : '\n\n${ui.t('collection.new')}\n${_newCards.map((n) => '• $n').join('\n')}'}'),
         actions: [
           if (widget.daily != null && _replay != null)
             TextButton(

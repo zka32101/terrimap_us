@@ -13,6 +13,7 @@ import 'package:terrimap_core/battle/stage_generator.dart';
 import 'package:terrimap_core/battle_ui/battle_view.dart';
 import 'package:terrimap_core/quiz/quiz_engine.dart';
 import 'package:terrimap_us/app_state.dart';
+import 'package:terrimap_us/screens/collection_screen.dart';
 import 'package:terrimap_us/main.dart';
 import 'package:terrimap_us/monetization.dart';
 
@@ -47,6 +48,28 @@ void main() {
     await t.pump();
     return app;
   }
+
+  testWidgets('コレクション: 州をクリアするとその州の名所カードが集まり、画面で見られる（開くと NEW が既読になる）', (t) async {
+    await t.binding.setSurfaceSize(const Size(800, 900));
+    final app = await boot(t, assist: false);
+    final first = app.pack.facts!.usable.first;
+    final cardKey = ValueKey('card-${first.id}');
+    expect(app.collection.unlockedCount, 0);
+    expect(app.newCardCount, 0);
+    await t.runAsync(() => app.recordBattleClear(StageKind.normal, first.regionId, Difficulty.easy));
+    expect(app.collection.unlockedIds, contains(first.id));
+    expect(app.newCardCount, greaterThan(0));
+    await t.pumpWidget(MaterialApp(home: CollectionScreen(app: app)));
+    await t.pump();
+    expect(find.byKey(cardKey), findsOneWidget);
+    expect(find.text(first.nameIn('en')), findsWidgets); // 解放したカードは名前が出る
+    expect(find.text('NEW'), findsWidgets);
+    await t.pump();
+    await t.runAsync(() => Future.delayed(const Duration(milliseconds: 50)));
+    expect(app.newCardCount, 0); // 開いたので既読
+    expect((await t.runAsync(AppState.load) as AppState).seenCards, contains(first.id)); // 端末に保存
+    await t.pumpWidget(const SizedBox());
+  });
 
   Future<void> enterBattle(WidgetTester t, String regionName) async {
     await t.tap(find.byKey(const ValueKey('battle')));
