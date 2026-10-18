@@ -319,6 +319,13 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
         ),
         if (_weather != null)
           Chip(visualDensity: VisualDensity.compact, avatar: const Icon(Icons.cloud, size: 16), label: Text(ui.t('weather.$_weather'))),
+        if (BattleEngine.quizBuffBonus(st) > 0)
+          Chip(
+            key: const ValueKey('hud-buff'),
+            visualDensity: VisualDensity.compact,
+            avatar: const Icon(Icons.bolt, size: 16),
+            label: Text('+${(BattleEngine.quizBuffBonus(st) * 100).round()}%  ${(st.buffUntil - st.time).ceil()}s'),
+          ),
         if (st.skill != null)
           Chip(visualDensity: VisualDensity.compact, label: Text(ui.t('skill.active', {'name': ui.t('skill.${st.skill}')}))),
         if (_session.inPrep && st.wave < _stage.waves.length)
