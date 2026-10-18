@@ -1,0 +1,346 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:terrimap_core/battle/battle_engine.dart';
+import 'package:terrimap_core/battle/difficulty.dart';
+import 'package:terrimap_core/battle/stage.dart';
+import 'package:terrimap_core/battle/stage_generator.dart';
+import 'package:terrimap_core/battle_ui/battle_session.dart';
+import 'package:terrimap_core/battle_ui/battle_view.dart';
+import 'package:terrimap_core/i18n/ui_strings.dart';
+
+import '../app_state.dart';
+import 'assist_dialog.dart';
+
+/// バトル画面（最小版）。盤面、HUD、施設の設置・強化・撤去・修理、スキル選択（クイズ連動）、結果。
+class BattleScreen extends StatefulWidget {
+  final AppState app;
+  final String regionId;
+  final Difficulty difficulty;
+  const BattleScreen({super.key, required this.app, required this.regionId, required this.difficulty});
+  @override
+  State<BattleScreen> createState() => _BattleScreenState();
+}
+
+class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderStateMixin {
+  late final Stage _stage = StageGenerator(widget.app.pack).generate(widget.regionId, widget.difficulty);
+  late final BattleSession _session = BattleSession(
+    BattleEngine(_stage, profile: widget.app.pack.profile, pack: widget.app.pack, quizAssist: widget.app.quizAssist),
+  );
+  late final Ticker _ticker;
+  Duration _last = Duration.zero;
+  BattleEvent? _lastEvent;
+  String _message = '';
+  String? _weather;
+  bool _resultShown = false;
+
+  BattleEngine get _engine => _session.engine;
+  UiStrings get _ui => widget.app.ui;
+
+  @override
+  void initState() {
+    super.initState();
+    _ticker = createTicker((elapsed) {
+      final dt = ((elapsed - _last).inMicroseconds / 1e6).clamp(0.0, 0.1);
+      _last = elapsed;
+      _session.tick(dt);
+    })..start();
+    _session.addListener(_onChanged);
+  }
+
+  @override
+  void dispose() {
+    _ticker.dispose();
+    _session.removeListener(_onChanged);
+    _session.dispose();
+    super.dispose();
+  }
+
+  void _onChanged() {
+    // 新しいイベントを文言にする
+    final log = _session.log;
+    final idx = _lastEvent == null ? log.length : log.indexWhere((e) => identical(e, _lastEvent));
+    final fresh = idx < 0 ? log : log.sublist(0, idx);
+    if (fresh.isNotEmpty) {
+      for (final e in fresh.reversed) {
+        _handle(e);
+      }
+      _lastEvent = log.first;
+    }
+    if (mounted) setState(() {});
+    if (_session.isOver && !_resultShown) {
+      _resultShown = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) => _showResult());
+    }
+  }
+
+  void _handle(BattleEvent e) {
+    final ui = _ui;
+    String weatherName() => ui.t('weather.${e.detail}');
+    switch (e.type) {
+      case BattleEventType.weatherWarning:
+        _message = ui.t('weather.warning', {'name': weatherName()});
+      case BattleEventType.weatherStart:
+        _weather = e.detail;
+        _message = ui.t('weather.start', {'name': weatherName()});
+      case BattleEventType.weatherEnd:
+        _weather = null;
+        _message = ui.t('weather.end', {'name': weatherName()});
+      case BattleEventType.weatherBlocked:
+        _message = ui.t('weather.blocked', {'name': weatherName()});
+      case BattleEventType.bossSkill:
+        _message = ui.t('boss.${e.detail}');
+      case BattleEventType.facilityDestroyed:
+        _message = ui.t('facility.destroyed');
+      case BattleEventType.breach:
+        _message = ui.t('base.breach');
+      case BattleEventType.baseHeal:
+        _message = ui.t('base.heal');
+      default:
+        break;
+    }
+  }
+
+  String _facilityName(FacilityType t) {
+    final skin = widget.app.pack.profile?.facilitySkins[t.name];
+    return skin?.name[widget.app.lang] ?? _ui.t('facility.${t.name}');
+  }
+
+  String _exclusiveName(String id) => id.split('_').map((w) => w.isEmpty ? w : w[0].toUpperCase() + w.substring(1)).join(' ');
+
+  // ── 操作 ──
+
+  Future<void> _skillFlow() async {
+    final ui = _ui;
+    if (_session.skillNeedsQuiz) {
+      final q = _session.skillQuestion;
+      if (q != null) {
+        _session.paused = true;
+        final ok = await showAssistQuestion(context, widget.app, q, title: ui.t('assist.skillTitle'), timeLimit: _engine.assistTimeLimit);
+        _session.paused = false;
+        _session.answerSkillQuiz(correct: ok);
+        if (!ok) {
+          if (mounted) _toast(ui.t('assist.skillWrong', {'name': ui.t('skill.${_session.state.skill}')}));
+          return;
+        }
+        _toast(ui.t('assist.skillRight'));
+      }
+    }
+    if (!mounted) return;
+    final choices = _session.skillChoices;
+    if (choices.isEmpty) return;
+    final pick = await showDialog<String>(
+      context: context,
+      builder: (ctx) => SimpleDialog(
+        title: Text(ui.t('skill.choose')),
+        children: [
+          for (final id in choices)
+            SimpleDialogOption(
+              key: ValueKey('skill-$id'),
+              onPressed: () => Navigator.pop(ctx, id),
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(ui.t('skill.$id'), style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(ui.t('skill.$id.desc'), style: Theme.of(ctx).textTheme.bodySmall),
+              ]),
+            ),
+        ],
+      ),
+    );
+    if (pick != null) _session.chooseSkill(pick);
+  }
+
+  Future<void> _repairFlow() async {
+    final sel = _session.selected;
+    final f = _session.selectedFacility;
+    if (sel == null || f == null) return;
+    final ui = _ui;
+    if (_engine.assistEnabled) {
+      final q = _session.repairQuestion(sel);
+      if (q != null) {
+        _session.paused = true;
+        final ok = await showAssistQuestion(context, widget.app, q, title: ui.t('assist.repairTitle'), timeLimit: _engine.assistTimeLimit);
+        _session.paused = false;
+        final cost = _engine.repairCostOf(f);
+        if (_session.repair(correct: ok)) {
+          if (mounted) _toast(ok ? ui.t('assist.repairRight') : ui.t('assist.repairWrong', {'n': cost ?? 0}));
+        }
+        return;
+      }
+    }
+    _session.repair();
+  }
+
+  void _toast(String text) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text), duration: const Duration(seconds: 2)));
+  }
+
+  void _showResult() {
+    if (!mounted) return;
+    final ui = _ui;
+    final st = _session.state;
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        title: Text(_session.won ? ui.t('result.victory') : ui.t('result.defeat')),
+        content: Text('${ui.t('result.waves', {'n': _session.won ? _stage.waves.length : (st.wave - 1).clamp(0, 99)})}\n${ui.t('result.score', {'n': st.score})}'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (_) => BattleScreen(app: widget.app, regionId: widget.regionId, difficulty: widget.difficulty),
+              ));
+            },
+            child: Text(ui.t('result.retry')),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              Navigator.of(context).pop();
+            },
+            child: Text(ui.t('result.back')),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ── 画面 ──
+
+  @override
+  Widget build(BuildContext context) {
+    final app = widget.app, ui = _ui, st = _session.state;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('${app.s.regionName(widget.regionId)} · ${ui.t('difficulty.${widget.difficulty.name}')}', maxLines: 1, overflow: TextOverflow.ellipsis),
+        actions: [
+          IconButton(
+            key: const ValueKey('speed'),
+            tooltip: ui.t('hud.speed', {'n': _session.speed == 1 ? 2 : 1}),
+            icon: Text('×${_session.speed.toInt()}', style: const TextStyle(fontWeight: FontWeight.bold)),
+            onPressed: () => _session.setSpeed(_session.speed == 1 ? 2 : 1),
+          ),
+          IconButton(
+            key: const ValueKey('pause'),
+            tooltip: _session.paused ? ui.t('hud.resume') : ui.t('hud.pause'),
+            icon: Icon(_session.paused ? Icons.play_arrow : Icons.pause),
+            onPressed: _session.togglePause,
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Column(children: [
+          _hud(st),
+          if (_message.isNotEmpty)
+            Padding(padding: const EdgeInsets.symmetric(horizontal: 12), child: Text(_message, style: Theme.of(context).textTheme.bodySmall)),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: BattleView(
+                key: const ValueKey('board'),
+                stage: _stage,
+                state: st,
+                selected: _session.selected,
+                selectedRange: _session.selectedFacility == null ? null : _engine.facilityStats(_session.selectedFacility!).range,
+                facilityMaxHp: _engine.maxHpOf,
+                onCellTap: _session.tapCell,
+              ),
+            ),
+          ),
+          _panel(st),
+        ]),
+      ),
+    );
+  }
+
+  Widget _hud(BattleState st) {
+    final ui = _ui;
+    final wave = st.wave.clamp(0, _stage.waves.length);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
+      child: Wrap(spacing: 14, runSpacing: 4, crossAxisAlignment: WrapCrossAlignment.center, children: [
+        Text(ui.t('hud.wave', {'n': wave, 'total': _stage.waves.length}), key: const ValueKey('hud-wave')),
+        Text('♥ ${st.baseHp}/${_stage.baseHp}', key: const ValueKey('hud-base')),
+        Text('● ${st.coins}', key: const ValueKey('hud-coins')),
+        Chip(
+          visualDensity: VisualDensity.compact,
+          label: Text(ui.t('season.${_stage.season.name}')),
+        ),
+        if (_weather != null)
+          Chip(visualDensity: VisualDensity.compact, avatar: const Icon(Icons.cloud, size: 16), label: Text(ui.t('weather.$_weather'))),
+        if (st.skill != null)
+          Chip(visualDensity: VisualDensity.compact, label: Text(ui.t('skill.active', {'name': ui.t('skill.${st.skill}')}))),
+        if (_session.inPrep && st.wave < _stage.waves.length)
+          Text(ui.t('hud.prepare', {'s': st.prepTimer.ceil()}), style: const TextStyle(fontStyle: FontStyle.italic)),
+      ]),
+    );
+  }
+
+  Widget _panel(BattleState st) {
+    final ui = _ui;
+    final sel = _session.selected, f = _session.selectedFacility;
+    final children = <Widget>[];
+    if (_session.inPrep && st.wave < _stage.waves.length) {
+      children.add(Wrap(spacing: 8, runSpacing: 6, children: [
+        FilledButton(key: const ValueKey('start-wave'), onPressed: _session.startWave, child: Text(ui.t('hud.startWave'))),
+        if (_session.skillChoices.isNotEmpty)
+          OutlinedButton.icon(
+            key: const ValueKey('skill'),
+            icon: const Icon(Icons.auto_awesome, size: 18),
+            onPressed: _skillFlow,
+            label: Text(ui.t('skill.choose')),
+          ),
+      ]));
+    }
+    if (sel != null && f == null) {
+      children.add(Wrap(spacing: 6, runSpacing: 6, children: [
+        for (final t in FacilityType.values)
+          Tooltip(
+            message: ui.t('facility.${t.name}.desc'),
+            child: FilledButton.tonal(
+              key: ValueKey('place-${t.name}'),
+              onPressed: st.coins >= _engine.costOf(t) ? () => _session.place(t) : null,
+              child: Text('${_facilityName(t)} ${_engine.costOf(t)}'),
+            ),
+          ),
+        if (_engine.exclusiveCostOf() != null && !st.facilities.values.any((x) => x.exclusive != null))
+          FilledButton(
+            key: const ValueKey('place-exclusive'),
+            onPressed: st.coins >= _engine.exclusiveCostOf()! ? _session.placeExclusive : null,
+            child: Text('★ ${_exclusiveName(_stage.exclusiveFacility!)} ${_engine.exclusiveCostOf()}'),
+          ),
+      ]));
+    } else if (f != null) {
+      final up = _engine.upgradeCostOf(f), rep = _engine.repairCostOf(f), max = _engine.maxHpOf(f);
+      final name = f.exclusive != null ? '★ ${_exclusiveName(f.exclusive!)}' : _facilityName(f.type);
+      children.add(Text('$name · ${ui.t('facility.level', {'n': f.level})}${max > 0 ? ' · HP ${f.hp}/$max' : ''}'));
+      children.add(Wrap(spacing: 6, runSpacing: 6, children: [
+        if (f.exclusive == null)
+          FilledButton.tonal(
+            key: const ValueKey('upgrade'),
+            onPressed: up != null && st.coins >= up ? _session.upgrade : null,
+            child: Text(up == null ? ui.t('facility.maxLevel') : ui.t('facility.upgrade', {'n': up})),
+          ),
+        if (rep != null)
+          FilledButton.tonal(
+            key: const ValueKey('repair'),
+            onPressed: _engine.assistEnabled || st.coins >= rep ? _repairFlow : null,
+            child: Text(_engine.assistEnabled ? ui.t('facility.repairFree') : ui.t('facility.repair', {'n': rep})),
+          ),
+        OutlinedButton(
+          key: const ValueKey('remove'),
+          onPressed: _session.remove,
+          child: Text(ui.t('facility.remove', {'n': (f.invested * BattleEngine.refundRatio).round()})),
+        ),
+      ]));
+    }
+    if (children.isEmpty) return const SizedBox(height: 8);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
+      child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        for (final c in children) Padding(padding: const EdgeInsets.only(bottom: 6), child: c),
+      ]),
+    );
+  }
+}

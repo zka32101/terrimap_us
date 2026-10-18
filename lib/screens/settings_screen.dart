@@ -2,7 +2,7 @@ import 'package:app_common_kit/app_common_kit.dart' show PurchaseSection;
 import 'package:flutter/material.dart';
 
 import '../app_state.dart';
-import '../strings.dart';
+import 'package:terrimap_core/i18n/languages.dart';
 
 class SettingsScreen extends StatelessWidget {
   final AppState app;
@@ -17,17 +17,22 @@ class SettingsScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(title: Text(s.t('settings'))),
           body: ListView(children: [
-            if (Strings.supported.length > 1)
-              ListTile(
-                title: Text(s.t('language')),
-                trailing: DropdownButton<String>(
-                  value: app.lang,
-                  items: [for (final l in Strings.supported) DropdownMenuItem(value: l, child: Text(l))],
-                  onChanged: (l) {
-                    if (l != null) app.setLang(l);
-                  },
-                ),
+            ListTile(
+              title: Text(s.t('language')),
+              trailing: DropdownButton<String>(
+                value: app.lang,
+                items: [for (final l in appLanguages) DropdownMenuItem(value: l.code, child: Text(l.nativeName))],
+                onChanged: (l) {
+                  if (l != null) app.setLang(l);
+                },
               ),
+            ),
+            SwitchListTile(
+              title: Text(app.ui.t('assist.setting')),
+              subtitle: Text(app.ui.t('assist.settingHelp')),
+              value: app.quizAssist,
+              onChanged: app.setQuizAssist,
+            ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: PurchaseSection(),

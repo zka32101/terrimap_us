@@ -1,7 +1,9 @@
 
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show AssetManifest, rootBundle;
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:terrimap_core/i18n/languages.dart';
+import 'package:terrimap_core/i18n/ui_strings.dart';
 import 'package:terrimap_core/pack/region_pack.dart';
 import 'package:terrimap_core/progress/region_progress.dart';
 
@@ -9,16 +11,19 @@ import 'strings.dart';
 
 const _progressKey = 'progress_v1';
 const _langKey = 'lang';
+const _assistKey = 'quiz_assist';
 
 /// アプリ全体の状態: pack・進捗(端末に保存)・表示言語。
 class AppState extends ChangeNotifier {
   final RegionPack pack;
   final JsonProgressStore store;
   final SharedPreferences prefs;
+  final Map<String, String> _battleJson; // 言語コード→画面の文言(JSON)
   String _lang;
+  bool _quizAssist;
   RegionProgress progress;
 
-  AppState._(this.pack, this.store, this.prefs, this._lang, this.progress);
+  AppState._(this.pack, this.store, this.prefs, this._lang, this.progress, this._battleJson, this._quizAssist);
 
   static Future<AppState> load({SharedPreferences? prefs, AssetBundleLike? bundle}) async {
     final p = prefs ?? await SharedPreferences.getInstance();
@@ -29,16 +34,37 @@ class AppState extends ChangeNotifier {
       regionsJson: await asset('regions.json'),
       geoJson: await asset('geo.geojson'),
       stringsJsonByLang: {for (final l in Strings.supported) l: await asset('strings/$l.json')},
+      profileJson: await asset('profile.json'),
     );
+    // 画面の文言（コアに同梱。言語ごとのファイルがあるものだけ読む）
+    final battle = <String, String>{};
+    final manifest = bundle?.listAssets != null ? await bundle!.listAssets!() : (await AssetManifest.loadFromAssetBundle(rootBundle)).listAssets();
+    for (final key in manifest) {
+      final m = RegExp(r'^packages/terrimap_core/i18n/battle\.(\w+)\.json$').firstMatch(key);
+      if (m != null) battle[m.group(1)!] = await (bundle?.loadString ?? rootBundle.loadString)(key);
+    }
     final saved = p.getString(_progressKey);
     final store = saved == null ? JsonProgressStore() : JsonProgressStore.fromJson(saved);
-    final lang = p.getString(_langKey) ?? 'en';
+    final deviceLang = PlatformDispatcher.instance.locale.languageCode;
+    final lang = p.getString(_langKey) ?? resolveLanguage(deviceLang);
     final progress = await RegionProgress.load(store, pack.packId, pack.regions.map((r) => r.id));
-    return AppState._(pack, store, p, lang, progress);
+    return AppState._(pack, store, p, lang, progress, battle, p.getBool(_assistKey) ?? true);
   }
 
   String get lang => _lang;
   Strings get s => Strings(_lang, pack);
+
+  /// バトル画面の文言（その言語になければ英語）。
+  UiStrings get ui => UiStrings.parse(_battleJson, lang: _lang);
+
+  /// バトル中のクイズ連動（設定）。
+  bool get quizAssist => _quizAssist;
+
+  Future<void> setQuizAssist(bool v) async {
+    _quizAssist = v;
+    await prefs.setBool(_assistKey, v);
+    notifyListeners();
+  }
 
   Future<void> setLang(String l) async {
     _lang = l;
@@ -62,6 +88,7 @@ class AppState extends ChangeNotifier {
 /// テストでアセットを差し替えるための薄い型。
 class AssetBundleLike {
   final Future<String> Function(String key) loadString;
-  const AssetBundleLike(this.loadString);
+  final Future<List<String>> Function()? listAssets; // 画面の文言を探すとき（省略すると本物のアセット一覧）
+  const AssetBundleLike(this.loadString, {this.listAssets});
 }
 

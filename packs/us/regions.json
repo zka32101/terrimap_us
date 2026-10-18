@@ -2,207 +2,729 @@
  "regions": [
   {
    "id": "US-AK",
-   "capitalId": "cap_US-AK"
+   "capitalId": "cap_US-AK",
+   "capitalPos": {
+    "x": 267.94,
+    "y": 487.0
+   },
+   "neighbors": []
   },
   {
    "id": "US-AL",
-   "capitalId": "cap_US-AL"
+   "capitalId": "cap_US-AL",
+   "capitalPos": {
+    "x": 753.69,
+    "y": 383.2
+   },
+   "neighbors": [
+    "US-FL",
+    "US-GA",
+    "US-MS",
+    "US-TN"
+   ]
   },
   {
    "id": "US-AR",
-   "capitalId": "cap_US-AR"
+   "capitalId": "cap_US-AR",
+   "capitalPos": {
+    "x": 649.65,
+    "y": 341.89
+   },
+   "neighbors": [
+    "US-LA",
+    "US-MO",
+    "US-MS",
+    "US-OK",
+    "US-TN",
+    "US-TX"
+   ]
   },
   {
    "id": "US-AZ",
-   "capitalId": "cap_US-AZ"
+   "capitalId": "cap_US-AZ",
+   "capitalPos": {
+    "x": 318.25,
+    "y": 346.84
+   },
+   "neighbors": [
+    "US-CA",
+    "US-NM",
+    "US-NV",
+    "US-UT"
+   ]
   },
   {
    "id": "US-CA",
-   "capitalId": "cap_US-CA"
+   "capitalId": "cap_US-CA",
+   "capitalPos": {
+    "x": 191.13,
+    "y": 210.72
+   },
+   "neighbors": [
+    "US-AZ",
+    "US-NV",
+    "US-OR"
+   ]
   },
   {
    "id": "US-CO",
-   "capitalId": "cap_US-CO"
+   "capitalId": "cap_US-CO",
+   "capitalPos": {
+    "x": 448.89,
+    "y": 233.9
+   },
+   "neighbors": [
+    "US-KS",
+    "US-NE",
+    "US-NM",
+    "US-OK",
+    "US-UT",
+    "US-WY"
+   ]
   },
   {
    "id": "US-CT",
-   "capitalId": "cap_US-CT"
+   "capitalId": "cap_US-CT",
+   "capitalPos": {
+    "x": 936.0,
+    "y": 156.05
+   },
+   "neighbors": [
+    "US-MA",
+    "US-NY",
+    "US-RI"
+   ]
   },
   {
    "id": "US-DC",
-   "capitalId": "cap_US-DC"
+   "capitalId": "cap_US-DC",
+   "capitalPos": {
+    "x": 883.65,
+    "y": 228.01
+   },
+   "neighbors": [
+    "US-MD",
+    "US-VA"
+   ]
   },
   {
    "id": "US-DE",
-   "capitalId": "cap_US-DE"
+   "capitalId": "cap_US-DE",
+   "capitalPos": {
+    "x": 905.77,
+    "y": 218.08
+   },
+   "neighbors": [
+    "US-MD",
+    "US-NJ",
+    "US-PA"
+   ]
   },
   {
    "id": "US-FL",
-   "capitalId": "cap_US-FL"
+   "capitalId": "cap_US-FL",
+   "capitalPos": {
+    "x": 792.87,
+    "y": 418.64
+   },
+   "neighbors": [
+    "US-AL",
+    "US-GA"
+   ]
   },
   {
    "id": "US-GA",
-   "capitalId": "cap_US-GA"
+   "capitalId": "cap_US-GA",
+   "capitalPos": {
+    "x": 782.75,
+    "y": 351.65
+   },
+   "neighbors": [
+    "US-AL",
+    "US-FL",
+    "US-NC",
+    "US-SC",
+    "US-TN"
+   ]
   },
   {
    "id": "US-HI",
-   "capitalId": "cap_US-HI"
+   "capitalId": "cap_US-HI",
+   "capitalPos": {
+    "x": 378.24,
+    "y": 494.28
+   },
+   "neighbors": []
   },
   {
    "id": "US-IA",
-   "capitalId": "cap_US-IA"
+   "capitalId": "cap_US-IA",
+   "capitalPos": {
+    "x": 623.99,
+    "y": 202.11
+   },
+   "neighbors": [
+    "US-IL",
+    "US-MN",
+    "US-MO",
+    "US-NE",
+    "US-SD",
+    "US-WI"
+   ]
   },
   {
    "id": "US-ID",
-   "capitalId": "cap_US-ID"
+   "capitalId": "cap_US-ID",
+   "capitalPos": {
+    "x": 293.91,
+    "y": 129.63
+   },
+   "neighbors": [
+    "US-MT",
+    "US-NV",
+    "US-OR",
+    "US-UT",
+    "US-WA",
+    "US-WY"
+   ]
   },
   {
    "id": "US-IL",
-   "capitalId": "cap_US-IL"
+   "capitalId": "cap_US-IL",
+   "capitalPos": {
+    "x": 686.46,
+    "y": 236.33
+   },
+   "neighbors": [
+    "US-IA",
+    "US-IN",
+    "US-KY",
+    "US-MI",
+    "US-MO",
+    "US-WI"
+   ]
   },
   {
    "id": "US-IN",
-   "capitalId": "cap_US-IN"
+   "capitalId": "cap_US-IN",
+   "capitalPos": {
+    "x": 740.42,
+    "y": 232.0
+   },
+   "neighbors": [
+    "US-IL",
+    "US-KY",
+    "US-MI",
+    "US-OH"
+   ]
   },
   {
    "id": "US-KS",
-   "capitalId": "cap_US-KS"
+   "capitalId": "cap_US-KS",
+   "capitalPos": {
+    "x": 593.2,
+    "y": 254.7
+   },
+   "neighbors": [
+    "US-CO",
+    "US-MO",
+    "US-NE",
+    "US-OK"
+   ]
   },
   {
    "id": "US-KY",
-   "capitalId": "cap_US-KY"
+   "capitalId": "cap_US-KY",
+   "capitalPos": {
+    "x": 763.97,
+    "y": 261.8
+   },
+   "neighbors": [
+    "US-IL",
+    "US-IN",
+    "US-MO",
+    "US-OH",
+    "US-TN",
+    "US-VA",
+    "US-WV"
+   ]
   },
   {
    "id": "US-LA",
-   "capitalId": "cap_US-LA"
+   "capitalId": "cap_US-LA",
+   "capitalPos": {
+    "x": 672.37,
+    "y": 428.87
+   },
+   "neighbors": [
+    "US-AR",
+    "US-MS",
+    "US-TX"
+   ]
   },
   {
    "id": "US-MA",
-   "capitalId": "cap_US-MA"
+   "capitalId": "cap_US-MA",
+   "capitalPos": {
+    "x": 956.55,
+    "y": 138.08
+   },
+   "neighbors": [
+    "US-CT",
+    "US-NH",
+    "US-NY",
+    "US-RI",
+    "US-VT"
+   ]
   },
   {
    "id": "US-MD",
-   "capitalId": "cap_US-MD"
+   "capitalId": "cap_US-MD",
+   "capitalPos": {
+    "x": 891.72,
+    "y": 224.91
+   },
+   "neighbors": [
+    "US-DC",
+    "US-DE",
+    "US-PA",
+    "US-VA",
+    "US-WV"
+   ]
   },
   {
    "id": "US-ME",
-   "capitalId": "cap_US-ME"
+   "capitalId": "cap_US-ME",
+   "capitalPos": {
+    "x": 964.11,
+    "y": 94.61
+   },
+   "neighbors": [
+    "US-NH"
+   ]
   },
   {
    "id": "US-MI",
-   "capitalId": "cap_US-MI"
+   "capitalId": "cap_US-MI",
+   "capitalPos": {
+    "x": 757.8,
+    "y": 168.85
+   },
+   "neighbors": [
+    "US-IL",
+    "US-IN",
+    "US-MN",
+    "US-OH",
+    "US-WI"
+   ]
   },
   {
    "id": "US-MN",
-   "capitalId": "cap_US-MN"
+   "capitalId": "cap_US-MN",
+   "capitalPos": {
+    "x": 629.97,
+    "y": 133.04
+   },
+   "neighbors": [
+    "US-IA",
+    "US-MI",
+    "US-ND",
+    "US-SD",
+    "US-WI"
+   ]
   },
   {
    "id": "US-MO",
-   "capitalId": "cap_US-MO"
+   "capitalId": "cap_US-MO",
+   "capitalPos": {
+    "x": 648.4,
+    "y": 263.17
+   },
+   "neighbors": [
+    "US-AR",
+    "US-IA",
+    "US-IL",
+    "US-KS",
+    "US-KY",
+    "US-NE",
+    "US-OK",
+    "US-TN"
+   ]
   },
   {
    "id": "US-MS",
-   "capitalId": "cap_US-MS"
+   "capitalId": "cap_US-MS",
+   "capitalPos": {
+    "x": 687.58,
+    "y": 390.22
+   },
+   "neighbors": [
+    "US-AL",
+    "US-AR",
+    "US-LA",
+    "US-TN"
+   ]
   },
   {
    "id": "US-MT",
-   "capitalId": "cap_US-MT"
+   "capitalId": "cap_US-MT",
+   "capitalPos": {
+    "x": 364.06,
+    "y": 81.47
+   },
+   "neighbors": [
+    "US-ID",
+    "US-ND",
+    "US-SD",
+    "US-WY"
+   ]
   },
   {
    "id": "US-NC",
-   "capitalId": "cap_US-NC"
+   "capitalId": "cap_US-NC",
+   "capitalPos": {
+    "x": 870.67,
+    "y": 295.99
+   },
+   "neighbors": [
+    "US-GA",
+    "US-SC",
+    "US-TN",
+    "US-VA"
+   ]
   },
   {
    "id": "US-ND",
-   "capitalId": "cap_US-ND"
+   "capitalId": "cap_US-ND",
+   "capitalPos": {
+    "x": 521.22,
+    "y": 94.29
+   },
+   "neighbors": [
+    "US-MN",
+    "US-MT",
+    "US-SD"
+   ]
   },
   {
    "id": "US-NE",
-   "capitalId": "cap_US-NE"
+   "capitalId": "cap_US-NE",
+   "capitalPos": {
+    "x": 577.38,
+    "y": 218.39
+   },
+   "neighbors": [
+    "US-CO",
+    "US-IA",
+    "US-KS",
+    "US-MO",
+    "US-SD",
+    "US-WY"
+   ]
   },
   {
    "id": "US-NH",
-   "capitalId": "cap_US-NH"
+   "capitalId": "cap_US-NH",
+   "capitalPos": {
+    "x": 945.21,
+    "y": 123.13
+   },
+   "neighbors": [
+    "US-MA",
+    "US-ME",
+    "US-VT"
+   ]
   },
   {
    "id": "US-NJ",
-   "capitalId": "cap_US-NJ"
+   "capitalId": "cap_US-NJ",
+   "capitalPos": {
+    "x": 912.87,
+    "y": 194.21
+   },
+   "neighbors": [
+    "US-DE",
+    "US-NY",
+    "US-PA"
+   ]
   },
   {
    "id": "US-NM",
-   "capitalId": "cap_US-NM"
+   "capitalId": "cap_US-NM",
+   "capitalPos": {
+    "x": 425.57,
+    "y": 315.27
+   },
+   "neighbors": [
+    "US-AZ",
+    "US-CO",
+    "US-OK",
+    "US-TX"
+   ]
   },
   {
    "id": "US-NV",
-   "capitalId": "cap_US-NV"
+   "capitalId": "cap_US-NV",
+   "capitalPos": {
+    "x": 220.4,
+    "y": 206.1
+   },
+   "neighbors": [
+    "US-AZ",
+    "US-CA",
+    "US-ID",
+    "US-OR",
+    "US-UT"
+   ]
   },
   {
    "id": "US-NY",
-   "capitalId": "cap_US-NY"
+   "capitalId": "cap_US-NY",
+   "capitalPos": {
+    "x": 916.09,
+    "y": 142.16
+   },
+   "neighbors": [
+    "US-CT",
+    "US-MA",
+    "US-NJ",
+    "US-PA",
+    "US-VT"
+   ]
   },
   {
    "id": "US-OH",
-   "capitalId": "cap_US-OH"
+   "capitalId": "cap_US-OH",
+   "capitalPos": {
+    "x": 788.5,
+    "y": 222.2
+   },
+   "neighbors": [
+    "US-IN",
+    "US-KY",
+    "US-MI",
+    "US-PA",
+    "US-WV"
+   ]
   },
   {
    "id": "US-OK",
-   "capitalId": "cap_US-OK"
+   "capitalId": "cap_US-OK",
+   "capitalPos": {
+    "x": 563.19,
+    "y": 328.08
+   },
+   "neighbors": [
+    "US-AR",
+    "US-CO",
+    "US-KS",
+    "US-MO",
+    "US-NM",
+    "US-TX"
+   ]
   },
   {
    "id": "US-OR",
-   "capitalId": "cap_US-OR"
+   "capitalId": "cap_US-OR",
+   "capitalPos": {
+    "x": 204.36,
+    "y": 78.95
+   },
+   "neighbors": [
+    "US-CA",
+    "US-ID",
+    "US-NV",
+    "US-WA"
+   ]
   },
   {
    "id": "US-PA",
-   "capitalId": "cap_US-PA"
+   "capitalId": "cap_US-PA",
+   "capitalPos": {
+    "x": 880.36,
+    "y": 200.04
+   },
+   "neighbors": [
+    "US-DE",
+    "US-MD",
+    "US-NJ",
+    "US-NY",
+    "US-OH",
+    "US-WV"
+   ]
   },
   {
    "id": "US-RI",
-   "capitalId": "cap_US-RI"
+   "capitalId": "cap_US-RI",
+   "capitalPos": {
+    "x": 954.25,
+    "y": 150.07
+   },
+   "neighbors": [
+    "US-CT",
+    "US-MA"
+   ]
   },
   {
    "id": "US-SC",
-   "capitalId": "cap_US-SC"
+   "capitalId": "cap_US-SC",
+   "capitalPos": {
+    "x": 837.74,
+    "y": 338.7
+   },
+   "neighbors": [
+    "US-GA",
+    "US-NC"
+   ]
   },
   {
    "id": "US-SD",
-   "capitalId": "cap_US-SD"
+   "capitalId": "cap_US-SD",
+   "capitalPos": {
+    "x": 525.0,
+    "y": 144.18
+   },
+   "neighbors": [
+    "US-IA",
+    "US-MN",
+    "US-MT",
+    "US-ND",
+    "US-NE",
+    "US-WY"
+   ]
   },
   {
    "id": "US-TN",
-   "capitalId": "cap_US-TN"
+   "capitalId": "cap_US-TN",
+   "capitalPos": {
+    "x": 737.97,
+    "y": 306.73
+   },
+   "neighbors": [
+    "US-AL",
+    "US-AR",
+    "US-GA",
+    "US-KY",
+    "US-MO",
+    "US-MS",
+    "US-NC",
+    "US-VA"
+   ]
   },
   {
    "id": "US-TX",
-   "capitalId": "cap_US-TX"
+   "capitalId": "cap_US-TX",
+   "capitalPos": {
+    "x": 557.52,
+    "y": 434.48
+   },
+   "neighbors": [
+    "US-AR",
+    "US-LA",
+    "US-NM",
+    "US-OK"
+   ]
   },
   {
    "id": "US-UT",
-   "capitalId": "cap_US-UT"
+   "capitalId": "cap_US-UT",
+   "capitalPos": {
+    "x": 346.29,
+    "y": 199.25
+   },
+   "neighbors": [
+    "US-AZ",
+    "US-CO",
+    "US-ID",
+    "US-NV",
+    "US-WY"
+   ]
   },
   {
    "id": "US-VA",
-   "capitalId": "cap_US-VA"
+   "capitalId": "cap_US-VA",
+   "capitalPos": {
+    "x": 882.97,
+    "y": 256.79
+   },
+   "neighbors": [
+    "US-DC",
+    "US-KY",
+    "US-MD",
+    "US-NC",
+    "US-TN",
+    "US-WV"
+   ]
   },
   {
    "id": "US-VT",
-   "capitalId": "cap_US-VT"
+   "capitalId": "cap_US-VT",
+   "capitalPos": {
+    "x": 925.13,
+    "y": 106.09
+   },
+   "neighbors": [
+    "US-MA",
+    "US-NH",
+    "US-NY"
+   ]
   },
   {
    "id": "US-WA",
-   "capitalId": "cap_US-WA"
+   "capitalId": "cap_US-WA",
+   "capitalPos": {
+    "x": 218.11,
+    "y": 38.6
+   },
+   "neighbors": [
+    "US-ID",
+    "US-OR"
+   ]
   },
   {
    "id": "US-WI",
-   "capitalId": "cap_US-WI"
+   "capitalId": "cap_US-WI",
+   "capitalPos": {
+    "x": 685.63,
+    "y": 168.72
+   },
+   "neighbors": [
+    "US-IA",
+    "US-IL",
+    "US-MI",
+    "US-MN"
+   ]
   },
   {
    "id": "US-WV",
-   "capitalId": "cap_US-WV"
+   "capitalId": "cap_US-WV",
+   "capitalPos": {
+    "x": 814.39,
+    "y": 251.91
+   },
+   "neighbors": [
+    "US-KY",
+    "US-MD",
+    "US-OH",
+    "US-PA",
+    "US-VA"
+   ]
   },
   {
    "id": "US-WY",
-   "capitalId": "cap_US-WY"
+   "capitalId": "cap_US-WY",
+   "capitalPos": {
+    "x": 454.18,
+    "y": 205.51
+   },
+   "neighbors": [
+    "US-CO",
+    "US-ID",
+    "US-MT",
+    "US-NE",
+    "US-SD",
+    "US-UT"
+   ]
   }
  ]
 }
