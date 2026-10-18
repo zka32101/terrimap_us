@@ -1,0 +1,853 @@
+{
+ "style": "vast",
+ "summary": {
+  "ja": "広大・多様な物量型。足の速い敵が多く進路も長い。地域ごとの天候の荒れに備える。",
+  "en": "Vast and varied. Fast enemies on long paths; prepare for regional extreme weather."
+ },
+ "enemyMix": {
+  "normal": 0.4,
+  "speedy": 0.3,
+  "armored": 0.2,
+  "healer": 0.1
+ },
+ "economy": {
+  "startCoins": 1.0,
+  "income": 1.0,
+  "facilityCost": 1.0
+ },
+ "pathLength": "long",
+ "signature": {
+  "id": "weather_extremes",
+  "note": "地域ごとに天候イベント(竜巻・ハリケーン・猛吹雪)が起きる。施設の射程や敵の速さが一時的に変わる。"
+ },
+ "regions": {
+  "US-AL": {
+   "terrain": "agriculture",
+   "tags": [
+    "south",
+    "aerospace"
+   ],
+   "facilityBonus": {
+    "farm": 1.1
+   },
+   "weatherEvent": "tornado",
+   "backdrop": "plains"
+  },
+  "US-AK": {
+   "terrain": "mountain",
+   "tags": [
+    "arctic",
+    "oil"
+   ],
+   "facilityBonus": {
+    "mine": 1.2
+   },
+   "weatherEvent": "blizzard",
+   "backdrop": "tundra",
+   "exclusiveFacility": "pipeline"
+  },
+  "US-AZ": {
+   "terrain": "mixed",
+   "tags": [
+    "desert",
+    "canyon"
+   ],
+   "weatherEvent": "heatwave",
+   "backdrop": "desert"
+  },
+  "US-AR": {
+   "terrain": "agriculture",
+   "tags": [
+    "rice",
+    "south"
+   ],
+   "facilityBonus": {
+    "farm": 1.1
+   },
+   "weatherEvent": "tornado",
+   "backdrop": "plains"
+  },
+  "US-CA": {
+   "terrain": "mixed",
+   "tags": [
+    "tech",
+    "farming",
+    "coast"
+   ],
+   "facilityBonus": {
+    "factory": 1.2
+   },
+   "weatherEvent": "wildfire",
+   "backdrop": "pacific_coast",
+   "exclusiveFacility": "tech_campus"
+  },
+  "US-CO": {
+   "terrain": "mountain",
+   "tags": [
+    "rockies",
+    "ski"
+   ],
+   "weatherEvent": "blizzard",
+   "backdrop": "rockies"
+  },
+  "US-CT": {
+   "terrain": "urban",
+   "tags": [
+    "insurance",
+    "small"
+   ],
+   "facilityBonus": {
+    "castle": 1.1
+   },
+   "backdrop": "atlantic_coast"
+  },
+  "US-DE": {
+   "terrain": "urban",
+   "tags": [
+    "first_state",
+    "small"
+   ],
+   "facilityBonus": {
+    "castle": 1.1
+   },
+   "backdrop": "atlantic_coast"
+  },
+  "US-DC": {
+   "terrain": "urban",
+   "tags": [
+    "capital"
+   ],
+   "facilityBonus": {
+    "castle": 1.2
+   },
+   "backdrop": "skyline",
+   "exclusiveFacility": "capitol"
+  },
+  "US-FL": {
+   "terrain": "sea",
+   "tags": [
+    "coast",
+    "tourism",
+    "space"
+   ],
+   "facilityBonus": {
+    "fishery": 1.15
+   },
+   "weatherEvent": "hurricane",
+   "backdrop": "tropics",
+   "exclusiveFacility": "space_center"
+  },
+  "US-GA": {
+   "terrain": "agriculture",
+   "tags": [
+    "south",
+    "logistics"
+   ],
+   "facilityBonus": {
+    "farm": 1.1
+   },
+   "backdrop": "plains"
+  },
+  "US-HI": {
+   "terrain": "sea",
+   "tags": [
+    "island",
+    "volcano"
+   ],
+   "facilityBonus": {
+    "fishery": 1.2
+   },
+   "backdrop": "tropics"
+  },
+  "US-ID": {
+   "terrain": "mountain",
+   "tags": [
+    "potato",
+    "mountains"
+   ],
+   "facilityBonus": {
+    "farm": 1.15
+   },
+   "backdrop": "rockies"
+  },
+  "US-IL": {
+   "terrain": "urban",
+   "tags": [
+    "industry",
+    "farming",
+    "chicago"
+   ],
+   "facilityBonus": {
+    "factory": 1.1
+   },
+   "backdrop": "skyline"
+  },
+  "US-IN": {
+   "terrain": "agriculture",
+   "tags": [
+    "industry",
+    "corn"
+   ],
+   "facilityBonus": {
+    "factory": 1.1
+   },
+   "weatherEvent": "tornado",
+   "backdrop": "cornfield"
+  },
+  "US-IA": {
+   "terrain": "agriculture",
+   "tags": [
+    "farming",
+    "corn"
+   ],
+   "facilityBonus": {
+    "farm": 1.2
+   },
+   "weatherEvent": "storm",
+   "backdrop": "cornfield"
+  },
+  "US-KS": {
+   "terrain": "agriculture",
+   "tags": [
+    "plains",
+    "wheat"
+   ],
+   "facilityBonus": {
+    "farm": 1.15
+   },
+   "weatherEvent": "tornado",
+   "backdrop": "plains",
+   "enemyBias": {
+    "speedy": 1.2
+   }
+  },
+  "US-KY": {
+   "terrain": "mountain",
+   "tags": [
+    "bourbon",
+    "horses",
+    "coal"
+   ],
+   "facilityBonus": {
+    "mine": 1.15
+   },
+   "backdrop": "appalachia",
+   "exclusiveFacility": "distillery"
+  },
+  "US-LA": {
+   "terrain": "sea",
+   "tags": [
+    "bayou",
+    "oil",
+    "jazz"
+   ],
+   "facilityBonus": {
+    "fishery": 1.15
+   },
+   "weatherEvent": "hurricane",
+   "backdrop": "bayou"
+  },
+  "US-ME": {
+   "terrain": "sea",
+   "tags": [
+    "lobster",
+    "forest"
+   ],
+   "facilityBonus": {
+    "fishery": 1.2
+   },
+   "weatherEvent": "blizzard",
+   "backdrop": "atlantic_coast"
+  },
+  "US-MD": {
+   "terrain": "sea",
+   "tags": [
+    "bay",
+    "capital_region"
+   ],
+   "facilityBonus": {
+    "fishery": 1.15
+   },
+   "backdrop": "atlantic_coast"
+  },
+  "US-MA": {
+   "terrain": "urban",
+   "tags": [
+    "education",
+    "harbor"
+   ],
+   "facilityBonus": {
+    "factory": 1.1
+   },
+   "weatherEvent": "blizzard",
+   "backdrop": "atlantic_coast"
+  },
+  "US-MI": {
+   "terrain": "mixed",
+   "tags": [
+    "auto",
+    "lakes"
+   ],
+   "facilityBonus": {
+    "factory": 1.2
+   },
+   "weatherEvent": "blizzard",
+   "backdrop": "great_lakes",
+   "enemyBias": {
+    "armored": 1.2
+   }
+  },
+  "US-MN": {
+   "terrain": "mixed",
+   "tags": [
+    "lakes",
+    "north"
+   ],
+   "facilityBonus": {
+    "farm": 1.1
+   },
+   "weatherEvent": "blizzard",
+   "backdrop": "great_lakes"
+  },
+  "US-MS": {
+   "terrain": "agriculture",
+   "tags": [
+    "delta",
+    "south"
+   ],
+   "facilityBonus": {
+    "farm": 1.1
+   },
+   "weatherEvent": "hurricane",
+   "backdrop": "bayou"
+  },
+  "US-MO": {
+   "terrain": "mixed",
+   "tags": [
+    "river",
+    "midwest"
+   ],
+   "weatherEvent": "tornado",
+   "backdrop": "plains"
+  },
+  "US-MT": {
+   "terrain": "mountain",
+   "tags": [
+    "big_sky",
+    "ranch"
+   ],
+   "facilityBonus": {
+    "mine": 1.1
+   },
+   "weatherEvent": "blizzard",
+   "backdrop": "rockies"
+  },
+  "US-NE": {
+   "terrain": "agriculture",
+   "tags": [
+    "plains",
+    "ranch"
+   ],
+   "facilityBonus": {
+    "farm": 1.2
+   },
+   "weatherEvent": "tornado",
+   "backdrop": "plains"
+  },
+  "US-NV": {
+   "terrain": "mixed",
+   "tags": [
+    "desert",
+    "mining"
+   ],
+   "facilityBonus": {
+    "mine": 1.15
+   },
+   "weatherEvent": "heatwave",
+   "backdrop": "desert"
+  },
+  "US-NH": {
+   "terrain": "mountain",
+   "tags": [
+    "granite",
+    "mountains"
+   ],
+   "weatherEvent": "blizzard",
+   "backdrop": "appalachia"
+  },
+  "US-NJ": {
+   "terrain": "urban",
+   "tags": [
+    "port",
+    "pharma",
+    "shore"
+   ],
+   "facilityBonus": {
+    "factory": 1.1
+   },
+   "weatherEvent": "storm",
+   "backdrop": "atlantic_coast"
+  },
+  "US-NM": {
+   "terrain": "mixed",
+   "tags": [
+    "desert",
+    "science"
+   ],
+   "weatherEvent": "heatwave",
+   "backdrop": "desert",
+   "exclusiveFacility": "national_lab"
+  },
+  "US-NY": {
+   "terrain": "urban",
+   "tags": [
+    "finance",
+    "city"
+   ],
+   "facilityBonus": {
+    "castle": 1.2
+   },
+   "weatherEvent": "blizzard",
+   "backdrop": "skyline",
+   "exclusiveFacility": "stock_exchange"
+  },
+  "US-NC": {
+   "terrain": "mixed",
+   "tags": [
+    "coast",
+    "research",
+    "farming"
+   ],
+   "facilityBonus": {
+    "farm": 1.1
+   },
+   "weatherEvent": "hurricane",
+   "backdrop": "atlantic_coast"
+  },
+  "US-ND": {
+   "terrain": "agriculture",
+   "tags": [
+    "plains",
+    "oil"
+   ],
+   "facilityBonus": {
+    "farm": 1.2,
+    "mine": 1.1
+   },
+   "weatherEvent": "blizzard",
+   "backdrop": "plains"
+  },
+  "US-OH": {
+   "terrain": "urban",
+   "tags": [
+    "manufacturing",
+    "lakes"
+   ],
+   "facilityBonus": {
+    "factory": 1.15
+   },
+   "backdrop": "great_lakes"
+  },
+  "US-OK": {
+   "terrain": "agriculture",
+   "tags": [
+    "plains",
+    "oil"
+   ],
+   "facilityBonus": {
+    "mine": 1.15
+   },
+   "weatherEvent": "tornado",
+   "backdrop": "plains",
+   "enemyBias": {
+    "speedy": 1.2
+   }
+  },
+  "US-OR": {
+   "terrain": "mixed",
+   "tags": [
+    "forest",
+    "coast"
+   ],
+   "facilityBonus": {
+    "fishery": 1.1
+   },
+   "backdrop": "pacific_coast"
+  },
+  "US-PA": {
+   "terrain": "urban",
+   "tags": [
+    "steel",
+    "coal"
+   ],
+   "facilityBonus": {
+    "mine": 1.15,
+    "factory": 1.1
+   },
+   "backdrop": "appalachia",
+   "enemyBias": {
+    "armored": 1.2
+   }
+  },
+  "US-RI": {
+   "terrain": "sea",
+   "tags": [
+    "ocean_state",
+    "small"
+   ],
+   "facilityBonus": {
+    "fishery": 1.1
+   },
+   "backdrop": "atlantic_coast"
+  },
+  "US-SC": {
+   "terrain": "sea",
+   "tags": [
+    "coast",
+    "south"
+   ],
+   "facilityBonus": {
+    "fishery": 1.1
+   },
+   "weatherEvent": "hurricane",
+   "backdrop": "atlantic_coast"
+  },
+  "US-SD": {
+   "terrain": "agriculture",
+   "tags": [
+    "plains",
+    "black_hills"
+   ],
+   "facilityBonus": {
+    "farm": 1.15
+   },
+   "weatherEvent": "blizzard",
+   "backdrop": "plains"
+  },
+  "US-TN": {
+   "terrain": "mixed",
+   "tags": [
+    "music",
+    "appalachia"
+   ],
+   "weatherEvent": "tornado",
+   "backdrop": "appalachia"
+  },
+  "US-TX": {
+   "terrain": "agriculture",
+   "tags": [
+    "energy",
+    "ranch"
+   ],
+   "facilityBonus": {
+    "mine": 1.2
+   },
+   "weatherEvent": "hurricane",
+   "backdrop": "desert",
+   "exclusiveFacility": "oil_derrick",
+   "enemyBias": {
+    "speedy": 1.1
+   }
+  },
+  "US-UT": {
+   "terrain": "mountain",
+   "tags": [
+    "canyons",
+    "ski"
+   ],
+   "facilityBonus": {
+    "mine": 1.1
+   },
+   "backdrop": "desert"
+  },
+  "US-VT": {
+   "terrain": "mountain",
+   "tags": [
+    "maple",
+    "dairy"
+   ],
+   "facilityBonus": {
+    "farm": 1.1
+   },
+   "weatherEvent": "blizzard",
+   "backdrop": "appalachia"
+  },
+  "US-VA": {
+   "terrain": "mixed",
+   "tags": [
+    "capital_region",
+    "history"
+   ],
+   "facilityBonus": {
+    "castle": 1.1
+   },
+   "backdrop": "atlantic_coast"
+  },
+  "US-WA": {
+   "terrain": "sea",
+   "tags": [
+    "tech",
+    "aerospace",
+    "port"
+   ],
+   "facilityBonus": {
+    "factory": 1.15
+   },
+   "weatherEvent": "earthquake",
+   "backdrop": "pacific_coast",
+   "exclusiveFacility": "aerospace_works"
+  },
+  "US-WV": {
+   "terrain": "mountain",
+   "tags": [
+    "coal",
+    "appalachia"
+   ],
+   "facilityBonus": {
+    "mine": 1.2
+   },
+   "weatherEvent": "flood",
+   "backdrop": "appalachia"
+  },
+  "US-WI": {
+   "terrain": "agriculture",
+   "tags": [
+    "dairy",
+    "lakes"
+   ],
+   "facilityBonus": {
+    "farm": 1.2
+   },
+   "weatherEvent": "blizzard",
+   "backdrop": "great_lakes"
+  },
+  "US-WY": {
+   "terrain": "mountain",
+   "tags": [
+    "yellowstone",
+    "energy"
+   ],
+   "facilityBonus": {
+    "mine": 1.2
+   },
+   "weatherEvent": "blizzard",
+   "backdrop": "rockies"
+  }
+ },
+ "enemies": {
+  "normal": {
+   "baseDamage": 1.2
+  },
+  "speedy": {
+   "speed": 1.2,
+   "ability": "swarm"
+  },
+  "armored": {
+   "hp": 1.0,
+   "action": "ranged_disable"
+  },
+  "healer": {
+   "ability": "regen"
+  }
+ },
+ "attackActions": {
+  "factory": {
+   "action": "splash",
+   "damage": 1.0,
+   "range": 1.1,
+   "cooldown": 0.9
+  },
+  "mine": {
+   "action": "burn",
+   "damage": 1.0,
+   "range": 1.0,
+   "cooldown": 1.0
+  },
+  "castle": {
+   "action": "single",
+   "damage": 1.2,
+   "range": 1.2,
+   "cooldown": 1.0
+  },
+  "farm": {
+   "action": "slow",
+   "damage": 0.8,
+   "range": 1.2,
+   "cooldown": 1.0
+  }
+ },
+ "theme": {
+  "backdrops": {
+   "desert": {
+    "palette": [
+     "#F1D9A8",
+     "#D9985B",
+     "#8C4F2E"
+    ],
+    "note": "砂漠と赤い岩"
+   },
+   "plains": {
+    "palette": [
+     "#EAE2A8",
+     "#B7B04A",
+     "#6F7A2E"
+    ],
+    "note": "大平原と地平線"
+   },
+   "rockies": {
+    "palette": [
+     "#DCE6EE",
+     "#7C98B0",
+     "#46607A"
+    ],
+    "note": "ロッキーの山と雪"
+   },
+   "bayou": {
+    "palette": [
+     "#CFE0C4",
+     "#5F8F5B",
+     "#2F5A3A"
+    ],
+    "note": "湿地とバイユー"
+   },
+   "atlantic_coast": {
+    "palette": [
+     "#D3E4EC",
+     "#5C93AE",
+     "#2F5F7A"
+    ],
+    "note": "大西洋岸の港と灯台"
+   },
+   "pacific_coast": {
+    "palette": [
+     "#D8E8E4",
+     "#4F9A94",
+     "#276A66"
+    ],
+    "note": "太平洋岸と霧"
+   },
+   "great_lakes": {
+    "palette": [
+     "#D5E4EE",
+     "#5A8DB0",
+     "#2E5F86"
+    ],
+    "note": "五大湖と港町"
+   },
+   "appalachia": {
+    "palette": [
+     "#D9E0C8",
+     "#7B9468",
+     "#445E3A"
+    ],
+    "note": "アパラチアの丘と霧"
+   },
+   "skyline": {
+    "palette": [
+     "#DADBE6",
+     "#7C7E9E",
+     "#454866"
+    ],
+    "note": "摩天楼の街"
+   },
+   "tundra": {
+    "palette": [
+     "#E6EEF2",
+     "#9DB8C6",
+     "#5A7A8C"
+    ],
+    "note": "氷原とオーロラ"
+   },
+   "tropics": {
+    "palette": [
+     "#D6F0E0",
+     "#4DB88C",
+     "#1F7A5A"
+    ],
+    "note": "亜熱帯の海と島"
+   },
+   "cornfield": {
+    "palette": [
+     "#F2E8B0",
+     "#D8B84A",
+     "#7C8A34"
+    ],
+    "note": "とうもろこし畑とサイロ"
+   }
+  }
+ },
+ "facilities": {
+  "farm": {
+   "skin": "grain_silo",
+   "name": {
+    "ja": "穀物サイロ",
+    "en": "Grain Silo"
+   }
+  },
+  "fishery": {
+   "skin": "fishing_trawler",
+   "name": {
+    "ja": "底引き漁船",
+    "en": "Fishing Trawler"
+   }
+  },
+  "factory": {
+   "skin": "assembly_line",
+   "name": {
+    "ja": "組立ライン",
+    "en": "Assembly Line"
+   }
+  },
+  "mine": {
+   "skin": "oil_derrick",
+   "name": {
+    "ja": "油井",
+    "en": "Oil Derrick"
+   }
+  },
+  "castle": {
+   "skin": "capitol_hall",
+   "name": {
+    "ja": "議事堂",
+    "en": "Capitol Hall"
+   }
+  },
+  "shrine": {
+   "skin": "town_church",
+   "name": {
+    "ja": "町の教会",
+    "en": "Town Church"
+   }
+  }
+ },
+ "enemySkins": {
+  "normal": {
+   "skin": "dust_devil",
+   "name": {
+    "ja": "つむじ風",
+    "en": "Dust Devil"
+   }
+  },
+  "speedy": {
+   "skin": "tumbleweed",
+   "name": {
+    "ja": "回転草",
+    "en": "Tumbleweed"
+   }
+  },
+  "armored": {
+   "skin": "rock_golem",
+   "name": {
+    "ja": "岩のゴーレム",
+    "en": "Rock Golem"
+   }
+  },
+  "healer": {
+   "skin": "cactus_nurse",
+   "name": {
+    "ja": "サボテンの看護師",
+    "en": "Cactus Nurse"
+   }
+  }
+ }
+}

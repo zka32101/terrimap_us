@@ -1,0 +1,140 @@
+import 'package:app_common_kit/app_common_kit.dart' hide SettingsScreen;
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:terrimap_core/battle/battle_engine.dart';
+import 'package:terrimap_core/battle/difficulty.dart';
+import 'package:terrimap_core/battle/stage_generator.dart';
+import 'package:terrimap_core/battle_ui/battle_view.dart';
+import 'package:terrimap_core/quiz/quiz_engine.dart';
+import 'package:terrimap_us/app_state.dart';
+import 'package:terrimap_us/main.dart';
+import 'package:terrimap_us/monetization.dart';
+
+void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  test('AppState: 国の特性と、画面の文言（英語）を読み込む。足りない言語は英語になる', () async {
+    final a = await AppState.load();
+    expect(a.pack.profile, isNotNull);
+    expect(a.pack.regions.any((r) => r.neighbors.isNotEmpty), true);
+    expect(a.ui.t('hud.wave', {'n': 1, 'total': 5}), 'Wave 1/5');
+    await a.setLang('fr'); // 翻訳がまだなくても動く
+    expect(a.ui.t('hud.base'), 'Base');
+    expect(a.quizAssist, true);
+    await a.setQuizAssist(false);
+    expect((await AppState.load()).quizAssist, false);
+  });
+
+  Future<AppState> boot(WidgetTester t, {bool assist = true}) async {
+    final app = await t.runAsync(AppState.load) as AppState;
+    await app.setLang('en');
+    await app.setQuizAssist(assist);
+    await t.pumpWidget(ProviderScope(
+      overrides: [
+        entitlementServiceProvider.overrideWithValue(Monetization.fakeEntitlement()),
+        optionalAdGateProvider.overrideWithValue(null),
+      ],
+      child: TerrimapApp(app: app),
+    ));
+    await t.pump();
+    return app;
+  }
+
+  Future<void> enterBattle(WidgetTester t, String regionName) async {
+    await t.tap(find.byKey(const ValueKey('battle')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    await t.tap(find.text(regionName));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+  }
+
+  int coins(WidgetTester t) => int.parse((t.widget(find.byKey(const ValueKey('hud-coins'))) as Text).data!.replaceAll('● ', ''));
+
+  Future<void> tapCell(WidgetTester t, int col, int row, int cols, int rows) async {
+    final box = t.getRect(find.byKey(const ValueKey('board')));
+    final l = BattleView.layout(box.size, cols, rows);
+    await t.tapAt(box.topLeft + Offset(l.dx + (col + 0.5) * l.cell, l.dy + (row + 0.5) * l.cell));
+    await t.pump();
+  }
+
+  testWidgets('ホーム→バトル→州を選ぶ→設置→波の開始→HUDが進む', (t) async {
+    await t.binding.setSurfaceSize(const Size(360, 740)); // 小さめのスマホ
+    addTearDown(() => t.binding.setSurfaceSize(null));
+    final app = await boot(t, assist: false);
+    await enterBattle(t, 'California');
+    expect(find.byKey(const ValueKey('hud-wave')), findsOneWidget);
+    expect(find.text('Wave 0/5'), findsOneWidget);
+
+    final stage = StageGenerator(app.pack).generate('US-CA', Difficulty.normal);
+    final slot = stage.slots.first;
+    final before = coins(t);
+    await tapCell(t, slot.col, slot.row, stage.cols, stage.rows);
+    expect(find.byKey(const ValueKey('place-farm')), findsOneWidget);
+    await t.tap(find.byKey(const ValueKey('place-farm')));
+    await t.pump();
+    expect(coins(t), lessThan(before));
+    expect(find.byKey(const ValueKey('upgrade')), findsOneWidget); // 施設が置かれ、操作欄に変わった
+
+    await t.tap(find.byKey(const ValueKey('start-wave')));
+    await t.pump();
+    for (var i = 0; i < 20; i++) {
+      await t.pump(const Duration(milliseconds: 100));
+    }
+    expect(find.text('Wave 1/5'), findsOneWidget);
+    expect(t.takeException(), isNull); // 小さい画面でもはみ出さない
+
+    // 一時停止すると時間が進まない
+    await t.tap(find.byKey(const ValueKey('pause')));
+    await t.pump();
+    final c = coins(t);
+    for (var i = 0; i < 10; i++) {
+      await t.pump(const Duration(milliseconds: 100));
+    }
+    expect(coins(t), c);
+
+    await t.pumpWidget(const SizedBox()); // 画面を閉じてタイマーを止める
+  });
+
+  testWidgets('クイズ連動: 正解するとスキルを3つから選べて、選ぶとHUDに出る', (t) async {
+    final app = await boot(t);
+    final stage = StageGenerator(app.pack).generate('US-CA', Difficulty.normal);
+    final engine = BattleEngine(stage, profile: app.pack.profile, pack: app.pack);
+    final q = engine.assistQuestion(engine.start())!;
+    final correct = q.type == QuestionType.capitalFromName ? app.s.capitalName(q.correctId) : app.s.regionName(q.correctId);
+
+    await enterBattle(t, 'California');
+    await t.tap(find.byKey(const ValueKey('skill')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 300));
+    await t.tap(find.text(correct));
+    await t.pump();
+    await t.pump(const Duration(seconds: 1)); // 結果の表示のあと閉じる
+    await t.pump(const Duration(milliseconds: 400));
+    final choice = find.byWidgetPredicate((w) => w.key is ValueKey && (w.key as ValueKey).value.toString().startsWith('skill-'));
+    expect(choice, findsNWidgets(3));
+    await t.tap(choice.first);
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.textContaining('Active skill'), findsOneWidget);
+    await t.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('無料でない州は、解放の案内が出る（バトルには入れない）', (t) async {
+    await boot(t, assist: false);
+    await t.tap(find.byKey(const ValueKey('battle')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    await t.scrollUntilVisible(find.byKey(const ValueKey('stage-US-VT')), 300, scrollable: find.descendant(of: find.byType(ListView).last, matching: find.byType(Scrollable)));
+    await t.ensureVisible(find.byKey(const ValueKey('stage-US-VT')));
+    await t.pump();
+    await t.tap(find.byKey(const ValueKey('stage-US-VT')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.byKey(const ValueKey('hud-wave')), findsNothing);
+    expect(find.text('Unlock all 51 states'), findsWidgets);
+  });
+}

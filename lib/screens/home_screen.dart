@@ -10,6 +10,7 @@ import 'package:terrimap_core/quiz/quiz_engine.dart';
 import '../app_state.dart';
 import '../monetization.dart';
 import 'quiz_screen.dart';
+import 'stage_picker_screen.dart';
 import 'settings_screen.dart';
 import 'unlock_sheet.dart';
 
@@ -126,6 +127,19 @@ class HomeScreen extends ConsumerWidget {
                   colorOf: (id) => isRegionUnlocked(id, premium: premium)
                       ? defaultRegionColor(p.stateOf(id))
                       : _lockedColor,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: FilledButton.icon(
+                    key: const ValueKey('battle'),
+                    icon: const Icon(Icons.shield),
+                    onPressed: () => Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (_) => StagePickerScreen(app: app))),
+                    label: Text(s.t('battle')),
+                  ),
                 ),
               ),
               Padding(
