@@ -11,6 +11,7 @@ import 'package:terrimap_core/daily/daily_streak.dart';
 import 'package:terrimap_core/battle/replay.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/battle/grid.dart';
+import 'package:terrimap_core/battle/invite.dart';
 import 'package:terrimap_core/i18n/languages.dart';
 import 'package:terrimap_core/i18n/ui_strings.dart';
 import 'package:terrimap_core/pack/region_pack.dart';
@@ -137,6 +138,25 @@ class AppState extends ChangeNotifier {
 
   /// 名所の名前（コレクションの表示用）。
   int get newCardCount => collection.unlockedIds.difference(seenCards).length;
+
+  /// 招待コードのステージの名前（州・地方・エクストラ）。
+  String inviteStageName(Invite inv) {
+    final profile = pack.profile;
+    switch (inv.kind) {
+      case StageKind.normal:
+        return s.regionName(inv.stageId);
+      case StageKind.regional:
+        return profile?.groups[inv.stageId]?.nameIn(lang) ?? inv.stageId;
+      case StageKind.extra:
+        return profile?.extras.where((e) => e.id == inv.stageId).firstOrNull?.titleIn(lang) ?? inv.stageId;
+    }
+  }
+
+  /// 友だちに送る招待の文面（一文・自分の結果・コード）。
+  String inviteText(Invite inv) => inv.shareText(
+        headline: ui.t('invite.headline', {'app': s.t('appTitle'), 'stage': inviteStageName(inv), 'difficulty': ui.t('difficulty.${inv.difficulty.name}')}),
+        result: inv.hasResult ? ui.t('invite.result', {'mark': inv.won! ? '✅' : '❌', 'hp': inv.baseHp!}) : '',
+      );
 
   /// 復習: 間違えた州がバトルのクイズで出やすくなる重み。
   Map<String, double> get reviewWeights => battleReviewWeights(progress);
