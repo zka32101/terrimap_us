@@ -11,6 +11,7 @@ import 'package:terrimap_core/pack/country_profile.dart';
 import '../app_state.dart';
 import '../monetization.dart';
 import 'battle_screen.dart';
+import 'replay_screen.dart';
 import 'unlock_sheet.dart';
 
 /// 守るステージ（州／地方決戦／エクストラ）と難易度を選ぶ画面。
@@ -30,6 +31,8 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
         builder: (_) => BattleScreen(app: widget.app, regionId: id, difficulty: difficulty ?? _difficulty, kind: kind, daily: daily),
       ));
 
+  void _watch(Replay r) => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ReplayScreen(app: widget.app, replay: r)));
+
   /// 今日のバトル。無料の間は、無料の州だけから選ぶ。
   DailyBattle _daily(bool premium) =>
       DailyBattle.forDate(widget.app.pack, widget.app.today(), allowedIds: premium ? null : freeRegionIds);
@@ -47,8 +50,8 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
         subtitle: Text(done != null
             ? '${ui.t('daily.done')}  ${done.result.won ? '✅' : '❌'} ♥${done.result.baseHp}'
             : ui.t('daily.today', {'name': app.s.regionName(d.stageId), 'difficulty': ui.t('difficulty.${d.difficulty.name}')})),
-        trailing: done != null ? const Icon(Icons.check_circle, color: Colors.green) : const Icon(Icons.chevron_right),
-        onTap: done != null ? null : () => _play(d.kind, d.stageId, difficulty: d.difficulty, daily: d),
+        trailing: done != null ? const Icon(Icons.play_circle_outline, key: ValueKey('daily-watch')) : const Icon(Icons.chevron_right),
+        onTap: done != null ? () => _watch(done) : () => _play(d.kind, d.stageId, difficulty: d.difficulty, daily: d),
       ),
     );
   }
@@ -93,6 +96,15 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
           ]),
           actions: [
             TextButton(onPressed: () => Navigator.pop(ctx), child: Text(ui.t('result.back'))),
+            if (ok)
+              TextButton(
+                key: const ValueKey('challenge-watch'),
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  _watch(r);
+                },
+                child: Text(ui.t('replay.watch')),
+              ),
             FilledButton(
               key: const ValueKey('challenge-play'),
               onPressed: ok && r.kind == StageKind.normal && isRegionUnlocked(r.stageId, premium: ref.read(entitlementServiceProvider).state.hasPremium)

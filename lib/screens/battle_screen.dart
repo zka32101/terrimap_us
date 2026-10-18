@@ -14,6 +14,7 @@ import 'package:terrimap_core/i18n/ui_strings.dart';
 
 import '../app_state.dart';
 import 'assist_dialog.dart';
+import 'replay_screen.dart';
 
 /// バトル画面（最小版）。盤面、HUD、施設の設置・強化・撤去・修理、スキル選択（クイズ連動）、結果。
 class BattleScreen extends StatefulWidget {
@@ -218,6 +219,12 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
               key: const ValueKey('share-daily'),
               onPressed: () => _copy(widget.daily!.shareText(widget.app.s.t('appTitle'), _replay!.result, totalWaves: _stage.waves.length, maxBaseHp: _stage.baseHp), ui.t('daily.share')),
               child: Text(ui.t('daily.share')),
+            ),
+          if (_replay != null)
+            TextButton(
+              key: const ValueKey('watch-replay'),
+              onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ReplayScreen(app: widget.app, replay: _replay!))),
+              child: Text(ui.t('replay.watch')),
             ),
           if (_replay != null)
             TextButton(
