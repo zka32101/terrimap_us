@@ -72,6 +72,8 @@ class _AssistDialogState extends State<_AssistDialog> {
         return '${s.t('nameFromCapital')}\n${s.capitalName(q.targetId)}';
       case QuestionType.silhouette:
         return s.t('silhouette');
+      case QuestionType.neighborOf:
+        return '${s.t('neighborOf')}\n${s.regionName(q.targetId)}';
       case QuestionType.locateOnMap:
         return s.regionName(q.targetId);
     }

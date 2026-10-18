@@ -77,6 +77,8 @@ class _QuizScreenState extends State<QuizScreen> {
         return '${s.t('nameFromCapital')}\n${s.capitalName(q.targetId)}';
       case QuestionType.silhouette:
         return s.t('silhouette');
+      case QuestionType.neighborOf:
+        return '${s.t('neighborOf')}\n${s.regionName(q.targetId)}';
     }
   }
 
@@ -96,6 +98,7 @@ class _QuizScreenState extends State<QuizScreen> {
           },
         );
       case QuestionType.nameFromMap:
+      case QuestionType.neighborOf:
         return RegionMapView(
           pack: pack,
           showZoomControls: true,
