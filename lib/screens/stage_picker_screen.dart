@@ -4,6 +4,7 @@ import 'collection_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:terrimap_core/battle/daily_battle.dart';
+import 'package:terrimap_core/battle/invite.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/battle/replay.dart';
 import 'package:terrimap_core/battle/grid.dart';
@@ -70,10 +71,20 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
       builder: (ctx) => StatefulBuilder(builder: (ctx, setS) {
         final r = Replay.fromShareCode(ctl.text.trim());
         final ok = r != null && r.packId == app.pack.packId && r.verify(app.pack);
+        final inv = Invite.parse(ctl.text);
+        final invOk = inv != null && inv.isValidFor(app.pack);
+        final premium = ref.read(entitlementServiceProvider).state.hasPremium;
+        // 招待のステージを、今の解放の条件で遊べるか
+        final invPlayable = invOk &&
+            switch (inv.kind) {
+              StageKind.normal => isRegionUnlocked(inv.stageId, premium: premium),
+              StageKind.regional => premium && app.battle.regionalUnlocked(app.pack.profile!.groups[inv.stageId]!),
+              StageKind.extra => premium && app.battle.extraUnlocked(app.pack),
+            };
         return AlertDialog(
           title: Text(ui.t('daily.challenge')),
           content: Column(mainAxisSize: MainAxisSize.min, children: [
-            Text(ui.t('daily.challenge.hint')),
+            Text(ui.t('invite.hint')),
             TextField(
               key: const ValueKey('challenge-code'),
               controller: ctl,
@@ -94,9 +105,15 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
             if (ctl.text.trim().isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: 8),
-                child: Text(ok
-                    ? '${app.s.regionName(r.stageId)} · ${ui.t('difficulty.${r.difficulty.name}')}  ${r.result.won ? '✅' : '❌'} ♥${r.result.baseHp}'
-                    : ui.t('replay.invalid')),
+                child: Text(invOk
+                    ? [
+                        '${app.inviteStageName(inv)} · ${ui.t('difficulty.${inv.difficulty.name}')}',
+                        if (inv.hasResult) ui.t('invite.beat', {'mark': inv.won! ? '✅' : '❌', 'hp': inv.baseHp!}),
+                        if (!invPlayable) ui.t('invite.locked'),
+                      ].join('\n')
+                    : ok
+                        ? '${app.s.regionName(r.stageId)} · ${ui.t('difficulty.${r.difficulty.name}')}  ${r.result.won ? '✅' : '❌'} ♥${r.result.baseHp}'
+                        : ctl.text.contains('TMI1') ? ui.t('invite.invalid') : ui.t('replay.invalid')),
               ),
           ]),
           actions: [
@@ -112,12 +129,17 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
               ),
             FilledButton(
               key: const ValueKey('challenge-play'),
-              onPressed: ok && r.kind == StageKind.normal && isRegionUnlocked(r.stageId, premium: ref.read(entitlementServiceProvider).state.hasPremium)
+              onPressed: invPlayable
                   ? () {
                       Navigator.pop(ctx);
-                      _play(r.kind, r.stageId, difficulty: r.difficulty);
+                      _play(inv.kind, inv.stageId, difficulty: inv.difficulty);
                     }
-                  : null,
+                  : ok && r.kind == StageKind.normal && isRegionUnlocked(r.stageId, premium: premium)
+                      ? () {
+                          Navigator.pop(ctx);
+                          _play(r.kind, r.stageId, difficulty: r.difficulty);
+                        }
+                      : null,
               child: Text(ui.t('stage.play')),
             ),
           ],
@@ -213,6 +235,12 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
               return;
             }
             _play(StageKind.normal, id);
+          },
+          // 長押しで、このステージ（今選んでいる難易度）への招待をコピーする
+          onLongPress: () async {
+            final inv = Invite(packId: app.pack.packId, kind: StageKind.normal, stageId: id, difficulty: _difficulty);
+            await Clipboard.setData(ClipboardData(text: app.inviteText(inv)));
+            if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(ui.t('invite.copied')), duration: const Duration(seconds: 2)));
           },
         ),
     ];

@@ -1,5 +1,6 @@
 import 'package:app_common_kit/app_common_kit.dart' hide SettingsScreen;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,6 +10,7 @@ import 'package:terrimap_core/battle/daily_battle.dart';
 import 'package:terrimap_core/battle/bot.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/battle/grid.dart';
+import 'package:terrimap_core/battle/invite.dart';
 import 'package:terrimap_core/battle/stage_generator.dart';
 import 'package:terrimap_core/battle_ui/battle_view.dart';
 import 'package:terrimap_core/quiz/quiz_engine.dart';
@@ -260,6 +262,45 @@ void main() {
     await t.pump();
     await t.pump(const Duration(milliseconds: 400));
     expect(find.byKey(const ValueKey('hud-wave')), findsOneWidget);
+  });
+
+  testWidgets('招待: 州の長押しで招待をコピーでき、貼ると相手の結果が見えて、同じステージを遊べる。壊れた招待は遊べない', (t) async {
+    await t.binding.setSurfaceSize(const Size(800, 1000));
+    addTearDown(() => t.binding.setSurfaceSize(null));
+    final app = await boot(t, assist: false);
+    String? copied;
+    t.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (call) async {
+      if (call.method == 'Clipboard.setData') copied = (call.arguments as Map)['text'] as String;
+      return null;
+    });
+    addTearDown(() => t.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, null));
+    await t.tap(find.byKey(const ValueKey('battle')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    await t.longPress(find.byKey(const ValueKey('stage-US-CA')));
+    await t.pump();
+    expect(copied, contains('TMI1.${app.pack.packId}.normal.US-CA.normal'));
+    expect(copied, contains('California'));
+    await t.pump(const Duration(seconds: 3));
+    final theirs = Invite(packId: app.pack.packId, kind: StageKind.normal, stageId: 'US-CA', difficulty: Difficulty.hard, won: true, baseHp: 12);
+    await t.tap(find.byKey(const ValueKey('challenge')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    await t.enterText(find.byKey(const ValueKey('challenge-code')), 'Look!\n${app.inviteText(theirs)}\nPlay it');
+    await t.pump();
+    expect(find.textContaining('California'), findsWidgets);
+    expect(find.textContaining('♥12'), findsWidgets);
+    await t.enterText(find.byKey(const ValueKey('challenge-code')), 'TMI1.xx.normal.nowhere.hard');
+    await t.pump();
+    expect(find.text('This invite can\'t be used.'), findsOneWidget);
+    expect((t.widget(find.byKey(const ValueKey('challenge-play'))) as FilledButton).onPressed, isNull);
+    await t.enterText(find.byKey(const ValueKey('challenge-code')), theirs.toCode());
+    await t.pump();
+    await t.tap(find.byKey(const ValueKey('challenge-play')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.byKey(const ValueKey('hud-wave')), findsOneWidget);
+    await t.pumpWidget(const SizedBox());
   });
 
   testWidgets('ホーム→バトル→州を選ぶ→設置→波の開始→HUDが進む', (t) async {
