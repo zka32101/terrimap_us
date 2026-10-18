@@ -30,13 +30,13 @@ const _seenCardsKey = 'collection_seen_v1';
 /// アプリ全体の状態: pack・進捗(端末に保存)・表示言語。
 class AppState extends ChangeNotifier {
   final RegionPack pack;
-  final JsonProgressStore store;
+  JsonProgressStore store;
   final SharedPreferences prefs;
   final Map<String, String> _battleJson; // 言語コード→画面の文言(JSON)
   String _lang;
   bool _quizAssist;
   RegionProgress progress;
-  final BattleProgress battle; // バトルのクリア記録（地方決戦・エクストラの解放に使う）
+  BattleProgress battle; // バトルのクリア記録（地方決戦・エクストラの解放に使う）
 
   AppState._(this.pack, this.store, this.prefs, this._lang, this.progress, this._battleJson, this._quizAssist, this.battle);
 
@@ -65,6 +65,17 @@ class AppState extends ChangeNotifier {
     final lang = p.getString(_langKey) ?? resolveLanguage(deviceLang);
     final progress = await RegionProgress.load(store, pack.packId, pack.regions.map((r) => r.id));
     return AppState._(pack, store, p, lang, progress, battle, p.getBool(_assistKey) ?? true, BattleProgress.fromJsonString(p.getString(_battleKey)));
+  }
+
+  /// 端末のデータを消したあとなど、保存済みの値から状態を読み直す。
+  Future<void> reloadFromPrefs() async {
+    final saved = prefs.getString(_progressKey);
+    store = saved == null ? JsonProgressStore() : JsonProgressStore.fromJson(saved);
+    battle = BattleProgress.fromJsonString(prefs.getString(_battleKey));
+    _lang = prefs.getString(_langKey) ?? resolveLanguage(PlatformDispatcher.instance.locale.languageCode);
+    _quizAssist = prefs.getBool(_assistKey) ?? true;
+    progress = await RegionProgress.load(store, pack.packId, pack.regions.map((r) => r.id));
+    notifyListeners();
   }
 
   String get lang => _lang;

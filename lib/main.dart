@@ -8,6 +8,7 @@ import 'screens/home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await loadSavedThemeMode();
   final app = await AppState.load();
   final money = await Monetization.init();
   runApp(ProviderScope(
@@ -28,12 +29,17 @@ class TerrimapApp extends StatelessWidget {
     // キットの部品(購入欄など)の文言を、アプリの表示言語に合わせる。
     return ListenableBuilder(
       listenable: app,
-      builder: (context, _) => MaterialApp(
+      builder: (context, _) => ValueListenableBuilder<ThemeMode>(
+        valueListenable: appThemeMode, // 設定の「表示モード」
+        builder: (context, mode, _) => MaterialApp(
+        themeMode: mode,
+        darkTheme: ThemeData(colorSchemeSeed: const Color(0xFF2E7D32), brightness: Brightness.dark, useMaterial3: true),
         title: 'State Master – USA',
         theme: ThemeData(colorSchemeSeed: const Color(0xFF2E7D32), useMaterial3: true),
         builder: (context, child) =>
             KitStringsScope(strings: app.s.kit, child: child ?? const SizedBox.shrink()),
         home: HomeScreen(app: app),
+        ),
       ),
     );
   }
