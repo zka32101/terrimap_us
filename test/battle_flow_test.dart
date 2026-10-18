@@ -163,6 +163,24 @@ void main() {
     await t.pump();
     expect(find.text('You finished today\'s battle.', findRichText: false, skipOffstage: false), findsNothing); // 文は「完了 + 結果」と続くので部分一致で確かめる
     expect(find.textContaining('You finished today'), findsOneWidget);
+
+    // 終えた日は、タップするとリプレイを見られる。最後まで飛ばすと、記録と一致したと出る
+    await t.pump(const Duration(seconds: 1));
+    await t.tap(find.byKey(const ValueKey('daily-battle')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.byKey(const ValueKey('replay-board')), findsOneWidget);
+    await t.tap(find.byKey(const ValueKey('replay-speed-4')));
+    await t.pump();
+    await t.tap(find.byKey(const ValueKey('replay-pause')));
+    await t.pump();
+    await t.tap(find.byKey(const ValueKey('replay-skip')));
+    await t.pump();
+    expect(find.byKey(const ValueKey('replay-done')), findsOneWidget);
+    expect(find.textContaining('Verified'), findsOneWidget);
+    await t.tap(find.byKey(const ValueKey('replay-restart')));
+    await t.pump();
+    expect(find.byKey(const ValueKey('replay-done')), findsNothing);
   });
 
   testWidgets('挑戦コード: 正しいコードは確かめられて遊べる。壊れたコードは遊べない', (t) async {
@@ -183,6 +201,19 @@ void main() {
     await t.enterText(find.byKey(const ValueKey('challenge-code')), code);
     await t.pump();
     expect(find.textContaining('California'), findsWidgets);
+    // 見るだけもできる
+    await t.tap(find.byKey(const ValueKey('challenge-watch')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.byKey(const ValueKey('replay-board')), findsOneWidget);
+    Navigator.of(t.element(find.byKey(const ValueKey('replay-board')))).pop();
+    await t.pump();
+    await t.pump(const Duration(seconds: 1));
+    await t.tap(find.byKey(const ValueKey('challenge')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    await t.enterText(find.byKey(const ValueKey('challenge-code')), code);
+    await t.pump();
     await t.tap(find.byKey(const ValueKey('challenge-play')));
     await t.pump();
     await t.pump(const Duration(milliseconds: 400));
