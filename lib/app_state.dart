@@ -26,6 +26,7 @@ import 'package:terrimap_core/progress/quiz_history.dart';
 import 'package:terrimap_core/progress/region_progress.dart';
 import 'package:terrimap_core/progress/weak_regions.dart';
 
+import 'a11y.dart';
 import 'reminders.dart';
 import 'share_card.dart';
 import 'sound.dart';
@@ -38,6 +39,7 @@ const _sfxKey = 'sfx_on_v1';
 const _bgmKey = 'bgm_on_v1';
 const _reminderKey = 'reminder_on_v1';
 const _adaptiveKey = 'adaptive_quiz_v1';
+const _colorBlindKey = 'color_blind_v1';
 const _reminderTimeKey = 'reminder_minutes_v1';
 const _tutorialKey = 'tutorial_done_v1';
 const _battleKey = 'battle_progress_v1';
@@ -273,6 +275,15 @@ class AppState extends ChangeNotifier {
   /// 苦手な州（間違いの多い順）。1問ごとに [record] で更新される。
   List<WeakRegion> weakRegions = const [];
   Map<String, int> _misses = const {}; // 州ごとの間違えた回数（出題の重みに使う）
+
+  /// 色覚に配慮した配色（青とオレンジ）。初期はオフ。
+  bool get colorBlind => prefs.getBool(_colorBlindKey) ?? false;
+  A11yPalette get palette => A11yPalette(colorBlind);
+
+  Future<void> setColorBlind(bool v) async {
+    await prefs.setBool(_colorBlindKey, v);
+    notifyListeners();
+  }
 
   /// 「かしこいクイズ」: オンなら、クイズで苦手な州が出やすくなる。初期はオン。
   bool get adaptiveQuiz => prefs.getBool(_adaptiveKey) ?? true;
