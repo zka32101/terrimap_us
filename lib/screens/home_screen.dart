@@ -12,6 +12,7 @@ import '../app_state.dart';
 import '../monetization.dart';
 import 'quiz_screen.dart';
 import 'stage_picker_screen.dart';
+import 'stats_screen.dart';
 import 'settings_screen.dart';
 import 'unlock_sheet.dart';
 
@@ -100,6 +101,13 @@ class HomeScreen extends ConsumerWidget {
           appBar: AppBar(
             title: Text(s.t('appTitle')),
             actions: [
+              IconButton(
+                key: const ValueKey('stats'),
+                tooltip: s.t('stats'),
+                icon: const Icon(Icons.bar_chart),
+                onPressed: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (_) => StatsScreen(app: app))),
+              ),
               IconButton(
                 tooltip: s.t('settings'),
                 icon: const Icon(Icons.settings),
