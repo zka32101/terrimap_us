@@ -10,6 +10,7 @@ import 'package:terrimap_core/quiz/quiz_engine.dart';
 
 import '../app_state.dart';
 import '../monetization.dart';
+import 'daily_landmark_card.dart';
 import 'quiz_screen.dart';
 import 'stage_picker_screen.dart';
 import 'stats_screen.dart';
@@ -142,6 +143,7 @@ class HomeScreen extends ConsumerWidget {
                       : _lockedColor,
                 ),
               ),
+              DailyLandmarkCard(app: app),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                 child: SizedBox(
