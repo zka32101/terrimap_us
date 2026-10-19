@@ -40,9 +40,10 @@ void main() {
     expect((await AppState.load()).quizAssist, false);
   });
 
-  Future<AppState> boot(WidgetTester t, {bool assist = true}) async {
+  Future<AppState> boot(WidgetTester t, {bool assist = true, bool tutorial = false}) async {
     final app = await t.runAsync(AppState.load) as AppState;
     await app.setLang('en');
+    await app.setTutorialDone(!tutorial); // 既定では案内を出さない（盤面の位置が動かないように）
     await app.setQuizAssist(assist);
     await t.pumpWidget(ProviderScope(
       overrides: [
@@ -395,6 +396,34 @@ void main() {
     await t.pump();
     await t.pump(const Duration(milliseconds: 400));
     expect(find.byKey(const ValueKey('hud-wave')), findsOneWidget);
+    await t.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('チュートリアル: 初回は案内が順に出て、スキップすると出ない。最初の波を終えると終わる。設定から、もう一度見られる', (t) async {
+    await t.binding.setSurfaceSize(const Size(480, 1000)); // テストの文字は幅が広く、案内が何行にもなるので、少し大きめにする
+    addTearDown(() => t.binding.setSurfaceSize(null));
+    final app = await boot(t, assist: false, tutorial: true);
+    expect(app.tutorialDone, isFalse);
+    await enterBattle(t, 'California');
+    expect(find.byKey(const ValueKey('tutorial-placeSlot')), findsOneWidget);
+    expect(find.text('Tap a build spot on the map to place a facility.'), findsOneWidget);
+
+    final stage = StageGenerator(app.pack).generate('US-CA', Difficulty.normal);
+    final slot = stage.slots.first;
+    await tapCell(t, slot.col, slot.row, stage.cols, stage.rows);
+    await t.pump();
+    expect(find.byKey(const ValueKey('tutorial-placeFacility')), findsOneWidget);
+    await t.tap(find.byKey(const ValueKey('place-farm')));
+    await t.pump();
+    expect(find.byKey(const ValueKey('tutorial-startWave')), findsOneWidget);
+
+    await t.tap(find.byKey(const ValueKey('tutorial-skip')));
+    await t.pump();
+    expect(find.byKey(const ValueKey('tutorial-hint')), findsNothing);
+    expect(app.tutorialDone, isTrue);
+    expect((await t.runAsync(AppState.load) as AppState).tutorialDone, isTrue); // 端末に保存
+    await app.setTutorialDone(false); // 設定の「もう一度見る」
+    expect(app.tutorialDone, isFalse);
     await t.pumpWidget(const SizedBox());
   });
 
