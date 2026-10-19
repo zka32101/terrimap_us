@@ -745,11 +745,9 @@ packages:
   terrimap_core:
     dependency: "direct main"
     description:
-      path: "."
-      ref: main
-      resolved-ref: b9c8dbb844958f19816c64f0709537e0eb4c2eea
-      url: "https://github.com/zka32101/terrimap_core"
-    source: git
+      path: "../terrimap_core"
+      relative: true
+    source: path
     version: "0.0.1"
   test_api:
     dependency: transitive

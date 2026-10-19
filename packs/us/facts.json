@@ -6,7 +6,15 @@
    "region": "US-AZ",
    "name": {
     "en": "Grand Canyon",
-    "ja": "グランドキャニオン"
+    "ja": "グランドキャニオン",
+    "fr": "Grand Canyon",
+    "es": "Gran Cañón",
+    "it": "Grand Canyon",
+    "pt": "Grand Canyon",
+    "nl": "Grand Canyon",
+    "tr": "Büyük Kanyon",
+    "ko": "그랜드 캐니언",
+    "zh": "大峡谷"
    },
    "use": true,
    "check": "unchecked",
@@ -17,7 +25,15 @@
    "region": "US-CA",
    "name": {
     "en": "Golden Gate Bridge",
-    "ja": "ゴールデンゲートブリッジ"
+    "ja": "ゴールデンゲートブリッジ",
+    "fr": "Golden Gate Bridge",
+    "es": "Puente Golden Gate",
+    "it": "Golden Gate Bridge",
+    "pt": "Ponte Golden Gate",
+    "nl": "Golden Gate Bridge",
+    "tr": "Golden Gate Köprüsü",
+    "ko": "금문교",
+    "zh": "金门大桥"
    },
    "use": true,
    "check": "unchecked",
@@ -28,7 +44,15 @@
    "region": "US-CO",
    "name": {
     "en": "Mesa Verde National Park",
-    "ja": "メサ・ヴェルデ国立公園"
+    "ja": "メサ・ヴェルデ国立公園",
+    "fr": "Parc national de Mesa Verde",
+    "es": "Parque nacional Mesa Verde",
+    "it": "Parco nazionale di Mesa Verde",
+    "pt": "Parque Nacional de Mesa Verde",
+    "nl": "Nationaal Park Mesa Verde",
+    "tr": "Mesa Verde Milli Parkı",
+    "ko": "메사 버디 국립공원",
+    "zh": "梅萨维德国家公园"
    },
    "use": true,
    "check": "unchecked",
@@ -39,7 +63,15 @@
    "region": "US-FL",
    "name": {
     "en": "Kennedy Space Center",
-    "ja": "ケネディ宇宙センター"
+    "ja": "ケネディ宇宙センター",
+    "fr": "Centre spatial Kennedy",
+    "es": "Centro Espacial Kennedy",
+    "it": "Kennedy Space Center",
+    "pt": "Centro Espacial Kennedy",
+    "nl": "Kennedy Space Center",
+    "tr": "Kennedy Uzay Merkezi",
+    "ko": "케네디 우주센터",
+    "zh": "肯尼迪航天中心"
    },
    "use": true,
    "check": "unchecked",
@@ -50,7 +82,15 @@
    "region": "US-HI",
    "name": {
     "en": "Diamond Head (Oahu)",
-    "ja": "ダイヤモンドヘッド（オアフ島）"
+    "ja": "ダイヤモンドヘッド（オアフ島）",
+    "fr": "Diamond Head (Oahu)",
+    "es": "Diamond Head (Oahu)",
+    "it": "Diamond Head (Oahu)",
+    "pt": "Diamond Head (Oahu)",
+    "nl": "Diamond Head (Oahu)",
+    "tr": "Diamond Head (Oahu)",
+    "ko": "다이아몬드 헤드 (오아후)",
+    "zh": "钻石头山（瓦胡岛）"
    },
    "use": true,
    "check": "unchecked",
@@ -61,7 +101,15 @@
    "region": "US-NY",
    "name": {
     "en": "Empire State Building",
-    "ja": "エンパイア・ステート・ビルディング"
+    "ja": "エンパイア・ステート・ビルディング",
+    "fr": "Empire State Building",
+    "es": "Empire State Building",
+    "it": "Empire State Building",
+    "pt": "Empire State Building",
+    "nl": "Empire State Building",
+    "tr": "Empire State Binası",
+    "ko": "엠파이어 스테이트 빌딩",
+    "zh": "帝国大厦"
    },
    "use": true,
    "check": "unchecked",
@@ -72,7 +120,15 @@
    "region": "US-DC",
    "name": {
     "en": "Lincoln Memorial",
-    "ja": "リンカーン記念堂"
+    "ja": "リンカーン記念堂",
+    "fr": "Lincoln Memorial",
+    "es": "Monumento a Lincoln",
+    "it": "Lincoln Memorial",
+    "pt": "Memorial Lincoln",
+    "nl": "Lincoln Memorial",
+    "tr": "Lincoln Anıtı",
+    "ko": "링컨 기념관",
+    "zh": "林肯纪念堂"
    },
    "use": true,
    "check": "unchecked",
@@ -83,7 +139,15 @@
    "region": "US-IL",
    "name": {
     "en": "Willis Tower",
-    "ja": "ウィリス・タワー"
+    "ja": "ウィリス・タワー",
+    "fr": "Willis Tower",
+    "es": "Torre Willis",
+    "it": "Willis Tower",
+    "pt": "Willis Tower",
+    "nl": "Willis Tower",
+    "tr": "Willis Kulesi",
+    "ko": "윌리스 타워",
+    "zh": "威利斯大厦"
    },
    "use": true,
    "check": "unchecked",
@@ -94,7 +158,15 @@
    "region": "US-MA",
    "name": {
     "en": "Fenway Park",
-    "ja": "フェンウェイ・パーク"
+    "ja": "フェンウェイ・パーク",
+    "fr": "Fenway Park",
+    "es": "Fenway Park",
+    "it": "Fenway Park",
+    "pt": "Fenway Park",
+    "nl": "Fenway Park",
+    "tr": "Fenway Park",
+    "ko": "펜웨이 파크",
+    "zh": "芬威球场"
    },
    "use": true,
    "check": "unchecked",
@@ -105,7 +177,15 @@
    "region": "US-NV",
    "name": {
     "en": "Las Vegas Strip",
-    "ja": "ラスベガス・ストリップ"
+    "ja": "ラスベガス・ストリップ",
+    "fr": "Las Vegas Strip",
+    "es": "Las Vegas Strip",
+    "it": "Las Vegas Strip",
+    "pt": "Las Vegas Strip",
+    "nl": "Las Vegas Strip",
+    "tr": "Las Vegas Strip",
+    "ko": "라스베이거스 스트립",
+    "zh": "拉斯维加斯大道"
    },
    "use": true,
    "check": "unchecked",
@@ -116,7 +196,15 @@
    "region": "US-WY",
    "name": {
     "en": "Devils Tower",
-    "ja": "デビルズタワー"
+    "ja": "デビルズタワー",
+    "fr": "Devils Tower",
+    "es": "Torre del Diablo",
+    "it": "Devils Tower",
+    "pt": "Devils Tower",
+    "nl": "Devils Tower",
+    "tr": "Şeytan Kulesi",
+    "ko": "데블스 타워",
+    "zh": "魔鬼塔"
    },
    "use": true,
    "check": "unchecked",
@@ -127,7 +215,15 @@
    "region": "US-SD",
    "name": {
     "en": "Mount Rushmore",
-    "ja": "ラシュモア山"
+    "ja": "ラシュモア山",
+    "fr": "Mont Rushmore",
+    "es": "Monte Rushmore",
+    "it": "Monte Rushmore",
+    "pt": "Monte Rushmore",
+    "nl": "Mount Rushmore",
+    "tr": "Rushmore Dağı",
+    "ko": "러시모어 산",
+    "zh": "拉什莫尔山"
    },
    "use": true,
    "check": "unchecked",
@@ -138,7 +234,15 @@
    "region": "US-WA",
    "name": {
     "en": "Space Needle",
-    "ja": "スペースニードル"
+    "ja": "スペースニードル",
+    "fr": "Space Needle",
+    "es": "Space Needle",
+    "it": "Space Needle",
+    "pt": "Space Needle",
+    "nl": "Space Needle",
+    "tr": "Space Needle",
+    "ko": "스페이스 니들",
+    "zh": "太空针塔"
    },
    "use": true,
    "check": "unchecked",
@@ -149,7 +253,15 @@
    "region": "US-TX",
    "name": {
     "en": "Johnson Space Center (Houston)",
-    "ja": "ジョンソン宇宙センター（ヒューストン）"
+    "ja": "ジョンソン宇宙センター（ヒューストン）",
+    "fr": "Centre spatial Johnson (Houston)",
+    "es": "Centro Espacial Johnson (Houston)",
+    "it": "Johnson Space Center (Houston)",
+    "pt": "Centro Espacial Johnson (Houston)",
+    "nl": "Johnson Space Center (Houston)",
+    "tr": "Johnson Uzay Merkezi (Houston)",
+    "ko": "존슨 우주센터 (휴스턴)",
+    "zh": "约翰逊航天中心（休斯敦）"
    },
    "use": true,
    "check": "unchecked",
@@ -160,7 +272,15 @@
    "region": "US-UT",
    "name": {
     "en": "Arches National Park",
-    "ja": "アーチーズ国立公園"
+    "ja": "アーチーズ国立公園",
+    "fr": "Parc national des Arches",
+    "es": "Parque nacional Arches",
+    "it": "Parco nazionale degli Arches",
+    "pt": "Parque Nacional de Arches",
+    "nl": "Nationaal Park Arches",
+    "tr": "Arches Milli Parkı",
+    "ko": "아치스 국립공원",
+    "zh": "拱门国家公园"
    },
    "use": true,
    "check": "unchecked",
@@ -171,7 +291,15 @@
    "region": "US-ND",
    "name": {
     "en": "Theodore Roosevelt National Park",
-    "ja": "セオドア・ルーズベルト国立公園"
+    "ja": "セオドア・ルーズベルト国立公園",
+    "fr": "Parc national Theodore Roosevelt",
+    "es": "Parque nacional Theodore Roosevelt",
+    "it": "Parco nazionale Theodore Roosevelt",
+    "pt": "Parque Nacional Theodore Roosevelt",
+    "nl": "Nationaal Park Theodore Roosevelt",
+    "tr": "Theodore Roosevelt Milli Parkı",
+    "ko": "시어도어 루스벨트 국립공원",
+    "zh": "西奥多·罗斯福国家公园"
    },
    "use": true,
    "check": "unchecked",
@@ -182,7 +310,15 @@
    "region": "US-ME",
    "name": {
     "en": "Acadia National Park",
-    "ja": "アケイディア国立公園"
+    "ja": "アケイディア国立公園",
+    "fr": "Parc national d'Acadia",
+    "es": "Parque nacional Acadia",
+    "it": "Parco nazionale di Acadia",
+    "pt": "Parque Nacional de Acadia",
+    "nl": "Nationaal Park Acadia",
+    "tr": "Acadia Milli Parkı",
+    "ko": "아카디아 국립공원",
+    "zh": "阿卡迪亚国家公园"
    },
    "use": true,
    "check": "unchecked",
@@ -193,7 +329,15 @@
    "region": "US-AK",
    "name": {
     "en": "Denali",
-    "ja": "デナリ"
+    "ja": "デナリ",
+    "fr": "Denali",
+    "es": "Denali",
+    "it": "Denali",
+    "pt": "Denali",
+    "nl": "Denali",
+    "tr": "Denali",
+    "ko": "데날리",
+    "zh": "迪纳利"
    },
    "use": true,
    "check": "unchecked",
@@ -204,7 +348,15 @@
    "region": "US-LA",
    "name": {
     "en": "French Quarter (New Orleans)",
-    "ja": "フレンチ・クォーター（ニューオーリンズ）"
+    "ja": "フレンチ・クォーター（ニューオーリンズ）",
+    "fr": "Quartier français (La Nouvelle-Orléans)",
+    "es": "Barrio Francés (Nueva Orleans)",
+    "it": "French Quarter (Nuova Orleans)",
+    "pt": "Bairro Francês (Nova Orleans)",
+    "nl": "French Quarter (New Orleans)",
+    "tr": "French Quarter (New Orleans)",
+    "ko": "프렌치 쿼터 (뉴올리언스)",
+    "zh": "法国区（新奥尔良）"
    },
    "use": true,
    "check": "unchecked",
@@ -215,7 +367,15 @@
    "region": "US-PA",
    "name": {
     "en": "Liberty Bell (Philadelphia)",
-    "ja": "自由の鐘（フィラデルフィア）"
+    "ja": "自由の鐘（フィラデルフィア）",
+    "fr": "Liberty Bell (Philadelphie)",
+    "es": "Campana de la Libertad (Filadelfia)",
+    "it": "Liberty Bell (Filadelfia)",
+    "pt": "Sino da Liberdade (Filadélfia)",
+    "nl": "Liberty Bell (Philadelphia)",
+    "tr": "Özgürlük Çanı (Philadelphia)",
+    "ko": "자유의 종 (필라델피아)",
+    "zh": "自由钟（费城）"
    },
    "use": true,
    "check": "unchecked",
@@ -226,7 +386,15 @@
    "region": "US-MO",
    "name": {
     "en": "Gateway Arch (St. Louis)",
-    "ja": "ゲートウェイ・アーチ（セントルイス）"
+    "ja": "ゲートウェイ・アーチ（セントルイス）",
+    "fr": "Gateway Arch (Saint-Louis)",
+    "es": "Gateway Arch (San Luis)",
+    "it": "Gateway Arch (St. Louis)",
+    "pt": "Gateway Arch (St. Louis)",
+    "nl": "Gateway Arch (St. Louis)",
+    "tr": "Gateway Arch (St. Louis)",
+    "ko": "게이트웨이 아치 (세인트루이스)",
+    "zh": "大拱门（圣路易斯）"
    },
    "use": true,
    "check": "unchecked",
@@ -237,7 +405,15 @@
    "region": "US-TN",
    "name": {
     "en": "Grand Ole Opry (Nashville)",
-    "ja": "グランド・オール・オープリ（ナッシュビル）"
+    "ja": "グランド・オール・オープリ（ナッシュビル）",
+    "fr": "Grand Ole Opry (Nashville)",
+    "es": "Grand Ole Opry (Nashville)",
+    "it": "Grand Ole Opry (Nashville)",
+    "pt": "Grand Ole Opry (Nashville)",
+    "nl": "Grand Ole Opry (Nashville)",
+    "tr": "Grand Ole Opry (Nashville)",
+    "ko": "그랜드 올 오프리 (내슈빌)",
+    "zh": "大奥普里（纳什维尔）"
    },
    "use": true,
    "check": "unchecked",
@@ -248,7 +424,15 @@
    "region": "US-KY",
    "name": {
     "en": "Mammoth Cave National Park",
-    "ja": "マンモス・ケイブ国立公園"
+    "ja": "マンモス・ケイブ国立公園",
+    "fr": "Parc national de Mammoth Cave",
+    "es": "Parque nacional Mammoth Cave",
+    "it": "Parco nazionale di Mammoth Cave",
+    "pt": "Parque Nacional da Caverna Mammoth",
+    "nl": "Nationaal Park Mammoth Cave",
+    "tr": "Mammoth Cave Milli Parkı",
+    "ko": "매머드 동굴 국립공원",
+    "zh": "猛犸洞国家公园"
    },
    "use": true,
    "check": "unchecked",
@@ -259,7 +443,15 @@
    "region": "US-OR",
    "name": {
     "en": "Crater Lake",
-    "ja": "クレーターレイク"
+    "ja": "クレーターレイク",
+    "fr": "Crater Lake",
+    "es": "Lago del Cráter",
+    "it": "Crater Lake",
+    "pt": "Lago Crater",
+    "nl": "Crater Lake",
+    "tr": "Crater Lake",
+    "ko": "크레이터 호수",
+    "zh": "火山口湖"
    },
    "use": true,
    "check": "unchecked",
@@ -270,7 +462,15 @@
    "region": "US-NM",
    "name": {
     "en": "Carlsbad Caverns National Park",
-    "ja": "カールズバッド洞窟群国立公園"
+    "ja": "カールズバッド洞窟群国立公園",
+    "fr": "Parc national des grottes de Carlsbad",
+    "es": "Parque nacional Cavernas de Carlsbad",
+    "it": "Parco nazionale delle Carlsbad Caverns",
+    "pt": "Parque Nacional das Cavernas de Carlsbad",
+    "nl": "Nationaal Park Carlsbad Caverns",
+    "tr": "Carlsbad Caverns Milli Parkı",
+    "ko": "칼즈배드 동굴 국립공원",
+    "zh": "卡尔斯巴德洞窟国家公园"
    },
    "use": true,
    "check": "unchecked",
@@ -281,7 +481,15 @@
    "region": "US-MI",
    "name": {
     "en": "Mackinac Island",
-    "ja": "マキナック島"
+    "ja": "マキナック島",
+    "fr": "Île Mackinac",
+    "es": "Isla Mackinac",
+    "it": "Isola di Mackinac",
+    "pt": "Ilha Mackinac",
+    "nl": "Mackinac Island",
+    "tr": "Mackinac Adası",
+    "ko": "매키낵 섬",
+    "zh": "麦基诺岛"
    },
    "use": true,
    "check": "unchecked",
@@ -292,7 +500,15 @@
    "region": "US-OH",
    "name": {
     "en": "Rock and Roll Hall of Fame (Cleveland)",
-    "ja": "ロックの殿堂（クリーブランド）"
+    "ja": "ロックの殿堂（クリーブランド）",
+    "fr": "Rock and Roll Hall of Fame (Cleveland)",
+    "es": "Salón de la Fama del Rock and Roll (Cleveland)",
+    "it": "Rock and Roll Hall of Fame (Cleveland)",
+    "pt": "Rock and Roll Hall of Fame (Cleveland)",
+    "nl": "Rock and Roll Hall of Fame (Cleveland)",
+    "tr": "Rock and Roll Hall of Fame (Cleveland)",
+    "ko": "로큰롤 명예의 전당 (클리블랜드)",
+    "zh": "摇滚名人堂（克利夫兰）"
    },
    "use": true,
    "check": "unchecked",
@@ -303,7 +519,15 @@
    "region": "US-IN",
    "name": {
     "en": "Indianapolis Motor Speedway",
-    "ja": "インディアナポリス・モーター・スピードウェイ"
+    "ja": "インディアナポリス・モーター・スピードウェイ",
+    "fr": "Indianapolis Motor Speedway",
+    "es": "Indianapolis Motor Speedway",
+    "it": "Indianapolis Motor Speedway",
+    "pt": "Indianapolis Motor Speedway",
+    "nl": "Indianapolis Motor Speedway",
+    "tr": "Indianapolis Motor Speedway",
+    "ko": "인디애나폴리스 모터 스피드웨이",
+    "zh": "印第安纳波利斯赛车场"
    },
    "use": true,
    "check": "unchecked",
@@ -314,7 +538,15 @@
    "region": "US-MN",
    "name": {
     "en": "Mall of America",
-    "ja": "モール・オブ・アメリカ"
+    "ja": "モール・オブ・アメリカ",
+    "fr": "Mall of America",
+    "es": "Mall of America",
+    "it": "Mall of America",
+    "pt": "Mall of America",
+    "nl": "Mall of America",
+    "tr": "Mall of America",
+    "ko": "몰 오브 아메리카",
+    "zh": "美国商城"
    },
    "use": true,
    "check": "unchecked",
@@ -325,7 +557,15 @@
    "region": "US-NE",
    "name": {
     "en": "Chimney Rock",
-    "ja": "チムニーロック"
+    "ja": "チムニーロック",
+    "fr": "Chimney Rock",
+    "es": "Chimney Rock",
+    "it": "Chimney Rock",
+    "pt": "Chimney Rock",
+    "nl": "Chimney Rock",
+    "tr": "Chimney Rock",
+    "ko": "침니 록",
+    "zh": "烟囱岩"
    },
    "use": true,
    "check": "unchecked",
@@ -336,7 +576,15 @@
    "region": "US-GA",
    "name": {
     "en": "Georgia Aquarium (Atlanta)",
-    "ja": "ジョージア水族館（アトランタ）"
+    "ja": "ジョージア水族館（アトランタ）",
+    "fr": "Georgia Aquarium (Atlanta)",
+    "es": "Acuario de Georgia (Atlanta)",
+    "it": "Georgia Aquarium (Atlanta)",
+    "pt": "Georgia Aquarium (Atlanta)",
+    "nl": "Georgia Aquarium (Atlanta)",
+    "tr": "Georgia Akvaryumu (Atlanta)",
+    "ko": "조지아 수족관 (애틀랜타)",
+    "zh": "佐治亚水族馆（亚特兰大）"
    },
    "use": true,
    "check": "unchecked",
@@ -347,7 +595,15 @@
    "region": "US-MT",
    "name": {
     "en": "Glacier National Park",
-    "ja": "グレイシャー国立公園"
+    "ja": "グレイシャー国立公園",
+    "fr": "Parc national de Glacier",
+    "es": "Parque nacional Glacier",
+    "it": "Parco nazionale dei Glacier",
+    "pt": "Parque Nacional de Glacier",
+    "nl": "Nationaal Park Glacier",
+    "tr": "Glacier Milli Parkı",
+    "ko": "글레이셔 국립공원",
+    "zh": "冰川国家公园"
    },
    "use": true,
    "check": "unchecked",
@@ -358,7 +614,15 @@
    "region": "US-NH",
    "name": {
     "en": "Mount Washington",
-    "ja": "ワシントン山"
+    "ja": "ワシントン山",
+    "fr": "Mont Washington",
+    "es": "Monte Washington",
+    "it": "Monte Washington",
+    "pt": "Monte Washington",
+    "nl": "Mount Washington",
+    "tr": "Washington Dağı",
+    "ko": "워싱턴 산",
+    "zh": "华盛顿山"
    },
    "use": true,
    "check": "unchecked",
@@ -369,7 +633,15 @@
    "region": "US-WI",
    "name": {
     "en": "Lambeau Field (Green Bay)",
-    "ja": "ランボー・フィールド（グリーンベイ）"
+    "ja": "ランボー・フィールド（グリーンベイ）",
+    "fr": "Lambeau Field (Green Bay)",
+    "es": "Lambeau Field (Green Bay)",
+    "it": "Lambeau Field (Green Bay)",
+    "pt": "Lambeau Field (Green Bay)",
+    "nl": "Lambeau Field (Green Bay)",
+    "tr": "Lambeau Field (Green Bay)",
+    "ko": "램보 필드 (그린베이)",
+    "zh": "兰博球场（绿湾）"
    },
    "use": true,
    "check": "unchecked",
@@ -380,7 +652,15 @@
    "region": "US-AL",
    "name": {
     "en": "U.S. Space & Rocket Center (Huntsville)",
-    "ja": "米国宇宙ロケットセンター（ハンツビル）"
+    "ja": "米国宇宙ロケットセンター（ハンツビル）",
+    "fr": "U.S. Space & Rocket Center (Huntsville)",
+    "es": "U.S. Space & Rocket Center (Huntsville)",
+    "it": "U.S. Space & Rocket Center (Huntsville)",
+    "pt": "U.S. Space & Rocket Center (Huntsville)",
+    "nl": "U.S. Space & Rocket Center (Huntsville)",
+    "tr": "U.S. Space & Rocket Center (Huntsville)",
+    "ko": "미국 우주로켓센터 (헌츠빌)",
+    "zh": "美国太空与火箭中心（亨茨维尔）"
    },
    "use": true,
    "check": "unchecked",
@@ -391,7 +671,15 @@
    "region": "US-NC",
    "name": {
     "en": "Biltmore Estate (Asheville)",
-    "ja": "ビルトモア・エステート（アシュビル）"
+    "ja": "ビルトモア・エステート（アシュビル）",
+    "fr": "Domaine Biltmore (Asheville)",
+    "es": "Biltmore Estate (Asheville)",
+    "it": "Biltmore Estate (Asheville)",
+    "pt": "Biltmore Estate (Asheville)",
+    "nl": "Biltmore Estate (Asheville)",
+    "tr": "Biltmore Malikânesi (Asheville)",
+    "ko": "비트모어 저택 (애슈빌)",
+    "zh": "比尔特莫庄园（阿什维尔）"
    },
    "use": true,
    "check": "unchecked",

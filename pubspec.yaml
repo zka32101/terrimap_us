@@ -48,6 +48,14 @@ flutter:
     - packs/us/profile.json
     - packs/us/facts.json
     - packs/us/strings/en.json
+    - packs/us/strings/zh.json
+    - packs/us/strings/ko.json
+    - packs/us/strings/tr.json
+    - packs/us/strings/nl.json
+    - packs/us/strings/pt.json
+    - packs/us/strings/it.json
+    - packs/us/strings/es.json
+    - packs/us/strings/fr.json
     - packs/us/strings/ja.json
     - assets/art/landmarks/
     - assets/sound/
