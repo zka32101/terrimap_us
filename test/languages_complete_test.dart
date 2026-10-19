@@ -25,7 +25,7 @@ void main() {
       expect(app.ui.t('hud.pause'), isNot('hud.pause'));
       if (lang != 'en') {
         // 英語のままの訳漏れがないこと（画面の文言のうち、固有名でないもの）
-        expect(app.ui.t('hud.pause'), isNot('Pause'), reason: lang);
+        expect(app.ui.t('hud.startWave'), isNot('Start next wave'), reason: lang);
       }
     }
   });
