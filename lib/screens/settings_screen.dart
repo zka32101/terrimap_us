@@ -95,6 +95,16 @@ class SettingsScreen extends StatelessWidget {
                 },
               ),
             ]),
+            kit.SettingsSection(title: app.ui.t('adaptive.setting'), children: [
+              SwitchListTile(
+                key: const ValueKey('adaptive-switch'),
+                contentPadding: EdgeInsets.zero,
+                title: Text(app.ui.t('adaptive.setting')),
+                subtitle: Text(app.ui.t('adaptive.help')),
+                value: app.adaptiveQuiz,
+                onChanged: app.setAdaptiveQuiz,
+              ),
+            ]),
             kit.SettingsSection(title: app.ui.t('assist.setting'), children: [
               SwitchListTile(
                 key: const ValueKey('assist-switch'),

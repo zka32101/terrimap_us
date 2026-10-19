@@ -3,6 +3,7 @@ import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/quiz/quiz_engine.dart';
 
 import '../app_state.dart';
+import '../share_card.dart';
 import 'quiz_screen.dart';
 
 /// 統計。クイズ・バトル・毎日のバトル・図鑑・実績の数字を、今ある記録から出す。
@@ -47,7 +48,28 @@ class StatsScreen extends StatelessWidget {
     }
     String days(int n) => ui.t('stats.days', {'n': n});
     return Scaffold(
-      appBar: AppBar(title: Text(ui.t('stats.title'))),
+      appBar: AppBar(title: Text(ui.t('stats.title')), actions: [
+        IconButton(
+          key: const ValueKey('stats-share'),
+          tooltip: ui.t('share.send'),
+          icon: const Icon(Icons.ios_share),
+          onPressed: () => showShareCard(
+            context,
+            app,
+            ShareCardData(
+              heading: ui.t('share.progressTitle'),
+              title: app.s.t('appTitle'),
+              rows: [
+                (ui.t('stats.mastered'), '${st.quizMastered} / ${st.quizTotal}'),
+                (ui.t('stats.streakBest'), days(st.streakBest)),
+                (ui.t('stats.winRate'), st.winRatePercent == null ? '—' : '${st.winRatePercent}%'),
+                (ui.t('stats.cards'), '${st.cardsUnlocked} / ${st.cardsTotal}'),
+                (ui.t('stats.achievements'), '${st.achievementsUnlocked} / ${st.achievementsTotal}'),
+              ],
+            ),
+          ),
+        ),
+      ]),
       body: ListView(
         key: const ValueKey('stats-list'),
         padding: const EdgeInsets.all(12),

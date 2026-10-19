@@ -31,7 +31,7 @@ class HomeScreen extends ConsumerWidget {
     final pool = landmarks ? {for (final id in base) if (app.landmarkRegionIds.contains(id)) id} : base;
     if (pool.isEmpty) return;
     final qs = QuizEngine(app.pack, seed: DateTime.now().millisecondsSinceEpoch & 0x7FFFFFFF)
-        .generate(count: 10, types: landmarks ? const [QuestionType.landmarkOf] : QuestionType.values, pool: pool);
+        .generate(count: 10, types: landmarks ? const [QuestionType.landmarkOf] : QuestionType.values, pool: pool, weights: review ? null : app.quizWeights);
     final results = await Navigator.of(context)
         .push<List<bool>>(MaterialPageRoute(builder: (_) => QuizScreen(app: app, questions: qs)));
     if (results != null && context.mounted) {

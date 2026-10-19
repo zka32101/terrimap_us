@@ -73,6 +73,8 @@ void main() {
     await t.pump();
     expect(app.lang, 'de');
     await reveal(t, find.byKey(const ValueKey('assist-switch')));
+    await t.ensureVisible(find.byKey(const ValueKey('assist-switch')));
+    await t.pump();
     await t.tap(find.byKey(const ValueKey('assist-switch')));
     await t.pump();
     expect(app.quizAssist, false);

@@ -27,6 +27,7 @@ import 'package:terrimap_core/progress/region_progress.dart';
 import 'package:terrimap_core/progress/weak_regions.dart';
 
 import 'reminders.dart';
+import 'share_card.dart';
 import 'sound.dart';
 import 'strings.dart';
 
@@ -36,6 +37,7 @@ const _assistKey = 'quiz_assist';
 const _sfxKey = 'sfx_on_v1';
 const _bgmKey = 'bgm_on_v1';
 const _reminderKey = 'reminder_on_v1';
+const _adaptiveKey = 'adaptive_quiz_v1';
 const _reminderTimeKey = 'reminder_minutes_v1';
 const _tutorialKey = 'tutorial_done_v1';
 const _battleKey = 'battle_progress_v1';
@@ -63,6 +65,7 @@ class AppState extends ChangeNotifier {
   /// 効果音・BGMと毎日の通知。端末で動かすときだけ main が実物を入れる（テストでは何もしない）。
   Sound sound = const NoopSound();
   Reminders reminders = const NoopReminders();
+  Sharer sharer = const NoopSharer();
   BattleProgress battle; // バトルのクリア記録（地方決戦・エクストラの解放に使う）
 
   AppState._(this.pack, this.store, this.prefs, this._lang, this.progress, this._battleJson, this._quizAssist, this.battle);
@@ -269,9 +272,22 @@ class AppState extends ChangeNotifier {
 
   /// 苦手な州（間違いの多い順）。1問ごとに [record] で更新される。
   List<WeakRegion> weakRegions = const [];
+  Map<String, int> _misses = const {}; // 州ごとの間違えた回数（出題の重みに使う）
+
+  /// 「かしこいクイズ」: オンなら、クイズで苦手な州が出やすくなる。初期はオン。
+  bool get adaptiveQuiz => prefs.getBool(_adaptiveKey) ?? true;
+
+  Future<void> setAdaptiveQuiz(bool v) async {
+    await prefs.setBool(_adaptiveKey, v);
+    notifyListeners();
+  }
+
+  /// クイズの出題の重み（[adaptiveQuiz] がオフなら null＝ふつうにランダム）。
+  Map<String, double>? get quizWeights => adaptiveQuiz ? adaptiveQuizWeights(progress, _misses) : null;
 
   Future<void> _refreshWeak() async {
     final misses = await store.misses(pack.packId);
+    _misses = misses;
     final mastered = await store.mastered(pack.packId);
     weakRegions = WeakRegions.rank(misses, mastered, pack.regions.map((r) => r.id));
   }
