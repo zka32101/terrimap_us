@@ -100,6 +100,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     if (_session.isOver && !_resultShown) {
       _resultShown = true;
       widget.app.logBattle(won: _session.won, seconds: _played);
+      widget.app.sfx(_session.won ? 'clear' : 'lose');
       _played = 0;
       if (_session.won) {
         final before = widget.app.collection.unlockedIds;

@@ -4,13 +4,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app_state.dart';
 import 'monetization.dart';
+import 'reminders.dart';
 import 'review.dart';
+import 'sound.dart';
 import 'screens/home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadSavedThemeMode();
   final app = await AppState.load();
+  app.sound = PlayerSound();
+  app.reminders = LocalReminders();
+  if (app.bgmOn) app.sound.setBgm(true);
   app.review = await createReviewPrompt('terrimap_us');
   final money = await Monetization.init();
   runApp(ProviderScope(

@@ -35,11 +35,15 @@ void main() {
     return app;
   }
 
+  Future<void> reveal(WidgetTester t, Finder f) => t.scrollUntilVisible(f, 300, scrollable: find.byType(Scrollable).first);
+
   testWidgets('設定: 共通の項目（表示モード・言語・データ削除・このアプリについて）と、固有の項目（クイズ連動）が並ぶ', (t) async {
     final app = await openSettings(t);
     expect(find.text('Appearance'), findsOneWidget);
     expect(find.text('Language'), findsOneWidget);
+    await reveal(t, find.text('Delete my data'));
     expect(find.text('Delete my data'), findsOneWidget);
+    await reveal(t, find.text('About this app'));
     expect(find.text('About this app'), findsOneWidget);
     expect(find.text(app.ui.t('assist.setting')), findsWidgets);
     expect(find.text('Privacy policy'), findsNothing); // URL を設定するまで出ない
@@ -68,7 +72,8 @@ void main() {
     await t.tap(find.text('Deutsch'));
     await t.pump();
     expect(app.lang, 'de');
-    await t.tap(find.byType(Switch));
+    await reveal(t, find.byKey(const ValueKey('assist-switch')));
+    await t.tap(find.byKey(const ValueKey('assist-switch')));
     await t.pump();
     expect(app.quizAssist, false);
     await t.pumpWidget(const SizedBox());
@@ -82,6 +87,7 @@ void main() {
     });
     await t.pump();
     expect(app.battle.isCleared(StageKind.normal, 'US-CA'), true);
+    await reveal(t, find.text('Delete my data'));
     await t.tap(find.text('Delete my data'));
     await t.pump();
     await t.pump(const Duration(milliseconds: 400));
