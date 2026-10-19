@@ -25,6 +25,7 @@ import 'package:terrimap_core/pack/region_pack.dart';
 import 'package:terrimap_core/progress/quiz_history.dart';
 import 'package:terrimap_core/progress/region_progress.dart';
 import 'package:terrimap_core/progress/weak_regions.dart';
+import 'package:terrimap_core/progress/weekly_goal.dart';
 
 import 'a11y.dart';
 import 'reminders.dart';
@@ -39,6 +40,7 @@ const _sfxKey = 'sfx_on_v1';
 const _bgmKey = 'bgm_on_v1';
 const _reminderKey = 'reminder_on_v1';
 const _adaptiveKey = 'adaptive_quiz_v1';
+const _weeklyGoalKey = 'weekly_goal_v1';
 const _colorBlindKey = 'color_blind_v1';
 const _reminderTimeKey = 'reminder_minutes_v1';
 const _tutorialKey = 'tutorial_done_v1';
@@ -292,6 +294,19 @@ class AppState extends ChangeNotifier {
     await prefs.setBool(_adaptiveKey, v);
     notifyListeners();
   }
+
+  /// 今週の学習目標（解いた問題数）。初期は50問。
+  int get weeklyGoalTarget {
+    final v = prefs.getInt(_weeklyGoalKey);
+    return v != null && WeeklyGoal.choices.contains(v) ? v : WeeklyGoal.defaultTarget;
+  }
+
+  Future<void> setWeeklyGoalTarget(int v) async {
+    await prefs.setInt(_weeklyGoalKey, v);
+    notifyListeners();
+  }
+
+  WeeklyGoal get weeklyGoal => WeeklyGoal.of(quizHistory, today(), target: weeklyGoalTarget);
 
   /// クイズの出題の重み（[adaptiveQuiz] がオフなら null＝ふつうにランダム）。
   Map<String, double>? get quizWeights => adaptiveQuiz ? adaptiveQuizWeights(progress, _misses) : null;

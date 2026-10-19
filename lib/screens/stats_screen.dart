@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
+import 'package:terrimap_core/progress/weekly_goal.dart';
 import 'package:terrimap_core/quiz/quiz_engine.dart';
 
 import '../app_state.dart';
@@ -12,7 +13,9 @@ class StatsScreen extends StatelessWidget {
   const StatsScreen({super.key, required this.app});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => ListenableBuilder(listenable: app, builder: _build);
+
+  Widget _build(BuildContext context, Widget? _) {
     final ui = app.ui, st = app.stats;
     Widget bar(String key, int n, int total, {String? label}) => Padding(
           padding: const EdgeInsets.symmetric(vertical: 6),
@@ -74,6 +77,22 @@ class StatsScreen extends StatelessWidget {
         key: const ValueKey('stats-list'),
         padding: const EdgeInsets.all(12),
         children: [
+          section('goal.title', [
+            bar('goal.progress', app.weeklyGoal.shown, app.weeklyGoal.target, label: ui.t('goal.progress', {'n': app.weeklyGoal.answered, 'total': app.weeklyGoal.target})),
+            if (app.weeklyGoal.reached)
+              Padding(padding: const EdgeInsets.symmetric(vertical: 4), child: Text(ui.t('goal.reached'), key: const ValueKey('goal-reached'))),
+            const SizedBox(height: 4),
+            Text(ui.t('goal.set'), style: Theme.of(context).textTheme.bodySmall),
+            Wrap(spacing: 8, children: [
+              for (final n in WeeklyGoal.choices)
+                ChoiceChip(
+                  key: ValueKey('goal-$n'),
+                  label: Text('$n'),
+                  selected: app.weeklyGoalTarget == n,
+                  onSelected: (_) => app.setWeeklyGoalTarget(n),
+                ),
+            ]),
+          ]),
           section('stats.quiz', [
             bar('stats.mastered', st.quizMastered, st.quizTotal),
             line('stats.missed', '${st.quizMissed}'),
