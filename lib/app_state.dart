@@ -9,6 +9,7 @@ import 'package:terrimap_core/battle/achievements.dart';
 import 'package:terrimap_core/battle/battle_progress.dart';
 import 'package:terrimap_core/battle/collection.dart';
 import 'package:terrimap_core/battle/review.dart';
+import 'package:terrimap_core/battle/weekly_battle.dart';
 import 'package:terrimap_core/daily/daily_streak.dart';
 import 'package:terrimap_core/battle/replay.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
@@ -27,6 +28,7 @@ const _assistKey = 'quiz_assist';
 const _battleKey = 'battle_progress_v1';
 const _dailyKey = 'daily_battle_v1';
 const _streakKey = 'daily_streak_v1';
+const _weeklyKey = 'weekly_battle_v1';
 const _seenCardsKey = 'collection_seen_v1';
 const _seenAchKey = 'achievements_seen_v1';
 
@@ -196,6 +198,30 @@ class AppState extends ChangeNotifier {
 
   /// 復習: 間違えた州がバトルのクイズで出やすくなる重み。
   Map<String, double> get reviewWeights => battleReviewWeights(progress);
+
+  /// 今週のチャレンジ。無料の間は、無料の州だけから選ぶ。
+  WeeklyBattle weekly({required bool premium, Set<String> freeIds = const {}}) =>
+      WeeklyBattle.forDate(pack, today(), allowedIds: premium ? null : freeIds);
+
+  /// 今週の挑戦の結果（今週のものだけ。まだなら null）。1週に1回だけ挑戦できる。
+  WeeklyRecord? get weeklyRecord {
+    final r = WeeklyRecord.fromJson(prefs.getString(_weeklyKey));
+    return r != null && r.doneIn(WeeklyBattle.weekOf(today())) ? r : null;
+  }
+
+  Future<void> saveWeekly(String week, bool won, int baseHp) async {
+    await prefs.setString(_weeklyKey, WeeklyRecord(week, won, baseHp).toJson());
+    notifyListeners();
+  }
+
+  /// 今週のチャレンジを友だちに送る文面（結果があれば添える）。
+  String weeklyText(WeeklyBattle w, {WeeklyRecord? record}) {
+    final inv = w.invite(pack.packId, won: record?.won, baseHp: record?.baseHp);
+    return inv.shareText(
+      headline: ui.t('weekly.headline', {'app': s.t('appTitle'), 'stage': inviteStageName(inv), 'difficulty': ui.t('difficulty.${w.difficulty.name}')}),
+      result: record == null ? '' : ui.t('invite.result', {'mark': record.won ? '✅' : '❌', 'hp': record.baseHp}),
+    );
+  }
 
   Future<void> saveDaily(String date, Replay r) async {
     final all = _daily..[date] = r;

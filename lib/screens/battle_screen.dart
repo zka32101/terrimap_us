@@ -13,6 +13,7 @@ import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/battle/stage.dart';
 import 'package:terrimap_core/battle/stage_generator.dart';
+import 'package:terrimap_core/battle/weekly_battle.dart';
 import 'package:terrimap_core/battle_ui/battle_session.dart';
 import 'package:terrimap_core/battle_ui/battle_view.dart';
 import 'package:terrimap_core/i18n/ui_strings.dart';
@@ -28,7 +29,8 @@ class BattleScreen extends StatefulWidget {
   final Difficulty difficulty;
   final StageKind kind;
   final DailyBattle? daily; // 今日のバトルのとき
-  const BattleScreen({super.key, required this.app, required this.regionId, required this.difficulty, this.kind = StageKind.normal, this.daily});
+  final WeeklyBattle? weekly; // 今週のチャレンジのとき（1週に1回。やり直しはない）
+  const BattleScreen({super.key, required this.app, required this.regionId, required this.difficulty, this.kind = StageKind.normal, this.daily, this.weekly});
   @override
   State<BattleScreen> createState() => _BattleScreenState();
 }
@@ -37,7 +39,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   late final Stage _stage = StageGenerator(widget.app.pack).generate(widget.regionId, widget.difficulty, kind: widget.kind);
   late final BattleSession _session = BattleSession(
     BattleEngine(_stage, profile: widget.app.pack.profile, pack: widget.app.pack, quizAssist: widget.app.quizAssist,
-        reviewWeights: widget.daily == null ? widget.app.reviewWeights : null), // 毎日のバトルは全員同じ条件にする
+        reviewWeights: widget.daily == null && widget.weekly == null ? widget.app.reviewWeights : null), // 毎日・毎週は全員同じ条件にする
   );
   late final Ticker _ticker;
   Duration _last = Duration.zero;
@@ -95,6 +97,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
       }
       _replay = _session.recorder.toReplay(packId: widget.app.pack.packId, kind: widget.kind, stageId: widget.regionId, difficulty: widget.difficulty);
       if (widget.daily != null) widget.app.saveDaily(widget.daily!.date, _replay!);
+      if (widget.weekly != null) widget.app.saveWeekly(widget.weekly!.week, _replay!.result.won, _replay!.result.baseHp);
       WidgetsBinding.instance.addPostFrameCallback((_) => _showResult());
     }
   }
@@ -266,6 +269,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
               onPressed: () => _copy(widget.app.inviteText(Invite.fromReplay(_replay!)), ui.t('invite.copied')),
               child: Text(ui.t('invite.title')),
             ),
+          if (widget.weekly == null) // 今週のチャレンジは1回きり
           TextButton(
             onPressed: () {
               Navigator.pop(ctx);
