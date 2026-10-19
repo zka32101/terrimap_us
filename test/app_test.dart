@@ -23,7 +23,7 @@ void main() {
         packJson: r('pack.json'),
         regionsJson: r('regions.json'),
         geoJson: r('geo.geojson'),
-        stringsJsonByLang: {'en': r('strings/en.json')},
+        stringsJsonByLang: {'en': r('strings/en.json'), 'ja': r('strings/ja.json')},
       ),
       isEmpty,
     );
