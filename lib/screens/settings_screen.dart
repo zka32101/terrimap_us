@@ -36,6 +36,19 @@ class SettingsScreen extends StatelessWidget {
           },
           disclaimer: app.pack.attribution,
           extraSections: [
+            kit.SettingsSection(title: app.ui.t('tutorial.replay'), children: [
+              ListTile(
+                key: const ValueKey('tutorial-replay'),
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.lightbulb_outline),
+                title: Text(app.ui.t('tutorial.replay')),
+                subtitle: Text(app.ui.t('tutorial.replayHelp')),
+                onTap: () async {
+                  await app.setTutorialDone(false);
+                  if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(app.ui.t('tutorial.replayHelp'))));
+                },
+              ),
+            ]),
             kit.SettingsSection(title: app.ui.t('assist.setting'), children: [
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,

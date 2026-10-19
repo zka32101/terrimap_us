@@ -46,6 +46,19 @@ void main() {
     await t.pumpWidget(const SizedBox());
   });
 
+  testWidgets('設定: 「チュートリアルをもう一度見る」で、案内が戻る', (t) async {
+    final app = await openSettings(t);
+    await t.runAsync(() => app.setTutorialDone(true));
+    expect(app.tutorialDone, isTrue);
+    await t.ensureVisible(find.byKey(const ValueKey('tutorial-replay')));
+    await t.pump();
+    await t.tap(find.byKey(const ValueKey('tutorial-replay')));
+    await t.pump();
+    await t.runAsync(() => Future.delayed(const Duration(milliseconds: 50)));
+    expect(app.tutorialDone, isFalse);
+    await t.pumpWidget(const SizedBox());
+  });
+
   testWidgets('設定: 表示モードを変えると全体に反映され、言語とクイズ連動も変えられる', (t) async {
     final app = await openSettings(t);
     await t.tap(find.text('Dark'));

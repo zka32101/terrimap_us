@@ -26,6 +26,7 @@ import 'strings.dart';
 const _progressKey = 'progress_v1';
 const _langKey = 'lang';
 const _assistKey = 'quiz_assist';
+const _tutorialKey = 'tutorial_done_v1';
 const _battleKey = 'battle_progress_v1';
 const _dailyKey = 'daily_battle_v1';
 const _streakKey = 'daily_streak_v1';
@@ -107,6 +108,14 @@ class AppState extends ChangeNotifier {
 
   /// バトル中のクイズ連動（設定）。
   bool get quizAssist => _quizAssist;
+
+  /// 初回バトルの案内（チュートリアル）を終えたか。設定の「もう一度見る」で戻せる。
+  bool get tutorialDone => prefs.getBool(_tutorialKey) ?? false;
+
+  Future<void> setTutorialDone(bool v) async {
+    await prefs.setBool(_tutorialKey, v);
+    notifyListeners();
+  }
 
   Future<void> setQuizAssist(bool v) async {
     _quizAssist = v;
