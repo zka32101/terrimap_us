@@ -37,6 +37,7 @@ const _assistKey = 'quiz_assist';
 const _sfxKey = 'sfx_on_v1';
 const _bgmKey = 'bgm_on_v1';
 const _reminderKey = 'reminder_on_v1';
+const _adaptiveKey = 'adaptive_quiz_v1';
 const _reminderTimeKey = 'reminder_minutes_v1';
 const _tutorialKey = 'tutorial_done_v1';
 const _battleKey = 'battle_progress_v1';
@@ -271,9 +272,22 @@ class AppState extends ChangeNotifier {
 
   /// 苦手な州（間違いの多い順）。1問ごとに [record] で更新される。
   List<WeakRegion> weakRegions = const [];
+  Map<String, int> _misses = const {}; // 州ごとの間違えた回数（出題の重みに使う）
+
+  /// 「かしこいクイズ」: オンなら、クイズで苦手な州が出やすくなる。初期はオン。
+  bool get adaptiveQuiz => prefs.getBool(_adaptiveKey) ?? true;
+
+  Future<void> setAdaptiveQuiz(bool v) async {
+    await prefs.setBool(_adaptiveKey, v);
+    notifyListeners();
+  }
+
+  /// クイズの出題の重み（[adaptiveQuiz] がオフなら null＝ふつうにランダム）。
+  Map<String, double>? get quizWeights => adaptiveQuiz ? adaptiveQuizWeights(progress, _misses) : null;
 
   Future<void> _refreshWeak() async {
     final misses = await store.misses(pack.packId);
+    _misses = misses;
     final mastered = await store.mastered(pack.packId);
     weakRegions = WeakRegions.rank(misses, mastered, pack.regions.map((r) => r.id));
   }
