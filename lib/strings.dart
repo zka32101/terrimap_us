@@ -16,6 +16,7 @@ class Strings {
       'quiz': 'Quiz',
       'daily': 'Daily challenge',
       'review': 'Review mistakes',
+      'landmarkQuiz': 'Landmark quiz',
       'stats': 'Statistics',
       'settings': 'Settings',
       'progress': 'Progress',

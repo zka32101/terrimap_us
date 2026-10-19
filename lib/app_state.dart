@@ -104,6 +104,9 @@ class AppState extends ChangeNotifier {
   String get lang => _lang;
   Strings get s => Strings(_lang, pack);
 
+  /// 問題に使う名所がある州の id（名所クイズの出題範囲）。
+  Set<String> get landmarkRegionIds => {for (final l in pack.facts?.usable ?? const []) l.regionId};
+
   /// 名所の名前（その言語になければ英語）。名所のデータがなければ空。
   String landmarkName(String? id) {
     final l = pack.facts?.landmarks.where((x) => x.id == id);
