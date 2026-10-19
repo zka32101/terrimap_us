@@ -21,6 +21,7 @@ import 'package:terrimap_us/app_state.dart';
 import 'package:terrimap_us/screens/achievements_screen.dart';
 import 'package:terrimap_us/screens/collection_screen.dart';
 import 'package:terrimap_us/screens/quiz_screen.dart';
+import 'package:terrimap_us/screens/stats_screen.dart';
 import 'package:terrimap_us/main.dart';
 import 'package:terrimap_us/monetization.dart';
 
@@ -397,6 +398,43 @@ void main() {
     await t.pump();
     await t.pump(const Duration(milliseconds: 400));
     expect(find.byKey(const ValueKey('hud-wave')), findsOneWidget);
+    await t.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('統計: ホームの右上から開ける。クイズ・バトル・連続日数・図鑑・実績の数字が、記録どおりに出る', (t) async {
+    await t.binding.setSurfaceSize(const Size(480, 1200));
+    addTearDown(() => t.binding.setSurfaceSize(null));
+    final app = await boot(t, assist: false);
+    app.today = () => '2026-10-19';
+    final ids = [for (final r in app.pack.regions) r.id];
+    await t.tap(find.byKey(const ValueKey('stats')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.byKey(const ValueKey('stats-list')), findsOneWidget);
+    expect(find.text('0 / ${ids.length}'), findsWidgets); // まだ何もしていない
+    Navigator.of(t.element(find.byKey(const ValueKey('stats-list')))).pop();
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+
+    await t.runAsync(() async {
+      await app.record(ids[0], correct: true);
+      await app.record(ids[1], correct: false);
+      await app.recordBattleClear(StageKind.normal, ids[0], Difficulty.easy);
+      await app.recordBattleClear(StageKind.normal, ids[0], Difficulty.hard);
+    });
+    final st = app.stats;
+    expect((st.quizMastered, st.quizMissed), (1, 1));
+    expect(st.statesCleared[Difficulty.easy], 1);
+    expect(st.statesClearedAny, 1);
+    await t.pumpWidget(MaterialApp(home: StatsScreen(app: app)));
+    await t.pump();
+    expect(find.byKey(const ValueKey('stats.mastered-value')), findsOneWidget);
+    expect(t.widget<Text>(find.byKey(const ValueKey('stats.mastered-value'))).data, '1 / ${ids.length}');
+    expect(t.widget<Text>(find.byKey(const ValueKey('stats.missed-value'))).data, '1');
+    expect(t.widget<Text>(find.byKey(const ValueKey('stats.clearedEasy-value'))).data, '1 / ${ids.length}');
+    expect(t.widget<Text>(find.byKey(const ValueKey('stats.clearedNormal-value'))).data, '0 / ${ids.length}');
+    expect(t.widget<Text>(find.byKey(const ValueKey('stats.streakBest-value'))).data, '0 days');
+    expect(t.takeException(), isNull);
     await t.pumpWidget(const SizedBox());
   });
 

@@ -10,6 +10,7 @@ import 'package:terrimap_core/battle/battle_progress.dart';
 import 'package:terrimap_core/battle/collection.dart';
 import 'package:terrimap_core/battle_ui/art_set.dart';
 import 'package:terrimap_core/battle/review.dart';
+import 'package:terrimap_core/battle/stats.dart';
 import 'package:terrimap_core/battle/weekly_battle.dart';
 import 'package:terrimap_core/daily/daily_streak.dart';
 import 'package:terrimap_core/battle/replay.dart';
@@ -181,6 +182,18 @@ class AppState extends ChangeNotifier {
         collection: collection,
         bestStreak: streak.best,
         regions: progress,
+      );
+
+  /// 統計の数字（今ある記録から、毎回計算する）。
+  Stats get stats => Stats.compute(
+        regionIds: [for (final r in pack.regions) r.id],
+        regions: progress,
+        battle: battle,
+        collection: collection,
+        streak: streak,
+        today: today(),
+        regionalTotal: pack.profile?.groups.length ?? 0,
+        extraTotal: pack.profile?.extras.length ?? 0,
       );
 
   Set<String> get seenAchievements => (prefs.getStringList(_seenAchKey) ?? const <String>[]).toSet();
