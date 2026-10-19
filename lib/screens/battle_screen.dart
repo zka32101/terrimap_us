@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_common_kit/app_common_kit.dart' show showReviewPrePrompt;
 import 'package:flutter/material.dart';
 import 'boss_intro_card.dart';
 import 'package:flutter/scheduler.dart';
@@ -89,6 +90,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
       if (_session.won) {
         final before = widget.app.collection.unlockedIds;
         widget.app.recordBattleClear(widget.kind, widget.regionId, widget.difficulty); // 記録は同期で反映される
+        widget.app.review?.recordPositiveMoment(); // 勝利は、レビューを頼んでよい「良い体験」
         _newCards = [for (final c in widget.app.collection.cards) if (c.unlocked && !before.contains(c.landmark.id)) c.landmark.nameIn(widget.app.lang)];
       }
       _replay = _session.recorder.toReplay(packId: widget.app.pack.packId, kind: widget.kind, stageId: widget.regionId, difficulty: widget.difficulty);
@@ -275,8 +277,17 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(ctx);
-              Navigator.of(context).pop();
+              final nav = Navigator.of(context);
+              final review = widget.app.review;
+              final ask = _session.won && review != null;
+              nav.pop(); // 結果
+              nav.pop(); // バトル画面
+              // 勝って戻ったあとに、条件を満たしていれば「楽しんでいますか？」を出す（負けた直後・戦闘中には出さない）
+              if (ask) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  if (nav.mounted) showReviewPrePrompt(nav.context, review, strings: widget.app.s.kit);
+                });
+              }
             },
             child: Text(ui.t('result.back')),
           ),

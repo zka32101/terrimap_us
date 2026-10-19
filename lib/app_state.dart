@@ -1,5 +1,6 @@
 
 import 'package:flutter/services.dart' show AssetManifest, rootBundle;
+import 'package:app_common_kit/app_common_kit.dart' show ReviewPromptService;
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -38,6 +39,9 @@ class AppState extends ChangeNotifier {
   String _lang;
   bool _quizAssist;
   RegionProgress progress;
+
+  /// レビューを頼むタイミングの制御。端末で動かすときだけ main が入れる（テストでは null で、何もしない）。
+  ReviewPromptService? review;
   BattleProgress battle; // バトルのクリア記録（地方決戦・エクストラの解放に使う）
 
   AppState._(this.pack, this.store, this.prefs, this._lang, this.progress, this._battleJson, this._quizAssist, this.battle);
@@ -77,6 +81,7 @@ class AppState extends ChangeNotifier {
     _lang = prefs.getString(_langKey) ?? resolveLanguage(PlatformDispatcher.instance.locale.languageCode);
     _quizAssist = prefs.getBool(_assistKey) ?? true;
     progress = await RegionProgress.load(store, pack.packId, pack.regions.map((r) => r.id));
+    await review?.load(); // データ削除のあとは、レビュー依頼の記録も初期に戻る
     notifyListeners();
   }
 

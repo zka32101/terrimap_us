@@ -4,12 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app_state.dart';
 import 'monetization.dart';
+import 'review.dart';
 import 'screens/home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadSavedThemeMode();
   final app = await AppState.load();
+  app.review = await createReviewPrompt('terrimap_us');
   final money = await Monetization.init();
   runApp(ProviderScope(
     overrides: [

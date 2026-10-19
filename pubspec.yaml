@@ -20,6 +20,7 @@ dependencies:
     git:
       url: https://github.com/zka32101/terrimap_core
       ref: main
+  in_app_review: ^2.0.12
 
 dev_dependencies:
   flutter_test:
