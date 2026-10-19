@@ -15,6 +15,7 @@ class Strings {
       'appTitle': 'State Master – USA',
       'quiz': 'Quiz',
       'daily': 'Daily challenge',
+      'review': 'Review mistakes',
       'settings': 'Settings',
       'progress': 'Progress',
       'language': 'Language',
