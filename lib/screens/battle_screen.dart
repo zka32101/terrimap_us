@@ -44,6 +44,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   );
   late final Ticker _ticker;
   Duration _last = Duration.zero;
+  double _played = 0; // まだ記録していない、実際に遊んだ秒数
   BattleEvent? _lastEvent;
   String _message = '';
   String? _weather;
@@ -63,6 +64,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     _ticker = createTicker((elapsed) {
       final dt = ((elapsed - _last).inMicroseconds / 1e6).clamp(0.0, 0.1);
       _last = elapsed;
+      if (!_session.paused && !_session.isOver) _played += dt;
       _session.tick(dt);
     })..start();
     _session.addListener(_onChanged);
@@ -71,6 +73,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   @override
   void dispose() {
     _ticker.dispose();
+    if (_played > 0) widget.app.logBattle(seconds: _played); // 途中でやめた分の時間
     _bossIntroTimer?.cancel();
     _session.removeListener(_onChanged);
     _session.dispose();
@@ -96,6 +99,8 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     }
     if (_session.isOver && !_resultShown) {
       _resultShown = true;
+      widget.app.logBattle(won: _session.won, seconds: _played);
+      _played = 0;
       if (_session.won) {
         final before = widget.app.collection.unlockedIds;
         widget.app.recordBattleClear(widget.kind, widget.regionId, widget.difficulty); // 記録は同期で反映される

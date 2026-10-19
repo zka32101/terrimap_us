@@ -39,6 +39,10 @@ class StatsScreen extends StatelessWidget {
             ]),
           ),
         );
+    String playTime() {
+      final m = st.playMinutes;
+      return m < 60 ? ui.t('stats.minutes', {'n': m}) : ui.t('stats.hoursMinutes', {'h': m ~/ 60, 'm': m % 60});
+    }
     String days(int n) => ui.t('stats.days', {'n': n});
     return Scaffold(
       appBar: AppBar(title: Text(ui.t('stats.title'))),
@@ -57,6 +61,12 @@ class StatsScreen extends StatelessWidget {
             bar('stats.clearedHard', st.statesCleared[Difficulty.hard] ?? 0, st.totalStates),
             if (st.regionalTotal > 0) bar('stats.regional', st.regionalCleared, st.regionalTotal),
             if (st.extraTotal > 0) bar('stats.extra', st.extraCleared, st.extraTotal),
+          ]),
+          section('stats.record', [
+            line('stats.wins', '${st.wins}'),
+            line('stats.losses', '${st.losses}'),
+            line('stats.winRate', st.winRatePercent == null ? '—' : '${st.winRatePercent}%'),
+            line('stats.playTime', playTime()),
           ]),
           section('stats.daily', [
             line('stats.streakNow', days(st.streakCurrent)),

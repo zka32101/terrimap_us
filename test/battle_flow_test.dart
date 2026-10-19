@@ -421,8 +421,13 @@ void main() {
       await app.record(ids[1], correct: false);
       await app.recordBattleClear(StageKind.normal, ids[0], Difficulty.easy);
       await app.recordBattleClear(StageKind.normal, ids[0], Difficulty.hard);
+      await app.logBattle(won: true, seconds: 90);
+      await app.logBattle(won: true, seconds: 30);
+      await app.logBattle(won: false, seconds: 60);
+      await app.logBattle(seconds: 3600); // 途中でやめた分の時間
     });
     final st = app.stats;
+    expect((st.wins, st.losses, st.winRatePercent, st.playMinutes), (2, 1, 67, 63));
     expect((st.quizMastered, st.quizMissed), (1, 1));
     expect(st.statesCleared[Difficulty.easy], 1);
     expect(st.statesClearedAny, 1);
@@ -434,6 +439,10 @@ void main() {
     expect(t.widget<Text>(find.byKey(const ValueKey('stats.clearedEasy-value'))).data, '1 / ${ids.length}');
     expect(t.widget<Text>(find.byKey(const ValueKey('stats.clearedNormal-value'))).data, '0 / ${ids.length}');
     expect(t.widget<Text>(find.byKey(const ValueKey('stats.streakBest-value'))).data, '0 days');
+    await t.scrollUntilVisible(find.byKey(const ValueKey('stats.playTime-value')), 200, scrollable: find.descendant(of: find.byKey(const ValueKey('stats-list')), matching: find.byType(Scrollable)));
+    expect(t.widget<Text>(find.byKey(const ValueKey('stats.wins-value'))).data, '2');
+    expect(t.widget<Text>(find.byKey(const ValueKey('stats.winRate-value'))).data, '67%');
+    expect(t.widget<Text>(find.byKey(const ValueKey('stats.playTime-value'))).data, '1 h 3 min');
     expect(t.takeException(), isNull);
     await t.pumpWidget(const SizedBox());
   });
