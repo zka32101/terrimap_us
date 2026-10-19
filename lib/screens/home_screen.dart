@@ -23,12 +23,13 @@ class HomeScreen extends ConsumerWidget {
 
   /// 無料の間は、解放済みの州だけを出題する(選択肢の誤答には全州が使われる)。
   /// [review] のときは、間違えて未習得の州だけを出題する（復習）。
-  Future<void> _startQuiz(BuildContext context, WidgetRef ref, {required bool premium, bool review = false}) async {
+  Future<void> _startQuiz(BuildContext context, WidgetRef ref, {required bool premium, bool review = false, bool landmarks = false}) async {
     final unlocked = unlockedPool(app.pack.regions.map((r) => r.id), premium: premium);
-    final pool = review ? reviewPool(app.progress, allowed: unlocked) : unlocked;
+    final base = review ? reviewPool(app.progress, allowed: unlocked) : unlocked;
+    final pool = landmarks ? {for (final id in base) if (app.landmarkRegionIds.contains(id)) id} : base;
     if (pool.isEmpty) return;
     final qs = QuizEngine(app.pack, seed: DateTime.now().millisecondsSinceEpoch & 0x7FFFFFFF)
-        .generate(count: 10, types: QuestionType.values, pool: pool);
+        .generate(count: 10, types: landmarks ? const [QuestionType.landmarkOf] : QuestionType.values, pool: pool);
     final results = await Navigator.of(context)
         .push<List<bool>>(MaterialPageRoute(builder: (_) => QuizScreen(app: app, questions: qs)));
     if (results != null && context.mounted) {
@@ -157,6 +158,19 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ),
               ),
+              if (app.landmarkRegionIds.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton.icon(
+                      key: const ValueKey('landmark-quiz'),
+                      icon: const Icon(Icons.photo_outlined),
+                      onPressed: () => _startQuiz(context, ref, premium: premium, landmarks: true),
+                      label: Text(s.t('landmarkQuiz')),
+                    ),
+                  ),
+                ),
               if (reviewCount > 0)
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
