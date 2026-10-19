@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:terrimap_core/battle_ui/art_set.dart';
+
+import 'package:terrimap_core/battle/collection.dart';
 
 import '../app_state.dart';
 
 /// 名所のコレクション。州をクリアすると、その州の名所カードが集まる。
 class CollectionScreen extends StatefulWidget {
   final AppState app;
-  const CollectionScreen({super.key, required this.app});
+  final ArtSet? art; // 名所の画像（省略するとアプリの `assets/art/landmarks/` から読む。テスト用に差し替えられる）
+  const CollectionScreen({super.key, required this.app, this.art});
   @override
   State<CollectionScreen> createState() => _CollectionScreenState();
 }
@@ -13,10 +17,25 @@ class CollectionScreen extends StatefulWidget {
 class _CollectionScreenState extends State<CollectionScreen> {
   late final Set<String> _seenAtOpen = widget.app.seenCards; // 開いたときの「見たことのあるカード」（NEW の判定）
 
+  ArtSet? _art;
+
   @override
   void initState() {
     super.initState();
+    _art = widget.art;
+    if (_art == null) {
+      widget.app.art().then((a) {
+        if (mounted) setState(() => _art = a);
+      }, onError: (_) {}); // 画像が読めなくても、アイコンで出す
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) => widget.app.markCardsSeen());
+  }
+
+  /// カードの絵。解放済みで名所の画像があれば画像、なければアイコン（未解放は鍵）。
+  Widget _picture(CollectionCard c) {
+    final img = c.unlocked ? _art?.landmark(c.landmark.id) : null;
+    if (img == null) return Icon(c.unlocked ? Icons.place : Icons.lock_outline, size: 32);
+    return SizedBox(key: ValueKey('card-image-${c.landmark.id}'), width: 64, height: 64, child: RawImage(image: img, fit: BoxFit.contain));
   }
 
   @override
@@ -44,7 +63,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                     padding: const EdgeInsets.all(10),
                     child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                       if (isNew) Text(ui.t('collection.newBadge'), style: TextStyle(color: Theme.of(context).colorScheme.error, fontWeight: FontWeight.bold, fontSize: 12)),
-                      Icon(c.unlocked ? Icons.place : Icons.lock_outline, size: 32),
+                      _picture(c),
                       const SizedBox(height: 6),
                       Text(
                         c.unlocked ? c.landmark.nameIn(app.lang) : '？',
