@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'package:terrimap_core/battle/achievements.dart';
 import 'package:terrimap_core/battle/battle_progress.dart';
 import 'package:terrimap_core/battle/collection.dart';
+import 'package:terrimap_core/battle_ui/art_set.dart';
 import 'package:terrimap_core/battle/review.dart';
 import 'package:terrimap_core/battle/weekly_battle.dart';
 import 'package:terrimap_core/daily/daily_streak.dart';
@@ -95,6 +96,11 @@ class AppState extends ChangeNotifier {
     final l = pack.facts?.landmarks.where((x) => x.id == id);
     return l == null || l.isEmpty ? '' : l.first.nameIn(_lang);
   }
+
+  ArtSet? _art;
+
+  /// 画像（`assets/art/`。今は図鑑カードの名所画像だけ）。画像が無いものはアイコンで出る。読み込みは初回だけ。
+  Future<ArtSet> art() async => _art ??= await ArtSet.load(rootBundle);
 
   /// バトル画面の文言（その言語になければ英語）。
   UiStrings get ui => UiStrings.parse(_battleJson, lang: _lang);

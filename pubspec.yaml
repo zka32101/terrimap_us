@@ -44,3 +44,4 @@ flutter:
     - packs/us/profile.json
     - packs/us/facts.json
     - packs/us/strings/en.json
+    - assets/art/landmarks/

@@ -1,3 +1,4 @@
+import 'dart:ui' as ui;
 import 'package:app_common_kit/app_common_kit.dart' hide SettingsScreen;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,6 +14,7 @@ import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/battle/invite.dart';
 import 'package:terrimap_core/battle/stage_generator.dart';
 import 'package:terrimap_core/battle/weekly_battle.dart';
+import 'package:terrimap_core/battle_ui/art_set.dart';
 import 'package:terrimap_core/battle_ui/battle_view.dart';
 import 'package:terrimap_core/quiz/quiz_engine.dart';
 import 'package:terrimap_us/app_state.dart';
@@ -73,6 +75,30 @@ void main() {
     await t.runAsync(() => Future.delayed(const Duration(milliseconds: 50)));
     expect(app.newAchievementCount, 0);
     expect((await t.runAsync(AppState.load) as AppState).seenAchievements, contains('firstClear'));
+    await t.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('コレクション: 名所の画像があれば解放済みのカードに出る。画像が無い・未解放のカードはアイコンのまま', (t) async {
+    await t.binding.setSurfaceSize(const Size(360, 740));
+    addTearDown(() => t.binding.setSurfaceSize(null));
+    final app = await boot(t, assist: false);
+    final all = app.pack.facts!.usable;
+    final a = all.first;
+    final b = all.firstWhere((l) => l.regionId == a.regionId && l.id != a.id, orElse: () => a);
+    final locked = all.firstWhere((l) => l.regionId != a.regionId);
+    await t.runAsync(() => app.recordBattleClear(StageKind.normal, a.regionId, Difficulty.easy));
+    final img = (await t.runAsync(() async {
+      final rec = ui.PictureRecorder();
+      Canvas(rec).drawRect(const Rect.fromLTWH(0, 0, 8, 8), Paint()..color = Colors.red);
+      return rec.endRecording().toImage(8, 8);
+    }))!;
+    final art = ArtSet(images: {'landmarks/${a.id}': img, 'landmarks/${locked.id}': img});
+    await t.pumpWidget(MaterialApp(home: CollectionScreen(app: app, art: art)));
+    await t.pump();
+    expect(find.byKey(ValueKey('card-image-${a.id}')), findsOneWidget); // 画像あり・解放済み
+    if (b.id != a.id) expect(find.byKey(ValueKey('card-image-${b.id}')), findsNothing); // 解放済みだが画像なし → アイコン
+    expect(find.byKey(ValueKey('card-image-${locked.id}')), findsNothing); // 未解放は、画像があっても出さない（鍵のまま）
+    expect(t.takeException(), isNull); // はみ出しなし
     await t.pumpWidget(const SizedBox());
   });
 
