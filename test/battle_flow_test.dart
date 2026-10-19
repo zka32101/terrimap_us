@@ -438,9 +438,12 @@ void main() {
     expect(t.widget<Text>(find.byKey(const ValueKey('stats.missed-value'))).data, '1');
     expect(t.widget<Text>(find.byKey(const ValueKey('stats.clearedEasy-value'))).data, '1 / ${ids.length}');
     expect(t.widget<Text>(find.byKey(const ValueKey('stats.clearedNormal-value'))).data, '0 / ${ids.length}');
+    final statsScroll = find.descendant(of: find.byKey(const ValueKey('stats-list')), matching: find.byType(Scrollable));
+    await t.scrollUntilVisible(find.byKey(const ValueKey('stats.streakBest-value')), 200, scrollable: statsScroll);
     expect(t.widget<Text>(find.byKey(const ValueKey('stats.streakBest-value'))).data, '0 days');
-    await t.scrollUntilVisible(find.byKey(const ValueKey('stats.playTime-value')), 200, scrollable: find.descendant(of: find.byKey(const ValueKey('stats-list')), matching: find.byType(Scrollable)));
+    await t.scrollUntilVisible(find.byKey(const ValueKey('stats.wins-value')), 200, scrollable: statsScroll);
     expect(t.widget<Text>(find.byKey(const ValueKey('stats.wins-value'))).data, '2');
+    await t.scrollUntilVisible(find.byKey(const ValueKey('stats.playTime-value')), 200, scrollable: statsScroll);
     expect(t.widget<Text>(find.byKey(const ValueKey('stats.winRate-value'))).data, '67%');
     expect(t.widget<Text>(find.byKey(const ValueKey('stats.playTime-value'))).data, '1 h 3 min');
     expect(t.takeException(), isNull);

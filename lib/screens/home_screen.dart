@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:terrimap_core/battle/review.dart';
 import 'package:terrimap_core/daily/daily_challenge.dart';
+import 'package:terrimap_core/daily/quiz_invite.dart';
 import 'package:terrimap_core/map/region_map_view.dart';
 import 'package:terrimap_core/progress/region_progress.dart';
 import 'package:terrimap_core/quiz/quiz_engine.dart';
@@ -55,13 +56,65 @@ class HomeScreen extends ConsumerWidget {
     }
   }
 
+  /// 友だちへの挑戦状。[inv] があればそのコードの問題、なければ新しい問題を作る。
+  Future<void> _startInvite(BuildContext context, WidgetRef ref, [QuizInvite? inv]) async {
+    app.sfx('tap');
+    final base = inv ?? QuizInvite(packId: app.pack.packId, seed: (DateTime.now().millisecondsSinceEpoch & 0x7FFFFFFF) | 1);
+    final qs = base.questions(app.pack);
+    final results = await Navigator.of(context)
+        .push<List<bool>>(MaterialPageRoute(builder: (_) => QuizScreen(app: app, questions: qs)));
+    if (results != null && context.mounted) {
+      await ref.read(optionalAdGateProvider)?.maybeShowInterstitial(InterstitialTrigger.sessionEnd);
+      if (!context.mounted) return;
+      final ui = app.ui;
+      final score = results.where((e) => e).length;
+      final mine = base.withScore(score);
+      final share = '${app.s.t('appTitle')}\n${mine.shareText(headline: ui.t('qinvite.headline'), result: ui.t('qinvite.result', {'n': score, 'total': results.length}))}';
+      final extra = inv?.score == null ? null : ui.t('qinvite.compare', {'a': inv!.score!, 'b': score, 'n': results.length});
+      _showResult(context, results, share, extra: extra);
+    }
+  }
+
+  Future<void> _enterInvite(BuildContext context, WidgetRef ref) async {
+    final ui = app.ui;
+    final ctl = TextEditingController();
+    final inv = await showDialog<QuizInvite>(
+      context: context,
+      builder: (ctx) => StatefulBuilder(builder: (ctx, setState) {
+        final parsed = QuizInvite.parse(ctl.text);
+        final ok = parsed != null && parsed.isValidFor(app.pack);
+        return AlertDialog(
+          title: Text(ui.t('qinvite.enter')),
+          content: Column(mainAxisSize: MainAxisSize.min, children: [
+            TextField(
+              key: const ValueKey('qinvite-field'),
+              controller: ctl,
+              decoration: InputDecoration(hintText: ui.t('qinvite.hint')),
+              onChanged: (_) => setState(() {}),
+            ),
+            if (ctl.text.trim().isNotEmpty && !ok)
+              Padding(padding: const EdgeInsets.only(top: 8), child: Text(ui.t('qinvite.invalid'), key: const ValueKey('qinvite-invalid'))),
+          ]),
+          actions: [
+            TextButton(
+              key: const ValueKey('qinvite-start'),
+              onPressed: ok ? () => Navigator.pop(ctx, parsed) : null,
+              child: Text(ui.t('qinvite.start')),
+            ),
+          ],
+        );
+      }),
+    );
+    if (inv != null && context.mounted) await _startInvite(context, ref, inv);
+  }
+
   static String _utcDate() {
     final d = DateTime.now().toUtc();
     String two(int n) => n.toString().padLeft(2, '0');
     return '${d.year}-${two(d.month)}-${two(d.day)}';
   }
 
-  void _showResult(BuildContext context, List<bool> results, String? share, {List<Question>? questions}) {
+  void _showResult(BuildContext context, List<bool> results, String? share, {List<Question>? questions, String? extra}) {
     final s = app.s;
     final score = results.where((e) => e).length;
     showDialog<void>(
@@ -70,7 +123,7 @@ class HomeScreen extends ConsumerWidget {
         title: Text(s.t('result')),
         content: questions != null
             ? SingleChildScrollView(child: LandmarkQuizSummary(app: app, results: results, questions: questions))
-            : Text('$score / ${results.length}\n${results.map((e) => e ? '🟩' : '🟥').join()}'),
+            : Text('$score / ${results.length}\n${results.map((e) => e ? '🟩' : '🟥').join()}${extra == null ? '' : '\n$extra'}'),
         actions: [
           if (share != null)
             TextButton(
@@ -108,6 +161,16 @@ class HomeScreen extends ConsumerWidget {
           appBar: AppBar(
             title: Text(s.t('appTitle')),
             actions: [
+              PopupMenuButton<String>(
+                key: const ValueKey('qinvite-menu'),
+                tooltip: app.ui.t('qinvite.send'),
+                icon: const Icon(Icons.people_outline),
+                onSelected: (v) => v == 'send' ? _startInvite(context, ref) : _enterInvite(context, ref),
+                itemBuilder: (_) => [
+                  PopupMenuItem(key: const ValueKey('qinvite-send'), value: 'send', child: Text(app.ui.t('qinvite.send'))),
+                  PopupMenuItem(key: const ValueKey('qinvite-enter'), value: 'enter', child: Text(app.ui.t('qinvite.enter'))),
+                ],
+              ),
               IconButton(
                 key: const ValueKey('stats'),
                 tooltip: s.t('stats'),
