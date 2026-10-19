@@ -22,7 +22,9 @@ import 'package:terrimap_core/battle/invite.dart';
 import 'package:terrimap_core/i18n/languages.dart';
 import 'package:terrimap_core/i18n/ui_strings.dart';
 import 'package:terrimap_core/pack/region_pack.dart';
+import 'package:terrimap_core/progress/quiz_history.dart';
 import 'package:terrimap_core/progress/region_progress.dart';
+import 'package:terrimap_core/progress/weak_regions.dart';
 
 import 'reminders.dart';
 import 'sound.dart';
@@ -43,6 +45,7 @@ const _weeklyKey = 'weekly_battle_v1';
 const _seenCardsKey = 'collection_seen_v1';
 const _seenAchKey = 'achievements_seen_v1';
 const _battleLogKey = 'battle_log_v1';
+const _quizHistoryKey = 'quiz_history_v1';
 
 /// アプリ全体の状態: pack・進捗(端末に保存)・表示言語。
 class AppState extends ChangeNotifier {
@@ -88,7 +91,9 @@ class AppState extends ChangeNotifier {
     final deviceLang = PlatformDispatcher.instance.locale.languageCode;
     final lang = p.getString(_langKey) ?? resolveLanguage(deviceLang);
     final progress = await RegionProgress.load(store, pack.packId, pack.regions.map((r) => r.id));
-    return AppState._(pack, store, p, lang, progress, battle, p.getBool(_assistKey) ?? true, BattleProgress.fromJsonString(p.getString(_battleKey)));
+    final app = AppState._(pack, store, p, lang, progress, battle, p.getBool(_assistKey) ?? true, BattleProgress.fromJsonString(p.getString(_battleKey)));
+    await app._refreshWeak();
+    return app;
   }
 
   /// 端末のデータを消したあとなど、保存済みの値から状態を読み直す。
@@ -98,6 +103,7 @@ class AppState extends ChangeNotifier {
     final saved = prefs.getString(_progressKey);
     store = saved == null ? JsonProgressStore() : JsonProgressStore.fromJson(saved);
     battle = BattleProgress.fromJsonString(prefs.getString(_battleKey));
+    await _refreshWeak();
     _lang = prefs.getString(_langKey) ?? resolveLanguage(PlatformDispatcher.instance.locale.languageCode);
     _quizAssist = prefs.getBool(_assistKey) ?? true;
     progress = await RegionProgress.load(store, pack.packId, pack.regions.map((r) => r.id));
@@ -258,6 +264,18 @@ class AppState extends ChangeNotifier {
       );
 
   /// 勝ち・負け・プレイ時間の記録（端末の中だけ）。
+  /// クイズの日ごとの結果（学習の進み具合のグラフ用）。
+  QuizHistory get quizHistory => QuizHistory.fromJsonString(prefs.getString(_quizHistoryKey));
+
+  /// 苦手な州（間違いの多い順）。1問ごとに [record] で更新される。
+  List<WeakRegion> weakRegions = const [];
+
+  Future<void> _refreshWeak() async {
+    final misses = await store.misses(pack.packId);
+    final mastered = await store.mastered(pack.packId);
+    weakRegions = WeakRegions.rank(misses, mastered, pack.regions.map((r) => r.id));
+  }
+
   BattleLog get battleLog => BattleLog.fromJsonString(prefs.getString(_battleLogKey));
 
   /// [won] が null のときは、プレイ時間だけを足す。
@@ -362,7 +380,9 @@ class AppState extends ChangeNotifier {
       await store.recordMiss(pack.packId, regionId);
     }
     await prefs.setString(_progressKey, store.toJson());
+    await prefs.setString(_quizHistoryKey, quizHistory.record(today(), correct: correct).toJsonString());
     progress = await RegionProgress.load(store, pack.packId, pack.regions.map((r) => r.id));
+    await _refreshWeak();
     notifyListeners();
   }
 }
