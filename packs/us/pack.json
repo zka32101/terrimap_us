@@ -5,7 +5,15 @@
  "regionKind": "state",
  "languages": [
   "en",
-  "ja"
+  "ja",
+  "fr",
+  "es",
+  "it",
+  "pt",
+  "nl",
+  "tr",
+  "ko",
+  "zh"
  ],
  "defaultLanguage": "en",
  "projection": {
