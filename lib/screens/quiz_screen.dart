@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:terrimap_core/battle_ui/art_set.dart';
 import 'package:terrimap_core/map/region_map_view.dart';
 import 'package:terrimap_core/map/region_silhouette.dart';
 import 'package:terrimap_core/quiz/quiz_engine.dart';
@@ -18,6 +19,15 @@ class _QuizScreenState extends State<QuizScreen> {
   int _index = 0;
   final List<bool> _results = [];
   String? _answered; // 回答済みなら選んだ(タップした)地域id
+  ArtSet? _art; // 名所の画像（読めなければ地図だけで出す）
+
+  @override
+  void initState() {
+    super.initState();
+    widget.app.art().then((a) {
+      if (mounted) setState(() => _art = a);
+    }, onError: (_) {});
+  }
 
   Question get _q => widget.questions[_index];
   bool get _done => _answered != null;
@@ -107,6 +117,10 @@ class _QuizScreenState extends State<QuizScreen> {
           colorOf: (id) => id == q.targetId ? const Color(0xFFFFB300) : const Color(0xFFECEFF1),
         );
       case QuestionType.landmarkOf:
+        final img = _done ? null : (q.subjectId == null ? null : _art?.landmark(q.subjectId!));
+        if (img != null) {
+          return RawImage(key: ValueKey('quiz-landmark-${q.subjectId}'), image: img, fit: BoxFit.contain);
+        }
         return RegionMapView(
           pack: pack,
           showZoomControls: true,
