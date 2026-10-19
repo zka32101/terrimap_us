@@ -49,8 +49,40 @@ class SettingsScreen extends StatelessWidget {
                 },
               ),
             ]),
+            kit.SettingsSection(title: app.ui.t('sound.sfx'), children: [
+              SwitchListTile(
+                key: const ValueKey('sfx-switch'),
+                contentPadding: EdgeInsets.zero,
+                title: Text(app.ui.t('sound.sfx')),
+                value: app.sfxOn,
+                onChanged: app.setSfx,
+              ),
+              SwitchListTile(
+                key: const ValueKey('bgm-switch'),
+                contentPadding: EdgeInsets.zero,
+                title: Text(app.ui.t('sound.bgm')),
+                value: app.bgmOn,
+                onChanged: app.setBgm,
+              ),
+            ]),
+            kit.SettingsSection(title: app.ui.t('reminder.setting'), children: [
+              SwitchListTile(
+                key: const ValueKey('reminder-switch'),
+                contentPadding: EdgeInsets.zero,
+                title: Text(app.ui.t('reminder.setting')),
+                subtitle: Text(app.ui.t('reminder.help')),
+                value: app.reminderOn,
+                onChanged: (v) async {
+                  final ok = await app.setReminder(v);
+                  if (!ok && context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(app.ui.t('reminder.denied'))));
+                  }
+                },
+              ),
+            ]),
             kit.SettingsSection(title: app.ui.t('assist.setting'), children: [
               SwitchListTile(
+                key: const ValueKey('assist-switch'),
                 contentPadding: EdgeInsets.zero,
                 title: Text(app.ui.t('assist.setting')),
                 subtitle: Text(app.ui.t('assist.settingHelp')),

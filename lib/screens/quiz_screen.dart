@@ -35,6 +35,7 @@ class _QuizScreenState extends State<QuizScreen> {
   Future<void> _answer(String id) async {
     if (_done) return;
     final ok = _q.isCorrect(id);
+    widget.app.sfx(ok ? 'correct' : 'wrong');
     setState(() {
       _answered = id;
       _results.add(ok);

@@ -23,11 +23,16 @@ import 'package:terrimap_core/i18n/ui_strings.dart';
 import 'package:terrimap_core/pack/region_pack.dart';
 import 'package:terrimap_core/progress/region_progress.dart';
 
+import 'reminders.dart';
+import 'sound.dart';
 import 'strings.dart';
 
 const _progressKey = 'progress_v1';
 const _langKey = 'lang';
 const _assistKey = 'quiz_assist';
+const _sfxKey = 'sfx_on_v1';
+const _bgmKey = 'bgm_on_v1';
+const _reminderKey = 'reminder_on_v1';
 const _tutorialKey = 'tutorial_done_v1';
 const _battleKey = 'battle_progress_v1';
 const _dailyKey = 'daily_battle_v1';
@@ -49,6 +54,10 @@ class AppState extends ChangeNotifier {
 
   /// レビューを頼むタイミングの制御。端末で動かすときだけ main が入れる（テストでは null で、何もしない）。
   ReviewPromptService? review;
+
+  /// 効果音・BGMと毎日の通知。端末で動かすときだけ main が実物を入れる（テストでは何もしない）。
+  Sound sound = const NoopSound();
+  Reminders reminders = const NoopReminders();
   BattleProgress battle; // バトルのクリア記録（地方決戦・エクストラの解放に使う）
 
   AppState._(this.pack, this.store, this.prefs, this._lang, this.progress, this._battleJson, this._quizAssist, this.battle);
@@ -118,6 +127,35 @@ class AppState extends ChangeNotifier {
   Future<void> setTutorialDone(bool v) async {
     await prefs.setBool(_tutorialKey, v);
     notifyListeners();
+  }
+
+  bool get sfxOn => prefs.getBool(_sfxKey) ?? true;
+  bool get bgmOn => prefs.getBool(_bgmKey) ?? false;
+  bool get reminderOn => prefs.getBool(_reminderKey) ?? false;
+
+  /// 効果音を鳴らす（設定でオフなら鳴らさない）。
+  void sfx(String name) {
+    if (sfxOn) sound.play(name);
+  }
+
+  Future<void> setSfx(bool v) async {
+    await prefs.setBool(_sfxKey, v);
+    notifyListeners();
+  }
+
+  Future<void> setBgm(bool v) async {
+    await prefs.setBool(_bgmKey, v);
+    await sound.setBgm(v);
+    notifyListeners();
+  }
+
+  /// 毎日の通知を切り替える。許可されなければ false を返し、オフのままにする。
+  Future<bool> setReminder(bool v) async {
+    final ok = v ? await reminders.enable(ui.t('reminder.title'), ui.t('reminder.body')) : true;
+    if (!v) await reminders.disable();
+    await prefs.setBool(_reminderKey, v && ok);
+    notifyListeners();
+    return ok;
   }
 
   Future<void> setQuizAssist(bool v) async {
