@@ -10,6 +10,7 @@ import 'package:terrimap_core/battle/battle_progress.dart';
 import 'package:terrimap_core/battle/collection.dart';
 import 'package:terrimap_core/battle_ui/art_set.dart';
 import 'package:terrimap_core/battle/review.dart';
+import 'package:terrimap_core/battle/battle_log.dart';
 import 'package:terrimap_core/battle/stats.dart';
 import 'package:terrimap_core/battle/weekly_battle.dart';
 import 'package:terrimap_core/daily/daily_streak.dart';
@@ -34,6 +35,7 @@ const _streakKey = 'daily_streak_v1';
 const _weeklyKey = 'weekly_battle_v1';
 const _seenCardsKey = 'collection_seen_v1';
 const _seenAchKey = 'achievements_seen_v1';
+const _battleLogKey = 'battle_log_v1';
 
 /// アプリ全体の状態: pack・進捗(端末に保存)・表示言語。
 class AppState extends ChangeNotifier {
@@ -184,6 +186,16 @@ class AppState extends ChangeNotifier {
         regions: progress,
       );
 
+  /// 勝ち・負け・プレイ時間の記録（端末の中だけ）。
+  BattleLog get battleLog => BattleLog.fromJsonString(prefs.getString(_battleLogKey));
+
+  /// [won] が null のときは、プレイ時間だけを足す。
+  Future<void> logBattle({bool? won, required double seconds}) async {
+    final log = battleLog.record(won: won, seconds: seconds);
+    await prefs.setString(_battleLogKey, log.toJsonString());
+    notifyListeners();
+  }
+
   /// 統計の数字（今ある記録から、毎回計算する）。
   Stats get stats => Stats.compute(
         regionIds: [for (final r in pack.regions) r.id],
@@ -194,6 +206,7 @@ class AppState extends ChangeNotifier {
         today: today(),
         regionalTotal: pack.profile?.groups.length ?? 0,
         extraTotal: pack.profile?.extras.length ?? 0,
+        log: battleLog,
       );
 
   Set<String> get seenAchievements => (prefs.getStringList(_seenAchKey) ?? const <String>[]).toSet();
