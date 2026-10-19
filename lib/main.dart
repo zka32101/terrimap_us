@@ -6,6 +6,7 @@ import 'app_state.dart';
 import 'monetization.dart';
 import 'reminders.dart';
 import 'review.dart';
+import 'share_card.dart';
 import 'sound.dart';
 import 'screens/home_screen.dart';
 
@@ -15,6 +16,7 @@ Future<void> main() async {
   final app = await AppState.load();
   app.sound = PlayerSound();
   app.reminders = LocalReminders();
+  app.sharer = const PlatformSharer();
   if (app.bgmOn) app.sound.setBgm(true);
   app.refreshRescue();
   app.review = await createReviewPrompt('terrimap_us');

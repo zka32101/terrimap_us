@@ -27,6 +27,7 @@ import 'package:terrimap_core/progress/region_progress.dart';
 import 'package:terrimap_core/progress/weak_regions.dart';
 
 import 'reminders.dart';
+import 'share_card.dart';
 import 'sound.dart';
 import 'strings.dart';
 
@@ -63,6 +64,7 @@ class AppState extends ChangeNotifier {
   /// 効果音・BGMと毎日の通知。端末で動かすときだけ main が実物を入れる（テストでは何もしない）。
   Sound sound = const NoopSound();
   Reminders reminders = const NoopReminders();
+  Sharer sharer = const NoopSharer();
   BattleProgress battle; // バトルのクリア記録（地方決戦・エクストラの解放に使う）
 
   AppState._(this.pack, this.store, this.prefs, this._lang, this.progress, this._battleJson, this._quizAssist, this.battle);

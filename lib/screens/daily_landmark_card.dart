@@ -3,6 +3,7 @@ import 'package:terrimap_core/battle_ui/art_set.dart';
 import 'package:terrimap_core/daily/daily_landmark.dart';
 
 import '../app_state.dart';
+import '../share_card.dart';
 import 'landmark_detail.dart';
 
 /// ホームの「今日の名所」。日替わりで、名所の画像・名前・州を見せる。名所のデータがなければ何も出さない。
@@ -45,6 +46,21 @@ class _DailyLandmarkCardState extends State<DailyLandmarkCard> {
             width: 48,
             height: 48,
             child: img == null ? const Icon(Icons.place) : RawImage(image: img, fit: BoxFit.contain),
+          ),
+          trailing: IconButton(
+            key: const ValueKey('daily-landmark-share'),
+            tooltip: app.ui.t('share.send'),
+            icon: const Icon(Icons.ios_share),
+            onPressed: () => showShareCard(
+              context,
+              app,
+              ShareCardData(
+                heading: app.ui.t('dailyLandmark.title'),
+                title: lm.nameIn(app.lang),
+                subtitle: app.ui.t('landmark.in', {'region': app.s.regionName(lm.regionId)}),
+                image: img,
+              ),
+            ),
           ),
           title: Text(app.ui.t('dailyLandmark.title'), style: Theme.of(context).textTheme.labelMedium),
           subtitle: Text(
