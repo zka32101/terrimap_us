@@ -1,4 +1,4 @@
-package dev.terrimap.terrimap_de
+package dev.terrimap.terrimap_us
 
 import io.flutter.embedding.android.FlutterActivity
 

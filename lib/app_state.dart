@@ -13,6 +13,7 @@ import 'package:terrimap_core/battle/review.dart';
 import 'package:terrimap_core/battle/battle_log.dart';
 import 'package:terrimap_core/battle/stats.dart';
 import 'package:terrimap_core/battle/weekly_battle.dart';
+import 'package:terrimap_core/daily/daily_landmark.dart';
 import 'package:terrimap_core/daily/daily_streak.dart';
 import 'package:terrimap_core/daily/streak_rescue.dart';
 import 'package:terrimap_core/battle/replay.dart';
@@ -31,6 +32,7 @@ import 'a11y.dart';
 import 'reminders.dart';
 import 'share_card.dart';
 import 'sound.dart';
+import 'widget_sync.dart';
 import 'strings.dart';
 
 const _progressKey = 'progress_v1';
@@ -69,6 +71,7 @@ class AppState extends ChangeNotifier {
   /// 効果音・BGMと毎日の通知。端末で動かすときだけ main が実物を入れる（テストでは何もしない）。
   Sound sound = const NoopSound();
   Reminders reminders = const NoopReminders();
+  WidgetSync widgetSync = const NoopWidgetSync();
   Sharer sharer = const NoopSharer();
   BattleProgress battle; // バトルのクリア記録（地方決戦・エクストラの解放に使う）
 
@@ -197,6 +200,18 @@ class AppState extends ChangeNotifier {
     final day = today();
     final at = reminderOn ? StreakRescue.plan(streak: streak, today: day, nowLocal: DateTime.now()) : null;
     await reminders.scheduleRescue(at, ui.t('reminder.rescueTitle'), ui.t('reminder.rescueBody', {'n': streak.currentOn(day)}));
+    await syncWidget();
+  }
+
+  /// ホーム画面ウィジェットの中身（連続日数・今日のチャレンジ・今日の名所）を、いまの状態に書き直す。
+  Future<void> syncWidget() async {
+    final day = today();
+    final lm = DailyLandmark.pick(pack.facts, day);
+    await widgetSync.update(WidgetData(
+      streak: ui.t('stats.days', {'n': streak.currentOn(day)}),
+      status: '${streak.doneOn(day) ? '✅' : '⬜'} ${s.t('daily')}',
+      landmark: lm == null ? '' : landmarkName(lm.id),
+    ));
   }
 
   /// BGM の曲を切り替える（BGM がオンのときだけ）。バトルのボス戦で bgm → boss。
@@ -214,6 +229,7 @@ class AppState extends ChangeNotifier {
     _lang = l;
     await prefs.setString(_langKey, l);
     notifyListeners();
+    await syncWidget();
   }
 
   /// 今日の日付(UTC の yyyy-MM-dd)。テストで差し替える。
