@@ -16,6 +16,7 @@ Future<void> main() async {
   app.sound = PlayerSound();
   app.reminders = LocalReminders();
   if (app.bgmOn) app.sound.setBgm(true);
+  app.refreshRescue();
   app.review = await createReviewPrompt('terrimap_us');
   final money = await Monetization.init();
   runApp(ProviderScope(

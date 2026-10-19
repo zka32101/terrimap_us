@@ -4,6 +4,7 @@ import 'package:terrimap_core/battle_ui/art_set.dart';
 import 'package:terrimap_core/battle/collection.dart';
 
 import '../app_state.dart';
+import 'landmark_detail.dart';
 
 /// 名所のコレクション。州をクリアすると、その州の名所カードが集まる。
 class CollectionScreen extends StatefulWidget {
@@ -59,7 +60,10 @@ class _CollectionScreenState extends State<CollectionScreen> {
                 return Card(
                   key: ValueKey('card-${c.landmark.id}'),
                   color: c.unlocked ? null : Theme.of(context).colorScheme.surfaceContainerHighest,
-                  child: Padding(
+                  clipBehavior: Clip.antiAlias,
+                  child: InkWell(
+                    onTap: c.unlocked ? () => showLandmarkDetail(context, app, c.landmark.id, art: _art) : null,
+                    child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                       if (isNew) Text(ui.t('collection.newBadge'), style: TextStyle(color: Theme.of(context).colorScheme.error, fontWeight: FontWeight.bold, fontSize: 12)),
@@ -81,6 +85,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ]),
+                  ),
                   ),
                 );
               },

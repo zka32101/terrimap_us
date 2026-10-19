@@ -11,6 +11,7 @@ import 'package:terrimap_core/quiz/quiz_engine.dart';
 import '../app_state.dart';
 import '../monetization.dart';
 import 'daily_landmark_card.dart';
+import 'landmark_quiz_summary.dart';
 import 'quiz_screen.dart';
 import 'stage_picker_screen.dart';
 import 'stats_screen.dart';
@@ -24,6 +25,7 @@ class HomeScreen extends ConsumerWidget {
   /// 無料の間は、解放済みの州だけを出題する(選択肢の誤答には全州が使われる)。
   /// [review] のときは、間違えて未習得の州だけを出題する（復習）。
   Future<void> _startQuiz(BuildContext context, WidgetRef ref, {required bool premium, bool review = false, bool landmarks = false}) async {
+    app.sfx('tap');
     final unlocked = unlockedPool(app.pack.regions.map((r) => r.id), premium: premium);
     final base = review ? reviewPool(app.progress, allowed: unlocked) : unlocked;
     final pool = landmarks ? {for (final id in base) if (app.landmarkRegionIds.contains(id)) id} : base;
@@ -34,12 +36,13 @@ class HomeScreen extends ConsumerWidget {
         .push<List<bool>>(MaterialPageRoute(builder: (_) => QuizScreen(app: app, questions: qs)));
     if (results != null && context.mounted) {
       await ref.read(optionalAdGateProvider)?.maybeShowInterstitial(InterstitialTrigger.sessionEnd);
-      if (context.mounted) _showResult(context, results, null);
+      if (context.mounted) _showResult(context, results, null, questions: landmarks ? qs : null);
     }
   }
 
   /// デイリーは全員が同じ問題(日付固定)なので、無料でも全州から出す。
   Future<void> _startDaily(BuildContext context, WidgetRef ref) async {
+    app.sfx('tap');
     final date = _utcDate();
     final qs = DailyChallenge.forDate(app.pack, date);
     final results = await Navigator.of(context)
@@ -58,14 +61,16 @@ class HomeScreen extends ConsumerWidget {
     return '${d.year}-${two(d.month)}-${two(d.day)}';
   }
 
-  void _showResult(BuildContext context, List<bool> results, String? share) {
+  void _showResult(BuildContext context, List<bool> results, String? share, {List<Question>? questions}) {
     final s = app.s;
     final score = results.where((e) => e).length;
     showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(s.t('result')),
-        content: Text('$score / ${results.length}\n${results.map((e) => e ? '🟩' : '🟥').join()}'),
+        content: questions != null
+            ? SingleChildScrollView(child: LandmarkQuizSummary(app: app, results: results, questions: questions))
+            : Text('$score / ${results.length}\n${results.map((e) => e ? '🟩' : '🟥').join()}'),
         actions: [
           if (share != null)
             TextButton(

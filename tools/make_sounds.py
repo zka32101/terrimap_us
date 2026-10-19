@@ -34,3 +34,11 @@ for c in chords:
         for k in (0, 1, 2, 1):
             bgm += tone(N[c[k]], 0.375, 0.22, release=0.12)
 write('bgm.wav', bgm)
+
+# ボス戦のBGM: 短調で少し速い（約9.6秒でループ）
+boss = []
+for c in [('A3', 'C4', 'E4'), ('A3', 'C4', 'E4'), ('F4', 'A4', 'C5'), ('G4', 'B3', 'D4')]:
+    for _ in range(2):
+        for k in (0, 2, 1, 2):
+            boss += tone(N[c[k]], 0.3, 0.24, 'saw', release=0.1)
+write('boss.wav', boss)

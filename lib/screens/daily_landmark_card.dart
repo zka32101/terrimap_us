@@ -3,6 +3,7 @@ import 'package:terrimap_core/battle_ui/art_set.dart';
 import 'package:terrimap_core/daily/daily_landmark.dart';
 
 import '../app_state.dart';
+import 'landmark_detail.dart';
 
 /// ホームの「今日の名所」。日替わりで、名所の画像・名前・州を見せる。名所のデータがなければ何も出さない。
 class DailyLandmarkCard extends StatefulWidget {
@@ -39,6 +40,7 @@ class _DailyLandmarkCardState extends State<DailyLandmarkCard> {
         key: const ValueKey('daily-landmark'),
         margin: EdgeInsets.zero,
         child: ListTile(
+          onTap: () => showLandmarkDetail(context, app, lm.id, art: _art),
           leading: SizedBox(
             width: 48,
             height: 48,

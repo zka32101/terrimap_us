@@ -50,6 +50,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   String? _weather;
   bool _bossIntroShown = false, _bossIntroVisible = false; // エクストラのボスが出たとき、名前と事実の注記を1回だけ出す
   Timer? _bossIntroTimer;
+  bool _bossMusic = false; // ボスが出たら BGM をボス用にする（画面を出るとき元に戻す）
   List<String> _newCards = const []; // この勝利で集まった名所カード
   bool _resultShown = false;
   late bool _tutorial = !widget.app.tutorialDone; // 初回のバトルの案内（終えるかスキップするまで）
@@ -75,6 +76,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     _ticker.dispose();
     if (_played > 0) widget.app.logBattle(seconds: _played); // 途中でやめた分の時間
     _bossIntroTimer?.cancel();
+    if (_bossMusic) widget.app.bgmTrack('bgm');
     _session.removeListener(_onChanged);
     _session.dispose();
     super.dispose();
@@ -130,6 +132,10 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
       case BattleEventType.weatherBlocked:
         _message = ui.t('weather.blocked', {'name': weatherName()});
       case BattleEventType.spawn:
+        if (e.isBoss && !_bossMusic) {
+          _bossMusic = true;
+          widget.app.bgmTrack('boss');
+        }
         if (e.isBoss && widget.kind == StageKind.extra && !_bossIntroShown) {
           _bossIntroShown = _bossIntroVisible = true;
           _bossIntroTimer = Timer(const Duration(seconds: 7), () {

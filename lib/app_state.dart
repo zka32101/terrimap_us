@@ -14,6 +14,7 @@ import 'package:terrimap_core/battle/battle_log.dart';
 import 'package:terrimap_core/battle/stats.dart';
 import 'package:terrimap_core/battle/weekly_battle.dart';
 import 'package:terrimap_core/daily/daily_streak.dart';
+import 'package:terrimap_core/daily/streak_rescue.dart';
 import 'package:terrimap_core/battle/replay.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/battle/grid.dart';
@@ -33,6 +34,7 @@ const _assistKey = 'quiz_assist';
 const _sfxKey = 'sfx_on_v1';
 const _bgmKey = 'bgm_on_v1';
 const _reminderKey = 'reminder_on_v1';
+const _reminderTimeKey = 'reminder_minutes_v1';
 const _tutorialKey = 'tutorial_done_v1';
 const _battleKey = 'battle_progress_v1';
 const _dailyKey = 'daily_battle_v1';
@@ -91,6 +93,8 @@ class AppState extends ChangeNotifier {
 
   /// 端末のデータを消したあとなど、保存済みの値から状態を読み直す。
   Future<void> reloadFromPrefs() async {
+    if (!reminderOn) await reminders.disable(); // データ削除のあとは通知も止める
+    await sound.setBgm(bgmOn);
     final saved = prefs.getString(_progressKey);
     store = saved == null ? JsonProgressStore() : JsonProgressStore.fromJson(saved);
     battle = BattleProgress.fromJsonString(prefs.getString(_battleKey));
@@ -152,13 +156,39 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// 毎日の通知の時刻（0時からの分。初期は20:00）。
+  int get reminderMinutes => prefs.getInt(_reminderTimeKey) ?? 20 * 60;
+
+  Future<bool> _scheduleDaily() =>
+      reminders.enable(ui.t('reminder.title'), ui.t('reminder.body'), hour: reminderMinutes ~/ 60, minute: reminderMinutes % 60);
+
   /// 毎日の通知を切り替える。許可されなければ false を返し、オフのままにする。
   Future<bool> setReminder(bool v) async {
-    final ok = v ? await reminders.enable(ui.t('reminder.title'), ui.t('reminder.body')) : true;
+    final ok = v ? await _scheduleDaily() : true;
     if (!v) await reminders.disable();
     await prefs.setBool(_reminderKey, v && ok);
+    await refreshRescue();
     notifyListeners();
     return ok;
+  }
+
+  /// 通知の時刻を変える（オンなら予約し直す）。
+  Future<void> setReminderTime(int minutes) async {
+    await prefs.setInt(_reminderTimeKey, minutes);
+    if (reminderOn) await _scheduleDaily();
+    notifyListeners();
+  }
+
+  /// ストリーク救済の通知を、いまの連続記録に合わせて予約し直す（アプリを開いたとき・チャレンジを済ませたとき）。
+  Future<void> refreshRescue() async {
+    final day = today();
+    final at = reminderOn ? StreakRescue.plan(streak: streak, today: day, nowLocal: DateTime.now()) : null;
+    await reminders.scheduleRescue(at, ui.t('reminder.rescueTitle'), ui.t('reminder.rescueBody', {'n': streak.currentOn(day)}));
+  }
+
+  /// BGM の曲を切り替える（BGM がオンのときだけ）。バトルのボス戦で bgm → boss。
+  Future<void> bgmTrack(String track) async {
+    if (bgmOn) await sound.setBgm(true, track: track);
   }
 
   Future<void> setQuizAssist(bool v) async {
@@ -313,6 +343,7 @@ class AppState extends ChangeNotifier {
     }
     await prefs.setString(_dailyKey, jsonEncode({for (final e in all.entries) e.key: e.value.toJsonString()}));
     await prefs.setString(_streakKey, streak.record(date).toJson());
+    await refreshRescue();
     notifyListeners();
   }
 
