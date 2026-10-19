@@ -8,6 +8,7 @@ import 'package:terrimap_core/battle/daily_battle.dart';
 import 'package:terrimap_core/battle/invite.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/battle/replay.dart';
+import 'package:terrimap_core/battle/weekly_battle.dart';
 import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/pack/country_profile.dart';
 
@@ -30,8 +31,8 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
   Difficulty _difficulty = Difficulty.normal;
   StageKind _kind = StageKind.normal;
 
-  void _play(StageKind kind, String id, {Difficulty? difficulty, DailyBattle? daily}) => Navigator.of(context).push(MaterialPageRoute(
-        builder: (_) => BattleScreen(app: widget.app, regionId: id, difficulty: difficulty ?? _difficulty, kind: kind, daily: daily),
+  void _play(StageKind kind, String id, {Difficulty? difficulty, DailyBattle? daily, WeeklyBattle? weekly}) => Navigator.of(context).push(MaterialPageRoute(
+        builder: (_) => BattleScreen(app: widget.app, regionId: id, difficulty: difficulty ?? _difficulty, kind: kind, daily: daily, weekly: weekly),
       ));
 
   void _watch(Replay r) => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ReplayScreen(app: widget.app, replay: r)));
@@ -61,6 +62,36 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
         onTap: done != null ? () => _watch(done) : () => _play(d.kind, d.stageId, difficulty: d.difficulty, daily: d),
       ),
     );
+  }
+
+  /// 今週のチャレンジ。1週に1回だけ。終えたら結果と、友だちへの共有を出す。
+  Widget _weeklyCard(bool premium) {
+    final app = widget.app, ui = app.ui;
+    final w = app.weekly(premium: premium, freeIds: freeRegionIds);
+    final rec = app.weeklyRecord;
+    final left = WeeklyBattle.daysLeft(app.today());
+    final stage = w.kind == StageKind.regional ? app.pack.profile?.groups[w.stageId]?.nameIn(app.lang) ?? w.stageId : app.s.regionName(w.stageId);
+    return Card(
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      child: ListTile(
+        key: const ValueKey('weekly-battle'),
+        leading: const Icon(Icons.event_available),
+        title: Text(ui.t('weekly.title')),
+        isThreeLine: true,
+        subtitle: Text([
+          if (rec != null) ui.t('weekly.done', {'mark': rec.won ? '✅' : '❌', 'hp': rec.baseHp}) else '$stage · ${ui.t('difficulty.${w.difficulty.name}')}',
+          rec != null ? ui.t('weekly.doneHint') : ui.t('weekly.once'),
+          left == 1 ? ui.t('weekly.lastDay') : ui.t('weekly.daysLeft', {'n': left}),
+        ].join('\n')),
+        trailing: rec != null ? IconButton(key: const ValueKey('weekly-share'), tooltip: ui.t('weekly.share'), icon: const Icon(Icons.ios_share), onPressed: () => _copyWeekly(w, rec)) : const Icon(Icons.chevron_right),
+        onTap: rec != null ? null : () => _play(w.kind, w.stageId, difficulty: w.difficulty, weekly: w),
+      ),
+    );
+  }
+
+  void _copyWeekly(WeeklyBattle w, WeeklyRecord rec) {
+    Clipboard.setData(ClipboardData(text: widget.app.weeklyText(w, record: rec)));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(widget.app.ui.t('invite.copied'))));
   }
 
   /// 友だちの挑戦コードを貼って確かめ、同じステージで挑戦する。
@@ -186,6 +217,7 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
       body: SafeArea(
         child: Column(children: [
           _dailyCard(premium),
+          _weeklyCard(premium),
           Padding(
             padding: const EdgeInsets.all(16),
             child: SegmentedButton<Difficulty>(

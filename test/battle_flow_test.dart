@@ -12,6 +12,7 @@ import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/battle/invite.dart';
 import 'package:terrimap_core/battle/stage_generator.dart';
+import 'package:terrimap_core/battle/weekly_battle.dart';
 import 'package:terrimap_core/battle_ui/battle_view.dart';
 import 'package:terrimap_core/quiz/quiz_engine.dart';
 import 'package:terrimap_us/app_state.dart';
@@ -101,7 +102,7 @@ void main() {
     await t.tap(find.byKey(const ValueKey('battle')));
     await t.pump();
     await t.pump(const Duration(milliseconds: 400));
-    await t.ensureVisible(find.text(regionName));
+    await t.scrollUntilVisible(find.text(regionName), 200, scrollable: find.byType(Scrollable).last); // 州の一覧は、カードの下で長い
     await t.pump();
     await t.tap(find.text(regionName));
     await t.pump();
@@ -249,6 +250,50 @@ void main() {
     await t.tap(find.byKey(const ValueKey('replay-restart')));
     await t.pump();
     expect(find.byKey(const ValueKey('replay-done')), findsNothing);
+  });
+
+  testWidgets('今週のチャレンジ: 無料の間は無料の州。遊べて、終えると結果と共有が出て、もう挑戦できない。週が変わると新しくなる', (t) async {
+    await t.binding.setSurfaceSize(const Size(800, 1000));
+    addTearDown(() => t.binding.setSurfaceSize(null));
+    final app = await boot(t, assist: false);
+    app.today = () => '2026-10-20'; // 火曜
+    final w = WeeklyBattle.forDate(app.pack, '2026-10-20', allowedIds: freeRegionIds);
+    expect(w.kind, StageKind.normal);
+    expect(freeRegionIds, contains(w.stageId));
+    expect(app.weeklyRecord, isNull);
+    await t.tap(find.byKey(const ValueKey('battle')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.text("This week's challenge"), findsOneWidget);
+    expect(find.textContaining('6 days left'), findsOneWidget);
+    await t.tap(find.byKey(const ValueKey('weekly-battle')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.byKey(const ValueKey('hud-wave')), findsOneWidget);
+    Navigator.of(t.element(find.byKey(const ValueKey('hud-wave')))).pop();
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+
+    await t.runAsync(() => app.saveWeekly(w.week, true, 14));
+    await t.pump();
+    expect(find.textContaining('Done this week: ✅ ♥14'), findsOneWidget);
+    expect(find.byKey(const ValueKey('weekly-share')), findsOneWidget);
+    // 終えたら、タップしても戦闘に入れない（やり直しは出来ない）
+    expect(t.widget<ListTile>(find.byKey(const ValueKey('weekly-battle'))).onTap, isNull);
+    // 共有の文面は、招待コード（結果つき）として読める
+    final text = app.weeklyText(w, record: app.weeklyRecord);
+    final inv = Invite.parse(text)!;
+    expect((inv.stageId, inv.difficulty, inv.won, inv.baseHp), (w.stageId, w.difficulty, true, 14));
+    expect(inv.isValidFor(app.pack), isTrue);
+    // 保存は端末に残り、翌週は未挑戦に戻る
+    final reloaded = await t.runAsync(AppState.load) as AppState;
+    reloaded.today = () => '2026-10-23';
+    expect(reloaded.weeklyRecord?.baseHp, 14); // 端末に保存されている
+    app.today = () => '2026-10-26';
+    expect(app.weeklyRecord, isNull);
+    app.today = () => '2026-10-25'; // 同じ週の日曜はまだ挑戦済み
+    expect(app.weeklyRecord, isNotNull);
+    await t.pumpWidget(const SizedBox());
   });
 
   testWidgets('挑戦コード: 正しいコードは確かめられて遊べる。壊れたコードは遊べない', (t) async {
