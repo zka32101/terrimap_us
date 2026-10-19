@@ -95,6 +95,16 @@ class SettingsScreen extends StatelessWidget {
                 },
               ),
             ]),
+            kit.SettingsSection(title: app.ui.t('a11y.colorBlind'), children: [
+              SwitchListTile(
+                key: const ValueKey('color-blind-switch'),
+                contentPadding: EdgeInsets.zero,
+                title: Text(app.ui.t('a11y.colorBlind')),
+                subtitle: Text(app.ui.t('a11y.colorBlindHelp')),
+                value: app.colorBlind,
+                onChanged: app.setColorBlind,
+              ),
+            ]),
             kit.SettingsSection(title: app.ui.t('adaptive.setting'), children: [
               SwitchListTile(
                 key: const ValueKey('adaptive-switch'),

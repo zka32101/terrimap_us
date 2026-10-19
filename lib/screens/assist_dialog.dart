@@ -86,7 +86,7 @@ class _AssistDialogState extends State<_AssistDialog> {
     if (q.type == QuestionType.silhouette) return RegionSilhouette(pack: pack, regionId: q.targetId);
     if (q.type == QuestionType.nameFromCapital) return const SizedBox.shrink();
     if (q.type == QuestionType.landmarkOf) {
-      return RegionMapView(pack: pack, colorOf: (id) => _picked != null && id == q.correctId ? const Color(0xFF66BB6A) : const Color(0xFFECEFF1));
+      return RegionMapView(pack: pack, colorOf: (id) => _picked != null && id == q.correctId ? widget.app.palette.mapOk : const Color(0xFFECEFF1));
     }
     return RegionMapView(pack: pack, colorOf: (id) => id == q.targetId ? const Color(0xFFFFB300) : const Color(0xFFECEFF1));
   }
@@ -119,9 +119,9 @@ class _AssistDialogState extends State<_AssistDialog> {
                       backgroundColor: _picked == null
                           ? null
                           : id == q.correctId
-                              ? Colors.green.shade300
+                              ? widget.app.palette.choiceOk
                               : id == _picked
-                                  ? Colors.red.shade200
+                                  ? widget.app.palette.choiceNg
                                   : null,
                     ),
                     onPressed: _picked != null ? null : () => _finish(id, q.isCorrect(id)),

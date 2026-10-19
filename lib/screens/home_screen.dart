@@ -127,15 +127,20 @@ class HomeScreen extends ConsumerWidget {
             child: Column(children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                child: Row(children: [
-                  Chip(label: Text(_titleLabel(p.title))),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: LinearProgressIndicator(value: p.ratio, minHeight: 8),
-                  ),
-                  const SizedBox(width: 12),
-                  Text('${p.masteredCount} / ${p.total}'),
-                ]),
+                // 文字を大きくしても収まるように、称号と数は折り返せるようにする
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  spacing: 12,
+                  runSpacing: 4,
+                  children: [
+                    Chip(label: Text(_titleLabel(p.title))),
+                    Text('${p.masteredCount} / ${p.total}'),
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width - 32,
+                      child: LinearProgressIndicator(value: p.ratio, minHeight: 8),
+                    ),
+                  ],
+                ),
               ),
               Expanded(
                 child: RegionMapView(
@@ -145,7 +150,7 @@ class HomeScreen extends ConsumerWidget {
                     if (!isRegionUnlocked(id, premium: premium)) showUnlockSheet(context, app);
                   },
                   colorOf: (id) => isRegionUnlocked(id, premium: premium)
-                      ? defaultRegionColor(p.stateOf(id))
+                      ? app.palette.region(p.stateOf(id))
                       : _lockedColor,
                 ),
               ),

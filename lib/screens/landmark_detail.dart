@@ -19,7 +19,9 @@ Future<void> showLandmarkDetail(BuildContext context, AppState app, String landm
         SizedBox(
           width: 280,
           height: 280,
-          child: img == null ? const Icon(Icons.place, size: 64) : RawImage(image: img, fit: BoxFit.contain),
+          child: img == null
+              ? const Icon(Icons.place, size: 64)
+              : Semantics(image: true, label: app.ui.t('a11y.landmarkImage', {'name': lm.nameIn(app.lang)}), child: RawImage(image: img, fit: BoxFit.contain)),
         ),
         const SizedBox(height: 12),
         Text(app.ui.t('landmark.in', {'region': app.s.regionName(lm.regionId)})),

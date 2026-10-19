@@ -105,8 +105,8 @@ class _QuizScreenState extends State<QuizScreen> {
           onTap: _done ? null : _answer,
           colorOf: (id) {
             if (!_done) return const Color(0xFFECEFF1);
-            if (id == q.targetId) return const Color(0xFF66BB6A);
-            if (id == _answered) return const Color(0xFFEF9A9A);
+            if (id == q.targetId) return widget.app.palette.mapOk;
+            if (id == _answered) return widget.app.palette.mapNg;
             return const Color(0xFFECEFF1);
           },
         );
@@ -120,12 +120,16 @@ class _QuizScreenState extends State<QuizScreen> {
       case QuestionType.landmarkOf:
         final img = _done ? null : (q.subjectId == null ? null : _art?.landmark(q.subjectId!));
         if (img != null) {
-          return RawImage(key: ValueKey('quiz-landmark-${q.subjectId}'), image: img, fit: BoxFit.contain);
+          return Semantics(
+            image: true,
+            label: widget.app.ui.t('a11y.landmarkImage', {'name': widget.app.landmarkName(q.subjectId)}),
+            child: RawImage(key: ValueKey('quiz-landmark-${q.subjectId}'), image: img, fit: BoxFit.contain),
+          );
         }
         return RegionMapView(
           pack: pack,
           showZoomControls: true,
-          colorOf: (id) => _done && id == q.correctId ? const Color(0xFF66BB6A) : const Color(0xFFECEFF1),
+          colorOf: (id) => _done && id == q.correctId ? widget.app.palette.mapOk : const Color(0xFFECEFF1),
         );
       case QuestionType.silhouette:
         return RegionSilhouette(pack: pack, regionId: q.targetId);
@@ -156,9 +160,9 @@ class _QuizScreenState extends State<QuizScreen> {
                 backgroundColor: !_done
                     ? null
                     : id == q.correctId
-                        ? Colors.green.shade300
+                        ? widget.app.palette.choiceOk
                         : id == _answered
-                            ? Colors.red.shade200
+                            ? widget.app.palette.choiceNg
                             : null,
               ),
               onPressed: _done ? null : () => _answer(id),
@@ -173,7 +177,7 @@ class _QuizScreenState extends State<QuizScreen> {
     final ok = _answered == q.correctId;
     return Column(children: [
       Text(ok ? s.t('correct') : '${s.t('wrong')} ${s.t('answerWas')} ${s.regionName(q.correctId)}',
-          style: TextStyle(fontWeight: FontWeight.bold, color: ok ? Colors.green.shade800 : Colors.red.shade800)),
+          style: TextStyle(fontWeight: FontWeight.bold, color: ok ? widget.app.palette.textOk : widget.app.palette.textNg)),
       const SizedBox(height: 8),
       FilledButton(
         onPressed: _next,
