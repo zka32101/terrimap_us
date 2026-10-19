@@ -2,6 +2,7 @@ import 'package:app_common_kit/app_common_kit.dart' hide SettingsScreen;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:terrimap_core/battle/review.dart';
 import 'package:terrimap_core/daily/daily_challenge.dart';
 import 'package:terrimap_core/map/region_map_view.dart';
 import 'package:terrimap_core/progress/region_progress.dart';
@@ -19,8 +20,11 @@ class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key, required this.app});
 
   /// 無料の間は、解放済みの州だけを出題する(選択肢の誤答には全州が使われる)。
-  Future<void> _startQuiz(BuildContext context, WidgetRef ref, {required bool premium}) async {
-    final pool = unlockedPool(app.pack.regions.map((r) => r.id), premium: premium);
+  /// [review] のときは、間違えて未習得の州だけを出題する（復習）。
+  Future<void> _startQuiz(BuildContext context, WidgetRef ref, {required bool premium, bool review = false}) async {
+    final unlocked = unlockedPool(app.pack.regions.map((r) => r.id), premium: premium);
+    final pool = review ? reviewPool(app.progress, allowed: unlocked) : unlocked;
+    if (pool.isEmpty) return;
     final qs = QuizEngine(app.pack, seed: DateTime.now().millisecondsSinceEpoch & 0x7FFFFFFF)
         .generate(count: 10, types: QuestionType.values, pool: pool);
     final results = await Navigator.of(context)
@@ -91,6 +95,7 @@ class HomeScreen extends ConsumerWidget {
       builder: (context, _) {
         final s = app.s;
         final p = app.progress;
+        final reviewCount = reviewPool(p, allowed: unlockedPool(app.pack.regions.map((r) => r.id), premium: premium)).length;
         return Scaffold(
           appBar: AppBar(
             title: Text(s.t('appTitle')),
@@ -142,6 +147,19 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ),
               ),
+              if (reviewCount > 0)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton.icon(
+                      key: const ValueKey('review'),
+                      icon: const Icon(Icons.replay),
+                      onPressed: () => _startQuiz(context, ref, premium: premium, review: true),
+                      label: Text('${s.t('review')} ($reviewCount)'),
+                    ),
+                  ),
+                ),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Row(children: [

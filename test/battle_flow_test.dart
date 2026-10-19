@@ -20,6 +20,7 @@ import 'package:terrimap_core/quiz/quiz_engine.dart';
 import 'package:terrimap_us/app_state.dart';
 import 'package:terrimap_us/screens/achievements_screen.dart';
 import 'package:terrimap_us/screens/collection_screen.dart';
+import 'package:terrimap_us/screens/quiz_screen.dart';
 import 'package:terrimap_us/main.dart';
 import 'package:terrimap_us/monetization.dart';
 
@@ -396,6 +397,37 @@ void main() {
     await t.pump();
     await t.pump(const Duration(milliseconds: 400));
     expect(find.byKey(const ValueKey('hud-wave')), findsOneWidget);
+    await t.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('復習: 間違えた州があるときだけ「復習」が出て、その州だけを出題する。正解すると減って、なくなると消える', (t) async {
+    await t.binding.setSurfaceSize(const Size(480, 1000));
+    addTearDown(() => t.binding.setSurfaceSize(null));
+    final app = await boot(t, assist: false);
+    final id = freeRegionIds.first;
+    expect(find.byKey(const ValueKey('review')), findsNothing); // まだ間違えていない
+    await t.runAsync(() => app.record(id, correct: false));
+    await t.pump();
+    expect(find.byKey(const ValueKey('review')), findsOneWidget);
+    expect(find.text('Review mistakes (1)'), findsOneWidget);
+    await t.tap(find.byKey(const ValueKey('review')));
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    final qs = t.widget<QuizScreen>(find.byType(QuizScreen)).questions;
+    expect(qs, isNotEmpty);
+    expect(qs.every((q) => q.targetId == id), isTrue); // 間違えた州だけ
+    Navigator.of(t.element(find.byType(QuizScreen))).pop();
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 400));
+    // 正解して習得済みになると、復習から外れて、ボタンが消える
+    await t.runAsync(() => app.record(id, correct: true));
+    await t.pump();
+    expect(find.byKey(const ValueKey('review')), findsNothing);
+    // 無料の間は、解放していない州の間違いは数えない
+    final locked = app.pack.regions.map((r) => r.id).firstWhere((r) => !freeRegionIds.contains(r));
+    await t.runAsync(() => app.record(locked, correct: false));
+    await t.pump();
+    expect(find.byKey(const ValueKey('review')), findsNothing);
     await t.pumpWidget(const SizedBox());
   });
 
