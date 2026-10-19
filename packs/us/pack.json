@@ -4,12 +4,13 @@
  "country": "US",
  "regionKind": "state",
  "languages": [
-  "en"
+  "en",
+  "ja"
  ],
  "defaultLanguage": "en",
  "projection": {
   "type": "planar",
-  "note": "Albers USA\u76f8\u5f53(\u713c\u304d\u8fbc\u307f\u6e08\u307f)\u3002\u5ea7\u6a19\u306f0..1000\u306e\u5e73\u9762"
+  "note": "Albers USA相当(焼き込み済み)。座標は0..1000の平面"
  },
  "insets": [
   {
