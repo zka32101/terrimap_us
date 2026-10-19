@@ -4,7 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 abstract class Sound {
   const Sound();
   Future<void> play(String name); // assets/sound/<name>.wav
-  Future<void> setBgm(bool on);
+  Future<void> setBgm(bool on, {String track = 'bgm'}); // track: bgm / boss
 }
 
 class NoopSound extends Sound {
@@ -12,7 +12,7 @@ class NoopSound extends Sound {
   @override
   Future<void> play(String name) async {}
   @override
-  Future<void> setBgm(bool on) async {}
+  Future<void> setBgm(bool on, {String track = 'bgm'}) async {}
 }
 
 /// 実機用。音が出せない端末でもアプリは止めない。
@@ -31,9 +31,9 @@ class PlayerSound extends Sound {
   }
 
   @override
-  Future<void> setBgm(bool on) async {
+  Future<void> setBgm(bool on, {String track = 'bgm'}) async {
     try {
-      on ? await _bgm.play(AssetSource('sound/bgm.wav')) : await _bgm.stop();
+      on ? await _bgm.play(AssetSource('sound/$track.wav')) : await _bgm.stop();
     } catch (_) {}
   }
 }

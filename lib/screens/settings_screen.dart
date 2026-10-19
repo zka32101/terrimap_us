@@ -79,6 +79,21 @@ class SettingsScreen extends StatelessWidget {
                   }
                 },
               ),
+              ListTile(
+                key: const ValueKey('reminder-time'),
+                contentPadding: EdgeInsets.zero,
+                enabled: app.reminderOn,
+                leading: const Icon(Icons.access_time),
+                title: Text(app.ui.t('reminder.time')),
+                trailing: Text(MaterialLocalizations.of(context).formatTimeOfDay(TimeOfDay(hour: app.reminderMinutes ~/ 60, minute: app.reminderMinutes % 60))),
+                onTap: () async {
+                  final picked = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay(hour: app.reminderMinutes ~/ 60, minute: app.reminderMinutes % 60),
+                  );
+                  if (picked != null) await app.setReminderTime(picked.hour * 60 + picked.minute);
+                },
+              ),
             ]),
             kit.SettingsSection(title: app.ui.t('assist.setting'), children: [
               SwitchListTile(

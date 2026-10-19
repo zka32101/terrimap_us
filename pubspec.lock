@@ -316,6 +316,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_timezone:
+    dependency: "direct main"
+    description:
+      name: flutter_timezone
+      sha256: ea53c61c9152f271a5e30624a624184804947b6a733ff2b64186bb2579446892
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   flutter_tts:
     dependency: transitive
     description:
@@ -739,7 +747,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "8b4405858c3c7d1933b36814a0393e654968aaec"
+      resolved-ref: d5b01767169884635b81f96b87c0945fc2815e27
       url: "https://github.com/zka32101/terrimap_core"
     source: git
     version: "0.0.1"
@@ -752,7 +760,7 @@ packages:
     source: hosted
     version: "0.7.12"
   timezone:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: timezone
       sha256: dd14a3b83cfd7cb19e7888f1cbc20f258b8d71b54c06f79ac585f14093a287d1
