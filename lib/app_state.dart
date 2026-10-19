@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
+import 'package:terrimap_core/battle/achievements.dart';
 import 'package:terrimap_core/battle/battle_progress.dart';
 import 'package:terrimap_core/battle/collection.dart';
 import 'package:terrimap_core/battle/review.dart';
@@ -26,6 +27,7 @@ const _battleKey = 'battle_progress_v1';
 const _dailyKey = 'daily_battle_v1';
 const _streakKey = 'daily_streak_v1';
 const _seenCardsKey = 'collection_seen_v1';
+const _seenAchKey = 'achievements_seen_v1';
 
 /// アプリ全体の状態: pack・進捗(端末に保存)・表示言語。
 class AppState extends ChangeNotifier {
@@ -149,6 +151,24 @@ class AppState extends ChangeNotifier {
 
   /// 名所の名前（コレクションの表示用）。
   int get newCardCount => collection.unlockedIds.difference(seenCards).length;
+
+  /// 実績（毎回データから計算する。保存するのは「見たことのある実績」だけ）。
+  Achievements get achievements => Achievements(
+        regionIds: [for (final r in pack.regions) r.id],
+        progress: battle,
+        collection: collection,
+        bestStreak: streak.best,
+        regions: progress,
+      );
+
+  Set<String> get seenAchievements => (prefs.getStringList(_seenAchKey) ?? const <String>[]).toSet();
+
+  Future<void> markAchievementsSeen() async {
+    await prefs.setStringList(_seenAchKey, achievements.unlockedIds.toList()..sort());
+    notifyListeners();
+  }
+
+  int get newAchievementCount => achievements.unlockedIds.difference(seenAchievements).length;
 
   /// 招待コードのステージの名前（州・地方・エクストラ）。
   String inviteStageName(Invite inv) {
