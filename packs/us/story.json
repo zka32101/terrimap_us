@@ -297,6 +297,218 @@
           }
         }
       ]
+    },
+    {
+      "id": "us_ch_northeast",
+      "kind": "regional",
+      "stageId": "northeast",
+      "requires": null,
+      "title": {
+        "en": "Autumn in the Northeast",
+        "ja": "北東部の秋",
+        "es": "Otoño en el noreste",
+        "fr": "L’automne dans le Nord-Est",
+        "it": "Autunno nel Nordest",
+        "ko": "북동부의 가을",
+        "nl": "Herfst in het noordoosten",
+        "pt": "Outono no Nordeste",
+        "tr": "Kuzeydoğu’da Sonbahar",
+        "zh": "东北部的秋天"
+      },
+      "intro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Red and gold leaves, rocky coasts and old harbor towns. Defend the Northeast.",
+            "ja": "赤と金色の葉、岩の多い海岸、古い港町。北東部を守りましょう。",
+            "es": "Hojas rojas y doradas, costas rocosas y viejos pueblos portuarios. Defiende el noreste.",
+            "fr": "Feuilles rouges et dorées, côtes rocheuses et vieux ports. Défends le Nord-Est.",
+            "it": "Foglie rosse e dorate, coste rocciose e vecchi porti. Difendi il Nordest.",
+            "ko": "붉고 노란 나뭇잎, 바위 해안, 오래된 항구 마을. 북동부를 지켜 주세요.",
+            "nl": "Rode en gouden bladeren, rotsachtige kusten en oude havenstadjes. Verdedig het noordoosten.",
+            "pt": "Folhas vermelhas e douradas, costas rochosas e velhas vilas portuárias. Defende o Nordeste.",
+            "tr": "Kırmızı ve altın sarısı yapraklar, kayalık kıyılar ve eski liman kasabaları. Kuzeydoğu’yu koru.",
+            "zh": "红色与金色的树叶、岩石海岸和古老的港口小镇。守住东北部。"
+          }
+        }
+      ],
+      "beforeBoss": [],
+      "outro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Niagara Falls lies on the border between New York State and Canada.",
+            "ja": "ナイアガラの滝は、ニューヨーク州とカナダの境にあります。",
+            "es": "Las cataratas del Niágara están en la frontera entre el estado de Nueva York y Canadá.",
+            "fr": "Les chutes du Niagara se trouvent à la frontière entre l’État de New York et le Canada.",
+            "it": "Le cascate del Niagara si trovano al confine tra lo Stato di New York e il Canada.",
+            "ko": "나이아가라 폭포는 뉴욕주와 캐나다의 경계에 있습니다.",
+            "nl": "De Niagarawatervallen liggen op de grens tussen de staat New York en Canada.",
+            "pt": "As Cataratas do Niágara ficam na fronteira entre o estado de Nova Iorque e o Canadá.",
+            "tr": "Niagara Şelalesi, New York Eyaleti ile Kanada arasındaki sınırda yer alır.",
+            "zh": "尼亚加拉大瀑布位于纽约州与加拿大的边界上。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "us_ch_midwest",
+      "kind": "regional",
+      "stageId": "midwest",
+      "requires": null,
+      "title": {
+        "en": "Heart of the Heartland",
+        "ja": "中西部の心臓部",
+        "es": "El corazón del Medio Oeste",
+        "fr": "Le cœur du Midwest",
+        "it": "Il cuore del Midwest",
+        "ko": "중서부의 심장",
+        "nl": "Het hart van het Midwesten",
+        "pt": "O coração do Meio-Oeste",
+        "tr": "Ortabatı’nın Kalbi",
+        "zh": "中西部的心脏"
+      },
+      "intro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Wide fields, big skies and the shining Great Lakes. Defend the Midwest.",
+            "ja": "広い畑、大きな空、かがやく五大湖。中西部を守りましょう。",
+            "es": "Campos amplios, cielos grandes y los brillantes Grandes Lagos. Defiende el Medio Oeste.",
+            "fr": "De vastes champs, un grand ciel et les Grands Lacs scintillants. Défends le Midwest.",
+            "it": "Campi immensi, cieli ampi e i luminosi Grandi Laghi. Difendi il Midwest.",
+            "ko": "넓은 들판, 큰 하늘, 반짝이는 오대호. 중서부를 지켜 주세요.",
+            "nl": "Wijde velden, grote luchten en de glinsterende Grote Meren. Verdedig het Midwesten.",
+            "pt": "Campos amplos, céus grandes e os brilhantes Grandes Lagos. Defende o Meio-Oeste.",
+            "tr": "Geniş tarlalar, büyük gökyüzü ve ışıldayan Büyük Göller. Ortabatı’yı koru.",
+            "zh": "广阔的田野、辽阔的天空和闪闪发光的五大湖。守住中西部。"
+          }
+        }
+      ],
+      "beforeBoss": [],
+      "outro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Lake Michigan is the only Great Lake that lies entirely inside the United States.",
+            "ja": "ミシガン湖は、五大湖の中で、すべてがアメリカ国内にある唯一の湖です。",
+            "es": "El lago Míchigan es el único de los Grandes Lagos que está por completo dentro de Estados Unidos.",
+            "fr": "Le lac Michigan est le seul des Grands Lacs situé entièrement aux États-Unis.",
+            "it": "Il lago Michigan è l’unico dei Grandi Laghi interamente all’interno degli Stati Uniti.",
+            "ko": "미시간호는 오대호 가운데 전체가 미국 안에 있는 유일한 호수입니다.",
+            "nl": "Lake Michigan is het enige van de Grote Meren dat helemaal in de Verenigde Staten ligt.",
+            "pt": "O Lago Michigan é o único dos Grandes Lagos que fica inteiramente nos Estados Unidos.",
+            "tr": "Michigan Gölü, Büyük Göller’in tamamen ABD sınırları içinde kalan tek gölüdür.",
+            "zh": "密歇根湖是五大湖中唯一完全位于美国境内的湖。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "us_ch_south",
+      "kind": "regional",
+      "stageId": "south",
+      "requires": null,
+      "title": {
+        "en": "Down the Mississippi",
+        "ja": "ミシシッピをくだって",
+        "es": "Río abajo por el Misisipi",
+        "fr": "En descendant le Mississippi",
+        "it": "Lungo il Mississippi",
+        "ko": "미시시피강을 따라",
+        "nl": "De Mississippi af",
+        "pt": "Rio Mississípi abaixo",
+        "tr": "Mississippi Boyunca",
+        "zh": "沿密西西比河而下"
+      },
+      "intro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Bayous, warm breezes and a great river rolling south. Defend the South.",
+            "ja": "バイユー、あたたかい風、南へ流れる大きな川。南部を守りましょう。",
+            "es": "Pantanos, brisas cálidas y un gran río que corre hacia el sur. Defiende el sur.",
+            "fr": "Des bayous, une brise chaude et un grand fleuve qui coule vers le sud. Défends le Sud.",
+            "it": "Bayou, brezze calde e un grande fiume che scorre verso sud. Difendi il Sud.",
+            "ko": "늪지대, 따뜻한 바람, 남쪽으로 흐르는 큰 강. 남부를 지켜 주세요.",
+            "nl": "Moerassen, warme bries en een grote rivier die naar het zuiden stroomt. Verdedig het zuiden.",
+            "pt": "Pântanos, brisas quentes e um grande rio a correr para sul. Defende o Sul.",
+            "tr": "Bataklıklar, ılık esintiler ve güneye doğru akan büyük bir nehir. Güney’i koru.",
+            "zh": "河口湿地、温暖的微风，还有一条向南奔流的大河。守住南部。"
+          }
+        }
+      ],
+      "beforeBoss": [],
+      "outro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "The Mississippi River ends its long journey at the Gulf of Mexico, in Louisiana.",
+            "ja": "ミシシッピ川は、長い旅をルイジアナ州でメキシコ湾にそそいで終えます。",
+            "es": "El río Misisipi termina su largo viaje en el golfo de México, en Luisiana.",
+            "fr": "Le Mississippi termine son long voyage dans le golfe du Mexique, en Louisiane.",
+            "it": "Il fiume Mississippi conclude il suo lungo viaggio nel Golfo del Messico, in Louisiana.",
+            "ko": "미시시피강은 긴 여행을 루이지애나에서 멕시코만으로 흘러 들어가며 마칩니다.",
+            "nl": "De Mississippi eindigt zijn lange reis in de Golf van Mexico, in Louisiana.",
+            "pt": "O rio Mississípi termina a sua longa viagem no Golfo do México, na Luisiana.",
+            "tr": "Mississippi Nehri uzun yolculuğunu Louisiana’da Meksika Körfezi’nde bitirir.",
+            "zh": "密西西比河在路易斯安那州汇入墨西哥湾，结束它漫长的旅程。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "us_ch_west",
+      "kind": "regional",
+      "stageId": "west",
+      "requires": null,
+      "title": {
+        "en": "From the Rockies to the Pacific",
+        "ja": "ロッキーから太平洋へ",
+        "es": "De las Rocosas al Pacífico",
+        "fr": "Des Rocheuses au Pacifique",
+        "it": "Dalle Montagne Rocciose al Pacifico",
+        "ko": "로키산맥에서 태평양까지",
+        "nl": "Van de Rocky Mountains tot de Stille Oceaan",
+        "pt": "Das Montanhas Rochosas ao Pacífico",
+        "tr": "Kayalık Dağlar’dan Pasifik’e",
+        "zh": "从落基山到太平洋"
+      },
+      "intro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Red deserts, tall mountains and a long Pacific coast. Defend the West.",
+            "ja": "赤い砂漠、高い山々、長い太平洋の海岸。西部を守りましょう。",
+            "es": "Desiertos rojos, montañas altas y una larga costa del Pacífico. Defiende el oeste.",
+            "fr": "Des déserts rouges, de hautes montagnes et une longue côte pacifique. Défends l’Ouest.",
+            "it": "Deserti rossi, alte montagne e una lunga costa sul Pacifico. Difendi l’Ovest.",
+            "ko": "붉은 사막, 높은 산, 길게 이어진 태평양 해안. 서부를 지켜 주세요.",
+            "nl": "Rode woestijnen, hoge bergen en een lange kust aan de Stille Oceaan. Verdedig het westen.",
+            "pt": "Desertos vermelhos, montanhas altas e uma longa costa do Pacífico. Defende o Oeste.",
+            "tr": "Kırmızı çöller, yüksek dağlar ve uzun bir Pasifik kıyısı. Batı’yı koru.",
+            "zh": "红色的沙漠、高耸的山脉和绵长的太平洋海岸。守住西部。"
+          }
+        }
+      ],
+      "beforeBoss": [],
+      "outro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Denali in Alaska, at 6,190 meters, is the tallest mountain in North America.",
+            "ja": "アラスカのデナリは標高6,190メートルで、北アメリカでいちばん高い山です。",
+            "es": "El Denali, en Alaska, con 6190 metros, es la montaña más alta de América del Norte.",
+            "fr": "Le Denali, en Alaska, culmine à 6 190 mètres : c’est la plus haute montagne d’Amérique du Nord.",
+            "it": "Il Denali, in Alaska, con i suoi 6.190 metri è la montagna più alta del Nord America.",
+            "ko": "알래스카의 데날리는 해발 6,190미터로, 북아메리카에서 가장 높은 산입니다.",
+            "nl": "De Denali in Alaska is met 6190 meter de hoogste berg van Noord-Amerika.",
+            "pt": "O Denali, no Alasca, com 6190 metros, é a montanha mais alta da América do Norte.",
+            "tr": "Alaska’daki Denali, 6.190 metre yüksekliğiyle Kuzey Amerika’nın en yüksek dağıdır.",
+            "zh": "阿拉斯加的迪纳利峰海拔6190米，是北美洲最高的山。"
+          }
+        }
+      ]
     }
   ]
 }
