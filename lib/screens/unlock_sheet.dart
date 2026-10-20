@@ -3,20 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../app_state.dart';
+import '../looks.dart';
 import '../monetization.dart';
 
 /// 「全州を解放する」の案内。買い切りの購入と、購入の復元。
-Future<void> showUnlockSheet(BuildContext context, AppState app) {
+///
+/// [looksOnly] が true なら、見た目パックだけを案内する(設定の「見た目」から)。
+Future<void> showUnlockSheet(BuildContext context, AppState app, {bool looksOnly = false}) {
   return showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
-    builder: (_) => _UnlockSheet(app: app),
+    builder: (_) => _UnlockSheet(app: app, looksOnly: looksOnly),
   );
 }
 
 class _UnlockSheet extends ConsumerWidget {
   final AppState app;
-  const _UnlockSheet({required this.app});
+  final bool looksOnly;
+  const _UnlockSheet({required this.app, this.looksOnly = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,45 +35,42 @@ class _UnlockSheet extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(s.t('unlockTitle'), style: Theme.of(context).textTheme.titleLarge),
+            Text(s.t(looksOnly ? 'looksTitle' : 'unlockTitle'), style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),
-            Text(s.t('unlockBody')),
+            Text(s.t(looksOnly ? 'looksBody' : 'unlockBody')),
             const SizedBox(height: 16),
-            if (premium)
+            if (!looksOnly && premium)
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: const Icon(Icons.check_circle, color: Colors.green),
                 title: Text(app.s.kit.purchasedPremium),
-              )
-            else
-              FutureBuilder<List<EntitlementOffer>>(
-                future: service.offers(),
-                builder: (context, snap) => Column(children: [
-                  if (ent.hasNoAds)
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: const Icon(Icons.check_circle, color: Colors.green),
-                      title: Text(app.s.kit.purchasedNoAds),
-                    ),
-                  // 広告だけの単体商品は、広告なしを持つ人には出さない(買い切りの商品だけ出す)
-                  for (final offer in snap.data ?? const <EntitlementOffer>[])
-                    if (!ent.hasNoAds || isPremiumProduct(offer.productId))
-                      SizedBox(
-                        width: double.infinity,
-                        child: (isPremiumProduct(offer.productId) ? FilledButton.new : FilledButton.tonal)(
-                          key: ValueKey('offer-${offer.productId}'),
-                          onPressed: () async {
-                            final outcome = await service.purchaseOffer(offer.id);
-                            if (outcome == PurchaseOutcome.success && context.mounted) {
-                              Navigator.pop(context);
-                            }
-                          },
-                          child: Text(
-                              '${s.t(isPremiumProduct(offer.productId) ? 'unlockButton' : 'removeAdsButton')}  ${offer.priceString}'),
-                        ),
-                      ),
-                ]),
               ),
+            FutureBuilder<List<EntitlementOffer>>(
+              future: service.offers(),
+              builder: (context, snap) => Column(children: [
+                if (!looksOnly && !premium && ent.hasNoAds)
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: const Icon(Icons.check_circle, color: Colors.green),
+                    title: Text(app.s.kit.purchasedNoAds),
+                  ),
+                for (final offer in snap.data ?? const <EntitlementOffer>[])
+                  if (_showOffer(offer, ent))
+                    SizedBox(
+                      width: double.infinity,
+                      child: (isPremiumProduct(offer.productId) ? FilledButton.new : FilledButton.tonal)(
+                        key: ValueKey('offer-${offer.productId}'),
+                        onPressed: () async {
+                          final outcome = await service.purchaseOffer(offer.id);
+                          if (outcome == PurchaseOutcome.success && context.mounted) {
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: Text('${s.t(_buttonKey(offer.productId))}  ${offer.priceString}'),
+                      ),
+                    ),
+              ]),
+            ),
             Row(children: [
               TextButton(
                 onPressed: () => service.restore(),
@@ -82,5 +83,20 @@ class _UnlockSheet extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  static String _buttonKey(String productId) => isPremiumProduct(productId)
+      ? 'unlockButton'
+      : isLooksProduct(productId)
+          ? 'looksButton'
+          : 'removeAdsButton';
+
+  /// 出す商品。見た目パックは、衣装の画像が同梱されていて、まだ持っていないときだけ。
+  /// 買い切り・広告削除は、見た目パックの案内では出さない。持っている権利の商品も出さない
+  /// (広告削除は、広告なしや買い切りを持つ人には不要)。
+  bool _showOffer(EntitlementOffer o, EntitlementState ent) {
+    if (isLooksProduct(o.productId)) return app.lookIds.isNotEmpty && !ent.has(looksEntitlementId);
+    if (looksOnly || ent.hasPremium) return false;
+    return !ent.hasNoAds || isPremiumProduct(o.productId);
   }
 }

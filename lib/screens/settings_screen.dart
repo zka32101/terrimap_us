@@ -5,6 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../app_state.dart';
 import '../legal.dart';
+import '../looks.dart';
+import 'unlock_sheet.dart';
 
 /// 設定画面。キット（app_common_kit）の共通の設定画面に、このアプリ固有の項目（クイズ連動・出典）を足したもの。
 /// 共通の項目: 購入、表示モード（ライト・ダーク）、言語、プライバシーポリシー・利用規約（URL を設定したとき）、データの削除、このアプリについて。
@@ -36,6 +38,26 @@ class SettingsScreen extends StatelessWidget {
           },
           disclaimer: app.pack.attribution,
           extraSections: [
+            if (app.lookIds.isNotEmpty)
+              kit.SettingsSection(title: s.t('looksTitle'), children: [
+                ListTile(
+                  key: const ValueKey('look-default'),
+                  contentPadding: EdgeInsets.zero,
+                  leading: Icon(app.activeLook == null ? Icons.radio_button_checked : Icons.radio_button_unchecked),
+                  title: Text(s.t('looksDefault')),
+                  onTap: () => app.setLook(null),
+                ),
+                for (final id in app.lookIds)
+                  ListTile(
+                    key: ValueKey('look-$id'),
+                    contentPadding: EdgeInsets.zero,
+                    leading: Icon(app.activeLook == id ? Icons.radio_button_checked : Icons.radio_button_unchecked),
+                    title: Text(lookLabel(id, s.t)),
+                    trailing: app.looksOwned ? null : const Icon(Icons.lock_outline),
+                    // 持っていなければ、選ばずに購入の案内を出す
+                    onTap: () => app.looksOwned ? app.setLook(id) : showUnlockSheet(context, app, looksOnly: true),
+                  ),
+              ]),
             kit.SettingsSection(title: app.ui.t('tutorial.replay'), children: [
               ListTile(
                 key: const ValueKey('tutorial-replay'),
