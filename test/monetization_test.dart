@@ -88,6 +88,33 @@ void main() {
     expect(find.text('Unlock all 51 states'), findsNothing);
   });
 
+  testWidgets('広告だけ消す: 買うと広告は消えるが州は解放されない。その後は買い切りの商品だけ出る', (t) async {
+    final a = await t.runAsync(AppState.load) as AppState;
+    await a.setLang('en');
+    final ent = Monetization.fakeEntitlement();
+    final widget = await t.runAsync(() => app(a, ent)) as Widget;
+    await t.pumpWidget(widget);
+    await t.pump();
+    expect(find.byKey(const Key('banner')), findsOneWidget);
+
+    await t.tap(find.text('Unlock all 51 states'));
+    await t.pumpAndSettle();
+    expect(find.byKey(const ValueKey('offer-$unlockProductId')), findsOneWidget);
+    expect(find.byKey(const ValueKey('offer-$removeAdsProductId')), findsOneWidget);
+    await t.tap(find.byKey(const ValueKey('offer-$removeAdsProductId')));
+    await t.pumpAndSettle();
+
+    expect(ent.state.hasNoAds, isTrue);
+    expect(ent.state.hasPremium, isFalse); // 州は解放されない
+    expect(find.byKey(const Key('banner')), findsNothing);
+
+    // 広告なしを持つ人には、買い切りの商品だけを出す
+    await t.tap(find.text('Unlock all 51 states'));
+    await t.pumpAndSettle();
+    expect(find.byKey(const ValueKey('offer-$unlockProductId')), findsOneWidget);
+    expect(find.byKey(const ValueKey('offer-$removeAdsProductId')), findsNothing);
+  });
+
   testWidgets('購入済み(premium)で起動すると、広告も解放ボタンも出ない', (t) async {
     final a = await t.runAsync(AppState.load) as AppState;
     final ent = Monetization.fakeEntitlement()..setState(const EntitlementState(hasPremium: true));

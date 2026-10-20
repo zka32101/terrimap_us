@@ -12,6 +12,12 @@ const freeRegionIds = {
 /// 買い切りの商品ID。権利名は `premium`(全州解放＋広告なし)。ストア登録名と揃える。
 const unlockProductId = 'unlock_all_states';
 
+/// 広告だけを消す単体商品のID(権利名は `noads`。州は解放しない)。premium は広告なしを含むので、持っていれば不要。
+const removeAdsProductId = 'remove_ads';
+
+/// 買い切り(全州解放+広告なし)の商品か。
+bool isPremiumProduct(String productId) => productId == unlockProductId;
+
 /// 解放済みか。無料の州か、買い切り購入済み(=広告なしも兼ねる premium)。
 bool isRegionUnlocked(String regionId, {required bool premium}) =>
     premium || freeRegionIds.contains(regionId);
@@ -48,8 +54,17 @@ class Monetization {
             title: 'Unlock all 51 states · no ads',
             priceString: '—',
           ),
+          EntitlementOffer(
+            id: 'remove_ads',
+            productId: removeAdsProductId,
+            title: 'Remove ads only',
+            priceString: '—',
+          ),
         ],
-        grantOnPurchase: {unlockProductId: const EntitlementState(hasPremium: true)},
+        grantOnPurchase: {
+          unlockProductId: const EntitlementState(hasPremium: true),
+          removeAdsProductId: const EntitlementState(hasNoAds: true),
+        },
       );
 
   static Future<Monetization> init() async {

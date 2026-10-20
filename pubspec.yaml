@@ -15,7 +15,7 @@ dependencies:
   app_common_kit:
     git:
       url: https://github.com/zka32101/app_common_kit.git
-      ref: v3.11.0
+      ref: v3.13.0
   terrimap_core:
     git:
       url: https://github.com/zka32101/terrimap_core
