@@ -65,6 +65,9 @@ flutter:
     - packs/us/strings/ja.json
     - assets/art/backdrops/
     - assets/art/bosses/
+    - assets/art/facilities/
+    - assets/art/exclusive/
+    - assets/art/enemies/
     - assets/art/landmarks/
     - assets/sound/
 
