@@ -61,3 +61,9 @@ flutter:
     - packs/us/strings/ja.json
     - assets/art/landmarks/
     - assets/sound/
+
+# shared_preferences_android 2.5.0 は JNI(jni_flutter)を使い、リリースビルドで NoSuchMethodError
+# (SharedPreferencesApiRegistrar.getAll) になり、起動直後に止まる(スプラッシュのまま)。
+# 動作確認済みの 2.4.28 に固定する。
+dependency_overrides:
+  shared_preferences_android: 2.4.28
