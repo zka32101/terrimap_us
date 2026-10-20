@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:terrimap_core/story/story.dart';
 
 import '../app_state.dart';
+import '../looks.dart';
 
 /// 章のせりふを1つずつ出して、読み終えたら閉じる（戦いの前後と、物語の画面で使う）。
 Future<void> showStoryLines(BuildContext context, AppState app, {required String title, required List<DialogueLine> lines}) {
@@ -59,7 +60,7 @@ class _StorySheetState extends State<_StorySheet> {
             ),
             child: isHero && hero != null
                 ? Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    HeroAvatar(hero: hero, lang: lang),
+                    HeroAvatar(hero: hero, lang: lang, look: widget.app.activeLook),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -95,26 +96,38 @@ class HeroAvatar extends StatelessWidget {
   final StoryHero hero;
   final String lang;
   final double size;
-  const HeroAvatar({super.key, required this.hero, required this.lang, this.size = 48});
+
+  /// 見た目パックの衣装id(なければ通常)。画像がなければ通常→頭文字の順に代わりを出す。
+  final String? look;
+  const HeroAvatar({super.key, required this.hero, required this.lang, this.size = 48, this.look});
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final name = hero.name.of(lang);
     final initial = name.isEmpty ? '?' : String.fromCharCode(name.runes.first);
+    Widget fallback() => ColoredBox(
+          color: scheme.tertiary,
+          child: Center(child: Text(initial, style: TextStyle(color: scheme.onTertiary, fontSize: size * 0.45, fontWeight: FontWeight.bold))),
+        );
+    Widget plain() => Image.asset(
+          heroAssetPath(hero.id),
+          key: const ValueKey('hero-avatar'),
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => fallback(),
+        );
     return ClipOval(
       child: SizedBox(
         width: size,
         height: size,
-        child: Image.asset(
-          'assets/art/hero/${hero.id}.png',
-          key: const ValueKey('hero-avatar'),
-          fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => ColoredBox(
-            color: scheme.tertiary,
-            child: Center(child: Text(initial, style: TextStyle(color: scheme.onTertiary, fontSize: size * 0.45, fontWeight: FontWeight.bold))),
-          ),
-        ),
+        child: look == null
+            ? plain()
+            : Image.asset(
+                heroAssetPath(hero.id, look: look),
+                key: ValueKey('hero-avatar-$look'),
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => plain(),
+              ),
       ),
     );
   }

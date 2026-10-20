@@ -23,6 +23,8 @@ Future<void> main() async {
   app.refreshRescue();
   app.review = await createReviewPrompt('terrimap_us');
   final money = await Monetization.init();
+  app.syncEntitlement(money.entitlement.state);
+  money.entitlement.stateStream.listen(app.syncEntitlement);
   runApp(ProviderScope(
     overrides: [
       entitlementServiceProvider.overrideWithValue(money.entitlement),

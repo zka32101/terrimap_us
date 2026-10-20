@@ -1,11 +1,13 @@
 
 import 'package:flutter/services.dart' show AssetManifest, HapticFeedback, rootBundle;
-import 'package:app_common_kit/app_common_kit.dart' show ReviewPromptService;
+import 'package:app_common_kit/app_common_kit.dart' show EntitlementState, ReviewPromptService;
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import 'package:terrimap_core/story/story.dart';
+
+import 'looks.dart';
 import 'package:terrimap_core/battle/achievements.dart';
 import 'package:terrimap_core/battle/battle_progress.dart';
 import 'package:terrimap_core/battle/collection.dart';
@@ -42,6 +44,7 @@ const _assistKey = 'quiz_assist';
 const _sfxKey = 'sfx_on_v1';
 const _battleFxKey = 'battle_fx_v1';
 const _synergyHintKey = 'synergy_hint_v1';
+const _lookKey = 'look_v1';
 const _bgmKey = 'bgm_on_v1';
 const _reminderKey = 'reminder_on_v1';
 const _adaptiveKey = 'adaptive_quiz_v1';
@@ -79,6 +82,12 @@ class AppState extends ChangeNotifier {
   BattleProgress battle; // バトルのクリア記録（地方決戦・エクストラの解放に使う）
   Story? story; // 物語（章の文）。ファイルがなければ null で、物語の画面は出ない
 
+  /// 同梱された見た目(衣装)のid。画像がなければ空で、見た目の設定も商品も出ない。
+  List<String> lookIds = const [];
+
+  /// 見た目パックを持っているか。購入の状態を main が入れる(テストでは直接入れる)。
+  bool looksOwned = false;
+
   AppState._(this.pack, this.store, this.prefs, this._lang, this.progress, this._battleJson, this._quizAssist, this.battle);
 
   static Future<AppState> load({SharedPreferences? prefs, AssetBundleLike? bundle}) async {
@@ -111,6 +120,7 @@ class AppState extends ChangeNotifier {
     } catch (_) {} // 物語は無くても動く
     final app = AppState._(pack, store, p, lang, progress, battle, p.getBool(_assistKey) ?? true, BattleProgress.fromJsonString(p.getString(_battleKey)));
     app.story = story;
+    app.lookIds = lookIdsFrom(manifest);
     await app._refreshWeak();
     return app;
   }
@@ -168,6 +178,32 @@ class AppState extends ChangeNotifier {
 
   /// バトルの演出（弾・爆発・ダメージ数字・画面の揺れ）と振動。初期はオン。
   /// 組み合わせボーナスの説明を、もう見せたか（初めて効いたときに1回だけ出す）。
+  /// 選んだ見た目(なければ通常)。
+  String? get selectedLook => prefs.getString(_lookKey);
+
+  Future<void> setLook(String? id) async {
+    if (id == null) {
+      await prefs.remove(_lookKey);
+    } else {
+      await prefs.setString(_lookKey, id);
+    }
+    notifyListeners();
+  }
+
+  /// いま使う見た目。持っていて、画像が同梱されているときだけ。
+  String? get activeLook {
+    final id = selectedLook;
+    return looksOwned && id != null && lookIds.contains(id) ? id : null;
+  }
+
+  /// 購入の状態を取り込む(main が購入の変化のたびに呼ぶ)。
+  void syncEntitlement(EntitlementState s) {
+    final owned = s.has(looksEntitlementId);
+    if (owned == looksOwned) return;
+    looksOwned = owned;
+    notifyListeners();
+  }
+
   bool get synergyHintSeen => prefs.getBool(_synergyHintKey) ?? false;
   Future<void> setSynergyHintSeen() => prefs.setBool(_synergyHintKey, true);
 
