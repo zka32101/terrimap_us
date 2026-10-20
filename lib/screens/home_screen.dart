@@ -25,14 +25,18 @@ class HomeScreen extends ConsumerWidget {
 
   /// 無料の間は、解放済みの州だけを出題する(選択肢の誤答には全州が使われる)。
   /// [review] のときは、間違えて未習得の州だけを出題する（復習）。
-  Future<void> _startQuiz(BuildContext context, WidgetRef ref, {required bool premium, bool review = false, bool landmarks = false}) async {
+  Future<void> _startQuiz(BuildContext context, WidgetRef ref, {required bool premium, bool review = false, bool landmarks = false, bool knowledge = false}) async {
     app.sfx('tap');
     final unlocked = unlockedPool(app.pack.regions.map((r) => r.id), premium: premium);
     final base = review ? reviewPool(app.progress, allowed: unlocked) : unlocked;
-    final pool = landmarks ? {for (final id in base) if (app.landmarkRegionIds.contains(id)) id} : base;
+    final pool = landmarks
+        ? {for (final id in base) if (app.landmarkRegionIds.contains(id)) id}
+        : knowledge
+            ? {for (final id in base) if (app.knowledgeRegionIds.contains(id)) id}
+            : base;
     if (pool.isEmpty) return;
     final qs = QuizEngine(app.pack, seed: DateTime.now().millisecondsSinceEpoch & 0x7FFFFFFF)
-        .generate(count: 10, types: landmarks ? const [QuestionType.landmarkOf] : QuestionType.values, pool: pool, weights: review ? null : app.quizWeights);
+        .generate(count: 10, types: landmarks ? const [QuestionType.landmarkOf] : knowledge ? const [QuestionType.knowledgeOf] : QuestionType.values, pool: pool, weights: review ? null : app.quizWeights);
     final results = await Navigator.of(context)
         .push<List<bool>>(MaterialPageRoute(builder: (_) => QuizScreen(app: app, questions: qs)));
     if (results != null && context.mounted) {
@@ -231,18 +235,31 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ),
               ),
-              if (app.landmarkRegionIds.isNotEmpty)
+              // 名所と名物は並べる(文字を大きくしても収まるよう、1行にまとめる)
+              if (app.landmarkRegionIds.isNotEmpty || app.knowledgeRegionIds.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton.icon(
-                      key: const ValueKey('landmark-quiz'),
-                      icon: const Icon(Icons.photo_outlined),
-                      onPressed: () => _startQuiz(context, ref, premium: premium, landmarks: true),
-                      label: Text(s.t('landmarkQuiz')),
-                    ),
-                  ),
+                  child: Row(children: [
+                    if (app.landmarkRegionIds.isNotEmpty)
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          key: const ValueKey('landmark-quiz'),
+                          icon: const Icon(Icons.photo_outlined),
+                          onPressed: () => _startQuiz(context, ref, premium: premium, landmarks: true),
+                          label: Text(s.t('landmarkQuiz'), maxLines: 2, overflow: TextOverflow.ellipsis),
+                        ),
+                      ),
+                    if (app.landmarkRegionIds.isNotEmpty && app.knowledgeRegionIds.isNotEmpty) const SizedBox(width: 8),
+                    if (app.knowledgeRegionIds.isNotEmpty)
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          key: const ValueKey('knowledge-quiz'),
+                          icon: const Icon(Icons.local_dining_outlined),
+                          onPressed: () => _startQuiz(context, ref, premium: premium, knowledge: true),
+                          label: Text(s.t('knowledgeQuiz'), maxLines: 2, overflow: TextOverflow.ellipsis),
+                        ),
+                      ),
+                  ]),
                 ),
               if (reviewCount > 0)
                 Padding(

@@ -685,5 +685,799 @@
    "check": "unchecked",
    "source": "National Park Service / 各施設・自治体の公式ページ"
   }
+ ],
+ "knowledge": [
+  {
+   "id": "alabama_white_sauce",
+   "region": "US-AL",
+   "kind": "food",
+   "name": {
+    "en": "Alabama white sauce (barbecue)",
+    "ja": "アラバマ・ホワイトソース(バーベキュー)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "iditarod",
+   "region": "US-AK",
+   "kind": "culture",
+   "name": {
+    "en": "Iditarod sled dog race",
+    "ja": "アイディタロッド(犬ぞりレース)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "saguaro",
+   "region": "US-AZ",
+   "kind": "nature",
+   "name": {
+    "en": "Saguaro cactus",
+    "ja": "サワロサボテン"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "crater_of_diamonds",
+   "region": "US-AR",
+   "kind": "nature",
+   "name": {
+    "en": "Crater of Diamonds State Park",
+    "ja": "クレーター・オブ・ダイヤモンズ州立公園"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "walmart",
+   "region": "US-AR",
+   "kind": "product",
+   "name": {
+    "en": "Walmart (headquarters)",
+    "ja": "ウォルマート(本社)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "hollywood",
+   "region": "US-CA",
+   "kind": "culture",
+   "name": {
+    "en": "Hollywood film industry",
+    "ja": "ハリウッド(映画産業)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "napa_wine",
+   "region": "US-CA",
+   "kind": "food",
+   "name": {
+    "en": "Napa Valley wine",
+    "ja": "ナパ・バレーのワイン"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "coors",
+   "region": "US-CO",
+   "kind": "product",
+   "name": {
+    "en": "Coors beer (Golden)",
+    "ja": "クアーズビール(ゴールデン)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "new_haven_pizza",
+   "region": "US-CT",
+   "kind": "food",
+   "name": {
+    "en": "New Haven-style pizza (apizza)",
+    "ja": "ニューヘイブン風ピザ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "first_state",
+   "region": "US-DE",
+   "kind": "culture",
+   "name": {
+    "en": "First state to ratify the Constitution",
+    "ja": "憲法を最初に批准した州"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "cherry_blossoms",
+   "region": "US-DC",
+   "kind": "nature",
+   "name": {
+    "en": "National Cherry Blossom Festival",
+    "ja": "全米桜まつり"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "key_lime_pie",
+   "region": "US-FL",
+   "kind": "food",
+   "name": {
+    "en": "Key lime pie",
+    "ja": "キーライムパイ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "georgia_peaches",
+   "region": "US-GA",
+   "kind": "food",
+   "name": {
+    "en": "Georgia peaches",
+    "ja": "ジョージア・ピーチ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "coca_cola",
+   "region": "US-GA",
+   "kind": "product",
+   "name": {
+    "en": "Coca-Cola (Atlanta)",
+    "ja": "コカ・コーラ(アトランタ)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "kona_coffee",
+   "region": "US-HI",
+   "kind": "food",
+   "name": {
+    "en": "Kona coffee",
+    "ja": "コナコーヒー"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "hula",
+   "region": "US-HI",
+   "kind": "culture",
+   "name": {
+    "en": "Hula dance",
+    "ja": "フラダンス"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "idaho_potatoes",
+   "region": "US-ID",
+   "kind": "food",
+   "name": {
+    "en": "Idaho potatoes",
+    "ja": "アイダホのじゃがいも"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "deep_dish_pizza",
+   "region": "US-IL",
+   "kind": "food",
+   "name": {
+    "en": "Chicago deep-dish pizza",
+    "ja": "シカゴ風ディープディッシュピザ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "indy_500",
+   "region": "US-IN",
+   "kind": "culture",
+   "name": {
+    "en": "Indianapolis 500",
+    "ja": "インディ500"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "field_of_dreams",
+   "region": "US-IA",
+   "kind": "culture",
+   "name": {
+    "en": "Field of Dreams movie site (Dyersville)",
+    "ja": "映画『フィールド・オブ・ドリームス』の舞台(ダイアーズビル)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "kansas_wheat",
+   "region": "US-KS",
+   "kind": "food",
+   "name": {
+    "en": "Wheat fields (the Wheat State)",
+    "ja": "小麦畑(小麦の州)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "kentucky_derby",
+   "region": "US-KY",
+   "kind": "culture",
+   "name": {
+    "en": "Kentucky Derby",
+    "ja": "ケンタッキーダービー"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "bourbon",
+   "region": "US-KY",
+   "kind": "food",
+   "name": {
+    "en": "Bourbon whiskey",
+    "ja": "バーボンウイスキー"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "gumbo",
+   "region": "US-LA",
+   "kind": "food",
+   "name": {
+    "en": "Gumbo",
+    "ja": "ガンボ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "new_orleans_mardi_gras",
+   "region": "US-LA",
+   "kind": "culture",
+   "name": {
+    "en": "New Orleans Mardi Gras",
+    "ja": "ニューオーリンズのマルディグラ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "maine_lobster",
+   "region": "US-ME",
+   "kind": "food",
+   "name": {
+    "en": "Maine lobster",
+    "ja": "メイン・ロブスター"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "maryland_blue_crab",
+   "region": "US-MD",
+   "kind": "food",
+   "name": {
+    "en": "Maryland blue crab",
+    "ja": "メリーランドのブルークラブ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "boston_marathon",
+   "region": "US-MA",
+   "kind": "culture",
+   "name": {
+    "en": "Boston Marathon",
+    "ja": "ボストンマラソン"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "detroit_autos",
+   "region": "US-MI",
+   "kind": "product",
+   "name": {
+    "en": "Detroit auto industry (Motor City)",
+    "ja": "デトロイトの自動車産業(モーターシティ)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "mackinac_fudge",
+   "region": "US-MI",
+   "kind": "food",
+   "name": {
+    "en": "Mackinac Island fudge",
+    "ja": "マキノー島のファッジ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "mall_of_america",
+   "region": "US-MN",
+   "kind": "culture",
+   "name": {
+    "en": "Mall of America (Bloomington)",
+    "ja": "モール・オブ・アメリカ(ブルーミントン)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "delta_blues",
+   "region": "US-MS",
+   "kind": "culture",
+   "name": {
+    "en": "Delta blues",
+    "ja": "デルタ・ブルース"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "kansas_city_bbq",
+   "region": "US-MO",
+   "kind": "food",
+   "name": {
+    "en": "Kansas City barbecue",
+    "ja": "カンザスシティ風バーベキュー"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "huckleberry",
+   "region": "US-MT",
+   "kind": "food",
+   "name": {
+    "en": "Huckleberries",
+    "ja": "ハックルベリー"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "arbor_day",
+   "region": "US-NE",
+   "kind": "culture",
+   "name": {
+    "en": "Birthplace of Arbor Day",
+    "ja": "アーバーデー(植樹の日)の発祥地"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "area_51",
+   "region": "US-NV",
+   "kind": "culture",
+   "name": {
+    "en": "Area 51",
+    "ja": "エリア51"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "live_free_or_die",
+   "region": "US-NH",
+   "kind": "culture",
+   "name": {
+    "en": "\"Live Free or Die\" state motto",
+    "ja": "州のモットー「自由に生きよ、さもなくば死を」"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "salt_water_taffy",
+   "region": "US-NJ",
+   "kind": "food",
+   "name": {
+    "en": "Salt water taffy (Atlantic City)",
+    "ja": "ソルトウォーター・タフィー(アトランティックシティ)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "green_chile",
+   "region": "US-NM",
+   "kind": "food",
+   "name": {
+    "en": "New Mexico green chile",
+    "ja": "ニューメキシコのグリーンチリ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "roswell",
+   "region": "US-NM",
+   "kind": "culture",
+   "name": {
+    "en": "Roswell UFO legend",
+    "ja": "ロズウェルのUFO伝説"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "buffalo_wings",
+   "region": "US-NY",
+   "kind": "food",
+   "name": {
+    "en": "Buffalo wings",
+    "ja": "バッファロー・ウィング"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "broadway",
+   "region": "US-NY",
+   "kind": "culture",
+   "name": {
+    "en": "Broadway theater",
+    "ja": "ブロードウェイ(演劇)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "pepsi",
+   "region": "US-NC",
+   "kind": "product",
+   "name": {
+    "en": "Pepsi-Cola (created in New Bern)",
+    "ja": "ペプシコーラ(ニューバーンで誕生)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "bakken_oil",
+   "region": "US-ND",
+   "kind": "product",
+   "name": {
+    "en": "Bakken oil fields",
+    "ja": "バッケン油田"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "buckeye_candy",
+   "region": "US-OH",
+   "kind": "food",
+   "name": {
+    "en": "Buckeye candy",
+    "ja": "バックアイ・キャンディ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "land_run",
+   "region": "US-OK",
+   "kind": "culture",
+   "name": {
+    "en": "Land Run of 1889",
+    "ja": "1889年のランドラン(土地獲得競争)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "oregon_trail",
+   "region": "US-OR",
+   "kind": "culture",
+   "name": {
+    "en": "End of the Oregon Trail",
+    "ja": "オレゴン・トレイルの終点"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "cheesesteak",
+   "region": "US-PA",
+   "kind": "food",
+   "name": {
+    "en": "Philly cheesesteak",
+    "ja": "フィラデルフィア・チーズステーキ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "hershey",
+   "region": "US-PA",
+   "kind": "product",
+   "name": {
+    "en": "Hershey chocolate",
+    "ja": "ハーシーのチョコレート"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "coffee_milk",
+   "region": "US-RI",
+   "kind": "food",
+   "name": {
+    "en": "Coffee milk",
+    "ja": "コーヒーミルク"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "frogmore_stew",
+   "region": "US-SC",
+   "kind": "food",
+   "name": {
+    "en": "Frogmore stew (Lowcountry boil)",
+    "ja": "フロッグモア・シチュー(ローカントリー・ボイル)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "sturgis_rally",
+   "region": "US-SD",
+   "kind": "culture",
+   "name": {
+    "en": "Sturgis Motorcycle Rally",
+    "ja": "スタージス・モーターサイクル・ラリー"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "jack_daniels",
+   "region": "US-TN",
+   "kind": "product",
+   "name": {
+    "en": "Jack Daniel's whiskey (Lynchburg)",
+    "ja": "ジャックダニエル(リンチバーグ)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "nashville_hot_chicken",
+   "region": "US-TN",
+   "kind": "food",
+   "name": {
+    "en": "Nashville hot chicken",
+    "ja": "ナッシュビル・ホットチキン"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "texas_chili",
+   "region": "US-TX",
+   "kind": "food",
+   "name": {
+    "en": "Texas chili",
+    "ja": "テキサス風チリ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "houston_rodeo",
+   "region": "US-TX",
+   "kind": "culture",
+   "name": {
+    "en": "Houston Livestock Show and Rodeo",
+    "ja": "ヒューストン家畜ショー&ロデオ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "great_salt_lake",
+   "region": "US-UT",
+   "kind": "nature",
+   "name": {
+    "en": "Great Salt Lake",
+    "ja": "グレートソルト湖"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "maple_syrup",
+   "region": "US-VT",
+   "kind": "food",
+   "name": {
+    "en": "Maple syrup",
+    "ja": "メープルシロップ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "ben_and_jerrys",
+   "region": "US-VT",
+   "kind": "product",
+   "name": {
+    "en": "Ben & Jerry's ice cream",
+    "ja": "ベン&ジェリーズ(アイスクリーム)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "smithfield_ham",
+   "region": "US-VA",
+   "kind": "food",
+   "name": {
+    "en": "Smithfield ham",
+    "ja": "スミスフィールド・ハム"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "starbucks",
+   "region": "US-WA",
+   "kind": "product",
+   "name": {
+    "en": "Starbucks (Seattle)",
+    "ja": "スターバックス(シアトル)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "boeing",
+   "region": "US-WA",
+   "kind": "product",
+   "name": {
+    "en": "Boeing jetliners (Everett)",
+    "ja": "ボーイングの旅客機(エバレット)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "pepperoni_roll",
+   "region": "US-WV",
+   "kind": "food",
+   "name": {
+    "en": "Pepperoni roll",
+    "ja": "ペパロニ・ロール"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "cheese_curds",
+   "region": "US-WI",
+   "kind": "food",
+   "name": {
+    "en": "Cheese curds",
+    "ja": "チーズカード"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "harley_davidson",
+   "region": "US-WI",
+   "kind": "product",
+   "name": {
+    "en": "Harley-Davidson (Milwaukee)",
+    "ja": "ハーレーダビッドソン(ミルウォーキー)"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  },
+  {
+   "id": "frontier_days",
+   "region": "US-WY",
+   "kind": "culture",
+   "name": {
+    "en": "Cheyenne Frontier Days",
+    "ja": "シャイアン・フロンティア・デイズ"
+   },
+   "use": true,
+   "check": "unchecked",
+   "source": "州の観光局・業界団体・百科事典などの公式な説明(要確認)"
+  }
  ]
 }

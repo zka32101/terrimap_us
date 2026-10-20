@@ -147,6 +147,21 @@ class AppState extends ChangeNotifier {
   Strings get s => Strings(_lang, pack);
 
   /// 問題に使う名所がある州の id（名所クイズの出題範囲）。
+  /// 深い知識(特産品・名物など)の題材のある州。
+  Set<String> get knowledgeRegionIds => pack.facts?.knowledgeRegionIds ?? const {};
+
+  /// 深い知識の題材の名前(その言語になければ英語)。なければ空。
+  String knowledgeName(String? id) {
+    final k = pack.facts?.knowledge.where((x) => x.id == id);
+    return k == null || k.isEmpty ? '' : k.first.nameIn(_lang);
+  }
+
+  /// 深い知識の題材の種類(food / product / culture / nature)。なければ culture。
+  String knowledgeKind(String? id) {
+    final k = pack.facts?.knowledge.where((x) => x.id == id);
+    return k == null || k.isEmpty ? 'culture' : k.first.kind;
+  }
+
   Set<String> get landmarkRegionIds => {for (final l in pack.facts?.usable ?? const []) l.regionId};
 
   /// 名所の名前（その言語になければ英語）。名所のデータがなければ空。
