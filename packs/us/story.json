@@ -1,5 +1,23 @@
 {
   "version": 1,
+  "hero": {
+    "id": "us_hero",
+    "name": {
+      "en": "Jo"
+    },
+    "role": {
+      "en": "Apprentice surveyor with a map notebook",
+      "ja": "地図帳を持つ見習い測量士",
+      "es": "Aprendiz de topógrafo con un cuaderno de mapas",
+      "fr": "Apprenti géomètre avec un carnet de cartes",
+      "it": "Apprendista geometra con un quaderno di mappe",
+      "ko": "지도 노트를 들고 있는 견습 측량사",
+      "nl": "Leerling-landmeter met een kaartnotitieboekje",
+      "pt": "Topógrafo aprendiz com um caderno de mapas",
+      "tr": "Harita not defteri olan çırak araştırmacı",
+      "zh": "有地图笔记本的学徒测量员"
+    }
+  },
   "chapters": [
     {
       "id": "us_ch_bunyan",
@@ -48,6 +66,21 @@
             "tr": "Hikâye bitene kadar kampı koru.",
             "zh": "守住营地，直到故事讲完。"
           }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "A giant in the woods? I'd better draw big. Stay close to the fire!",
+            "ja": "森に巨人? 大きく描かなきゃ。火のそばにいてね!",
+            "es": "¿Un gigante en el bosque? Será mejor que dibuje en grande. ¡Manténgase cerca del fuego!",
+            "fr": "Un géant dans les bois ? Je ferais mieux de dessiner en grand. Restez près du feu !",
+            "it": "Un gigante nel bosco? Farei meglio a disegnare in grande. Stai vicino al fuoco!",
+            "ko": "숲속의 거인? 크게 그리는 게 낫겠다. 불 가까이에 있으세요!",
+            "nl": "Een reus in het bos? Ik kan beter groot tekenen. Blijf dicht bij het vuur!",
+            "pt": "Um gigante na floresta? É melhor eu desenhar grande. Fique perto do fogo!",
+            "tr": "Ormandaki bir dev mi? Büyük çizsem iyi olur. Ateşe yakın dur!",
+            "zh": "树林里的巨人？最好画大点。靠近火！"
+          }
         }
       ],
       "beforeBoss": [
@@ -81,6 +114,21 @@
             "pt": "A neve assenta e o acampamento adormece. A história fica um pouco maior de cada vez que é contada.",
             "tr": "Kar yerleşir ve kamp uykuya dalar. Hikâye her anlatıldığında biraz daha büyür.",
             "zh": "雪静静落下，营地沉沉睡去。这个故事每讲一次，就会变得更大一点。"
+          }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "Tall tales are still good stories. I'll write this one in the margin.",
+            "ja": "ほら話もいいお話だね。地図の余白に書いておくよ。",
+            "es": "Los cuentos fantásticos siguen siendo buenas historias. Escribiré este en el margen.",
+            "fr": "Les grandes histoires restent de bonnes histoires. J'écrirai celui-ci en marge.",
+            "it": "Le storielle sono ancora belle storie. Lo scriverò a margine.",
+            "ko": "큰 이야기는 여전히 좋은 이야기입니다. 여백에 이것을 쓰겠습니다.",
+            "nl": "Sterke verhalen zijn nog steeds goede verhalen. Ik schrijf deze in de kantlijn.",
+            "pt": "Contos fantásticos ainda são boas histórias. Vou escrever este na margem.",
+            "tr": "Uzun hikayeler hâlâ güzel hikayelerdir. Bunu kenar boşluğuna yazacağım.",
+            "zh": "荒唐的故事仍然是好故事。我会把这个写在页边空白处。"
           }
         },
         {
@@ -147,6 +195,21 @@
             "tr": "Onlar yeniden denerken sahayı güvende tut.",
             "zh": "在他们再次尝试时，守住这片场地。"
           }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "The wind is just right for flying. Hold the dunes!",
+            "ja": "飛ぶのにぴったりの風だね。砂丘を守ろう!",
+            "es": "El viento es el adecuado para volar. ¡Aguanten las dunas!",
+            "fr": "Le vent est parfait pour voler. Tenez les dunes !",
+            "it": "Il vento è proprio quello giusto per volare. Tieni le dune!",
+            "ko": "바람은 날기에 딱 좋습니다. 모래 언덕을 지켜라!",
+            "nl": "De wind is precies goed om te vliegen. Houd de duinen vast!",
+            "pt": "O vento é perfeito para voar. Segure as dunas!",
+            "tr": "Rüzgar uçmak için tam uygun. Kum tepelerini tutun!",
+            "zh": "风正好适合飞行。守住沙丘！"
+          }
         }
       ],
       "beforeBoss": [
@@ -180,6 +243,21 @@
             "pt": "A 17 de dezembro de 1903, o primeiro voo de Orville Wright durou cerca de 12 segundos. Nesse dia, fizeram-se quatro voos.",
             "tr": "17 Aralık 1903’te Orville Wright’ın ilk uçuşu yaklaşık 12 saniye sürdü. O gün dört uçuş yapıldı.",
             "zh": "1903年12月17日，奥维尔·莱特的第一次飞行持续了约12秒。那一天共飞行了四次。"
+          }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "Twelve seconds changed everything. I'll mark this spot on my map.",
+            "ja": "たった12秒が、すべてを変えたんだね。この場所に印をつけるよ。",
+            "es": "Doce segundos cambiaron todo. Marcaré este lugar en mi mapa.",
+            "fr": "Douze secondes ont tout changé. Je vais marquer cet endroit sur ma carte.",
+            "it": "Dodici secondi hanno cambiato tutto. Segnerò questo punto sulla mia mappa.",
+            "ko": "12초가 모든 것을 바꾸었습니다. 지도에 이 지점을 표시하겠습니다.",
+            "nl": "Twaalf seconden veranderden alles. Ik markeer deze plek op mijn kaart.",
+            "pt": "Doze segundos mudaram tudo. Vou marcar este local no meu mapa.",
+            "tr": "On iki saniye her şeyi değiştirdi. Bu noktayı haritamda işaretleyeceğim.",
+            "zh": "十二秒改变了一切。我会在地图上标记这个地点。"
           }
         },
         {
@@ -246,6 +324,21 @@
             "tr": "Mürettebat güvenle yola çıkana kadar fırlatma üssünü koru.",
             "zh": "守住发射场，直到机组人员平安出发。"
           }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "Even the Moon is on someone's map. Ready for launch?",
+            "ja": "月だって、誰かの地図にのってる。打ち上げ、準備はいい?",
+            "es": "Incluso la Luna está en el mapa de alguien. ¿Listo para el lanzamiento?",
+            "fr": "Même la Lune est sur la carte de quelqu'un. Prêt pour le lancement ?",
+            "it": "Anche la Luna è sulla mappa di qualcuno. Pronti per il lancio?",
+            "ko": "심지어 달도 누군가의 지도에 있습니다. 출시 준비가 되셨나요?",
+            "nl": "Zelfs de maan staat op iemands kaart. Klaar voor lancering?",
+            "pt": "Até a Lua está no mapa de alguém. Pronto para o lançamento?",
+            "tr": "Ay bile birisinin haritasındadır. Lansmana hazır mısınız?",
+            "zh": "甚至月亮也在某人的地图上。准备好发射了吗？"
+          }
         }
       ],
       "beforeBoss": [
@@ -282,6 +375,21 @@
           }
         },
         {
+          "speaker": "hero",
+          "text": {
+            "en": "People went all the way to the Moon! My map feels very small now.",
+            "ja": "人が月まで行ったなんて! 私の地図がとても小さく見えるよ。",
+            "es": "¡La gente llegó hasta la Luna! Mi mapa se siente muy pequeño ahora.",
+            "fr": "Les gens sont allés jusqu'à la Lune ! Ma carte semble très petite maintenant.",
+            "it": "La gente è arrivata fino alla Luna! La mia mappa sembra molto piccola ora.",
+            "ko": "사람들은 달까지 갔습니다! 이제 내 지도가 매우 작게 느껴집니다.",
+            "nl": "Mensen gingen helemaal naar de maan! Mijn kaart voelt nu heel klein aan.",
+            "pt": "As pessoas foram até a Lua! Meu mapa parece muito pequeno agora.",
+            "tr": "İnsanlar Ay'a kadar tüm yolu gittiler! Haritam artık çok küçük geliyor.",
+            "zh": "人们千里迢迢登上了月球！我的地图现在感觉很小。"
+          }
+        },
+        {
           "speaker": "note",
           "text": {
             "en": "The Apollo 11 landing is real history. The Moon Keeper is a character made for this game.",
@@ -294,6 +402,135 @@
             "pt": "A alunagem da Apollo 11 é história real. O Guardião da Lua é uma personagem criada para este jogo.",
             "tr": "Apollo 11’in Ay’a inişi gerçek tarihtir. Ay Bekçisi, bu oyun için yaratılmış bir karakterdir.",
             "zh": "阿波罗11号登月是真实的历史。月之守护者是为这款游戏创作的角色。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "us_ch_pony",
+      "kind": "extra",
+      "stageId": "us_pony",
+      "requires": null,
+      "title": {
+        "en": "Mail on the Gallop",
+        "ja": "駆けぬける郵便",
+        "es": "Correo al galope",
+        "fr": "Courrier au galop",
+        "it": "Posta al galoppo",
+        "ko": "갤럽의 메일",
+        "nl": "Post in galop",
+        "pt": "Correio no galope",
+        "tr": "Dörtnala Posta",
+        "zh": "驰骋邮件"
+      },
+      "intro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "April 1860. Riders race across the West, passing mail from one station to the next.",
+            "ja": "1860年4月。騎手たちが西部を駆けぬけ、駅から駅へと手紙をつないでいきます。",
+            "es": "Abril de 1860. Los jinetes corren por el Oeste, pasando el correo de una estación a la siguiente.",
+            "fr": "Avril 1860. Les cavaliers traversent l'Ouest à toute vitesse, passant le courrier d'une gare à l'autre.",
+            "it": "Aprile 1860. I cavalieri corrono attraverso l'Ovest, passando la posta da una stazione all'altra.",
+            "ko": "1860년 4월. 기수들은 서쪽을 가로질러 한 역에서 다음 역으로 우편물을 전달하며 경주합니다.",
+            "nl": "April 1860. Ruiters racen door het Westen en geven post door van het ene station naar het andere.",
+            "pt": "Abril de 1860. Os cavaleiros correm pelo Oeste, passando correspondência de uma estação para outra.",
+            "tr": "Nisan 1860. Yolcular Batı'da yarışarak postalarını bir istasyondan diğerine aktarıyorlar.",
+            "zh": "1860 年 4 月，骑手们竞相穿越西部，将邮件从一个车站传递到另一个车站。"
+          }
+        },
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Hold the station until the next rider arrives.",
+            "ja": "次の騎手が着くまで、駅を守りましょう。",
+            "es": "Mantenga la estación hasta que llegue el siguiente pasajero.",
+            "fr": "Tenez la station jusqu'à l'arrivée du prochain passager.",
+            "it": "Mantieni la stazione fino all'arrivo del ciclista successivo.",
+            "ko": "다음 라이더가 도착할 때까지 스테이션을 유지하세요.",
+            "nl": "Houd het station vast totdat de volgende rijder arriveert.",
+            "pt": "Mantenha a estação até que o próximo passageiro chegue.",
+            "tr": "Bir sonraki sürücü gelene kadar istasyonu koruyun.",
+            "zh": "坚守车站直至下一位乘客到达。"
+          }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "Riders on the plains! I'll draw the trail for them.",
+            "ja": "平原を駆ける騎手たち! 彼らのために道を描くよ。",
+            "es": "¡Jinetes en las llanuras! Les trazaré el rastro.",
+            "fr": "Cavaliers dans les plaines ! Je vais leur tracer la piste.",
+            "it": "Cavalieri in pianura! Traccerò loro la traccia.",
+            "ko": "평원의 라이더들! 나는 그들을 위해 흔적을 그릴 것입니다.",
+            "nl": "Ruiters op de vlakten! Ik zal het spoor voor ze uittekenen.",
+            "pt": "Cavaleiros nas planícies! Vou desenhar a trilha para eles.",
+            "tr": "Ovalardaki biniciler! Ben onların yolunu çizeceğim.",
+            "zh": "平原上的骑士们！我会为他们画出路线。"
+          }
+        }
+      ],
+      "beforeBoss": [
+        {
+          "speaker": "boss",
+          "text": {
+            "en": "Dust rides faster than any horse. Try to catch me!",
+            "ja": "砂ぼこりは、どんな馬よりも速いんだ。つかまえてごらん!",
+            "es": "El polvo cabalga más rápido que cualquier caballo. ¡Intenta atraparme!",
+            "fr": "La poussière roule plus vite que n'importe quel cheval. Essayez de m'attraper !",
+            "it": "La polvere cavalca più veloce di qualsiasi cavallo. Prova a prendermi!",
+            "ko": "먼지는 어떤 말보다 빠르게 움직입니다. 나를 잡아 보세요!",
+            "nl": "Stof rijdt sneller dan welk paard dan ook. Probeer mij te vangen!",
+            "pt": "A poeira cavalga mais rápido que qualquer cavalo. Tente me pegar!",
+            "tr": "Toz herhangi bir attan daha hızlı gider. Beni yakalamaya çalış!",
+            "zh": "尘埃骑得比任何马都快。试着抓住我吧！"
+          }
+        }
+      ],
+      "outro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "From April 1860 to October 1861, Pony Express riders carried mail between Missouri and California in about ten days, until the telegraph line made it unnecessary.",
+            "ja": "1860年4月から1861年10月まで、ポニー・エクスプレスの騎手たちは、ミズーリとカリフォルニアのあいだを約10日で郵便を運びました。やがて電信線がつながり、役目を終えました。",
+            "es": "Desde abril de 1860 hasta octubre de 1861, los pasajeros del Pony Express transportaron correo entre Missouri y California en unos diez días, hasta que la línea telegráfica lo hizo innecesario.",
+            "fr": "D'avril 1860 à octobre 1861, les passagers du Pony Express transportaient le courrier entre le Missouri et la Californie en une dizaine de jours, jusqu'à ce que la ligne télégraphique le rende inutile.",
+            "it": "Dall'aprile 1860 all'ottobre 1861, i viaggiatori del Pony Express trasportarono la posta tra il Missouri e la California in circa dieci giorni, fino a quando la linea telegrafica lo rese superfluo.",
+            "ko": "1860년 4월부터 1861년 10월까지 포니 익스프레스(Pony Express) 라이더들은 전신선이 불필요해질 때까지 약 10일 만에 미주리와 캘리포니아 사이에서 우편물을 운반했습니다.",
+            "nl": "Van april 1860 tot oktober 1861 vervoerden Pony Express-rijders in ongeveer tien dagen post tussen Missouri en Californië, totdat de telegraaflijn dit overbodig maakte.",
+            "pt": "De abril de 1860 a outubro de 1861, os passageiros do Pony Express transportaram correspondência entre o Missouri e a Califórnia em cerca de dez dias, até que a linha telegráfica tornou isso desnecessário.",
+            "tr": "Nisan 1860'tan Ekim 1861'e kadar Pony Ekspres yolcuları, telgraf hattı gereksiz hale gelene kadar Missouri ile Kaliforniya arasında postayı yaklaşık on gün içinde taşıdılar.",
+            "zh": "从 1860 年 4 月到 1861 年 10 月，Pony Express 骑手在密苏里州和加利福尼亚州之间运送邮件大约需要 10 天，直到电报线使这一过程变得不必要。"
+          }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "Letters crossed the whole West. Maps and mail are both about getting there!",
+            "ja": "手紙が西部をまるごと横切ったんだね。地図も郵便も、届けるためのものだ!",
+            "es": "Las cartas recorrieron todo Occidente. ¡Los mapas y el correo sirven para llegar allí!",
+            "fr": "Les lettres traversèrent tout l'Occident. Les cartes et le courrier servent tous deux à y arriver !",
+            "it": "Le lettere attraversarono tutto l'Occidente. Mappe e posta servono entrambe per arrivarci!",
+            "ko": "편지는 서부 전체를 통과했습니다. 지도와 우편물 모두 목적지에 도착하는 데 도움이 됩니다!",
+            "nl": "Brieven doorkruisten het hele Westen. Kaarten en e-mail gaan beide over hoe je er kunt komen!",
+            "pt": "As cartas cruzaram todo o Ocidente. Mapas e correio servem para chegar lá!",
+            "tr": "Mektuplar tüm Batı'yı geçti. Haritalar ve postalar oraya ulaşmakla ilgilidir!",
+            "zh": "信件传遍了整个西方。地图和邮件都是为了到达那里！"
+          }
+        },
+        {
+          "speaker": "note",
+          "text": {
+            "en": "The Pony Express is real history. The Dust Devil is a character made for this game.",
+            "ja": "ポニー・エクスプレスは実際の歴史です。砂ぼこりの精は、このゲームのために作られたキャラクターです。",
+            "es": "El Pony Express es historia real. Dust Devil es un personaje creado para este juego.",
+            "fr": "Le Pony Express est une véritable histoire. Le Dust Devil est un personnage créé pour ce jeu.",
+            "it": "Il Pony Express è una vera storia. Il Dust Devil è un personaggio creato per questo gioco.",
+            "ko": "포니 익스프레스는 실제 역사입니다. Dust Devil은 이 게임을 위해 만들어진 캐릭터입니다.",
+            "nl": "De Pony Express is echte geschiedenis. De Dust Devil is een personage gemaakt voor dit spel.",
+            "pt": "O Pony Express é história real. O Dust Devil é um personagem feito para este jogo.",
+            "tr": "Pony Ekspresi gerçek bir tarihtir. Dust Devil bu oyun için yaratılmış bir karakter.",
+            "zh": "小马快递是真实的历史。尘魔是为本游戏打造的角色。"
           }
         }
       ]
@@ -330,6 +567,21 @@
             "tr": "Kırmızı ve altın sarısı yapraklar, kayalık kıyılar ve eski liman kasabaları. Kuzeydoğu’yu koru.",
             "zh": "红色与金色的树叶、岩石海岸和古老的港口小镇。守住东北部。"
           }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "Red leaves and old harbors. The Northeast is so pretty!",
+            "ja": "赤い葉っぱに古い港。北東部ってきれいだね!",
+            "es": "Hojas rojas y puertos viejos. ¡El noreste es tan bonito!",
+            "fr": "Feuilles rouges et vieux ports. Le Nord-Est est si joli !",
+            "it": "Foglie rosse e porti antichi. Il Nordest è così carino!",
+            "ko": "붉은 단풍과 오래된 항구. 동북아 너무 예뻐요!",
+            "nl": "Rode bladeren en oude havens. Het noordoosten is zo mooi!",
+            "pt": "Folhas vermelhas e portos antigos. O Nordeste é tão lindo!",
+            "tr": "Kırmızı yapraklar ve eski limanlar. Kuzeydoğu çok güzel!",
+            "zh": "红叶和古老的港口。东北真是太美了！"
+          }
         }
       ],
       "beforeBoss": [],
@@ -347,6 +599,21 @@
             "pt": "As Cataratas do Niágara ficam na fronteira entre o estado de Nova Iorque e o Canadá.",
             "tr": "Niagara Şelalesi, New York Eyaleti ile Kanada arasındaki sınırda yer alır.",
             "zh": "尼亚加拉大瀑布位于纽约州与加拿大的边界上。"
+          }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "Next, the Midwest. My boots are ready!",
+            "ja": "次は中西部だね。ブーツの準備はばっちり!",
+            "es": "A continuación, el Medio Oeste. ¡Mis botas están listas!",
+            "fr": "Ensuite, le Midwest. Mes bottes sont prêtes !",
+            "it": "Poi il Midwest. I miei stivali sono pronti!",
+            "ko": "다음으로 중서부입니다. 내 부츠가 준비되었습니다!",
+            "nl": "Vervolgens het Midwesten. Mijn laarzen zijn klaar!",
+            "pt": "Em seguida, o Centro-Oeste. Minhas botas estão prontas!",
+            "tr": "Sırada Orta Batı var. Botlarım hazır!",
+            "zh": "接下来是中西部。我的靴子准备好了！"
           }
         }
       ]
@@ -383,6 +650,21 @@
             "tr": "Geniş tarlalar, büyük gökyüzü ve ışıldayan Büyük Göller. Ortabatı’yı koru.",
             "zh": "广阔的田野、辽阔的天空和闪闪发光的五大湖。守住中西部。"
           }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "Fields as far as I can see. I need a bigger page!",
+            "ja": "見わたすかぎりの畑。もっと大きな紙がいるよ!",
+            "es": "Campos hasta donde puedo ver. ¡Necesito una página más grande!",
+            "fr": "Des champs à perte de vue. J'ai besoin d'une page plus grande !",
+            "it": "Campi a perdita d'occhio. Ho bisogno di una pagina più grande!",
+            "ko": "내가 볼 수 있는 한 들판. 더 큰 페이지가 필요해요!",
+            "nl": "Velden zover ik kan zien. Ik heb een grotere pagina nodig!",
+            "pt": "Campos até onde posso ver. Preciso de uma página maior!",
+            "tr": "Görebildiğim kadarıyla tarlalar. Daha büyük bir sayfaya ihtiyacım var!",
+            "zh": "就我所能看到的领域而言。我需要更大的页面！"
+          }
         }
       ],
       "beforeBoss": [],
@@ -400,6 +682,21 @@
             "pt": "O Lago Michigan é o único dos Grandes Lagos que fica inteiramente nos Estados Unidos.",
             "tr": "Michigan Gölü, Büyük Göller’in tamamen ABD sınırları içinde kalan tek gölüdür.",
             "zh": "密歇根湖是五大湖中唯一完全位于美国境内的湖。"
+          }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "The Great Lakes look like seas on my map!",
+            "ja": "五大湖は、地図の上だと海みたいだね!",
+            "es": "¡Los Grandes Lagos parecen mares en mi mapa!",
+            "fr": "Les Grands Lacs ressemblent à des mers sur ma carte !",
+            "it": "I Grandi Laghi sembrano mari sulla mia mappa!",
+            "ko": "오대호는 내 지도에서 바다처럼 보입니다!",
+            "nl": "De Grote Meren zien eruit als zeeën op mijn kaart!",
+            "pt": "Os Grandes Lagos parecem mares no meu mapa!",
+            "tr": "Haritamda Büyük Göller denizlere benziyor!",
+            "zh": "五大湖在我的地图上看起来像海洋！"
           }
         }
       ]
@@ -436,6 +733,21 @@
             "tr": "Bataklıklar, ılık esintiler ve güneye doğru akan büyük bir nehir. Güney’i koru.",
             "zh": "河口湿地、温暖的微风，还有一条向南奔流的大河。守住南部。"
           }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "Warm breeze and a big river. Let's follow it south!",
+            "ja": "あたたかい風と大きな川。南へたどっていこう!",
+            "es": "Brisa cálida y un gran río. ¡Sigamos hacia el sur!",
+            "fr": "Brise chaude et grande rivière. Suivons-le vers le sud !",
+            "it": "Brezza calda e un grande fiume. Seguiamolo verso sud!",
+            "ko": "따뜻한 바람과 큰 강. 남쪽으로 따라가자!",
+            "nl": "Warme bries en een grote rivier. Laten we het naar het zuiden volgen!",
+            "pt": "Brisa quente e um grande rio. Vamos segui-lo para o sul!",
+            "tr": "Sıcak esinti ve büyük bir nehir. Hadi güneye doğru takip edelim!",
+            "zh": "温暖的微风和大河。我们就跟着它向南走吧！"
+          }
         }
       ],
       "beforeBoss": [],
@@ -453,6 +765,21 @@
             "pt": "O rio Mississípi termina a sua longa viagem no Golfo do México, na Luisiana.",
             "tr": "Mississippi Nehri uzun yolculuğunu Louisiana’da Meksika Körfezi’nde bitirir.",
             "zh": "密西西比河在路易斯安那州汇入墨西哥湾，结束它漫长的旅程。"
+          }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "The Mississippi rolls on to the Gulf. I'll draw it in one long line.",
+            "ja": "ミシシッピは湾まで流れていくんだ。ひと筆で描いてみよう。",
+            "es": "El Mississippi avanza hacia el Golfo. Lo dibujaré en una línea larga.",
+            "fr": "Le Mississippi continue sa route vers le Golfe. Je vais le dessiner en une longue ligne.",
+            "it": "Il Mississippi sfocia nel Golfo. Lo disegnerò in una lunga riga.",
+            "ko": "미시시피강은 걸프만으로 향합니다. 한 줄로 길게 그려보겠습니다.",
+            "nl": "De Mississippi rolt door naar de Golf. Ik teken het in één lange lijn.",
+            "pt": "O Mississippi segue para o Golfo. Vou desenhá-lo em uma longa linha.",
+            "tr": "Mississippi Körfez'e doğru ilerliyor. Uzun bir çizgi halinde çizeceğim.",
+            "zh": "密西西比河滚滚流入海湾。我会把它画成一条长线。"
           }
         }
       ]
@@ -489,6 +816,21 @@
             "tr": "Kırmızı çöller, yüksek dağlar ve uzun bir Pasifik kıyısı. Batı’yı koru.",
             "zh": "红色的沙漠、高耸的山脉和绵长的太平洋海岸。守住西部。"
           }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "Deserts, mountains, the ocean... I'll need all my pencils!",
+            "ja": "砂漠に山に海…。鉛筆が全部いるね!",
+            "es": "Desiertos, montañas, el océano... ¡Necesitaré todos mis lápices!",
+            "fr": "Déserts, montagnes, océan... J'aurai besoin de tous mes crayons !",
+            "it": "Deserti, montagne, oceano... mi serviranno tutte le mie matite!",
+            "ko": "사막, 산, 바다... 연필이 모두 필요해요!",
+            "nl": "Woestijnen, bergen, de oceaan... Ik heb al mijn potloden nodig!",
+            "pt": "Desertos, montanhas, oceano... Vou precisar de todos os meus lápis!",
+            "tr": "Çöller, dağlar, okyanus... Bütün kalemlerime ihtiyacım olacak!",
+            "zh": "沙漠、山脉、海洋……我需要我所有的铅笔！"
+          }
         }
       ],
       "beforeBoss": [],
@@ -506,6 +848,21 @@
             "pt": "O Denali, no Alasca, com 6190 metros, é a montanha mais alta da América do Norte.",
             "tr": "Alaska’daki Denali, 6.190 metre yüksekliğiyle Kuzey Amerika’nın en yüksek dağıdır.",
             "zh": "阿拉斯加的迪纳利峰海拔6190米，是北美洲最高的山。"
+          }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "A whole country on one map. What a trip!",
+            "ja": "一国まるごと、ひとつの地図に。すごい旅だったね!",
+            "es": "Todo un país en un mapa. ¡Qué viaje!",
+            "fr": "Un pays entier sur une seule carte. Quel voyage !",
+            "it": "Un intero paese su una mappa. Che viaggio!",
+            "ko": "하나의 지도에 전국이 표시됩니다. 정말 좋은 여행이에요!",
+            "nl": "Een heel land op één kaart. Wat een reis!",
+            "pt": "Um país inteiro em um mapa. Que viagem!",
+            "tr": "Bütün bir ülke tek bir haritada. Ne yolculuk!",
+            "zh": "一张地图上的整个国家。真是一次旅行！"
           }
         }
       ]
