@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "chapters": [
+    {
+      "id": "us_ch_bunyan",
+      "kind": "extra",
+      "stageId": "us_bunyan",
+      "requires": null,
+      "title": {
+        "en": "The Forest of the Giant",
+        "ja": "巨人の森"
+      },
+      "intro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Winter in the north woods. Loggers swap tall tales by the fire about a giant who clears a forest in a day.",
+            "ja": "北の森の冬。きこりたちは焚き火を囲んで、一日で森を切り開く巨人の話を語り合います。"
+          }
+        },
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Defend the camp until the tale runs out.",
+            "ja": "お話が終わるまで、キャンプを守りましょう。"
+          }
+        }
+      ],
+      "beforeBoss": [
+        {
+          "speaker": "boss",
+          "text": {
+            "en": "Moo. Even a giant ox has to eat.",
+            "ja": "モー。大きな牛だって、おなかはすくのです。"
+          }
+        }
+      ],
+      "outro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "The snow settles, and the camp sleeps. The story grows a little taller each time it is told.",
+            "ja": "雪が静まり、キャンプは眠りにつきます。お話は、語られるたびに少しずつ大きくなります。"
+          }
+        },
+        {
+          "speaker": "note",
+          "text": {
+            "en": "Paul Bunyan is a folk hero, not a real person. The logging camps of the northern forests were real, and his tales spread widely in the early 1900s.",
+            "ja": "ポール・バニヤンは民話の英雄で、実在の人物ではありません。北の森の伐採キャンプは実在し、物語は1900年代のはじめに広まりました。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "us_ch_wright",
+      "kind": "extra",
+      "stageId": "us_wright",
+      "requires": null,
+      "title": {
+        "en": "Twelve Seconds Over the Dunes",
+        "ja": "砂丘の上の12秒"
+      },
+      "intro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "December 1903. On the windy dunes of Kitty Hawk, North Carolina, two brothers from Ohio ready their flying machine.",
+            "ja": "1903年12月。ノースカロライナ州キティホークの風の強い砂丘で、オハイオ出身の兄弟が飛行機を準備します。"
+          }
+        },
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Keep the field safe while they try again.",
+            "ja": "兄弟がもう一度挑戦するあいだ、飛行場を守りましょう。"
+          }
+        }
+      ],
+      "beforeBoss": [
+        {
+          "speaker": "boss",
+          "text": {
+            "en": "The wind decides who flies today.",
+            "ja": "今日、誰が飛ぶかは、風が決めます。"
+          }
+        }
+      ],
+      "outro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "On December 17, 1903, Orville Wright's first flight lasted about 12 seconds. Four flights were made that day.",
+            "ja": "1903年12月17日、オーヴィル・ライトの最初の飛行は約12秒でした。その日、飛行は4回行われました。"
+          }
+        },
+        {
+          "speaker": "note",
+          "text": {
+            "en": "The Wright brothers and their flights are real history. The Gale Spirit is a character made for this game.",
+            "ja": "ライト兄弟とその飛行は実際の歴史です。疾風の精霊は、このゲームのために作られたキャラクターです。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "us_ch_moon",
+      "kind": "extra",
+      "stageId": "us_moon",
+      "requires": null,
+      "title": {
+        "en": "Reaching for the Moon",
+        "ja": "月をめざして"
+      },
+      "intro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "July 1969. Apollo 11 is on its way to the Moon, carried by the work of hundreds of thousands of people.",
+            "ja": "1969年7月。アポロ11号は、何十万人もの人々の仕事に支えられて、月へ向かいます。"
+          }
+        },
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Hold the launch site until the crew is safely on its way.",
+            "ja": "乗組員が無事に旅立つまで、発射場を守りましょう。"
+          }
+        }
+      ],
+      "beforeBoss": [
+        {
+          "speaker": "boss",
+          "text": {
+            "en": "No one has crossed this silence before.",
+            "ja": "この静けさを渡った人は、まだ誰もいません。"
+          }
+        }
+      ],
+      "outro": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "On July 20, 1969, Neil Armstrong and Buzz Aldrin landed on the Moon while Michael Collins orbited above.",
+            "ja": "1969年7月20日、ニール・アームストロングとバズ・オルドリンが月に降り立ち、マイケル・コリンズは上空の軌道を回っていました。"
+          }
+        },
+        {
+          "speaker": "note",
+          "text": {
+            "en": "The Apollo 11 landing is real history. The Moon Keeper is a character made for this game.",
+            "ja": "アポロ11号の月面着陸は実際の歴史です。月の番人は、このゲームのために作られたキャラクターです。"
+          }
+        }
+      ]
+    }
+  ]
+}
