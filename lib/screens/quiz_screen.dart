@@ -92,6 +92,8 @@ class _QuizScreenState extends State<QuizScreen> {
         return '${s.t('neighborOf')}\n${s.regionName(q.targetId)}';
       case QuestionType.landmarkOf:
         return '${s.t('landmarkOf')}\n${widget.app.landmarkName(q.subjectId)}';
+      case QuestionType.knowledgeOf:
+        return '${s.t('knowledgeOf.${widget.app.knowledgeKind(q.subjectId)}')}\n${widget.app.knowledgeName(q.subjectId)}';
     }
   }
 
@@ -129,6 +131,11 @@ class _QuizScreenState extends State<QuizScreen> {
         return RegionMapView(
           pack: pack,
           showZoomControls: true,
+          colorOf: (id) => _done && id == q.correctId ? widget.app.palette.mapOk : const Color(0xFFECEFF1),
+        );
+      case QuestionType.knowledgeOf:
+        return RegionMapView(
+          pack: pack,
           colorOf: (id) => _done && id == q.correctId ? widget.app.palette.mapOk : const Color(0xFFECEFF1),
         );
       case QuestionType.silhouette:

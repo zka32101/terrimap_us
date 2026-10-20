@@ -76,6 +76,8 @@ class _AssistDialogState extends State<_AssistDialog> {
         return '${s.t('neighborOf')}\n${s.regionName(q.targetId)}';
       case QuestionType.landmarkOf:
         return '${s.t('landmarkOf')}\n${widget.app.landmarkName(q.subjectId)}';
+      case QuestionType.knowledgeOf:
+        return '${s.t('knowledgeOf.${widget.app.knowledgeKind(q.subjectId)}')}\n${widget.app.knowledgeName(q.subjectId)}';
       case QuestionType.locateOnMap:
         return s.regionName(q.targetId);
     }
@@ -85,7 +87,7 @@ class _AssistDialogState extends State<_AssistDialog> {
     final pack = widget.app.pack, q = widget.q;
     if (q.type == QuestionType.silhouette) return RegionSilhouette(pack: pack, regionId: q.targetId);
     if (q.type == QuestionType.nameFromCapital) return const SizedBox.shrink();
-    if (q.type == QuestionType.landmarkOf) {
+    if (q.type == QuestionType.landmarkOf || q.type == QuestionType.knowledgeOf) {
       return RegionMapView(pack: pack, colorOf: (id) => _picked != null && id == q.correctId ? widget.app.palette.mapOk : const Color(0xFFECEFF1));
     }
     return RegionMapView(pack: pack, colorOf: (id) => id == q.targetId ? const Color(0xFFFFB300) : const Color(0xFFECEFF1));
