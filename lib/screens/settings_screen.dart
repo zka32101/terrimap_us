@@ -105,6 +105,16 @@ class SettingsScreen extends StatelessWidget {
                 onChanged: app.setColorBlind,
               ),
             ]),
+            kit.SettingsSection(title: app.ui.t('fx.setting'), children: [
+              SwitchListTile(
+                key: const ValueKey('battle-fx-switch'),
+                contentPadding: EdgeInsets.zero,
+                title: Text(app.ui.t('fx.setting')),
+                subtitle: Text(app.ui.t('fx.help')),
+                value: app.battleFx,
+                onChanged: app.setBattleFx,
+              ),
+            ]),
             kit.SettingsSection(title: app.ui.t('adaptive.setting'), children: [
               SwitchListTile(
                 key: const ValueKey('adaptive-switch'),
