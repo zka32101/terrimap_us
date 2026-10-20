@@ -787,7 +787,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "50fdb0093109ab81bfd8240991627f52ce5159f1"
+      resolved-ref: d8c81bacb9bc7bd98bcd8c34a45d52f738c4b2f1
       url: "https://github.com/zka32101/terrimap_core"
     source: git
     version: "0.0.1"
