@@ -68,6 +68,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
       if (!_session.paused && !_session.isOver) _played += dt;
       _session.tick(dt);
     })..start();
+    _session.fx.enabled = widget.app.battleFx;
     _session.addListener(_onChanged);
   }
 
@@ -119,6 +120,8 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
 
   void _handle(BattleEvent e) {
     final ui = _ui;
+    if (e.type == BattleEventType.breach) widget.app.haptic(heavy: e.isBoss);
+    if (e.type == BattleEventType.kill && e.isBoss) widget.app.haptic(heavy: true);
     String weatherName() => ui.t('weather.${e.detail}');
     switch (e.type) {
       case BattleEventType.weatherWarning:
@@ -367,6 +370,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
                 selectedRange: _session.selectedFacility == null ? null : _engine.facilityStats(_session.selectedFacility!).range,
                 facilityMaxHp: _engine.maxHpOf,
                 weather: _weather,
+                fx: _session.fx,
                 onCellTap: _session.tapCell,
               ),
               ),

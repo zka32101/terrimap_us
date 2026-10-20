@@ -1,5 +1,5 @@
 
-import 'package:flutter/services.dart' show AssetManifest, rootBundle;
+import 'package:flutter/services.dart' show AssetManifest, HapticFeedback, rootBundle;
 import 'package:app_common_kit/app_common_kit.dart' show ReviewPromptService;
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,6 +39,7 @@ const _progressKey = 'progress_v1';
 const _langKey = 'lang';
 const _assistKey = 'quiz_assist';
 const _sfxKey = 'sfx_on_v1';
+const _battleFxKey = 'battle_fx_v1';
 const _bgmKey = 'bgm_on_v1';
 const _reminderKey = 'reminder_on_v1';
 const _adaptiveKey = 'adaptive_quiz_v1';
@@ -153,6 +154,20 @@ class AppState extends ChangeNotifier {
   }
 
   bool get sfxOn => prefs.getBool(_sfxKey) ?? true;
+
+  /// バトルの演出（弾・爆発・ダメージ数字・画面の揺れ）と振動。初期はオン。
+  bool get battleFx => prefs.getBool(_battleFxKey) ?? true;
+
+  Future<void> setBattleFx(bool v) async {
+    await prefs.setBool(_battleFxKey, v);
+    notifyListeners();
+  }
+
+  /// 振動（演出がオンのときだけ）。拠点が突破されたとき・ボスを倒したときなど。
+  void haptic({bool heavy = false}) {
+    if (!battleFx) return;
+    heavy ? HapticFeedback.heavyImpact() : HapticFeedback.mediumImpact();
+  }
   bool get bgmOn => prefs.getBool(_bgmKey) ?? false;
   bool get reminderOn => prefs.getBool(_reminderKey) ?? false;
 
