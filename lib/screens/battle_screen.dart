@@ -344,9 +344,16 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
       ),
       body: SafeArea(
         child: Column(children: [
-          _hud(st),
-          if (_message.isNotEmpty)
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 12), child: Text(_message, style: Theme.of(context).textTheme.bodySmall)),
+          // HUD・メッセージ・下のパネルは高さを固定する。出入りで盤面が動いたり拡縮したりすると、
+          // 指で押した位置とずれて誤タップするため。
+          SizedBox(height: 92, child: ClipRect(child: _hud(st))),
+          SizedBox(
+            height: 22,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Text(_message, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.bodySmall),
+            ),
+          ),
           if (_tutorial) _tutorialHint(st),
           Expanded(
             child: Stack(children: [
@@ -499,12 +506,16 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
         ),
       ]));
     }
-    if (children.isEmpty) return const SizedBox(height: 8);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
-      child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        for (final c in children) Padding(padding: const EdgeInsets.only(bottom: 6), child: c),
-      ]),
+    final panelHeight = (MediaQuery.of(context).size.height * 0.34).clamp(140.0, 300.0);
+    if (children.isEmpty) return SizedBox(height: panelHeight);
+    return SizedBox(
+      height: panelHeight,
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
+        child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          for (final c in children) Padding(padding: const EdgeInsets.only(bottom: 6), child: c),
+        ]),
+      ),
     );
   }
 }
