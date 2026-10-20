@@ -380,11 +380,16 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   }
 
   /// 初回のバトルの案内。画面を止めず、いまやることを短く出す。
+  /// チュートリアルの案内は、ステップごとに文の長さが変わっても盤面が動かないよう高さを固定する。
+  static const double _tutorialHeight = 124;
+
   Widget _tutorialHint(BattleState st) {
     final step = Tutorial.stepFor(st, selecting: _session.selected != null && _session.selectedFacility == null, skillReady: _session.skillChoices.isNotEmpty);
-    if (step == null) return const SizedBox.shrink();
+    if (step == null) return const SizedBox(height: _tutorialHeight);
     final ui = _ui;
-    return Card(
+    return SizedBox(
+      height: _tutorialHeight,
+      child: Card(
       key: const ValueKey('tutorial-hint'),
       margin: const EdgeInsets.fromLTRB(12, 6, 12, 0),
       child: Padding(
@@ -402,6 +407,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
             child: Text(ui.t('tutorial.skip')),
           ),
         ]),
+      ),
       ),
     );
   }
