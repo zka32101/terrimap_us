@@ -38,6 +38,9 @@ flutter_launcher_icons:
   android: true
   ios: true
   image_path: assets/icon/app_icon.png
+  adaptive_icon_background: assets/icon/adaptive_bg.png
+  adaptive_icon_foreground: assets/icon/adaptive_fg.png
+  adaptive_icon_monochrome: assets/icon/adaptive_mono.png
   remove_alpha_ios: true
   min_sdk_android: 23
 
