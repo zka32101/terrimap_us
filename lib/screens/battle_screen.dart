@@ -343,6 +343,24 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     final ui = _ui, st = _session.state;
+    final landscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final board = Stack(children: [
+              Padding(
+              padding: const EdgeInsets.all(8),
+              child: BattleView(
+                key: const ValueKey('board'),
+                stage: _stage,
+                state: st,
+                selected: _session.selected,
+                selectedRange: _session.selectedFacility == null ? null : _engine.facilityStats(_session.selectedFacility!).range,
+                facilityMaxHp: _engine.maxHpOf,
+                weather: _weather,
+                fx: _session.fx,
+                onCellTap: _session.tapCell,
+              ),
+              ),
+              if (_bossIntroVisible) Positioned(top: 8, left: 8, right: 8, child: _bossIntro()),
+            ]);
     return Scaffold(
       appBar: AppBar(
         title: Text('$_title · ${ui.t('difficulty.${widget.difficulty.name}')}', maxLines: 1, overflow: TextOverflow.ellipsis),
@@ -362,7 +380,23 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
         ],
       ),
       body: SafeArea(
-        child: Column(children: [
+        child: landscape
+            ? Row(children: [
+                Expanded(child: board),
+                SizedBox(
+                  width: 340,
+                  child: SingleChildScrollView(
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                      _hud(st),
+                      if (_message.isNotEmpty)
+                        Padding(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4), child: Text(_message, style: Theme.of(context).textTheme.bodySmall)),
+                      if (_tutorial) _tutorialHint(st),
+                      _panel(st, side: true),
+                    ]),
+                  ),
+                ),
+              ])
+            : Column(children: [
           // HUD・メッセージ・下のパネルは高さを固定する。出入りで盤面が動いたり拡縮したりすると、
           // 指で押した位置とずれて誤タップするため。
           SizedBox(height: 92, child: ClipRect(child: _hud(st))),
@@ -374,25 +408,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
             ),
           ),
           if (_tutorial) _tutorialHint(st),
-          Expanded(
-            child: Stack(children: [
-              Padding(
-              padding: const EdgeInsets.all(8),
-              child: BattleView(
-                key: const ValueKey('board'),
-                stage: _stage,
-                state: st,
-                selected: _session.selected,
-                selectedRange: _session.selectedFacility == null ? null : _engine.facilityStats(_session.selectedFacility!).range,
-                facilityMaxHp: _engine.maxHpOf,
-                weather: _weather,
-                fx: _session.fx,
-                onCellTap: _session.tapCell,
-              ),
-              ),
-              if (_bossIntroVisible) Positioned(top: 8, left: 8, right: 8, child: _bossIntro()),
-            ]),
-          ),
+          Expanded(child: board),
           _panel(st),
         ]),
       ),
@@ -474,7 +490,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     );
   }
 
-  Widget _panel(BattleState st) {
+  Widget _panel(BattleState st, {bool side = false}) {
     final ui = _ui;
     final sel = _session.selected, f = _session.selectedFacility;
     final children = <Widget>[];
@@ -531,6 +547,16 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
           child: Text(ui.t('facility.remove', {'n': (f.invested * BattleEngine.refundRatio).round()})),
         ),
       ]));
+    }
+    if (side) {
+      // 横向き: 右の列の中に自然な高さで並べる(列ごとスクロールできる。盤面は動かない)
+      if (children.isEmpty) return const SizedBox.shrink();
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
+        child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          for (final c in children) Padding(padding: const EdgeInsets.only(bottom: 6), child: c),
+        ]),
+      );
     }
     final panelHeight = (MediaQuery.of(context).size.height * 0.34).clamp(140.0, 300.0);
     if (children.isEmpty) return SizedBox(height: panelHeight);
