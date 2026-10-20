@@ -8,21 +8,45 @@
       "requires": null,
       "title": {
         "en": "The Forest of the Giant",
-        "ja": "巨人の森"
+        "ja": "巨人の森",
+        "es": "El bosque del gigante",
+        "fr": "La forêt du géant",
+        "it": "La foresta del gigante",
+        "ko": "거인의 숲",
+        "nl": "Het bos van de reus",
+        "pt": "A floresta do gigante",
+        "tr": "Devin Ormanı",
+        "zh": "巨人的森林"
       },
       "intro": [
         {
           "speaker": "narrator",
           "text": {
             "en": "Winter in the north woods. Loggers swap tall tales by the fire about a giant who clears a forest in a day.",
-            "ja": "北の森の冬。きこりたちは焚き火を囲んで、一日で森を切り開く巨人の話を語り合います。"
+            "ja": "北の森の冬。きこりたちは焚き火を囲んで、一日で森を切り開く巨人の話を語り合います。",
+            "es": "Invierno en los bosques del norte. Junto al fuego, los leñadores se cuentan historias exageradas sobre un gigante que despeja un bosque en un día.",
+            "fr": "L’hiver dans les forêts du nord. Au coin du feu, les bûcherons se racontent des histoires extravagantes sur un géant qui défriche une forêt en un jour.",
+            "it": "Inverno nei boschi del nord. Attorno al fuoco, i boscaioli si raccontano storie strabilianti su un gigante che abbatte una foresta in un giorno.",
+            "ko": "북쪽 숲의 겨울. 나무꾼들은 모닥불 곁에서, 하루 만에 숲 하나를 베어 내는 거인의 허풍 섞인 이야기를 주고받습니다.",
+            "nl": "Winter in de noordelijke bossen. Bij het vuur vertellen houthakkers elkaar overdreven verhalen over een reus die in één dag een bos kaalkapt.",
+            "pt": "Inverno nas florestas do norte. Junto ao fogo, os lenhadores trocam histórias exageradas sobre um gigante que limpa uma floresta num dia.",
+            "tr": "Kuzey ormanlarında kış. Oduncular ateşin başında, bir günde koca bir ormanı temizleyen bir dev hakkında abartılı hikâyeler anlatır.",
+            "zh": "北方森林的冬天。伐木工们围着篝火，讲着一个一天就能砍光一片森林的巨人的夸张故事。"
           }
         },
         {
           "speaker": "narrator",
           "text": {
             "en": "Defend the camp until the tale runs out.",
-            "ja": "お話が終わるまで、キャンプを守りましょう。"
+            "ja": "お話が終わるまで、キャンプを守りましょう。",
+            "es": "Defiende el campamento hasta que se acabe el cuento.",
+            "fr": "Défends le camp jusqu’à la fin du conte.",
+            "it": "Difendi l’accampamento finché il racconto non finisce.",
+            "ko": "이야기가 끝날 때까지 캠프를 지켜 주세요.",
+            "nl": "Verdedig het kamp tot het verhaal uit is.",
+            "pt": "Defende o acampamento até o conto acabar.",
+            "tr": "Hikâye bitene kadar kampı koru.",
+            "zh": "守住营地，直到故事讲完。"
           }
         }
       ],
@@ -31,7 +55,15 @@
           "speaker": "boss",
           "text": {
             "en": "Moo. Even a giant ox has to eat.",
-            "ja": "モー。大きな牛だって、おなかはすくのです。"
+            "ja": "モー。大きな牛だって、おなかはすくのです。",
+            "es": "Muuu. Hasta un buey gigante tiene que comer.",
+            "fr": "Meuh. Même un bœuf géant doit manger.",
+            "it": "Muu. Anche un bue gigante deve mangiare.",
+            "ko": "음메. 거대한 황소도 먹어야 하잖아요.",
+            "nl": "Boe. Zelfs een reuzenos moet eten.",
+            "pt": "Muu. Até um boi gigante tem de comer.",
+            "tr": "Möö. Koca bir öküz bile yemek yemek zorunda.",
+            "zh": "哞。就连巨大的公牛也得吃东西呀。"
           }
         }
       ],
@@ -40,14 +72,30 @@
           "speaker": "narrator",
           "text": {
             "en": "The snow settles, and the camp sleeps. The story grows a little taller each time it is told.",
-            "ja": "雪が静まり、キャンプは眠りにつきます。お話は、語られるたびに少しずつ大きくなります。"
+            "ja": "雪が静まり、キャンプは眠りにつきます。お話は、語られるたびに少しずつ大きくなります。",
+            "es": "La nieve se asienta y el campamento duerme. La historia crece un poco cada vez que se cuenta.",
+            "fr": "La neige se pose et le camp s’endort. L’histoire grandit un peu à chaque fois qu’on la raconte.",
+            "it": "La neve si posa e l’accampamento dorme. La storia diventa un po’ più grande ogni volta che viene raccontata.",
+            "ko": "눈이 내려앉고 캠프는 잠이 듭니다. 이야기는 들려줄 때마다 조금씩 더 커집니다.",
+            "nl": "De sneeuw daalt neer en het kamp slaapt. Het verhaal wordt elke keer dat het verteld wordt een beetje groter.",
+            "pt": "A neve assenta e o acampamento adormece. A história fica um pouco maior de cada vez que é contada.",
+            "tr": "Kar yerleşir ve kamp uykuya dalar. Hikâye her anlatıldığında biraz daha büyür.",
+            "zh": "雪静静落下，营地沉沉睡去。这个故事每讲一次，就会变得更大一点。"
           }
         },
         {
           "speaker": "note",
           "text": {
             "en": "Paul Bunyan is a folk hero, not a real person. The logging camps of the northern forests were real, and his tales spread widely in the early 1900s.",
-            "ja": "ポール・バニヤンは民話の英雄で、実在の人物ではありません。北の森の伐採キャンプは実在し、物語は1900年代のはじめに広まりました。"
+            "ja": "ポール・バニヤンは民話の英雄で、実在の人物ではありません。北の森の伐採キャンプは実在し、物語は1900年代のはじめに広まりました。",
+            "es": "Paul Bunyan es un héroe del folclore, no una persona real. Los campamentos madereros de los bosques del norte sí existieron, y sus historias se extendieron mucho a principios del siglo XX.",
+            "fr": "Paul Bunyan est un héros de légende, pas une personne réelle. Les camps de bûcherons des forêts du nord, eux, existaient, et ses histoires se sont largement répandues au début du XXᵉ siècle.",
+            "it": "Paul Bunyan è un eroe del folklore, non una persona reale. I campi dei boscaioli nelle foreste del nord erano reali, e le sue storie si diffusero ampiamente all’inizio del Novecento.",
+            "ko": "폴 버니언은 민담 속 영웅이며 실제 인물이 아닙니다. 북쪽 숲의 벌목 캠프는 실제로 있었고, 그의 이야기는 1900년대 초에 널리 퍼졌습니다.",
+            "nl": "Paul Bunyan is een volksheld, geen echt persoon. De houthakkerskampen in de noordelijke bossen waren echt, en zijn verhalen verspreidden zich wijd aan het begin van de twintigste eeuw.",
+            "pt": "Paul Bunyan é um herói do folclore, não uma pessoa real. Os acampamentos de lenhadores das florestas do norte eram reais, e as suas histórias espalharam-se muito no início do século XX.",
+            "tr": "Paul Bunyan bir halk kahramanıdır, gerçek bir kişi değildir. Kuzey ormanlarındaki oduncu kampları gerçekti ve hikâyeleri 1900’lerin başında yaygın biçimde dolaştı.",
+            "zh": "保罗·班扬是民间传说中的英雄，并非真实人物。北方森林里的伐木营地是真实存在的，他的故事在20世纪初广为流传。"
           }
         }
       ]
@@ -59,21 +107,45 @@
       "requires": null,
       "title": {
         "en": "Twelve Seconds Over the Dunes",
-        "ja": "砂丘の上の12秒"
+        "ja": "砂丘の上の12秒",
+        "es": "Doce segundos sobre las dunas",
+        "fr": "Douze secondes au-dessus des dunes",
+        "it": "Dodici secondi sopra le dune",
+        "ko": "모래언덕 위의 12초",
+        "nl": "Twaalf seconden boven de duinen",
+        "pt": "Doze segundos sobre as dunas",
+        "tr": "Kumulların Üzerinde On İki Saniye",
+        "zh": "沙丘上空的12秒"
       },
       "intro": [
         {
           "speaker": "narrator",
           "text": {
             "en": "December 1903. On the windy dunes of Kitty Hawk, North Carolina, two brothers from Ohio ready their flying machine.",
-            "ja": "1903年12月。ノースカロライナ州キティホークの風の強い砂丘で、オハイオ出身の兄弟が飛行機を準備します。"
+            "ja": "1903年12月。ノースカロライナ州キティホークの風の強い砂丘で、オハイオ出身の兄弟が飛行機を準備します。",
+            "es": "Diciembre de 1903. En las ventosas dunas de Kitty Hawk, en Carolina del Norte, dos hermanos de Ohio preparan su máquina voladora.",
+            "fr": "Décembre 1903. Sur les dunes balayées par le vent de Kitty Hawk, en Caroline du Nord, deux frères de l’Ohio préparent leur machine volante.",
+            "it": "Dicembre 1903. Sulle dune ventose di Kitty Hawk, nella Carolina del Nord, due fratelli dell’Ohio preparano la loro macchina volante.",
+            "ko": "1903년 12월. 노스캐롤라이나 키티호크의 바람 부는 모래언덕에서, 오하이오 출신의 두 형제가 비행기를 준비합니다.",
+            "nl": "December 1903. Op de winderige duinen van Kitty Hawk in North Carolina maken twee broers uit Ohio hun vliegmachine klaar.",
+            "pt": "Dezembro de 1903. Nas dunas ventosas de Kitty Hawk, na Carolina do Norte, dois irmãos do Ohio preparam a sua máquina voadora.",
+            "tr": "Aralık 1903. Kuzey Karolina’daki rüzgârlı Kitty Hawk kumullarında, Ohio’lu iki kardeş uçan makinelerini hazırlar.",
+            "zh": "1903年12月。在北卡罗来纳州基蒂霍克多风的沙丘上，两兄弟从俄亥俄州赶来，准备好他们的飞行器。"
           }
         },
         {
           "speaker": "narrator",
           "text": {
             "en": "Keep the field safe while they try again.",
-            "ja": "兄弟がもう一度挑戦するあいだ、飛行場を守りましょう。"
+            "ja": "兄弟がもう一度挑戦するあいだ、飛行場を守りましょう。",
+            "es": "Mantén seguro el campo mientras lo intentan de nuevo.",
+            "fr": "Garde le terrain en sécurité pendant qu’ils tentent leur chance une nouvelle fois.",
+            "it": "Tieni al sicuro il campo mentre ci riprovano.",
+            "ko": "두 형제가 다시 도전하는 동안 비행장을 지켜 주세요.",
+            "nl": "Houd het veld veilig terwijl zij het opnieuw proberen.",
+            "pt": "Mantém o campo seguro enquanto eles tentam outra vez.",
+            "tr": "Onlar yeniden denerken sahayı güvende tut.",
+            "zh": "在他们再次尝试时，守住这片场地。"
           }
         }
       ],
@@ -82,7 +154,15 @@
           "speaker": "boss",
           "text": {
             "en": "The wind decides who flies today.",
-            "ja": "今日、誰が飛ぶかは、風が決めます。"
+            "ja": "今日、誰が飛ぶかは、風が決めます。",
+            "es": "Hoy el viento decide quién vuela.",
+            "fr": "C’est le vent qui décide qui vole aujourd’hui.",
+            "it": "Oggi è il vento a decidere chi vola.",
+            "ko": "오늘 누가 날지는 바람이 정합니다.",
+            "nl": "Vandaag bepaalt de wind wie er vliegt.",
+            "pt": "Hoje é o vento que decide quem voa.",
+            "tr": "Bugün kimin uçacağına rüzgâr karar verir.",
+            "zh": "今天谁能飞起来，由风来决定。"
           }
         }
       ],
@@ -91,14 +171,30 @@
           "speaker": "narrator",
           "text": {
             "en": "On December 17, 1903, Orville Wright's first flight lasted about 12 seconds. Four flights were made that day.",
-            "ja": "1903年12月17日、オーヴィル・ライトの最初の飛行は約12秒でした。その日、飛行は4回行われました。"
+            "ja": "1903年12月17日、オーヴィル・ライトの最初の飛行は約12秒でした。その日、飛行は4回行われました。",
+            "es": "El 17 de diciembre de 1903, el primer vuelo de Orville Wright duró unos 12 segundos. Ese día se hicieron cuatro vuelos.",
+            "fr": "Le 17 décembre 1903, le premier vol d’Orville Wright a duré environ 12 secondes. Quatre vols ont eu lieu ce jour-là.",
+            "it": "Il 17 dicembre 1903 il primo volo di Orville Wright durò circa 12 secondi. Quel giorno furono compiuti quattro voli.",
+            "ko": "1903년 12월 17일, 오빌 라이트의 첫 비행은 약 12초 동안 이어졌습니다. 그날 비행은 모두 네 번 이루어졌습니다.",
+            "nl": "Op 17 december 1903 duurde de eerste vlucht van Orville Wright ongeveer 12 seconden. Die dag werden vier vluchten gemaakt.",
+            "pt": "A 17 de dezembro de 1903, o primeiro voo de Orville Wright durou cerca de 12 segundos. Nesse dia, fizeram-se quatro voos.",
+            "tr": "17 Aralık 1903’te Orville Wright’ın ilk uçuşu yaklaşık 12 saniye sürdü. O gün dört uçuş yapıldı.",
+            "zh": "1903年12月17日，奥维尔·莱特的第一次飞行持续了约12秒。那一天共飞行了四次。"
           }
         },
         {
           "speaker": "note",
           "text": {
             "en": "The Wright brothers and their flights are real history. The Gale Spirit is a character made for this game.",
-            "ja": "ライト兄弟とその飛行は実際の歴史です。疾風の精霊は、このゲームのために作られたキャラクターです。"
+            "ja": "ライト兄弟とその飛行は実際の歴史です。疾風の精霊は、このゲームのために作られたキャラクターです。",
+            "es": "Los hermanos Wright y sus vuelos son historia real. El Espíritu del Vendaval es un personaje creado para este juego.",
+            "fr": "Les frères Wright et leurs vols appartiennent à l’histoire réelle. L’Esprit de la tempête est un personnage créé pour ce jeu.",
+            "it": "I fratelli Wright e i loro voli sono storia vera. Lo Spirito della Bufera è un personaggio creato per questo gioco.",
+            "ko": "라이트 형제와 그들의 비행은 실제 역사입니다. 질풍의 정령은 이 게임을 위해 만든 캐릭터입니다.",
+            "nl": "De gebroeders Wright en hun vluchten zijn echte geschiedenis. De Stormgeest is een personage dat voor dit spel is bedacht.",
+            "pt": "Os irmãos Wright e os seus voos são história real. O Espírito da Ventania é uma personagem criada para este jogo.",
+            "tr": "Wright kardeşler ve uçuşları gerçek tarihtir. Fırtına Ruhu, bu oyun için yaratılmış bir karakterdir.",
+            "zh": "莱特兄弟和他们的飞行是真实的历史。疾风之灵是为这款游戏创作的角色。"
           }
         }
       ]
@@ -110,21 +206,45 @@
       "requires": null,
       "title": {
         "en": "Reaching for the Moon",
-        "ja": "月をめざして"
+        "ja": "月をめざして",
+        "es": "Rumbo a la Luna",
+        "fr": "En route vers la Lune",
+        "it": "Verso la Luna",
+        "ko": "달을 향해",
+        "nl": "Op weg naar de maan",
+        "pt": "Rumo à Lua",
+        "tr": "Ay’a Uzanış",
+        "zh": "飞向月球"
       },
       "intro": [
         {
           "speaker": "narrator",
           "text": {
             "en": "July 1969. Apollo 11 is on its way to the Moon, carried by the work of hundreds of thousands of people.",
-            "ja": "1969年7月。アポロ11号は、何十万人もの人々の仕事に支えられて、月へ向かいます。"
+            "ja": "1969年7月。アポロ11号は、何十万人もの人々の仕事に支えられて、月へ向かいます。",
+            "es": "Julio de 1969. El Apolo 11 viaja hacia la Luna, impulsado por el trabajo de cientos de miles de personas.",
+            "fr": "Juillet 1969. Apollo 11 file vers la Lune, portée par le travail de centaines de milliers de personnes.",
+            "it": "Luglio 1969. L’Apollo 11 è in viaggio verso la Luna, spinto dal lavoro di centinaia di migliaia di persone.",
+            "ko": "1969년 7월. 아폴로 11호는 수십만 명의 노력에 힘입어 달을 향해 나아갑니다.",
+            "nl": "Juli 1969. Apollo 11 is onderweg naar de maan, gedragen door het werk van honderdduizenden mensen.",
+            "pt": "Julho de 1969. A Apollo 11 viaja rumo à Lua, impulsionada pelo trabalho de centenas de milhares de pessoas.",
+            "tr": "Temmuz 1969. Apollo 11, yüz binlerce insanın emeğiyle Ay’a doğru yol alıyor.",
+            "zh": "1969年7月。阿波罗11号在成千上万人的努力支撑下，飞向月球。"
           }
         },
         {
           "speaker": "narrator",
           "text": {
             "en": "Hold the launch site until the crew is safely on its way.",
-            "ja": "乗組員が無事に旅立つまで、発射場を守りましょう。"
+            "ja": "乗組員が無事に旅立つまで、発射場を守りましょう。",
+            "es": "Defiende la base de lanzamiento hasta que la tripulación esté a salvo en su camino.",
+            "fr": "Tiens la base de lancement jusqu’à ce que l’équipage soit parti en toute sécurité.",
+            "it": "Difendi la base di lancio finché l’equipaggio non è partito in sicurezza.",
+            "ko": "승무원이 안전하게 떠날 때까지 발사장을 지켜 주세요.",
+            "nl": "Verdedig het lanceerterrein tot de bemanning veilig op weg is.",
+            "pt": "Defende a base de lançamento até a tripulação partir em segurança.",
+            "tr": "Mürettebat güvenle yola çıkana kadar fırlatma üssünü koru.",
+            "zh": "守住发射场，直到机组人员平安出发。"
           }
         }
       ],
@@ -133,7 +253,15 @@
           "speaker": "boss",
           "text": {
             "en": "No one has crossed this silence before.",
-            "ja": "この静けさを渡った人は、まだ誰もいません。"
+            "ja": "この静けさを渡った人は、まだ誰もいません。",
+            "es": "Nadie ha cruzado antes este silencio.",
+            "fr": "Personne n’a encore traversé ce silence.",
+            "it": "Nessuno ha mai attraversato questo silenzio.",
+            "ko": "이 고요함을 건넌 사람은 아직 아무도 없어요.",
+            "nl": "Niemand is ooit door deze stilte gegaan.",
+            "pt": "Ninguém atravessou ainda este silêncio.",
+            "tr": "Bu sessizliği daha önce kimse aşmadı.",
+            "zh": "从来没有人穿越过这片寂静。"
           }
         }
       ],
@@ -142,14 +270,30 @@
           "speaker": "narrator",
           "text": {
             "en": "On July 20, 1969, Neil Armstrong and Buzz Aldrin landed on the Moon while Michael Collins orbited above.",
-            "ja": "1969年7月20日、ニール・アームストロングとバズ・オルドリンが月に降り立ち、マイケル・コリンズは上空の軌道を回っていました。"
+            "ja": "1969年7月20日、ニール・アームストロングとバズ・オルドリンが月に降り立ち、マイケル・コリンズは上空の軌道を回っていました。",
+            "es": "El 20 de julio de 1969, Neil Armstrong y Buzz Aldrin alunizaron mientras Michael Collins orbitaba sobre ellos.",
+            "fr": "Le 20 juillet 1969, Neil Armstrong et Buzz Aldrin se sont posés sur la Lune pendant que Michael Collins tournait en orbite au-dessus d’eux.",
+            "it": "Il 20 luglio 1969 Neil Armstrong e Buzz Aldrin atterrarono sulla Luna, mentre Michael Collins orbitava sopra di loro.",
+            "ko": "1969년 7월 20일, 닐 암스트롱과 버즈 올드린은 달에 착륙했고, 마이클 콜린스는 위에서 궤도를 돌고 있었습니다.",
+            "nl": "Op 20 juli 1969 landden Neil Armstrong en Buzz Aldrin op de maan, terwijl Michael Collins boven hen in een baan om de maan draaide.",
+            "pt": "A 20 de julho de 1969, Neil Armstrong e Buzz Aldrin pousaram na Lua, enquanto Michael Collins orbitava lá em cima.",
+            "tr": "20 Temmuz 1969’da Neil Armstrong ve Buzz Aldrin Ay’a indi; Michael Collins ise yukarıda yörüngede döndü.",
+            "zh": "1969年7月20日，尼尔·阿姆斯特朗和巴兹·奥尔德林登上了月球，而迈克尔·柯林斯则在上方的轨道上飞行。"
           }
         },
         {
           "speaker": "note",
           "text": {
             "en": "The Apollo 11 landing is real history. The Moon Keeper is a character made for this game.",
-            "ja": "アポロ11号の月面着陸は実際の歴史です。月の番人は、このゲームのために作られたキャラクターです。"
+            "ja": "アポロ11号の月面着陸は実際の歴史です。月の番人は、このゲームのために作られたキャラクターです。",
+            "es": "El alunizaje del Apolo 11 es historia real. El Guardián de la Luna es un personaje creado para este juego.",
+            "fr": "L’alunissage d’Apollo 11 appartient à l’histoire réelle. Le Gardien de la Lune est un personnage créé pour ce jeu.",
+            "it": "L’allunaggio dell’Apollo 11 è storia vera. Il Custode della Luna è un personaggio creato per questo gioco.",
+            "ko": "아폴로 11호의 달 착륙은 실제 역사입니다. 달의 파수꾼은 이 게임을 위해 만든 캐릭터입니다.",
+            "nl": "De maanlanding van Apollo 11 is echte geschiedenis. De Maanwachter is een personage dat voor dit spel is bedacht.",
+            "pt": "A alunagem da Apollo 11 é história real. O Guardião da Lua é uma personagem criada para este jogo.",
+            "tr": "Apollo 11’in Ay’a inişi gerçek tarihtir. Ay Bekçisi, bu oyun için yaratılmış bir karakterdir.",
+            "zh": "阿波罗11号登月是真实的历史。月之守护者是为这款游戏创作的角色。"
           }
         }
       ]
