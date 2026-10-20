@@ -1,10 +1,11 @@
 
-import 'package:flutter/services.dart' show AssetManifest, rootBundle;
+import 'package:flutter/services.dart' show AssetManifest, HapticFeedback, rootBundle;
 import 'package:app_common_kit/app_common_kit.dart' show ReviewPromptService;
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
+import 'package:terrimap_core/story/story.dart';
 import 'package:terrimap_core/battle/achievements.dart';
 import 'package:terrimap_core/battle/battle_progress.dart';
 import 'package:terrimap_core/battle/collection.dart';
@@ -39,6 +40,7 @@ const _progressKey = 'progress_v1';
 const _langKey = 'lang';
 const _assistKey = 'quiz_assist';
 const _sfxKey = 'sfx_on_v1';
+const _battleFxKey = 'battle_fx_v1';
 const _bgmKey = 'bgm_on_v1';
 const _reminderKey = 'reminder_on_v1';
 const _adaptiveKey = 'adaptive_quiz_v1';
@@ -74,6 +76,7 @@ class AppState extends ChangeNotifier {
   WidgetSync widgetSync = const NoopWidgetSync();
   Sharer sharer = const NoopSharer();
   BattleProgress battle; // バトルのクリア記録（地方決戦・エクストラの解放に使う）
+  Story? story; // 物語（章の文）。ファイルがなければ null で、物語の画面は出ない
 
   AppState._(this.pack, this.store, this.prefs, this._lang, this.progress, this._battleJson, this._quizAssist, this.battle);
 
@@ -101,7 +104,12 @@ class AppState extends ChangeNotifier {
     final deviceLang = PlatformDispatcher.instance.locale.languageCode;
     final lang = p.getString(_langKey) ?? resolveLanguage(deviceLang);
     final progress = await RegionProgress.load(store, pack.packId, pack.regions.map((r) => r.id));
+    Story? story;
+    try {
+      story = Story.parse(await asset('story.json'));
+    } catch (_) {} // 物語は無くても動く
     final app = AppState._(pack, store, p, lang, progress, battle, p.getBool(_assistKey) ?? true, BattleProgress.fromJsonString(p.getString(_battleKey)));
+    app.story = story;
     await app._refreshWeak();
     return app;
   }
@@ -120,6 +128,9 @@ class AppState extends ChangeNotifier {
     await review?.load(); // データ削除のあとは、レビュー依頼の記録も初期に戻る
     notifyListeners();
   }
+
+  /// 物語の進み具合（物語がなければ null）。
+  StoryProgress? get storyProgress => story == null || story!.chapters.isEmpty ? null : StoryProgress(story!, battle);
 
   String get lang => _lang;
   Strings get s => Strings(_lang, pack);
@@ -153,6 +164,20 @@ class AppState extends ChangeNotifier {
   }
 
   bool get sfxOn => prefs.getBool(_sfxKey) ?? true;
+
+  /// バトルの演出（弾・爆発・ダメージ数字・画面の揺れ）と振動。初期はオン。
+  bool get battleFx => prefs.getBool(_battleFxKey) ?? true;
+
+  Future<void> setBattleFx(bool v) async {
+    await prefs.setBool(_battleFxKey, v);
+    notifyListeners();
+  }
+
+  /// 振動（演出がオンのときだけ）。拠点が突破されたとき・ボスを倒したときなど。
+  void haptic({bool heavy = false}) {
+    if (!battleFx) return;
+    heavy ? HapticFeedback.heavyImpact() : HapticFeedback.mediumImpact();
+  }
   bool get bgmOn => prefs.getBool(_bgmKey) ?? false;
   bool get reminderOn => prefs.getBool(_reminderKey) ?? false;
 

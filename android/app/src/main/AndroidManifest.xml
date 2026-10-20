@@ -5,10 +5,10 @@
         android:label="terrimap_us"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
-        <!-- AdMob アプリID。下はGoogle公式のテストID。リリース前に本番IDへ差し替える(tools/ 参照)。 -->
+        <!-- AdMob アプリID(本番・2026-10-20登録)。広告ユニットIDはビルド時の dart-define で渡す。 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="ca-app-pub-5058227312086483~2200973062"/>
         <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"/>
         <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
             <intent-filter>
