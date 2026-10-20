@@ -70,6 +70,7 @@ flutter:
     - assets/art/exclusive/
     - assets/art/enemies/
     - assets/art/landmarks/
+    - assets/art/hero/
     - assets/sound/
 
 # shared_preferences_android 2.5.0 は JNI(jni_flutter)を使い、リリースビルドで NoSuchMethodError

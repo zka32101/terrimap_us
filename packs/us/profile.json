@@ -1044,6 +1044,45 @@
     "en": "The Moon Keeper",
     "ja": "月の番人"
    }
+  },
+ {
+  "id": "us_pony",
+  "basis": "history",
+  "regions": [
+   "US-MO",
+   "US-KS",
+   "US-NE",
+   "US-WY",
+   "US-UT",
+   "US-NV",
+   "US-CA"
+  ],
+  "center": "US-NE",
+  "seasons": [
+   "spring",
+   "summer",
+   "autumn",
+   "winter"
+  ],
+  "weatherEvent": "blizzard",
+  "backdrop": "plains",
+  "bossSkill": "speedBurst",
+  "waves": 10,
+  "title": {
+   "en": "Mail on the Gallop",
+   "ja": "駆けぬける郵便"
+  },
+  "summary": {
+   "en": "Pony Express riders raced mail across the West by relay. Defend the stations from dust creatures.",
+   "ja": "ポニー・エクスプレスの騎手たちは、リレーで西部に手紙を運びました。砂ぼこりの生き物たちから、駅を守りましょう。"
+  },
+  "fact": {
+   "en": "The Pony Express carried mail by relay riders between St. Joseph, Missouri, and Sacramento, California, from April 1860 to October 1861, in about ten days. The transcontinental telegraph made it unnecessary. The Dust Devil is a fantasy figure."
+  },
+  "bossName": {
+   "en": "The Dust Devil",
+   "ja": "砂ぼこりの精"
   }
+ }
  ]
 }

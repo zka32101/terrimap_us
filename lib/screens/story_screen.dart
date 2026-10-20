@@ -35,6 +35,8 @@ class _StorySheetState extends State<_StorySheet> {
     final theme = Theme.of(context);
     final isNote = line.speaker == Speaker.note;
     final isBoss = line.speaker == Speaker.boss;
+    final isHero = line.speaker == Speaker.hero;
+    final hero = widget.app.story?.hero;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -46,13 +48,31 @@ class _StorySheetState extends State<_StorySheet> {
             width: double.infinity,
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: isNote ? theme.colorScheme.surfaceContainerHighest : isBoss ? theme.colorScheme.errorContainer : theme.colorScheme.secondaryContainer,
+              color: isNote
+                  ? theme.colorScheme.surfaceContainerHighest
+                  : isBoss
+                      ? theme.colorScheme.errorContainer
+                      : isHero
+                          ? theme.colorScheme.tertiaryContainer
+                          : theme.colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Text(
-              isBoss ? '「${line.text.of(lang)}」' : line.text.of(lang),
-              style: theme.textTheme.bodyLarge?.copyWith(fontStyle: isNote ? FontStyle.italic : null),
-            ),
+            child: isHero && hero != null
+                ? Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    HeroAvatar(hero: hero, lang: lang),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        Text(hero.name.of(lang), key: const ValueKey('story-hero-name'), style: theme.textTheme.labelLarge),
+                        const SizedBox(height: 4),
+                        Text(line.text.of(lang), style: theme.textTheme.bodyLarge),
+                      ]),
+                    ),
+                  ])
+                : Text(
+                    isBoss ? '「${line.text.of(lang)}」' : line.text.of(lang),
+                    style: theme.textTheme.bodyLarge?.copyWith(fontStyle: isNote ? FontStyle.italic : null),
+                  ),
           ),
           const SizedBox(height: 12),
           Row(children: [
@@ -65,6 +85,36 @@ class _StorySheetState extends State<_StorySheet> {
             ),
           ]),
         ]),
+      ),
+    );
+  }
+}
+
+/// 主人公のアイコン。画像（assets/art/hero/<id>.png）がなければ、名前の頭文字の丸にする。
+class HeroAvatar extends StatelessWidget {
+  final StoryHero hero;
+  final String lang;
+  final double size;
+  const HeroAvatar({super.key, required this.hero, required this.lang, this.size = 48});
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final name = hero.name.of(lang);
+    final initial = name.isEmpty ? '?' : String.fromCharCode(name.runes.first);
+    return ClipOval(
+      child: SizedBox(
+        width: size,
+        height: size,
+        child: Image.asset(
+          'assets/art/hero/${hero.id}.png',
+          key: const ValueKey('hero-avatar'),
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => ColoredBox(
+            color: scheme.tertiary,
+            child: Center(child: Text(initial, style: TextStyle(color: scheme.onTertiary, fontSize: size * 0.45, fontWeight: FontWeight.bold))),
+          ),
+        ),
       ),
     );
   }
