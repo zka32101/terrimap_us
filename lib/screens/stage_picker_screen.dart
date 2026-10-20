@@ -15,6 +15,7 @@ import 'package:terrimap_core/pack/country_profile.dart';
 import '../app_state.dart';
 import '../monetization.dart';
 import 'battle_screen.dart';
+import 'story_screen.dart';
 import 'replay_screen.dart';
 import 'unlock_sheet.dart';
 
@@ -192,6 +193,13 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
     final modes = [StageKind.normal, if (hasRegional) StageKind.regional, if (hasExtra) StageKind.extra];
     return Scaffold(
       appBar: AppBar(title: Text(s.t('battle')), actions: [
+        if (app.storyProgress != null)
+          IconButton(
+            key: const ValueKey('story'),
+            tooltip: ui.t('story.title'),
+            icon: const Icon(Icons.menu_book),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => StoryScreen(app: app))),
+          ),
         IconButton(
           key: const ValueKey('collection'),
           tooltip: ui.t('collection.title'),

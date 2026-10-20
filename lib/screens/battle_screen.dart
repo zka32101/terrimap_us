@@ -17,11 +17,13 @@ import 'package:terrimap_core/battle/tutorial.dart';
 import 'package:terrimap_core/battle/weekly_battle.dart';
 import 'package:terrimap_core/battle_ui/battle_session.dart';
 import 'package:terrimap_core/battle_ui/battle_view.dart';
+import 'package:terrimap_core/story/story.dart';
 import 'package:terrimap_core/i18n/ui_strings.dart';
 
 import '../app_state.dart';
 import 'assist_dialog.dart';
 import 'replay_screen.dart';
+import 'story_screen.dart';
 
 /// バトル画面（最小版）。盤面、HUD、施設の設置・強化・撤去・修理、スキル選択（クイズ連動）、結果。
 class BattleScreen extends StatefulWidget {
@@ -56,6 +58,9 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   late bool _tutorial = !widget.app.tutorialDone; // 初回のバトルの案内（終えるかスキップするまで）
   Replay? _replay; // 終わったバトルの記録(今日のバトルの保存・共有に使う)
 
+  /// このステージの物語の章（毎日・毎週のバトルでは出さない）。
+  StoryChapter? get _chapter => widget.daily != null || widget.weekly != null ? null : widget.app.story?.forStage(widget.kind, widget.regionId);
+
   BattleEngine get _engine => _session.engine;
   UiStrings get _ui => widget.app.ui;
 
@@ -70,6 +75,12 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     })..start();
     _session.fx.enabled = widget.app.battleFx;
     _session.addListener(_onChanged);
+    final ch = _chapter;
+    if (ch != null && ch.intro.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) showStoryLines(context, widget.app, title: ch.title.of(widget.app.lang), lines: ch.intro);
+      });
+    }
   }
 
   @override
@@ -255,8 +266,13 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     _toast(label);
   }
 
-  void _showResult() {
+  Future<void> _showResult() async {
     if (!mounted) return;
+    final ch = _chapter;
+    if (_session.won && ch != null && ch.outro.isNotEmpty) {
+      await showStoryLines(context, widget.app, title: ch.title.of(widget.app.lang), lines: ch.outro);
+      if (!mounted) return;
+    }
     final ui = _ui;
     final st = _session.state;
     showDialog<void>(
