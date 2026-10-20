@@ -7,6 +7,7 @@ import 'package:terrimap_core/story/story.dart';
 
 import '../app_state.dart';
 import 'landmark_detail.dart';
+import 'notebook_screen.dart';
 import 'story_screen.dart';
 
 /// 名所のコレクション。州をクリアすると、その州の名所カードが集まる。
@@ -120,11 +121,23 @@ class _CollectionScreenState extends State<CollectionScreen> {
     final sp = app.storyProgress;
     return Scaffold(
       appBar: AppBar(title: Text('${ui.t('collection.title')}  ${ui.t('collection.count', {'n': col.unlockedCount, 'total': col.total})}')),
-      body: cards.isEmpty && sp == null
-          ? Center(child: Padding(padding: const EdgeInsets.all(24), child: Text(ui.t('collection.empty'))))
-          : CustomScrollView(
+      body: CustomScrollView(
               key: const ValueKey('collection-grid'),
               slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
+                    child: Card(
+                      child: ListTile(
+                        key: const ValueKey('notebook-entry'),
+                        leading: const Icon(Icons.menu_book),
+                        title: Text('${app.s.t('notebook.title')}  ${NotebookScreen.stampedCount(app)} / ${app.pack.regions.length}'),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => NotebookScreen(app: app))),
+                      ),
+                    ),
+                  ),
+                ),
                 if (cards.isEmpty)
                   SliverToBoxAdapter(child: Padding(padding: const EdgeInsets.all(24), child: Text(ui.t('collection.empty'))))
                 else
