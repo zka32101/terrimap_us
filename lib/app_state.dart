@@ -41,6 +41,7 @@ const _langKey = 'lang';
 const _assistKey = 'quiz_assist';
 const _sfxKey = 'sfx_on_v1';
 const _battleFxKey = 'battle_fx_v1';
+const _synergyHintKey = 'synergy_hint_v1';
 const _bgmKey = 'bgm_on_v1';
 const _reminderKey = 'reminder_on_v1';
 const _adaptiveKey = 'adaptive_quiz_v1';
@@ -166,6 +167,10 @@ class AppState extends ChangeNotifier {
   bool get sfxOn => prefs.getBool(_sfxKey) ?? true;
 
   /// バトルの演出（弾・爆発・ダメージ数字・画面の揺れ）と振動。初期はオン。
+  /// 組み合わせボーナスの説明を、もう見せたか（初めて効いたときに1回だけ出す）。
+  bool get synergyHintSeen => prefs.getBool(_synergyHintKey) ?? false;
+  Future<void> setSynergyHintSeen() => prefs.setBool(_synergyHintKey, true);
+
   bool get battleFx => prefs.getBool(_battleFxKey) ?? true;
 
   Future<void> setBattleFx(bool v) async {

@@ -72,7 +72,7 @@ class _ReplayScreenState extends State<ReplayScreen> with SingleTickerProviderSt
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8),
-              child: BattleView(key: const ValueKey('replay-board'), stage: stage, state: st, facilityMaxHp: _engine.maxHpOf, fx: _player.fx),
+              child: BattleView(key: const ValueKey('replay-board'), stage: stage, state: st, facilityMaxHp: _engine.maxHpOf, fx: _player.fx, synergy: _engine.rules >= 2),
             ),
           ),
           if (_player.corrupt)
