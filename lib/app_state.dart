@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:terrimap_core/story/story.dart';
 
+import 'leaderboard.dart';
 import 'looks.dart';
 import 'package:terrimap_core/battle/achievements.dart';
 import 'package:terrimap_core/battle/battle_progress.dart';
@@ -19,6 +20,7 @@ import 'package:terrimap_core/daily/daily_landmark.dart';
 import 'package:terrimap_core/daily/daily_streak.dart';
 import 'package:terrimap_core/daily/streak_rescue.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
+import 'package:terrimap_core/battle/endless.dart';
 import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/battle/invite.dart';
 import 'package:terrimap_core/i18n/languages.dart';
@@ -53,6 +55,7 @@ const _tutorialKey = 'tutorial_done_v1';
 const _battleKey = 'battle_progress_v1';
 const _streakKey = 'daily_streak_v1';
 const _weeklyKey = 'weekly_battle_v1';
+const _endlessKey = 'endless_v1';
 const _seenCardsKey = 'collection_seen_v1';
 const _seenAchKey = 'achievements_seen_v1';
 const _battleLogKey = 'battle_log_v1';
@@ -75,6 +78,7 @@ class AppState extends ChangeNotifier {
   Sound sound = const NoopSound();
   Reminders reminders = const NoopReminders();
   WidgetSync widgetSync = const NoopWidgetSync();
+  LeaderboardService leaderboard = const NoopLeaderboard();
   Sharer sharer = const NoopSharer();
   BattleProgress battle; // バトルのクリア記録（地方決戦・エクストラの解放に使う）
   Story? story; // 物語（章の文）。ファイルがなければ null で、物語の画面は出ない
@@ -487,6 +491,21 @@ class AppState extends ChangeNotifier {
     await prefs.setString(_streakKey, streak.record(date).toJson());
     await refreshRescue();
     notifyListeners();
+  }
+
+  /// エンドレスの自己ベスト(州ごと)。
+  EndlessBoard get endless => EndlessBoard.fromJson(prefs.getString(_endlessKey));
+
+  /// エンドレスの結果を記録する。自己ベストを更新したら true(そのときだけランキングへ送る)。
+  Future<bool> recordEndless(String regionId, int waves, int score) async {
+    final r = EndlessResult(regionId, waves, score);
+    final board = endless;
+    if (!board.improved(r)) return false;
+    await prefs.setString(_endlessKey, board.add(r).toJson());
+    notifyListeners();
+    final top = endless.best;
+    if (top != null) leaderboard.submit(top.rank); // 送るだけ。待たない
+    return true;
   }
 
   /// バトルのクリアを記録して保存する。

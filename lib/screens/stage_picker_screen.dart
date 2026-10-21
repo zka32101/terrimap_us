@@ -18,6 +18,7 @@ import '../app_state.dart';
 import 'clear_legend.dart';
 import '../monetization.dart';
 import 'battle_screen.dart';
+import 'endless_screen.dart';
 import 'story_screen.dart';
 import 'replay_screen.dart';
 import 'unlock_sheet.dart';
@@ -177,6 +178,12 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
             icon: Icon(_asList ? Icons.map_outlined : Icons.list),
             onPressed: () => setState(() => _asList = !_asList),
           ),
+        IconButton(
+          key: const ValueKey('endless'),
+          tooltip: s.t('endless.title'),
+          icon: const Icon(Icons.all_inclusive),
+          onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => EndlessScreen(app: app, premium: premium))),
+        ),
         if (app.storyProgress != null)
           IconButton(
             key: const ValueKey('story'),
@@ -235,7 +242,7 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               _kind == StageKind.normal
-                  ? ui.t(_onMap ? 'stage.chooseOnMap' : 'stage.choose')
+                  ? _onMap ? s.t('stage.chooseOnMap') : ui.t('stage.choose')
                   : ui.t('stage.progress', {'n': app.battle.clearedStates([for (final r in app.pack.regions) r.id]), 'total': app.pack.regions.length}),
               style: Theme.of(context).textTheme.titleSmall,
             ),

@@ -31,16 +31,19 @@ class BattleScreen extends StatefulWidget {
   final Difficulty difficulty;
   final StageKind kind;
   final WeeklyBattle? weekly; // 今週のチャレンジのとき（1週に1回。やり直しはない）
-  const BattleScreen({super.key, required this.app, required this.regionId, required this.difficulty, this.kind = StageKind.normal, this.weekly});
+  final bool endless; // エンドレス(州ひとつ・最大30波。クリア記録・物語・リプレイは対象外)
+  const BattleScreen({super.key, required this.app, required this.regionId, required this.difficulty, this.kind = StageKind.normal, this.weekly, this.endless = false});
   @override
   State<BattleScreen> createState() => _BattleScreenState();
 }
 
 class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderStateMixin {
-  late final Stage _stage = StageGenerator(widget.app.pack).generate(widget.regionId, widget.difficulty, kind: widget.kind);
+  late final Stage _stage = widget.endless
+      ? StageGenerator(widget.app.pack).endless(widget.regionId)
+      : StageGenerator(widget.app.pack).generate(widget.regionId, widget.difficulty, kind: widget.kind);
   late final BattleSession _session = BattleSession(
     BattleEngine(_stage, profile: widget.app.pack.profile, pack: widget.app.pack, quizAssist: widget.app.quizAssist,
-        reviewWeights: widget.weekly == null ? widget.app.reviewWeights : null), // 毎週のチャレンジは全員同じ条件にする
+        reviewWeights: widget.weekly == null && !widget.endless ? widget.app.reviewWeights : null), // 毎週のチャレンジは全員同じ条件にする
   );
   late final Ticker _ticker;
   Duration _last = Duration.zero;
@@ -55,9 +58,10 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   bool _resultShown = false;
   late bool _tutorial = !widget.app.tutorialDone; // 初回のバトルの案内（終えるかスキップするまで）
   Replay? _replay; // 終わったバトルの記録(今日のバトルの保存・共有に使う)
+  bool _newEndlessBest = false; // エンドレスで、この結果が自己ベスト
 
   /// このステージの物語の章（毎日・毎週のバトルでは出さない）。
-  StoryChapter? get _chapter => widget.weekly != null ? null : widget.app.story?.forStage(widget.kind, widget.regionId);
+  StoryChapter? get _chapter => widget.weekly != null || widget.endless ? null : widget.app.story?.forStage(widget.kind, widget.regionId);
 
   BattleEngine get _engine => _session.engine;
   UiStrings get _ui => widget.app.ui;
@@ -125,6 +129,15 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
       widget.app.logBattle(won: _session.won, seconds: _played);
       widget.app.sfx(_session.won ? 'clear' : 'lose');
       _played = 0;
+      if (widget.endless) {
+        final cleared = _session.won ? _stage.waves.length : (_session.state.wave - 1).clamp(0, _stage.waves.length);
+        widget.app.recordBattleDay();
+        widget.app.recordEndless(widget.regionId, cleared, _session.state.score).then((v) {
+          _newEndlessBest = v; // 保存が済んでから結果を出す(自己ベストの表示に使う)
+          WidgetsBinding.instance.addPostFrameCallback((_) => _showResult());
+        });
+        return;
+      }
       if (_session.won) {
         final before = widget.app.collection.unlockedIds;
         widget.app.recordBattleClear(widget.kind, widget.regionId, widget.difficulty); // 記録は同期で反映される
@@ -290,6 +303,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
       builder: (ctx) => AlertDialog(
         title: Text(_session.won ? ui.t('result.victory') : ui.t('result.defeat')),
         content: Text('${ui.t('result.waves', {'n': _session.won ? _stage.waves.length : (st.wave - 1).clamp(0, 99)})}\n${ui.t('result.score', {'n': st.score})}'
+            '${widget.endless && _newEndlessBest ? '\n\n${widget.app.s.t('endless.newBest')}' : ''}'
             '${_newCards.isEmpty ? '' : '\n\n${ui.t('collection.new')}\n${_newCards.map((n) => '• $n').join('\n')}'}'),
         actions: [
           if (_replay != null)
@@ -315,7 +329,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
             onPressed: () {
               Navigator.pop(ctx);
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (_) => BattleScreen(app: widget.app, regionId: widget.regionId, difficulty: widget.difficulty, kind: widget.kind),
+                builder: (_) => BattleScreen(app: widget.app, regionId: widget.regionId, difficulty: widget.difficulty, kind: widget.kind, endless: widget.endless),
               ));
             },
             child: Text(ui.t('result.retry')),
