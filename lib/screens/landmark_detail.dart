@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:terrimap_core/battle_ui/art_set.dart';
 
 import '../app_state.dart';
+import 'region_guide_screen.dart';
 
 /// 名所の詳細。大きな画像と、名前・州を見せる（説明文は持たない）。
 Future<void> showLandmarkDetail(BuildContext context, AppState app, String landmarkId, {ArtSet? art}) async {
@@ -26,7 +27,17 @@ Future<void> showLandmarkDetail(BuildContext context, AppState app, String landm
         const SizedBox(height: 12),
         Text(app.ui.t('landmark.in', {'region': app.s.regionName(lm.regionId)})),
       ]),
-      actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: Text(app.s.t('home')))],
+      actions: [
+        TextButton(
+          key: const ValueKey('landmark-guide'),
+          onPressed: () {
+            Navigator.pop(ctx);
+            openRegionGuide(context, app, lm.regionId);
+          },
+          child: Text(app.s.t('guide.open')),
+        ),
+        TextButton(onPressed: () => Navigator.pop(ctx), child: Text(app.s.t('home'))),
+      ],
     ),
   );
 }

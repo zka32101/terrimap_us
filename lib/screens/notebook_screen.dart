@@ -3,6 +3,7 @@ import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/progress/region_progress.dart';
 
 import '../app_state.dart';
+import 'region_guide_screen.dart';
 import 'story_screen.dart';
 
 /// 旅の手帳。州ごとのスタンプ帳。クイズで覚えた州と、バトルでクリアした州にスタンプが押される。
@@ -122,6 +123,19 @@ class _NotebookPage extends StatelessWidget {
             const SizedBox(height: 4),
             Text(known.join(' · '), key: const ValueKey('notebook-knowledge')),
           ],
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              key: const ValueKey('notebook-guide'),
+              icon: const Icon(Icons.menu_book_outlined),
+              label: Text(s.t('guide.open')),
+              onPressed: () {
+                Navigator.pop(context);
+                openRegionGuide(context, app, regionId);
+              },
+            ),
+          ),
         ]),
       ),
     );
