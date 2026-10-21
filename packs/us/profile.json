@@ -22,6 +22,18 @@
  },
  "regions": {
   "US-AL": {
+   "blurb": {
+    "en": "A Deep South state on the Gulf of Mexico, central to the civil rights movement with cities like Selma and Montgomery. Huntsville is home to NASA's Marshall Space Flight Center.",
+    "ja": "メキシコ湾に面した深南部の州で、セルマやモンゴメリーなど公民権運動の舞台になりました。ハンツビルにはNASAのマーシャル宇宙飛行センターがあります。",
+    "fr": "Un État du Sud profond situé sur le golfe du Mexique, au cœur du mouvement des droits civiques, avec des villes comme Selma et Montgomery. Huntsville abrite le Marshall Space Flight Center de la NASA.",
+    "es": "Un estado del sur profundo en el Golfo de México, central para el movimiento de derechos civiles con ciudades como Selma y Montgomery. Huntsville es el hogar del Centro Marshall de Vuelos Espaciales de la NASA.",
+    "it": "Uno stato del profondo sud sul Golfo del Messico, centrale per il movimento per i diritti civili con città come Selma e Montgomery. Huntsville ospita il Marshall Space Flight Center della NASA.",
+    "pt": "Um estado do extremo sul no Golfo do México, central para o movimento pelos direitos civis com cidades como Selma e Montgomery. Huntsville abriga o Marshall Space Flight Center da NASA.",
+    "nl": "Een staat in het diepe zuiden aan de Golf van Mexico, centraal in de burgerrechtenbeweging met steden als Selma en Montgomery. Huntsville is de thuisbasis van het Marshall Space Flight Center van NASA.",
+    "tr": "Meksika Körfezi'ndeki Derin Güney eyaleti, Selma ve Montgomery gibi şehirleriyle sivil haklar hareketinin merkezinde yer alıyor. Huntsville, NASA'nın Marshall Uzay Uçuş Merkezi'ne ev sahipliği yapmaktadır.",
+    "ko": "셀마, 몽고메리 등의 도시를 중심으로 민권 운동의 중심이 되는 멕시코 만의 최남단 주입니다. 헌츠빌에는 NASA의 마샬 우주 비행 센터가 있는 곳입니다.",
+    "zh": "墨西哥湾的一个南方腹州，是民权运动的中心，拥有塞尔玛和蒙哥马利等城市。亨茨维尔是美国宇航局马歇尔太空飞行中心的所在地。"
+   },
    "terrain": "agriculture",
    "tags": [
     "south",
@@ -34,6 +46,18 @@
    "backdrop": "plains"
   },
   "US-AK": {
+   "blurb": {
+    "en": "The largest US state, in the far northwest, with Denali, glaciers and long winters. It is not connected by land to the other contiguous states.",
+    "ja": "アメリカで最大の州で、北西の端にあり、デナリ山や氷河、長い冬で知られます。本土の州とは陸続きではありません。",
+    "fr": "Le plus grand État américain, à l'extrême nord-ouest, avec Denali, ses glaciers et ses hivers longs. Il n'est pas relié par voie terrestre aux autres États contigus.",
+    "es": "El estado más grande de Estados Unidos, en el extremo noroeste, con Denali, glaciares y largos inviernos. No está conectado por tierra con los otros estados contiguos.",
+    "it": "Il più grande stato degli Stati Uniti, nell'estremo nord-ovest, con Denali, ghiacciai e lunghi inverni. Non è collegato via terra agli altri stati contigui.",
+    "pt": "O maior estado dos EUA, no extremo noroeste, com Denali, geleiras e longos invernos. Não está ligado por terra aos outros estados contíguos.",
+    "nl": "De grootste Amerikaanse staat, in het uiterste noordwesten, met Denali, gletsjers en lange winters. Het is niet over land verbonden met de andere aangrenzende staten.",
+    "tr": "Denali, buzulları ve uzun kışlarıyla en kuzeybatıdaki ABD'nin en büyük eyaleti. Diğer komşu devletlere kara yoluyla bağlı değildir.",
+    "ko": "북서쪽에 위치한 미국 최대의 주이며 데날리, 빙하, 긴 겨울이 있습니다. 다른 인접한 주와 육로로 연결되어 있지 않습니다.",
+    "zh": "美国最大的州，位于西北部，拥有麦金利峰、冰川和漫长的冬季。它与其他毗邻的州没有陆地连接。"
+   },
    "terrain": "mountain",
    "tags": [
     "arctic",
@@ -47,6 +71,18 @@
    "exclusiveFacility": "pipeline"
   },
   "US-AZ": {
+   "blurb": {
+    "en": "A desert state in the Southwest, home to the Grand Canyon and the saguaro cactus. Much of it is dry, with hot summers.",
+    "ja": "南西部の砂漠の州で、グランドキャニオンやサグアロサボテンで知られます。多くが乾燥し、夏は暑くなります。",
+    "fr": "Un État désertique du sud-ouest, abritant le Grand Canyon et le cactus saguaro. Une grande partie est sèche, avec des étés chauds.",
+    "es": "Un estado desértico en el suroeste, hogar del Gran Cañón y del cactus saguaro. Gran parte es seca y tiene veranos calurosos.",
+    "it": "Uno stato desertico nel sud-ovest, sede del Grand Canyon e del cactus Saguaro. La maggior parte è secca, con estati calde.",
+    "pt": "Um estado desértico no sudoeste, lar do Grand Canyon e do cacto saguaro. Grande parte é seca, com verões quentes.",
+    "nl": "Een woestijnstaat in het zuidwesten, de thuisbasis van de Grand Canyon en de saguaro-cactus. Een groot deel ervan is droog, met hete zomers.",
+    "tr": "Güneybatıda, Büyük Kanyon ve saguaro kaktüsünün evi olan bir çöl eyaleti. Çoğu kuru ve yazları sıcaktır.",
+    "ko": "그랜드 캐년과 사와로 선인장이 있는 남서부의 사막 주입니다. 대부분은 건조하고 여름은 덥습니다.",
+    "zh": "西南部的一个沙漠州，是大峡谷和仙人掌的故乡。大部分地区气候干燥，夏季炎热。"
+   },
    "terrain": "mixed",
    "tags": [
     "desert",
@@ -56,6 +92,18 @@
    "backdrop": "desert"
   },
   "US-AR": {
+   "blurb": {
+    "en": "A southern state with the Ozark Mountains and Hot Springs National Park. Little Rock Central High School was a key site of school integration.",
+    "ja": "南部の州で、オザーク山地やホットスプリングス国立公園があります。リトルロックのセントラル高校は、学校の人種統合の重要な舞台でした。",
+    "fr": "Un État du sud avec les monts Ozark et le parc national de Hot Springs. Little Rock Central High School était un site clé de l'intégration scolaire.",
+    "es": "Un estado del sur con las montañas Ozark y el Parque Nacional Hot Springs. Little Rock Central High School fue un sitio clave para la integración escolar.",
+    "it": "Uno stato del sud con le montagne di Ozark e il parco nazionale di Hot Springs. La Little Rock Central High School è stata un luogo chiave per l'integrazione scolastica.",
+    "pt": "Um estado do sul com as Montanhas Ozark e o Parque Nacional de Hot Springs. A Little Rock Central High School foi um local importante de integração escolar.",
+    "nl": "Een zuidelijke staat met de Ozark Mountains en Hot Springs National Park. Little Rock Central High School was een belangrijke plaats voor schoolintegratie.",
+    "tr": "Ozark Dağları ve Hot Springs Ulusal Parkı'nın bulunduğu güney eyaleti. Little Rock Central Lisesi, okul entegrasyonunun önemli bir alanıydı.",
+    "ko": "오자크 산맥과 핫스프링스 국립공원이 있는 남부 주입니다. Little Rock Central High School은 학교 통합의 ​​핵심 장소였습니다.",
+    "zh": "南部州，拥有奥扎克山脉和温泉国家公园。小石城中央高中是学校整合的关键地点。"
+   },
    "terrain": "agriculture",
    "tags": [
     "rice",
@@ -68,6 +116,18 @@
    "backdrop": "plains"
   },
   "US-CA": {
+   "blurb": {
+    "en": "The most populous US state, on the Pacific coast, with Hollywood, Silicon Valley and the Golden Gate Bridge. Its landscapes range from beaches to Yosemite and Death Valley.",
+    "ja": "太平洋岸にあるアメリカで最も人口の多い州で、ハリウッドやシリコンバレー、ゴールデンゲートブリッジで知られます。海岸からヨセミテやデスバレーまで景色が多彩です。",
+    "fr": "L'État américain le plus peuplé, sur la côte Pacifique, avec Hollywood, la Silicon Valley et le Golden Gate Bridge. Ses paysages vont des plages à Yosemite et à la Vallée de la Mort.",
+    "es": "El estado más poblado de Estados Unidos, en la costa del Pacífico, con Hollywood, Silicon Valley y el puente Golden Gate. Sus paisajes van desde playas hasta Yosemite y el Valle de la Muerte.",
+    "it": "Lo stato più popoloso degli Stati Uniti, sulla costa del Pacifico, con Hollywood, la Silicon Valley e il Golden Gate Bridge. I suoi paesaggi spaziano dalle spiagge allo Yosemite e alla Death Valley.",
+    "pt": "O estado mais populoso dos EUA, na costa do Pacífico, com Hollywood, o Vale do Silício e a Ponte Golden Gate. Suas paisagens vão desde praias até Yosemite e Vale da Morte.",
+    "nl": "De dichtstbevolkte Amerikaanse staat, aan de Pacifische kust, met Hollywood, Silicon Valley en de Golden Gate Bridge. De landschappen variëren van stranden tot Yosemite en Death Valley.",
+    "tr": "Hollywood, Silikon Vadisi ve Golden Gate Köprüsü ile Pasifik kıyısındaki en kalabalık ABD eyaleti. Manzaraları plajlardan Yosemite ve Ölüm Vadisine kadar çeşitlilik göstermektedir.",
+    "ko": "할리우드, 실리콘밸리, 금문교가 있는 태평양 연안에 위치한 미국에서 가장 인구가 많은 주입니다. 그 풍경은 해변부터 요세미티와 데스 밸리까지 다양합니다.",
+    "zh": "美国人口最多的州，位于太平洋沿岸，拥有好莱坞、硅谷和金门大桥。其景观范围从海滩到优胜美地和死亡谷。"
+   },
    "terrain": "mixed",
    "tags": [
     "tech",
@@ -82,6 +142,18 @@
    "exclusiveFacility": "tech_campus"
   },
   "US-CO": {
+   "blurb": {
+    "en": "A Rocky Mountain state with many peaks over 14,000 feet and popular ski resorts. Denver is nicknamed the Mile High City.",
+    "ja": "ロッキー山脈の州で、標高14,000フィート(約4,300m)を超える山が多く、スキーリゾートで人気です。デンバーは「1マイルの高さの都市」と呼ばれます。",
+    "fr": "Un État des Rocheuses avec de nombreux sommets de plus de 14 000 pieds et des stations de ski populaires. Denver est surnommée la Mile High City.",
+    "es": "Un estado de las Montañas Rocosas con muchos picos de más de 14.000 pies y populares estaciones de esquí. Denver recibe el sobrenombre de Ciudad de una milla de altura.",
+    "it": "Uno stato delle Montagne Rocciose con numerose vette che superano i 14.000 piedi e famose località sciistiche. Denver è soprannominata la Mile High City.",
+    "pt": "Um estado das Montanhas Rochosas com muitos picos com mais de 14.000 pés e resorts de esqui populares. Denver é apelidada de Mile High City.",
+    "nl": "Een Rocky Mountain-staat met veel toppen van meer dan 4.000 meter en populaire skigebieden. Denver wordt ook wel de Mile High City genoemd.",
+    "tr": "14.000 feet'in üzerindeki birçok zirveye ve popüler kayak merkezlerine sahip bir Rocky Dağı eyaleti. Denver, Mile High City olarak adlandırılıyor.",
+    "ko": "14,000피트가 넘는 봉우리가 많고 인기 있는 스키 리조트가 있는 로키산맥 주입니다. 덴버는 마일 하이 시티(Mile High City)라는 별명을 가지고 있습니다.",
+    "zh": "落基山脉州，拥有许多超过 14,000 英尺的山峰和受欢迎的滑雪胜地。丹佛被昵称为“英里高城”。"
+   },
    "terrain": "mountain",
    "tags": [
     "rockies",
@@ -91,6 +163,18 @@
    "backdrop": "rockies"
   },
   "US-CT": {
+   "blurb": {
+    "en": "A small New England state with a long coast on Long Island Sound. Yale University is in New Haven.",
+    "ja": "ニューイングランドの小さな州で、ロングアイランド湾に長い海岸があります。ニューヘイブンにはイェール大学があります。",
+    "fr": "Un petit État de la Nouvelle-Angleterre avec une longue côte sur le détroit de Long Island. L'Université de Yale se trouve à New Haven.",
+    "es": "Un pequeño estado de Nueva Inglaterra con una larga costa en Long Island Sound. La Universidad de Yale está en New Haven.",
+    "it": "Un piccolo stato del New England con una lunga costa sul Long Island Sound. L'Università di Yale è a New Haven.",
+    "pt": "Um pequeno estado da Nova Inglaterra com uma longa costa em Long Island Sound. A Universidade de Yale fica em New Haven.",
+    "nl": "Een kleine staat in New England met een lange kust aan Long Island Sound. De Yale-universiteit bevindt zich in New Haven.",
+    "tr": "Long Island Sound'da uzun bir kıyıya sahip küçük bir New England eyaleti. Yale Üniversitesi New Haven'dadır.",
+    "ko": "롱아일랜드 사운드(Long Island Sound)에 긴 해안이 있는 뉴잉글랜드의 작은 주입니다. 예일대학교는 뉴헤이븐에 있습니다.",
+    "zh": "新英格兰的一个小州，在长岛海峡拥有漫长的海岸。耶鲁大学位于纽黑文。"
+   },
    "terrain": "urban",
    "tags": [
     "insurance",
@@ -102,6 +186,18 @@
    "backdrop": "atlantic_coast"
   },
   "US-DE": {
+   "blurb": {
+    "en": "The second-smallest US state by area. It was the first to ratify the Constitution in 1787, which earned it the nickname First State.",
+    "ja": "面積で全米2番目に小さい州です。1787年に最初に合衆国憲法を批准したため「ファースト・ステート」と呼ばれます。",
+    "fr": "Le deuxième plus petit État américain en termes de superficie. Il fut le premier à ratifier la Constitution en 1787, ce qui lui valut le surnom de Premier État.",
+    "es": "El segundo estado más pequeño de EE. UU. por área. Fue el primero en ratificar la Constitución en 1787, lo que le valió el apodo de Primer Estado.",
+    "it": "Il secondo stato americano più piccolo per area. Fu il primo a ratificare la Costituzione nel 1787, che gli valse il soprannome di Primo Stato.",
+    "pt": "O segundo menor estado dos EUA em área. Foi o primeiro a ratificar a Constituição em 1787, o que lhe valeu o apelido de Primeiro Estado.",
+    "nl": "De op een na kleinste Amerikaanse staat per gebied. Het was de eerste die de grondwet ratificeerde in 1787, waardoor het de bijnaam Eerste Staat kreeg.",
+    "tr": "Bölgeye göre ABD'nin ikinci en küçük eyaleti. 1787'de Anayasayı onaylayan ilk ülke oldu ve bu da ona Birinci Devlet takma adını kazandırdı.",
+    "ko": "지역별로 미국에서 두 번째로 작은 주입니다. 1787년에 최초로 헌법을 비준하여 First State라는 별명을 얻었습니다.",
+    "zh": "美国面积第二小的州。 1787 年，它是第一个批准宪法的州，因此获得了“第一州”的绰号。"
+   },
    "terrain": "urban",
    "tags": [
     "first_state",
@@ -113,6 +209,18 @@
    "backdrop": "atlantic_coast"
   },
   "US-DC": {
+   "blurb": {
+    "en": "The US capital, a federal district rather than a state, on the Potomac River between Maryland and Virginia. Home to the White House, the Capitol and the Smithsonian museums.",
+    "ja": "アメリカの首都で、州ではなく連邦直轄区です。ポトマック川沿い、メリーランド州とバージニア州の間にあり、ホワイトハウスや議会議事堂、スミソニアン博物館群があります。",
+    "fr": "La capitale américaine, un district fédéral plutôt qu'un État, située sur le fleuve Potomac, entre le Maryland et la Virginie. Abritant la Maison Blanche, le Capitole et les musées Smithsonian.",
+    "es": "La capital de Estados Unidos, más un distrito federal que un estado, a orillas del río Potomac, entre Maryland y Virginia. Hogar de la Casa Blanca, el Capitolio y los museos Smithsonian.",
+    "it": "La capitale degli Stati Uniti, un distretto federale più che uno stato, sul fiume Potomac tra il Maryland e la Virginia. Sede della Casa Bianca, del Campidoglio e dei musei Smithsonian.",
+    "pt": "A capital dos EUA, um distrito federal e não um estado, às margens do rio Potomac, entre Maryland e Virgínia. Lar da Casa Branca, do Capitólio e dos museus Smithsonian.",
+    "nl": "De Amerikaanse hoofdstad, eerder een federaal district dan een staat, aan de Potomac-rivier tussen Maryland en Virginia. De thuisbasis van het Witte Huis, het Capitool en de Smithsonian-musea.",
+    "tr": "ABD'nin başkenti, Maryland ve Virginia arasındaki Potomac Nehri üzerinde eyaletten ziyade federal bir bölge. Beyaz Saray, Capitol ve Smithsonian müzelerine ev sahipliği yapıyor.",
+    "ko": "메릴랜드와 버지니아 사이의 포토맥 강에 위치한 미국의 수도이자 주가 아닌 연방 지구입니다. 백악관, 국회의사당, 스미소니언 박물관이 있는 곳입니다.",
+    "zh": "美国首都，是一个联邦区，而不是一个州，位于马里兰州和弗吉尼亚州之间的波托马克河上。白宫、国会大厦和史密森尼博物馆的所在地。"
+   },
    "terrain": "urban",
    "tags": [
     "capital"
@@ -124,6 +232,18 @@
    "exclusiveFacility": "capitol"
   },
   "US-FL": {
+   "blurb": {
+    "en": "A warm southeastern peninsula with the Everglades wetlands and many beaches. Cape Canaveral launches rockets, and Orlando has big theme parks.",
+    "ja": "温暖な南東部の半島の州で、エバーグレーズの湿地や多くのビーチがあります。ケープカナベラルからロケットが打ち上げられ、オーランドには大きなテーマパークがあります。",
+    "fr": "Une péninsule chaude du sud-est avec les zones humides des Everglades et de nombreuses plages. Cap Canaveral lance des fusées et Orlando possède de grands parcs à thème.",
+    "es": "Una cálida península del sureste con humedales de los Everglades y muchas playas. Cabo Cañaveral lanza cohetes y Orlando tiene grandes parques temáticos.",
+    "it": "Una calda penisola sud-orientale con le zone umide delle Everglades e numerose spiagge. Cape Canaveral lancia razzi e Orlando ha grandi parchi a tema.",
+    "pt": "Uma península quente do sudeste com os pântanos de Everglades e muitas praias. Cabo Canaveral lança foguetes e Orlando tem grandes parques temáticos.",
+    "nl": "Een warm zuidoostelijk schiereiland met de moerassen van de Everglades en vele stranden. Cape Canaveral lanceert raketten en Orlando heeft grote themaparken.",
+    "tr": "Everglades sulak alanları ve birçok plajıyla sıcak bir güneydoğu yarımadası. Cape Canaveral roket fırlatıyor ve Orlando'da büyük tema parkları var.",
+    "ko": "에버글레이즈 습지와 많은 해변이 있는 따뜻한 남동부 반도입니다. 케이프커내버럴에는 로켓이 발사되고 올랜도에는 대규모 테마파크가 있습니다.",
+    "zh": "温暖的东南半岛，拥有大沼泽地湿地和许多海滩。卡纳维拉尔角发射火箭，奥兰多拥有大型主题公园。"
+   },
    "terrain": "sea",
    "tags": [
     "coast",
@@ -138,6 +258,18 @@
    "exclusiveFacility": "space_center"
   },
   "US-GA": {
+   "blurb": {
+    "en": "A southeastern state famous for peaches and for Atlanta, a major transport hub. It reaches from the Appalachian foothills to the Atlantic coast.",
+    "ja": "桃と、交通の要所アトランタで知られる南東部の州です。アパラチア山脈のふもとから大西洋岸まで広がります。",
+    "fr": "Un État du sud-est célèbre pour ses pêches et pour Atlanta, une plaque tournante majeure des transports. Il s'étend des contreforts des Appalaches jusqu'à la côte atlantique.",
+    "es": "Un estado del sureste famoso por los melocotones y por Atlanta, un importante centro de transporte. Se extiende desde las estribaciones de los Apalaches hasta la costa atlántica.",
+    "it": "Uno stato del sud-est famoso per le pesche e per Atlanta, un importante snodo dei trasporti. Si estende dai contrafforti degli Appalachi fino alla costa atlantica.",
+    "pt": "Um estado do sudeste famoso pelos pêssegos e por Atlanta, um importante centro de transportes. Atinge desde o sopé dos Apalaches até a costa atlântica.",
+    "nl": "Een zuidoostelijke staat die beroemd is om zijn perziken en om Atlanta, een belangrijk transportknooppunt. Het reikt van de uitlopers van de Appalachen tot aan de Atlantische kust.",
+    "tr": "Şeftalileriyle ve önemli bir ulaşım merkezi olan Atlanta'yla ünlü bir güneydoğu eyaleti. Appalachian eteklerinden Atlantik kıyısına kadar uzanır.",
+    "ko": "복숭아와 주요 교통 중심지인 애틀랜타로 유명한 남동부 주입니다. 애팔래치아 산기슭에서 대서양 연안까지 이릅니다.",
+    "zh": "东南部州，以桃子和主要交通枢纽亚特兰大而闻名。它从阿巴拉契亚山麓一直延伸到大西洋海岸。"
+   },
    "terrain": "agriculture",
    "tags": [
     "south",
@@ -149,6 +281,18 @@
    "backdrop": "plains"
   },
   "US-HI": {
+   "blurb": {
+    "en": "An island state in the Pacific made of volcanic islands, with active volcanoes and beaches. It became the 50th state in 1959.",
+    "ja": "太平洋に浮かぶ火山島からなる州で、活火山とビーチがあります。1959年に50番目の州になりました。",
+    "fr": "Un État insulaire du Pacifique composé d'îles volcaniques, avec des volcans actifs et des plages. Il est devenu le 50ème État en 1959.",
+    "es": "Un estado insular en el Pacífico formado por islas volcánicas, con volcanes activos y playas. Se convirtió en el estado número 50 en 1959.",
+    "it": "Uno stato insulare nel Pacifico fatto di isole vulcaniche, con vulcani attivi e spiagge. Divenne il cinquantesimo stato nel 1959.",
+    "pt": "Um estado insular no Pacífico feito de ilhas vulcânicas, com vulcões ativos e praias. Tornou-se o 50º estado em 1959.",
+    "nl": "Een eilandstaat in de Stille Oceaan, bestaande uit vulkanische eilanden, met actieve vulkanen en stranden. In 1959 werd het de 50e staat.",
+    "tr": "Pasifik'te, aktif volkanları ve plajları olan volkanik adalardan oluşan bir ada devleti. 1959'da 50. eyalet oldu.",
+    "ko": "화산섬으로 이루어진 태평양의 섬나라로, 활화산과 해변이 있습니다. 1959년에 50번째 주가 되었습니다.",
+    "zh": "太平洋上的一个岛国，由火山岛组成，拥有活火山和海滩。 1959年成为第50个州。"
+   },
    "terrain": "sea",
    "tags": [
     "island",
@@ -160,6 +304,18 @@
    "backdrop": "tropics"
   },
   "US-ID": {
+   "blurb": {
+    "en": "A mountain state in the Northwest, known for potatoes and wild areas like the Sawtooth Range. Much of it is public land.",
+    "ja": "北西部の山がちな州で、ジャガイモと、ソートゥース山脈のような自然の豊かな地域で知られます。広い範囲が公有地です。",
+    "fr": "Un État montagneux du Nord-Ouest, connu pour ses pommes de terre et ses zones sauvages comme la chaîne Sawtooth. Une grande partie est constituée de terres publiques.",
+    "es": "Un estado montañoso en el noroeste, conocido por sus patatas y áreas silvestres como Sawtooth Range. Gran parte es terreno público.",
+    "it": "Uno stato montano nel nord-ovest, noto per le patate e le aree selvagge come la catena montuosa del dente di sega. Gran parte di esso è suolo pubblico.",
+    "pt": "Um estado montanhoso no noroeste, conhecido pelas batatas e áreas selvagens como a Cordilheira Sawtooth. Grande parte é terra pública.",
+    "nl": "Een bergstaat in het noordwesten, bekend om zijn aardappelen en wilde gebieden zoals de Sawtooth Range. Een groot deel ervan is openbaar terrein.",
+    "tr": "Patatesleri ve Sawtooth Sıradağları gibi vahşi alanlarıyla tanınan, Kuzeybatı'daki bir dağ eyaleti. Büyük bir kısmı kamu arazisidir.",
+    "ko": "감자와 톱니 산맥 등의 야생 지역으로 유명한 북서부의 산악 주입니다. 대부분이 공유지입니다.",
+    "zh": "西北部的一个山区州，以土豆和锯齿山脉等野生地区而闻名。其中大部分是公共土地。"
+   },
    "terrain": "mountain",
    "tags": [
     "potato",
@@ -171,6 +327,18 @@
    "backdrop": "rockies"
   },
   "US-IL": {
+   "blurb": {
+    "en": "A Midwestern state on Lake Michigan, home to Chicago with its tall buildings and deep-dish pizza. Abraham Lincoln lived in Springfield.",
+    "ja": "ミシガン湖に面した中西部の州で、高層ビルとディープディッシュ・ピザで知られるシカゴがあります。エイブラハム・リンカーンはスプリングフィールドに住んでいました。",
+    "fr": "Un État du Midwest situé au bord du lac Michigan, où se trouve Chicago, avec ses grands immeubles et ses pizzas épaisses. Abraham Lincoln vivait à Springfield.",
+    "es": "Un estado del Medio Oeste en el lago Michigan, hogar de Chicago con sus edificios altos y pizza de plato hondo. Abraham Lincoln vivió en Springfield.",
+    "it": "Uno stato del Midwest sul lago Michigan, sede di Chicago con i suoi alti edifici e la sua pizza profonda. Abraham Lincoln viveva a Springfield.",
+    "pt": "Um estado do meio-oeste às margens do Lago Michigan, onde fica Chicago, com seus prédios altos e pizzas recheadas. Abraham Lincoln morava em Springfield.",
+    "nl": "Een staat in het Midwesten aan Lake Michigan, de thuisbasis van Chicago met zijn hoge gebouwen en diepe pizza's. Abraham Lincoln woonde in Springfield.",
+    "tr": "Michigan Gölü kıyısında, yüksek binaları ve kalın hamurlu pizzalarıyla Chicago'ya ev sahipliği yapan bir Ortabatı eyaleti. Abraham Lincoln Springfield'da yaşıyordu.",
+    "ko": "미시간 호수에 위치한 중서부 주, 높은 건물과 딥디쉬 피자가 있는 시카고의 본거지입니다. 에이브러햄 링컨은 스프링필드에 살았습니다.",
+    "zh": "密歇根湖畔的中西部州，是芝加哥的所在地，拥有高楼大厦和深盘披萨。亚伯拉罕·林肯住在斯普林菲尔德。"
+   },
    "terrain": "urban",
    "tags": [
     "industry",
@@ -183,6 +351,18 @@
    "backdrop": "skyline"
   },
   "US-IN": {
+   "blurb": {
+    "en": "A Midwestern state famous for the Indianapolis 500 car race. Much of it is flat farmland.",
+    "ja": "インディアナポリス500マイルレースで知られる中西部の州です。多くは平らな農地です。",
+    "fr": "Un État du Midwest célèbre pour la course automobile d'Indianapolis 500. Une grande partie est constituée de terres agricoles plates.",
+    "es": "Un estado del Medio Oeste famoso por la carrera automovilística de las 500 Millas de Indianápolis. Gran parte son tierras de cultivo planas.",
+    "it": "Uno stato del Midwest famoso per la corsa automobilistica 500 Miglia di Indianapolis. La maggior parte è costituita da terreni agricoli pianeggianti.",
+    "pt": "Um estado do Meio-Oeste famoso pela corrida de carros 500 Milhas de Indianápolis. Grande parte são terras agrícolas planas.",
+    "nl": "Een staat uit het Midwesten die beroemd is vanwege de autorace Indianapolis 500. Een groot deel ervan bestaat uit vlakke landbouwgrond.",
+    "tr": "Indianapolis 500 araba yarışıyla ünlü bir Ortabatı eyaleti. Çoğu düz tarım arazisidir.",
+    "ko": "인디애나폴리스 500 자동차 경주로 유명한 중서부 주. 대부분이 평평한 농지입니다.",
+    "zh": "中西部的一个州，以印第安纳波利斯 500 英里赛车比赛而闻名。其中大部分是平坦的农田。"
+   },
    "terrain": "agriculture",
    "tags": [
     "industry",
@@ -195,6 +375,18 @@
    "backdrop": "cornfield"
   },
   "US-IA": {
+   "blurb": {
+    "en": "A Midwestern farming state, a leading producer of corn and pigs, between the Mississippi and Missouri rivers.",
+    "ja": "ミシシッピ川とミズーリ川にはさまれた中西部の農業州で、トウモロコシと豚の大きな産地です。",
+    "fr": "Un État agricole du Midwest, principal producteur de maïs et de porcs, situé entre les fleuves Mississippi et Missouri.",
+    "es": "Un estado agrícola del Medio Oeste, productor líder de maíz y cerdos, entre los ríos Mississippi y Missouri.",
+    "it": "Uno stato agricolo del Midwest, uno dei principali produttori di mais e maiali, tra i fiumi Mississippi e Missouri.",
+    "pt": "Um estado agrícola do meio-oeste, líder na produção de milho e suínos, entre os rios Mississippi e Missouri.",
+    "nl": "Een landbouwstaat uit het Midwesten, een toonaangevende producent van maïs en varkens, tussen de rivieren de Mississippi en de Missouri.",
+    "tr": "Mississippi ve Missouri nehirleri arasında, önde gelen mısır ve domuz üreticisi olan bir Ortabatı tarım eyaleti.",
+    "ko": "미시시피 강과 미주리 강 사이에 위치한 중서부의 농업 주이자 옥수수와 돼지의 주요 생산지입니다.",
+    "zh": "中西部农业州，位于密西西比河和密苏里河之间，是玉米和生猪的主要生产地。"
+   },
    "terrain": "agriculture",
    "tags": [
     "farming",
@@ -207,6 +399,18 @@
    "backdrop": "cornfield"
   },
   "US-KS": {
+   "blurb": {
+    "en": "A Great Plains state near the centre of the contiguous US, known for wheat fields and wide skies.",
+    "ja": "グレートプレーンズの州で、本土のほぼ中央にあり、小麦畑と広い空で知られます。",
+    "fr": "Un État des Grandes Plaines situé près du centre des États-Unis contigus, connu pour ses champs de blé et son vaste ciel.",
+    "es": "Un estado de las Grandes Llanuras cerca del centro de los Estados Unidos contiguos, conocido por sus campos de trigo y sus cielos amplios.",
+    "it": "Uno stato delle Grandi Pianure vicino al centro degli Stati Uniti contigui, noto per i campi di grano e i cieli ampi.",
+    "pt": "Um estado das Grandes Planícies próximo ao centro dos EUA contíguos, conhecido por campos de trigo e céus amplos.",
+    "nl": "Een staat in de Great Plains, vlakbij het centrum van de aangrenzende VS, bekend om zijn tarwevelden en weidse luchten.",
+    "tr": "Buğday tarlaları ve geniş gökyüzüyle tanınan, bitişik ABD'nin merkezine yakın bir Great Plains eyaleti.",
+    "ko": "밀밭과 넓은 하늘로 유명한 미국 본토 중앙 근처의 대평원 주입니다.",
+    "zh": "靠近美国中部的大平原州，以麦田和广阔的天空而闻名。"
+   },
    "terrain": "agriculture",
    "tags": [
     "plains",
@@ -222,6 +426,18 @@
    }
   },
   "US-KY": {
+   "blurb": {
+    "en": "A southern state famous for the Kentucky Derby horse race, bourbon whiskey and Mammoth Cave, the longest known cave system in the world.",
+    "ja": "競馬のケンタッキーダービー、バーボンウイスキー、世界最長の洞窟系として知られるマンモス・ケーブがある南部の州です。",
+    "fr": "Un État du sud célèbre pour la course de chevaux du Kentucky Derby, le whisky bourbon et Mammoth Cave, le plus ancien système de grottes connu au monde.",
+    "es": "Un estado del sur famoso por la carrera de caballos Derby de Kentucky, el whisky bourbon y Mammoth Cave, el sistema de cuevas más largo conocido en el mundo.",
+    "it": "Uno stato del sud famoso per la corsa di cavalli del Kentucky Derby, il bourbon whisky e la Mammoth Cave, il sistema di grotte più lungo conosciuto al mondo.",
+    "pt": "Um estado do sul famoso pela corrida de cavalos Kentucky Derby, pelo uísque bourbon e pela Mammoth Cave, o sistema de cavernas mais longo conhecido do mundo.",
+    "nl": "Een zuidelijke staat die bekend staat om de paardenrace Kentucky Derby, bourbon whisky en Mammoth Cave, het langst bekende grottenstelsel ter wereld.",
+    "tr": "Kentucky Derby at yarışı, burbon viski ve dünyanın bilinen en uzun mağara sistemi olan Mamut Mağarası ile ünlü bir güney eyaleti.",
+    "ko": "켄터키 더비 경마, 버번 위스키, 세계에서 가장 긴 동굴 시스템인 매머드 동굴로 유명한 남부 주입니다.",
+    "zh": "南部州，以肯塔基德比赛马、波本威士忌和猛犸洞（世界上已知最长的洞穴系统）而闻名。"
+   },
    "terrain": "mountain",
    "tags": [
     "bourbon",
@@ -235,6 +451,18 @@
    "exclusiveFacility": "distillery"
   },
   "US-LA": {
+   "blurb": {
+    "en": "A Gulf Coast state with the Mississippi delta, jazz and Cajun and Creole food. New Orleans holds the Mardi Gras festival.",
+    "ja": "メキシコ湾岸の州で、ミシシッピ川の三角州があり、ジャズとケイジャン・クレオール料理で知られます。ニューオーリンズではマルディグラの祭りが開かれます。",
+    "fr": "Un État de la côte du Golfe avec le delta du Mississippi, le jazz et la cuisine cajun et créole. La Nouvelle-Orléans organise le festival du Mardi Gras.",
+    "es": "Un estado de la costa del Golfo con el delta del Mississippi, jazz y comida cajún y criolla. Nueva Orleans celebra el festival Mardi Gras.",
+    "it": "Uno stato della costa del Golfo con il delta del Mississippi, jazz e cucina cajun e creola. New Orleans ospita il festival del Mardi Gras.",
+    "pt": "Um estado da Costa do Golfo com o delta do Mississippi, jazz e comida cajun e crioula. Nova Orleans realiza o festival de Mardi Gras.",
+    "nl": "Een staat aan de Golfkust met de Mississippi-delta, jazz en Cajun en Creools eten. New Orleans organiseert het Mardi Gras-festival.",
+    "tr": "Mississippi deltası, caz ve Cajun ve Creole yemekleriyle Körfez Kıyısı eyaleti. New Orleans, Mardi Gras festivalini düzenliyor.",
+    "ko": "미시시피 삼각주, 재즈, 케이준 및 크리올 음식이 있는 멕시코만 연안의 주입니다. 뉴올리언스에서는 마디그라 축제가 열립니다.",
+    "zh": "墨西哥湾沿岸州，拥有密西西比三角洲、爵士乐以及卡真和克里奥尔美食。新奥尔良举办狂欢节。"
+   },
    "terrain": "sea",
    "tags": [
     "bayou",
@@ -248,6 +476,18 @@
    "backdrop": "bayou"
   },
   "US-ME": {
+   "blurb": {
+    "en": "The northeasternmost state, with a rocky coast, lighthouses and lobster. Most of it is covered by forest.",
+    "ja": "最も北東にある州で、岩の多い海岸、灯台、ロブスターで知られます。大部分が森林です。",
+    "fr": "L'État le plus au nord-est, avec une côte rocheuse, des phares et du homard. La majeure partie est couverte de forêt.",
+    "es": "El estado más nororiental, con costa rocosa, faros y langosta. La mayor parte está cubierta por bosques.",
+    "it": "Lo stato più a nord-est, con costa rocciosa, fari e aragoste. La maggior parte è coperta da foreste.",
+    "pt": "O estado mais nordestino, com litoral rochoso, faróis e lagostas. A maior parte é coberta por floresta.",
+    "nl": "De meest noordoostelijke staat, met een rotsachtige kust, vuurtorens en kreeft. Het grootste deel is bedekt met bos.",
+    "tr": "Kayalık sahili, deniz fenerleri ve ıstakozuyla en kuzeydoğu eyaleti. Büyük bir kısmı ormanlarla kaplıdır.",
+    "ko": "바위가 많은 해안, 등대, 바다가재가 있는 북동쪽 끝의 주입니다. 대부분이 숲으로 덮여있습니다.",
+    "zh": "最东北部的州，拥有岩石海岸、灯塔和龙虾。大部分地区被森林覆盖。"
+   },
    "terrain": "sea",
    "tags": [
     "lobster",
@@ -260,6 +500,18 @@
    "backdrop": "atlantic_coast"
   },
   "US-MD": {
+   "blurb": {
+    "en": "A mid-Atlantic state around Chesapeake Bay, known for blue crabs. It surrounds Washington, D.C. on three sides.",
+    "ja": "チェサピーク湾を囲む大西洋岸中部の州で、ブルークラブで知られます。ワシントンD.C.を三方から囲んでいます。",
+    "fr": "Un État du centre de l'Atlantique autour de la baie de Chesapeake, connu pour ses crabes bleus. Il entoure Washington, D.C., sur trois côtés.",
+    "es": "Un estado del Atlántico medio alrededor de la Bahía de Chesapeake, conocido por los cangrejos azules. Rodea Washington, D.C. por tres lados.",
+    "it": "Uno stato dell'Atlantico centrale intorno alla baia di Chesapeake, noto per i granchi blu. Circonda Washington, DC su tre lati.",
+    "pt": "Um estado do meio do Atlântico próximo à Baía de Chesapeake, conhecido pelos caranguejos azuis. Cerca Washington, DC em três lados.",
+    "nl": "Een staat in het midden van de Atlantische Oceaan rond Chesapeake Bay, bekend om de blauwe krabben. Het omringt Washington, D.C. aan drie kanten.",
+    "tr": "Chesapeake Körfezi civarında, mavi yengeçlerle tanınan bir Orta Atlantik eyaleti. Washington DC'yi üç taraftan çevreliyor.",
+    "ko": "꽃게로 유명한 체서피크 만 주변의 대서양 중부 주입니다. 워싱턴 D.C.를 삼면으로 둘러싸고 있습니다.",
+    "zh": "切萨皮克湾周围的大西洋中部一个州，以蓝蟹而闻名。它从三个侧面包围华盛顿特区。"
+   },
    "terrain": "sea",
    "tags": [
     "bay",
@@ -271,6 +523,18 @@
    "backdrop": "atlantic_coast"
   },
   "US-MA": {
+   "blurb": {
+    "en": "A New England state where the Pilgrims landed and the American Revolution began. Harvard and MIT are near Boston.",
+    "ja": "ピルグリムが上陸し、アメリカ独立戦争が始まったニューイングランドの州です。ボストンの近くにハーバード大学とMITがあります。",
+    "fr": "Un État de la Nouvelle-Angleterre où les pèlerins ont débarqué et où la Révolution américaine a commencé. Harvard et le MIT sont proches de Boston.",
+    "es": "Un estado de Nueva Inglaterra donde desembarcaron los peregrinos y comenzó la Revolución Americana. Harvard y el MIT están cerca de Boston.",
+    "it": "Uno stato del New England dove sbarcarono i pellegrini e dove ebbe inizio la rivoluzione americana. Harvard e il MIT sono vicino a Boston.",
+    "pt": "Um estado da Nova Inglaterra onde os peregrinos desembarcaram e a Revolução Americana começou. Harvard e MIT ficam perto de Boston.",
+    "nl": "Een staat in New England waar de Pilgrims landden en de Amerikaanse Revolutie begon. Harvard en MIT liggen in de buurt van Boston.",
+    "tr": "Hacıların ayak bastığı ve Amerikan Devrimi'nin başladığı New England eyaleti. Harvard ve MIT Boston'a yakındır.",
+    "ko": "순례자들이 상륙하고 미국 혁명이 시작된 뉴잉글랜드 주. 보스턴 근처에는 하버드와 MIT가 있습니다.",
+    "zh": "清教徒登陆的新英格兰州，美国革命开始于此。哈佛大学和麻省理工学院都在波士顿附近。"
+   },
    "terrain": "urban",
    "tags": [
     "education",
@@ -283,6 +547,18 @@
    "backdrop": "atlantic_coast"
   },
   "US-MI": {
+   "blurb": {
+    "en": "A Great Lakes state made of two peninsulas, long known for car making in Detroit.",
+    "ja": "五大湖に囲まれ、二つの半島からなる州で、デトロイトの自動車産業で長く知られてきました。",
+    "fr": "Un État des Grands Lacs composé de deux péninsules, connu depuis longtemps pour la construction automobile à Détroit.",
+    "es": "Un estado de los Grandes Lagos formado por dos penínsulas, conocido desde hace mucho tiempo por la fabricación de automóviles en Detroit.",
+    "it": "Uno stato dei Grandi Laghi formato da due peninsulari, da tempo noto per la produzione automobilistica a Detroit.",
+    "pt": "Um estado dos Grandes Lagos formado por duas penínsulas, há muito conhecido pela fabricação de automóveis em Detroit.",
+    "nl": "Een staat aan de Grote Meren bestaande uit twee schiereilanden, al lang bekend vanwege de autoproductie in Detroit.",
+    "tr": "İki yarımadadan oluşan, uzun süredir Detroit'teki araba yapımıyla tanınan Büyük Göller eyaleti.",
+    "ko": "오랫동안 디트로이트의 자동차 제조로 알려진 두 개의 반도로 이루어진 오대호 주입니다.",
+    "zh": "由两个半岛组成的五大湖州，底特律长期以来以汽车制造而闻名。"
+   },
    "terrain": "mixed",
    "tags": [
     "auto",
@@ -298,6 +574,18 @@
    }
   },
   "US-MN": {
+   "blurb": {
+    "en": "The Land of 10,000 Lakes in the upper Midwest, where the Mississippi River begins.",
+    "ja": "「1万の湖の国」と呼ばれる中西部北部の州で、ミシシッピ川の源流があります。",
+    "fr": "Le pays des 10 000 lacs dans le haut Midwest, là où commence le fleuve Mississippi.",
+    "es": "La Tierra de los 10.000 Lagos en la parte superior del Medio Oeste, donde comienza el río Mississippi.",
+    "it": "La terra dei 10.000 laghi nel Midwest superiore, dove inizia il fiume Mississippi.",
+    "pt": "A Terra dos 10.000 Lagos no alto Centro-Oeste, onde começa o Rio Mississippi.",
+    "nl": "Het land van 10.000 meren in het hogere middenwesten, waar de rivier de Mississippi begint.",
+    "tr": "Mississippi Nehri'nin başladığı Yukarı Orta Batı'daki 10.000 Göller Ülkesi.",
+    "ko": "미시시피강이 시작되는 중서부 상류에 위치한 10,000개의 호수의 땅.",
+    "zh": "位于中西部北部的万湖之地，密西西比河的发源地。"
+   },
    "terrain": "mixed",
    "tags": [
     "lakes",
@@ -310,6 +598,18 @@
    "backdrop": "great_lakes"
   },
   "US-MS": {
+   "blurb": {
+    "en": "A Deep South state along the Mississippi River, known as a birthplace of blues music.",
+    "ja": "ミシシッピ川沿いの深南部の州で、ブルース音楽の発祥の地の一つとして知られます。",
+    "fr": "Un État du Sud profond situé le long du fleuve Mississippi, connu comme le berceau de la musique blues.",
+    "es": "Un estado del sur profundo a lo largo del río Mississippi, conocido como el lugar de nacimiento de la música blues.",
+    "it": "Uno stato del profondo sud lungo il fiume Mississippi, noto come luogo di nascita della musica blues.",
+    "pt": "Um estado do extremo sul ao longo do rio Mississippi, conhecido como o berço do blues.",
+    "nl": "Een staat in het diepe zuiden langs de rivier de Mississippi, bekend als de geboorteplaats van de bluesmuziek.",
+    "tr": "Blues müziğinin doğduğu yer olarak bilinen, Mississippi Nehri kıyısındaki Derin Güney eyaleti.",
+    "ko": "블루스 음악의 발상지로 알려진 미시시피강을 따라 있는 최남부 주.",
+    "zh": "密西西比河沿岸的一个深南州，被誉为蓝调音乐的发源地。"
+   },
    "terrain": "agriculture",
    "tags": [
     "delta",
@@ -322,6 +622,18 @@
    "backdrop": "bayou"
   },
   "US-MO": {
+   "blurb": {
+    "en": "A central state where the Missouri and Mississippi rivers meet. St. Louis has the Gateway Arch.",
+    "ja": "ミズーリ川とミシシッピ川が合流する中央部の州です。セントルイスにはゲートウェイ・アーチがあります。",
+    "fr": "Un État central où se rencontrent les fleuves Missouri et Mississippi. Saint-Louis possède le Gateway Arch.",
+    "es": "Estado central donde se encuentran los ríos Misuri y Mississippi. St. Louis tiene el Arco Gateway.",
+    "it": "Uno stato centrale dove si incontrano i fiumi Missouri e Mississippi. St. Louis ha il Gateway Arch.",
+    "pt": "Um estado central onde os rios Missouri e Mississippi se encontram. St. Louis tem o Gateway Arch.",
+    "nl": "Een centrale staat waar de rivieren Missouri en Mississippi samenkomen. St. Louis heeft de Gateway Arch.",
+    "tr": "Missouri ve Mississippi nehirlerinin buluştuğu merkezi bir eyalet. St. Louis'de Geçit Kemeri var.",
+    "ko": "미주리 강과 미시시피 강이 만나는 중앙 주입니다. 세인트 루이스에는 게이트웨이 아치(Gateway Arch)가 있습니다.",
+    "zh": "密苏里河与密西西比河交汇处的中部州。圣路易斯有拱门。"
+   },
    "terrain": "mixed",
    "tags": [
     "river",
@@ -331,6 +643,18 @@
    "backdrop": "plains"
   },
   "US-MT": {
+   "blurb": {
+    "en": "A northern Rocky Mountain state, called Big Sky Country, with Glacier National Park.",
+    "ja": "ロッキー山脈北部の州で、「ビッグスカイ・カントリー」と呼ばれ、グレイシャー国立公園があります。",
+    "fr": "Un État du nord des Rocheuses, appelé Big Sky Country, avec le parc national des Glaciers.",
+    "es": "Un estado del norte de las Montañas Rocosas, llamado Big Sky Country, con el Parque Nacional Glacier.",
+    "it": "Uno stato settentrionale delle Montagne Rocciose, chiamato Big Sky Country, con il Glacier National Park.",
+    "pt": "Um estado do norte das Montanhas Rochosas, chamado Big Sky Country, com o Parque Nacional Glacier.",
+    "nl": "Een noordelijke Rocky Mountain-staat, genaamd Big Sky Country, met Glacier National Park.",
+    "tr": "Glacier Ulusal Parkı'nın bulunduğu, Big Sky Country olarak adlandırılan kuzeydeki Rocky Dağı eyaleti.",
+    "ko": "글레이셔 국립공원이 있는 빅 스카이 컨트리(Big Sky Country)라고 불리는 로키산맥 북부의 주입니다.",
+    "zh": "落基山脉北部的一个州，称为“大天空之国”，拥有冰川国家公园。"
+   },
    "terrain": "mountain",
    "tags": [
     "big_sky",
@@ -343,6 +667,18 @@
    "backdrop": "rockies"
   },
   "US-NE": {
+   "blurb": {
+    "en": "A Great Plains state of ranches and farms, crossed by the Platte River.",
+    "ja": "牧場と農地が広がるグレートプレーンズの州で、プラット川が流れます。",
+    "fr": "Un État des Grandes Plaines composé de ranchs et de fermes, traversé par la rivière Platte.",
+    "es": "Un estado de ranchos y granjas de las Grandes Llanuras, atravesado por el río Platte.",
+    "it": "Uno stato di ranch e fattorie delle Grandi Pianure, attraversato dal fiume Platte.",
+    "pt": "Um estado de fazendas e fazendas das Grandes Planícies, atravessado pelo rio Platte.",
+    "nl": "Een staat van Great Plains met boerderijen en boerderijen, doorkruist door de Platte River.",
+    "tr": "Platte Nehri'nin geçtiği, çiftliklerden ve çiftliklerden oluşan Great Plains eyaleti.",
+    "ko": "플래트 강을 건너 목장과 농장이 있는 대평원 주입니다.",
+    "zh": "一个拥有牧场和农场的大平原州，普拉特河穿过。"
+   },
    "terrain": "agriculture",
    "tags": [
     "plains",
@@ -355,6 +691,18 @@
    "backdrop": "plains"
   },
   "US-NV": {
+   "blurb": {
+    "en": "A dry western state in the Great Basin, home to Las Vegas and its casinos.",
+    "ja": "グレートベースンにある乾燥した西部の州で、カジノで知られるラスベガスがあります。",
+    "fr": "Un État sec de l'ouest du Grand Bassin, qui abrite Las Vegas et ses casinos.",
+    "es": "Un estado occidental seco en la Gran Cuenca, hogar de Las Vegas y sus casinos.",
+    "it": "Uno stato occidentale arido nel Grande Bacino, sede di Las Vegas e dei suoi casinò.",
+    "pt": "Um estado seco do oeste na Grande Bacia, lar de Las Vegas e seus cassinos.",
+    "nl": "Een droge westelijke staat in het Great Basin, de thuisbasis van Las Vegas en zijn casino's.",
+    "tr": "Büyük Havza'da, Las Vegas'a ve kumarhanelerine ev sahipliği yapan kurak bir batı eyaleti.",
+    "ko": "라스베가스와 카지노가 있는 그레이트 베이슨(Great Basin)에 위치한 건조한 서부 지역입니다.",
+    "zh": "大盆地的一个干燥的西部州，是拉斯维加斯及其赌场的所在地。"
+   },
    "terrain": "mixed",
    "tags": [
     "desert",
@@ -367,6 +715,18 @@
    "backdrop": "desert"
   },
   "US-NH": {
+   "blurb": {
+    "en": "A New England state with the motto \"Live Free or Die\" and the White Mountains.",
+    "ja": "標語が「自由に生きよ、さもなくば死を」のニューイングランドの州で、ホワイト山地があります。",
+    "fr": "Un État de la Nouvelle-Angleterre avec la devise « Vivre libre ou mourir » et les Montagnes Blanches.",
+    "es": "Un estado de Nueva Inglaterra con el lema \"Vive libre o muere\" y las Montañas Blancas.",
+    "it": "Uno stato del New England con il motto \"Vivi libero o muori\" e le White Mountains.",
+    "pt": "Um estado da Nova Inglaterra com o lema \"Viva Livre ou Morra\" e as Montanhas Brancas.",
+    "nl": "Een staat in New England met het motto ‘Live Free or Die’ en de Witte Bergen.",
+    "tr": "\"Özgür Yaşa ya da Öl\" sloganı ve Beyaz Dağlar ile bir New England eyaleti.",
+    "ko": "\"자유롭게 살거나 죽거나(Live Free or Die)\"를 모토로 하는 뉴잉글랜드 주와 화이트 산맥.",
+    "zh": "新英格兰州，座右铭是“不自由，毋宁死”和怀特山脉。"
+   },
    "terrain": "mountain",
    "tags": [
     "granite",
@@ -376,6 +736,18 @@
    "backdrop": "appalachia"
   },
   "US-NJ": {
+   "blurb": {
+    "en": "A densely populated mid-Atlantic state between New York City and Philadelphia, with a long Atlantic shore.",
+    "ja": "ニューヨークとフィラデルフィアの間にある人口密度の高い州で、大西洋岸の長い海岸があります。",
+    "fr": "Un État du centre de l'Atlantique densément peuplé entre New York et Philadelphie, avec une longue côte atlantique.",
+    "es": "Un estado densamente poblado en el Atlántico medio entre la ciudad de Nueva York y Filadelfia, con una larga costa atlántica.",
+    "it": "Uno stato dell'Atlantico centrale densamente popolato tra New York e Filadelfia, con una lunga costa atlantica.",
+    "pt": "Um estado densamente povoado do meio do Atlântico, entre a cidade de Nova York e a Filadélfia, com uma longa costa atlântica.",
+    "nl": "Een dichtbevolkte staat in het midden van de Atlantische Oceaan tussen New York City en Philadelphia, met een lange Atlantische kust.",
+    "tr": "New York City ile Philadelphia arasında, uzun bir Atlantik kıyısına sahip, yoğun nüfuslu bir Orta Atlantik eyaleti.",
+    "ko": "뉴욕시와 필라델피아 사이에 인구 밀도가 높고 대서양 해안이 긴 대서양 중부 주입니다.",
+    "zh": "大西洋中部一个人口稠密的州，位于纽约市和费城之间，拥有漫长的大西洋海岸。"
+   },
    "terrain": "urban",
    "tags": [
     "port",
@@ -389,6 +761,18 @@
    "backdrop": "atlantic_coast"
   },
   "US-NM": {
+   "blurb": {
+    "en": "A Southwest state with deserts, Pueblo culture and Carlsbad Caverns.",
+    "ja": "砂漠とプエブロの文化、カールスバッド洞窟群がある南西部の州です。",
+    "fr": "Un État du Sud-Ouest avec des déserts, la culture Pueblo et les cavernes de Carlsbad.",
+    "es": "Un estado del suroeste con desiertos, cultura Pueblo y Cavernas de Carlsbad.",
+    "it": "Uno stato del sud-ovest con deserti, cultura Pueblo e Carlsbad Caverns.",
+    "pt": "Um estado do sudoeste com desertos, cultura Pueblo e Cavernas Carlsbad.",
+    "nl": "Een zuidwestelijke staat met woestijnen, Pueblo-cultuur en Carlsbad Caverns.",
+    "tr": "Çölleri, Pueblo kültürü ve Carlsbad Mağaraları ile Güneybatı eyaleti.",
+    "ko": "사막, 푸에블로 문화, 칼스배드 동굴이 있는 남서부 주입니다.",
+    "zh": "西南州，拥有沙漠、普韦布洛文化和卡尔斯巴德洞穴。"
+   },
    "terrain": "mixed",
    "tags": [
     "desert",
@@ -399,6 +783,18 @@
    "exclusiveFacility": "national_lab"
   },
   "US-NY": {
+   "blurb": {
+    "en": "A northeastern state whose New York City is the largest US city, with the Statue of Liberty and Wall Street. Niagara Falls is also here.",
+    "ja": "最大の都市ニューヨーク市があり、自由の女神やウォール街で知られる北東部の州です。ナイアガラの滝もあります。",
+    "fr": "Un État du nord-est dont la ville de New York est la plus grande ville des États-Unis, avec la Statue de la Liberté et Wall Street. Les chutes du Niagara se trouvent également ici.",
+    "es": "Un estado del noreste cuya ciudad de Nueva York es la ciudad más grande de Estados Unidos, con la Estatua de la Libertad y Wall Street. Las Cataratas del Niágara también están aquí.",
+    "it": "Uno stato del nord-est la cui New York City è la più grande città degli Stati Uniti, con la Statua della Libertà e Wall Street. Anche le Cascate del Niagara sono qui.",
+    "pt": "Um estado do nordeste cuja cidade de Nova Iorque é a maior cidade dos EUA, com a Estátua da Liberdade e Wall Street. As Cataratas do Niágara também estão aqui.",
+    "nl": "Een noordoostelijke staat waarvan New York City de grootste Amerikaanse stad is, met het Vrijheidsbeeld en Wall Street. Niagara Falls is ook hier.",
+    "tr": "Özgürlük Anıtı ve Wall Street'in bulunduğu New York City'nin ABD'nin en büyük şehri olduğu kuzeydoğu eyaleti. Niagara Şelalesi de burada.",
+    "ko": "자유의 여신상과 월스트리트가 있는 미국 최대의 도시 뉴욕이 있는 북동부 주. 나이아가라 폭포도 여기에 있습니다.",
+    "zh": "东北部州，纽约市是美国最大的城市，拥有自由女神像和华尔街。尼亚加拉大瀑布也在这里。"
+   },
    "terrain": "urban",
    "tags": [
     "finance",
@@ -412,6 +808,18 @@
    "exclusiveFacility": "stock_exchange"
   },
   "US-NC": {
+   "blurb": {
+    "en": "A southeastern state stretching from the Outer Banks coast to the Blue Ridge mountains, where the Wright brothers made their first flight.",
+    "ja": "アウターバンクスの海岸からブルーリッジ山脈まで広がる南東部の州で、ライト兄弟が初飛行をした場所です。",
+    "fr": "Un État du sud-est qui s’étend de la côte des Outer Banks jusqu’aux montagnes Blue Ridge, où les frères Wright ont effectué leur premier vol.",
+    "es": "Un estado del sureste que se extiende desde la costa de Outer Banks hasta las montañas Blue Ridge, donde los hermanos Wright realizaron su primer vuelo.",
+    "it": "Uno stato sud-orientale che si estende dalla costa degli Outer Banks alle montagne Blue Ridge, dove i fratelli Wright effettuarono il loro primo volo.",
+    "pt": "Um estado do sudeste que se estende desde a costa de Outer Banks até as montanhas Blue Ridge, onde os irmãos Wright fizeram seu primeiro vôo.",
+    "nl": "Een zuidoostelijke staat die zich uitstrekt van de kust van de Outer Banks tot de Blue Ridge Mountains, waar de gebroeders Wright hun eerste vlucht maakten.",
+    "tr": "Outer Banks sahilinden Blue Ridge dağlarına kadar uzanan ve Wright kardeşlerin ilk uçuşlarını yaptıkları güneydoğu eyaleti.",
+    "ko": "아우터 뱅크스(Outer Banks) 해안에서 라이트 형제가 첫 비행을 했던 블루리지 산맥(Blue Ridge Mountains)까지 뻗어 있는 남동부 주입니다.",
+    "zh": "东南部的一个州，从外滩群岛海岸一直延伸到蓝岭山脉，莱特兄弟就是在那里进行了第一次飞行。"
+   },
    "terrain": "mixed",
    "tags": [
     "coast",
@@ -425,6 +833,18 @@
    "backdrop": "atlantic_coast"
   },
   "US-ND": {
+   "blurb": {
+    "en": "A Northern Plains state of wheat and oil, with Theodore Roosevelt National Park.",
+    "ja": "小麦と石油の産地である北部平原の州で、セオドア・ルーズベルト国立公園があります。",
+    "fr": "Un État des plaines du Nord où règnent le blé et le pétrole, avec le parc national Theodore Roosevelt.",
+    "es": "Un estado de trigo y petróleo de las Llanuras del Norte, con el Parque Nacional Theodore Roosevelt.",
+    "it": "Uno stato delle pianure settentrionali ricco di grano e petrolio, con il Parco nazionale Theodore Roosevelt.",
+    "pt": "Um estado de trigo e petróleo das Planícies do Norte, com o Parque Nacional Theodore Roosevelt.",
+    "nl": "Een staat van tarwe en olie in de Northern Plains, met het Theodore Roosevelt National Park.",
+    "tr": "Theodore Roosevelt Ulusal Parkı'nın da bulunduğu, buğday ve petrolün bulunduğu Kuzey Ovaları eyaleti.",
+    "ko": "테오도르 루즈벨트 국립공원이 있고 밀과 기름이 생산되는 북부 평원의 주입니다.",
+    "zh": "北部平原盛产小麦和石油的州，拥有西奥多·罗斯福国家公园。"
+   },
    "terrain": "agriculture",
    "tags": [
     "plains",
@@ -438,6 +858,18 @@
    "backdrop": "plains"
   },
   "US-OH": {
+   "blurb": {
+    "en": "A Midwestern state on Lake Erie, the birthplace of astronauts like Neil Armstrong and John Glenn.",
+    "ja": "エリー湖に面した中西部の州で、ニール・アームストロングやジョン・グレンなどの宇宙飛行士の出身地です。",
+    "fr": "Un État du Midwest situé au bord du lac Érié, lieu de naissance d'astronautes comme Neil Armstrong et John Glenn.",
+    "es": "Un estado del Medio Oeste en el lago Erie, lugar de nacimiento de astronautas como Neil Armstrong y John Glenn.",
+    "it": "Uno stato del Midwest sul lago Erie, luogo di nascita di astronauti come Neil Armstrong e John Glenn.",
+    "pt": "Um estado do meio-oeste às margens do Lago Erie, berço de astronautas como Neil Armstrong e John Glenn.",
+    "nl": "Een staat in het Midwesten aan Lake Erie, de geboorteplaats van astronauten als Neil Armstrong en John Glenn.",
+    "tr": "Neil Armstrong ve John Glenn gibi astronotların doğum yeri olan Erie Gölü kıyısındaki bir Ortabatı eyaleti.",
+    "ko": "닐 암스트롱(Neil Armstrong)과 존 글렌(John Glenn)과 같은 우주 비행사의 탄생지인 이리 호(Lake Erie)에 위치한 중서부 주입니다.",
+    "zh": "伊利湖畔的中西部州，是尼尔·阿姆斯特朗和约翰·格伦等宇航员的出生地。"
+   },
    "terrain": "urban",
    "tags": [
     "manufacturing",
@@ -449,6 +881,18 @@
    "backdrop": "great_lakes"
   },
   "US-OK": {
+   "blurb": {
+    "en": "A southern Plains state with a strong Native American heritage and a history of oil.",
+    "ja": "先住民の文化が色濃く、石油の歴史がある南部平原の州です。",
+    "fr": "Un État des plaines du sud avec un fort héritage amérindien et une histoire pétrolière.",
+    "es": "Un estado de las llanuras del sur con una fuerte herencia nativa americana y una historia de petróleo.",
+    "it": "Uno stato delle pianure meridionali con una forte eredità dei nativi americani e una storia di petrolio.",
+    "pt": "Um estado das planícies do sul com uma forte herança nativa americana e uma história de petróleo.",
+    "nl": "Een staat in de zuidelijke Plains met een sterk Indiaans erfgoed en een geschiedenis van olie.",
+    "tr": "Güçlü bir Kızılderili mirasına ve petrol geçmişine sahip bir güney Plains eyaleti.",
+    "ko": "강력한 아메리카 원주민 유산과 석유 역사를 지닌 남부 평원 주입니다.",
+    "zh": "南部平原州，拥有深厚的美洲原住民传统和石油历史。"
+   },
    "terrain": "agriculture",
    "tags": [
     "plains",
@@ -464,6 +908,18 @@
    }
   },
   "US-OR": {
+   "blurb": {
+    "en": "A Pacific Northwest state with rainy forests, Crater Lake and a rugged coast.",
+    "ja": "雨の多い森林、クレーター湖、険しい海岸がある太平洋岸北西部の州です。",
+    "fr": "Un État du nord-ouest du Pacifique avec des forêts pluvieuses, Crater Lake et une côte accidentée.",
+    "es": "Un estado del noroeste del Pacífico con bosques lluviosos, Crater Lake y una costa escarpada.",
+    "it": "Uno stato del Pacifico nord-occidentale con foreste pluviali, Crater Lake e una costa frastagliata.",
+    "pt": "Um estado do noroeste do Pacífico com florestas chuvosas, Lago Crater e uma costa acidentada.",
+    "nl": "Een staat in de Pacific Northwest met regenachtige bossen, een kratermeer en een ruige kust.",
+    "tr": "Yağmurlu ormanları, Krater Gölü ve engebeli kıyıları olan Kuzeybatı Pasifik eyaleti.",
+    "ko": "비오는 숲, 크레이터 호수(Crater Lake), 험준한 해안이 있는 태평양 북서부 주입니다.",
+    "zh": "太平洋西北部的一个州，拥有雨林、火山口湖和崎岖的海岸。"
+   },
    "terrain": "mixed",
    "tags": [
     "forest",
@@ -475,6 +931,18 @@
    "backdrop": "pacific_coast"
   },
   "US-PA": {
+   "blurb": {
+    "en": "A state where the Declaration of Independence and the Constitution were written in Philadelphia, which also has the Liberty Bell.",
+    "ja": "フィラデルフィアで独立宣言と合衆国憲法が作られた州で、自由の鐘があります。",
+    "fr": "Un État où la Déclaration d’Indépendance et la Constitution ont été rédigées à Philadelphie, qui possède également la Liberty Bell.",
+    "es": "Un estado donde se redactó la Declaración de Independencia y la Constitución en Filadelfia, que también cuenta con la Campana de la Libertad.",
+    "it": "Uno stato in cui furono scritte la Dichiarazione di Indipendenza e la Costituzione a Filadelfia, che ha anche la Campana della Libertà.",
+    "pt": "Um estado onde a Declaração da Independência e a Constituição foram escritas na Filadélfia, que também possui o Sino da Liberdade.",
+    "nl": "Een staat waar de Onafhankelijkheidsverklaring en de Grondwet zijn geschreven in Philadelphia, waar ook de Liberty Bell staat.",
+    "tr": "Philadelphia'da Bağımsızlık Bildirgesi'nin ve Anayasa'nın yazıldığı, Özgürlük Çanı'nın da bulunduğu bir eyalet.",
+    "ko": "자유의 종이 있는 필라델피아에서 독립선언서와 헌법이 작성된 주.",
+    "zh": "《独立宣言》和《宪法》是在费城起草的，费城也有自由钟。"
+   },
    "terrain": "urban",
    "tags": [
     "steel",
@@ -490,6 +958,18 @@
    }
   },
   "US-RI": {
+   "blurb": {
+    "en": "The smallest US state by area, with a long coast on Narragansett Bay.",
+    "ja": "面積が全米で最も小さい州で、ナラガンセット湾に長い海岸線があります。",
+    "fr": "Le plus petit État américain en termes de superficie, avec une longue côte sur la baie de Narragansett.",
+    "es": "El estado más pequeño de EE. UU. en superficie, con una larga costa en la Bahía de Narragansett.",
+    "it": "Lo stato americano più piccolo per area, con una lunga costa sulla baia di Narragansett.",
+    "pt": "O menor estado dos EUA em área, com uma longa costa na Baía de Narragansett.",
+    "nl": "De kleinste Amerikaanse staat per gebied, met een lange kust aan Narragansett Bay.",
+    "tr": "Narragansett Körfezi'ndeki uzun sahili ile ABD'nin bölgelere göre en küçük eyaleti.",
+    "ko": "Narragansett Bay에 긴 해안이 있는 지역적으로 미국에서 가장 작은 주입니다.",
+    "zh": "美国面积最小的州，在纳拉甘西特湾拥有漫长的海岸。"
+   },
    "terrain": "sea",
    "tags": [
     "ocean_state",
@@ -501,6 +981,18 @@
    "backdrop": "atlantic_coast"
   },
   "US-SC": {
+   "blurb": {
+    "en": "A southeastern state on the Atlantic with historic Charleston, where the Civil War began at Fort Sumter.",
+    "ja": "大西洋岸の南東部の州で、歴史ある港町チャールストンがあり、南北戦争はサムター要塞で始まりました。",
+    "fr": "Un État du sud-est sur l'Atlantique avec la ville historique de Charleston, où la guerre civile a commencé à Fort Sumter.",
+    "es": "Un estado del sudeste en el Atlántico con el histórico Charleston, donde comenzó la Guerra Civil en Fort Sumter.",
+    "it": "Uno stato sud-orientale sull'Atlantico con la storica Charleston, dove iniziò la guerra civile a Fort Sumter.",
+    "pt": "Um estado do sudeste no Atlântico com a histórica Charleston, onde a Guerra Civil começou em Fort Sumter.",
+    "nl": "Een zuidoostelijke staat aan de Atlantische Oceaan met het historische Charleston, waar de burgeroorlog begon bij Fort Sumter.",
+    "tr": "İç Savaş'ın Sumter Kalesi'nde başladığı, tarihi Charleston'un bulunduğu Atlantik kıyısındaki bir güneydoğu eyaleti.",
+    "ko": "역사적인 찰스턴이 있는 대서양 남동부 주이며, 이곳에서 남북전쟁이 시작된 포트 섬터(Fort Sumter)가 있습니다.",
+    "zh": "大西洋东南部州，拥有历史悠久的查尔斯顿，内战在萨姆特堡爆发。"
+   },
    "terrain": "sea",
    "tags": [
     "coast",
@@ -513,6 +1005,18 @@
    "backdrop": "atlantic_coast"
   },
   "US-SD": {
+   "blurb": {
+    "en": "A Northern Plains state with the Black Hills, the Badlands and Mount Rushmore.",
+    "ja": "ブラックヒルズやバッドランズ、ラシュモア山がある北部平原の州です。",
+    "fr": "Un État des Plaines du Nord avec les Black Hills, les Badlands et le Mont Rushmore.",
+    "es": "Un estado de las Llanuras del Norte con Black Hills, Badlands y el Monte Rushmore.",
+    "it": "Uno stato delle pianure settentrionali con le Black Hills, le Badlands e il Monte Rushmore.",
+    "pt": "Um estado das Planícies do Norte com Black Hills, Badlands e Monte Rushmore.",
+    "nl": "Een staat in de Northern Plains met de Black Hills, de Badlands en Mount Rushmore.",
+    "tr": "Black Hills, Badlands ve Rushmore Dağı'nın bulunduğu bir Kuzey Ovaları eyaleti.",
+    "ko": "블랙 힐스(Black Hills), 배드랜드(Badlands), 러시모어 산(Mount Rushmore)이 있는 북부 평원의 주입니다.",
+    "zh": "北部平原州，拥有布莱克山、荒地和拉什莫尔山。"
+   },
    "terrain": "agriculture",
    "tags": [
     "plains",
@@ -525,6 +1029,18 @@
    "backdrop": "plains"
   },
   "US-TN": {
+   "blurb": {
+    "en": "A southern state famous for music: country in Nashville, blues and rock 'n' roll in Memphis. It shares the Great Smoky Mountains with North Carolina.",
+    "ja": "音楽で知られる南部の州で、ナッシュビルのカントリー、メンフィスのブルースやロックンロールが有名です。グレートスモーキー山脈はノースカロライナ州と共有しています。",
+    "fr": "Un État du sud célèbre pour la musique : country à Nashville, blues et rock'n'roll à Memphis. Elle partage les Great Smoky Mountains avec la Caroline du Nord.",
+    "es": "Un estado del sur famoso por su música: country en Nashville, blues y rock 'n' roll en Memphis. Comparte las Grandes Montañas Humeantes con Carolina del Norte.",
+    "it": "Uno stato del sud famoso per la musica: country a Nashville, blues e rock 'n' roll a Memphis. Condivide le Great Smoky Mountains con la Carolina del Nord.",
+    "pt": "Um estado do sul famoso pela música: country em Nashville, blues e rock 'n' roll em Memphis. Ele compartilha as Great Smoky Mountains com a Carolina do Norte.",
+    "nl": "Een zuidelijke staat die beroemd is om zijn muziek: country in Nashville, blues en rock-'n-roll in Memphis. Het deelt de Great Smoky Mountains met North Carolina.",
+    "tr": "Müzikle ünlü bir güney eyaleti: Nashville'de country, Memphis'te blues ve rock 'n' roll. Büyük Smoky Dağları'nı Kuzey Carolina ile paylaşıyor.",
+    "ko": "음악으로 유명한 남부 주: 내슈빌의 컨트리, 멤피스의 블루스와 로큰롤. 노스캐롤라이나와 그레이트 스모키 산맥을 공유합니다.",
+    "zh": "南部州以音乐闻名：纳什维尔的乡村音乐、孟菲斯的蓝调和摇滚乐。它与北卡罗来纳州共享大烟山。"
+   },
    "terrain": "mixed",
    "tags": [
     "music",
@@ -534,6 +1050,18 @@
    "backdrop": "appalachia"
   },
   "US-TX": {
+   "blurb": {
+    "en": "The second-largest US state by area, with deserts, plains and a Gulf coast. Known for ranches, oil and the space program in Houston.",
+    "ja": "面積で全米2位の州で、砂漠や平原、メキシコ湾岸があります。牧場と石油、ヒューストンの宇宙開発で知られます。",
+    "fr": "Le deuxième plus grand État américain en termes de superficie, avec des déserts, des plaines et une côte du Golfe. Connu pour ses ranchs, son pétrole et son programme spatial à Houston.",
+    "es": "El segundo estado más grande de EE. UU. por superficie, con desiertos, llanuras y una costa del Golfo. Conocido por los ranchos, el petróleo y el programa espacial en Houston.",
+    "it": "Il secondo stato americano più grande per area, con deserti, pianure e una costa del Golfo. Conosciuto per i ranch, il petrolio e il programma spaziale a Houston.",
+    "pt": "O segundo maior estado dos EUA em área, com desertos, planícies e uma costa do Golfo. Conhecido pelas fazendas, pelo petróleo e pelo programa espacial em Houston.",
+    "nl": "De op een na grootste Amerikaanse staat qua gebied, met woestijnen, vlakten en een Golfkust. Bekend om ranches, olie en het ruimtevaartprogramma in Houston.",
+    "tr": "Çölleri, ovaları ve Körfez kıyılarıyla ABD'nin bölgelere göre ikinci büyük eyaleti. Çiftlikleri, petrolü ve Houston'daki uzay programıyla tanınır.",
+    "ko": "사막, 평야, 걸프 해안이 있는 지역적으로 미국에서 두 번째로 큰 주입니다. 휴스턴의 목장, 석유, 우주 프로그램으로 유명합니다.",
+    "zh": "美国面积第二大州，拥有沙漠、平原和墨西哥湾沿岸。休斯顿以牧场、石油和太空计划而闻名。"
+   },
    "terrain": "agriculture",
    "tags": [
     "energy",
@@ -550,6 +1078,18 @@
    }
   },
   "US-UT": {
+   "blurb": {
+    "en": "A Western state of red rock canyons, five national parks and the Great Salt Lake.",
+    "ja": "赤い岩の渓谷、五つの国立公園、グレートソルト湖がある西部の州です。",
+    "fr": "Un État occidental composé de canyons de roches rouges, de cinq parcs nationaux et du Grand Lac Salé.",
+    "es": "Un estado occidental de cañones de rocas rojas, cinco parques nacionales y el Gran Lago Salado.",
+    "it": "Uno stato occidentale ricco di canyon di roccia rossa, cinque parchi nazionali e il Grande Lago Salato.",
+    "pt": "Um estado ocidental com cânions de rocha vermelha, cinco parques nacionais e o Grande Lago Salgado.",
+    "nl": "Een westerse staat met rode rotskloven, vijf nationale parken en het Great Salt Lake.",
+    "tr": "Kırmızı kaya kanyonları, beş milli park ve Büyük Tuz Gölü'nden oluşan Batı eyaleti.",
+    "ko": "붉은 바위 협곡, 5개의 국립공원, 그레이트 솔트 호수가 있는 서부 주입니다.",
+    "zh": "西部州，拥有红岩峡谷、五个国家公园和大盐湖。"
+   },
    "terrain": "mountain",
    "tags": [
     "canyons",
@@ -561,6 +1101,18 @@
    "backdrop": "desert"
   },
   "US-VT": {
+   "blurb": {
+    "en": "A New England state known for maple syrup, green mountains and autumn colours.",
+    "ja": "メープルシロップ、緑の山々、秋の紅葉で知られるニューイングランドの州です。",
+    "fr": "Un État de la Nouvelle-Angleterre connu pour son sirop d'érable, ses montagnes verdoyantes et ses couleurs automnales.",
+    "es": "Un estado de Nueva Inglaterra conocido por el jarabe de arce, las montañas verdes y los colores del otoño.",
+    "it": "Uno stato del New England noto per lo sciroppo d'acero, le montagne verdi e i colori autunnali.",
+    "pt": "Um estado da Nova Inglaterra conhecido pelo xarope de bordo, montanhas verdes e cores do outono.",
+    "nl": "Een staat in New England die bekend staat om zijn ahornsiroop, groene bergen en herfstkleuren.",
+    "tr": "Akçaağaç şurubu, yeşil dağları ve sonbahar renkleriyle tanınan bir New England eyaleti.",
+    "ko": "메이플 시럽, 푸른 산, 가을 단풍으로 유명한 뉴잉글랜드 주.",
+    "zh": "新英格兰州，以枫糖浆、青山和秋色而闻名。"
+   },
    "terrain": "mountain",
    "tags": [
     "maple",
@@ -573,6 +1125,18 @@
    "backdrop": "appalachia"
   },
   "US-VA": {
+   "blurb": {
+    "en": "A mid-Atlantic state with Jamestown, the first lasting English settlement in America, and the homes of several early presidents.",
+    "ja": "アメリカ最初の恒久的なイギリス植民地ジェームズタウンがあり、初期の大統領たちの邸宅が残る州です。",
+    "fr": "Un État du centre de l'Atlantique avec Jamestown, la première colonie anglaise durable en Amérique et les maisons de plusieurs premiers présidents.",
+    "es": "Un estado del Atlántico medio con Jamestown, el primer asentamiento inglés duradero en Estados Unidos y las casas de varios de los primeros presidentes.",
+    "it": "Uno stato dell'Atlantico centrale con Jamestown, il primo insediamento inglese duraturo in America, e le case di molti dei primi presidenti.",
+    "pt": "Um estado no meio do Atlântico com Jamestown, o primeiro assentamento inglês duradouro na América, e as casas de vários dos primeiros presidentes.",
+    "nl": "Een staat in het midden van de Atlantische Oceaan met Jamestown, de eerste blijvende Engelse nederzetting in Amerika, en de huizen van verschillende vroege presidenten.",
+    "tr": "Amerika'daki ilk kalıcı İngiliz yerleşim yeri olan Jamestown ve birkaç eski başkanın evinin bulunduğu Orta Atlantik eyaleti.",
+    "ko": "미국 최초의 영국인 정착지이자 여러 초기 대통령의 거주지인 제임스타운이 있는 대서양 중부의 주입니다.",
+    "zh": "大西洋中部的一个州，拥有詹姆斯敦，是英国在美国第一个持久的定居点，也是几位早期总统的故居。"
+   },
    "terrain": "mixed",
    "tags": [
     "capital_region",
@@ -584,6 +1148,18 @@
    "backdrop": "atlantic_coast"
   },
   "US-WA": {
+   "blurb": {
+    "en": "A Pacific Northwest state with Seattle, Mount Rainier and Olympic National Park. It is named after George Washington.",
+    "ja": "シアトル、レーニア山、オリンピック国立公園がある太平洋岸北西部の州で、名前はジョージ・ワシントンに由来します。",
+    "fr": "Un État du nord-ouest du Pacifique avec Seattle, le mont Rainier et le parc national olympique. Il porte le nom de George Washington.",
+    "es": "Un estado del noroeste del Pacífico con Seattle, el Monte Rainier y el Parque Nacional Olympic. Lleva el nombre de George Washington.",
+    "it": "Uno stato del Pacifico nord-occidentale con Seattle, il Monte Rainier e il Parco Nazionale Olimpico. Prende il nome da George Washington.",
+    "pt": "Um estado do noroeste do Pacífico com Seattle, o Monte Rainier e o Parque Nacional Olímpico. É nomeado após George Washington.",
+    "nl": "Een staat in de Pacific Northwest met Seattle, Mount Rainier en Olympic National Park. Het is vernoemd naar George Washington.",
+    "tr": "Seattle, Rainier Dağı ve Olimpiyat Ulusal Parkı ile Kuzeybatı Pasifik eyaleti. Adını George Washington'dan alıyor.",
+    "ko": "시애틀, 레이니어 산, 올림픽 국립공원이 있는 태평양 북서부의 주입니다. 조지 워싱턴의 이름을 따서 명명되었습니다.",
+    "zh": "太平洋西北地区的一个州，拥有西雅图、雷尼尔山和奥林匹克国家公园。它以乔治·华盛顿的名字命名。"
+   },
    "terrain": "sea",
    "tags": [
     "tech",
@@ -598,6 +1174,18 @@
    "exclusiveFacility": "aerospace_works"
   },
   "US-WV": {
+   "blurb": {
+    "en": "A mountainous Appalachian state with a coal mining history, formed during the Civil War.",
+    "ja": "炭鉱の歴史があるアパラチア山脈の山がちな州で、南北戦争中にできました。",
+    "fr": "Un État montagneux des Appalaches avec une histoire minière de charbon, formé pendant la guerre civile.",
+    "es": "Un estado montañoso de los Apalaches con una historia minera de carbón, formado durante la Guerra Civil.",
+    "it": "Uno stato montuoso degli Appalachi con una storia di estrazione del carbone, formato durante la guerra civile.",
+    "pt": "Um estado montanhoso dos Apalaches com história de mineração de carvão, formado durante a Guerra Civil.",
+    "nl": "Een bergachtige staat in de Appalachen met een geschiedenis van steenkoolmijnen, gevormd tijdens de burgeroorlog.",
+    "tr": "İç Savaş sırasında oluşan, kömür madenciliği geçmişine sahip dağlık bir Appalachian eyaleti.",
+    "ko": "애팔래치아 산맥이 있는 주로서 석탄 채굴 역사를 갖고 있으며 남북 전쟁 중에 형성되었습니다.",
+    "zh": "一个多山的阿巴拉契亚州，拥有煤炭开采历史，在内战期间形成。"
+   },
    "terrain": "mountain",
    "tags": [
     "coal",
@@ -610,6 +1198,18 @@
    "backdrop": "appalachia"
   },
   "US-WI": {
+   "blurb": {
+    "en": "A Great Lakes state famous for dairy farms and cheese.",
+    "ja": "酪農とチーズで知られる五大湖の州です。",
+    "fr": "Un État des Grands Lacs célèbre pour ses fermes laitières et son fromage.",
+    "es": "Un estado de los Grandes Lagos famoso por sus granjas lecheras y su queso.",
+    "it": "Uno stato dei Grandi Laghi famoso per i caseifici e il formaggio.",
+    "pt": "Um estado dos Grandes Lagos famoso por suas fazendas leiteiras e queijos.",
+    "nl": "Een staat aan de Grote Meren, beroemd om zijn melkveehouderijen en kaas.",
+    "tr": "Mandıra çiftlikleri ve peyniriyle ünlü bir Büyük Göller eyaleti.",
+    "ko": "낙농장과 치즈로 유명한 오대호 주입니다.",
+    "zh": "五大湖州，以奶牛场和奶酪而闻名。"
+   },
    "terrain": "agriculture",
    "tags": [
     "dairy",
@@ -622,6 +1222,18 @@
    "backdrop": "great_lakes"
   },
   "US-WY": {
+   "blurb": {
+    "en": "A Rocky Mountain state with Yellowstone, the first national park, and Grand Teton.",
+    "ja": "世界最初の国立公園イエローストーンとグランドティトンがあるロッキー山脈の州です。",
+    "fr": "Un État des Rocheuses avec Yellowstone, le premier parc national, et Grand Teton.",
+    "es": "Un estado de las Montañas Rocosas con Yellowstone, el primer parque nacional, y Grand Teton.",
+    "it": "Uno stato delle Montagne Rocciose con Yellowstone, il primo parco nazionale, e Grand Teton.",
+    "pt": "Um estado das Montanhas Rochosas com Yellowstone, o primeiro parque nacional, e Grand Teton.",
+    "nl": "Een Rocky Mountain-staat met Yellowstone, het eerste nationale park, en Grand Teton.",
+    "tr": "Yellowstone, ilk milli park ve Grand Teton'un bulunduğu Rocky Mountain eyaleti.",
+    "ko": "최초의 국립공원인 옐로스톤(Yellowstone)과 그랜드티턴(Grand Teton)이 있는 로키산맥 주.",
+    "zh": "落基山脉州，拥有第一个国家公园黄石公园和大提顿公园。"
+   },
    "terrain": "mountain",
    "tags": [
     "yellowstone",
