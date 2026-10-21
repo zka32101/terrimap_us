@@ -11,6 +11,12 @@ Future<void> Function(Uri) openExternalLink = (uri) async {
   await launchUrl(uri, mode: LaunchMode.externalApplication);
 };
 
+/// 検索に使う名前。「Zugspitze (highest mountain in Germany)」のような補足のかっこは、検索のじゃまなので外す。
+String searchName(String name) {
+  final t = name.replaceAll(RegExp(r'\s*[（(][^）)]*[）)]'), '').trim();
+  return t.isEmpty ? name : t;
+}
+
 /// YouTube の検索結果ページ。動画を1本に決めずに検索にするので、消えた動画へのリンクにならない。
 Uri youtubeSearchUri(String query) => Uri.https('www.youtube.com', '/results', {'search_query': query});
 
@@ -95,7 +101,7 @@ class RegionGuideScreen extends StatelessWidget {
                   key: ValueKey('guide-video-${l.id}'),
                   avatar: const Icon(Icons.play_circle_outline),
                   label: Text(l.nameIn(app.lang)),
-                  onPressed: () => openExternalLink(youtubeSearchUri('${l.nameIn(app.lang)} ${s.t('guide.videoWord')}')),
+                  onPressed: () => openExternalLink(youtubeSearchUri('${searchName(l.nameIn(app.lang))} ${s.t('guide.videoWord')}')),
                 ),
             ]),
           ),
