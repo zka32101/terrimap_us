@@ -90,6 +90,9 @@ void main() {
     await t.pump();
     expect(app.battle.isCleared(StageKind.normal, 'US-CA'), true);
     await reveal(t, find.text('Delete my data'));
+    // ポリシーへのリンクが増えて、画面の下にはみ出すので、見える位置までスクロールしてから押す。
+    await t.ensureVisible(find.text('Delete my data'));
+    await t.pumpAndSettle();
     await t.tap(find.text('Delete my data'));
     await t.pump();
     await t.pump(const Duration(milliseconds: 400));
