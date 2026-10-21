@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:terrimap_core/map/region_silhouette.dart';
 import 'package:terrimap_core/pack/country_profile.dart';
 
 import '../app_state.dart';
 import 'landmark_detail.dart';
+
+/// リンクを外のアプリ(ブラウザ・YouTubeアプリ)で開く。テストでは差し替える。
+Future<void> Function(Uri) openExternalLink = (uri) async {
+  await launchUrl(uri, mode: LaunchMode.externalApplication);
+};
+
+/// YouTube の検索結果ページ。動画を1本に決めずに検索にするので、消えた動画へのリンクにならない。
+Uri youtubeSearchUri(String query) => Uri.https('www.youtube.com', '/results', {'search_query': query});
 
 /// 州の解説ページ。形・州都・紹介文・地方・となりの州・名所・名物をひとつにまとめる（新しい事実は持たず、データを並べる）。
 class RegionGuideScreen extends StatelessWidget {
@@ -72,6 +81,24 @@ class RegionGuideScreen extends StatelessWidget {
                   ),
               ]),
             ),
+          section(
+            s.t('guide.videos'),
+            Wrap(spacing: 8, runSpacing: 4, children: [
+              ActionChip(
+                key: const ValueKey('guide-video-region'),
+                avatar: const Icon(Icons.play_circle_outline),
+                label: Text(s.regionName(regionId)),
+                onPressed: () => openExternalLink(youtubeSearchUri('${s.regionName(regionId)} ${s.t('guide.videoWord')}')),
+              ),
+              for (final l in landmarks)
+                ActionChip(
+                  key: ValueKey('guide-video-${l.id}'),
+                  avatar: const Icon(Icons.play_circle_outline),
+                  label: Text(l.nameIn(app.lang)),
+                  onPressed: () => openExternalLink(youtubeSearchUri('${l.nameIn(app.lang)} ${s.t('guide.videoWord')}')),
+                ),
+            ]),
+          ),
           if (known.isNotEmpty) section(s.t('notebook.knowledge'), Text(known.join(' · '), key: const ValueKey('guide-knowledge'))),
         ]),
       ),
