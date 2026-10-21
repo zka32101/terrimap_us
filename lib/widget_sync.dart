@@ -6,13 +6,14 @@ class WidgetData {
   final String streak; // 例: 「3日」
   final String landmark; // 今日の名所の名前（なければ空）
   final String status; // 例: 「✅ 今日のチャレンジ」
-  const WidgetData({required this.streak, required this.landmark, required this.status});
+  final int skin; // 配色番号(見た目パックの衣装に連動。0 は標準)
+  const WidgetData({required this.streak, required this.landmark, required this.status, this.skin = 0});
 
   @override
   bool operator ==(Object other) =>
-      other is WidgetData && other.streak == streak && other.landmark == landmark && other.status == status;
+      other is WidgetData && other.streak == streak && other.landmark == landmark && other.status == status && other.skin == skin;
   @override
-  int get hashCode => Object.hash(streak, landmark, status);
+  int get hashCode => Object.hash(streak, landmark, status, skin);
 }
 
 /// ウィジェットへの書き出し。テストでは何もしない [NoopWidgetSync] か、記録するだけの偽物を使う。
@@ -42,6 +43,7 @@ class HomeWidgetSync extends WidgetSync {
       await HomeWidget.saveWidgetData<String>('streak', data.streak);
       await HomeWidget.saveWidgetData<String>('landmark', data.landmark);
       await HomeWidget.saveWidgetData<String>('status', data.status);
+      await HomeWidget.saveWidgetData<int>('skin', data.skin);
       await HomeWidget.updateWidget(qualifiedAndroidName: androidProvider, iOSName: iosWidgetName);
     } catch (e) {
       debugPrint('widget update failed: $e');

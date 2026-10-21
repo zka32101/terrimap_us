@@ -35,3 +35,13 @@ String lookLabel(String id, String Function(String key) t) {
   if (v != 'look.$id') return v;
   return id.isEmpty ? id : '${id[0].toUpperCase()}${id.substring(1).replaceAll('_', ' ')}';
 }
+
+/// ウィジェットの配色の数(0 は標準の青。1〜[widgetSkinCount]-1 が衣装ごとの配色)。Android の `widget_bg_<n>` / iOS の配色表と揃える。
+const widgetSkinCount = 6;
+
+/// 衣装idからウィジェットの配色番号を決める。衣装なし(null)は 0。同じidなら必ず同じ番号(文字コードの和で決め、端末や起動ごとにぶれない)。
+int widgetSkinIndex(String? lookId) {
+  if (lookId == null || lookId.isEmpty) return 0;
+  final sum = lookId.codeUnits.fold<int>(0, (a, c) => a + c);
+  return 1 + sum % (widgetSkinCount - 1);
+}
