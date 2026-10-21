@@ -1,4 +1,5 @@
 
+import 'dart:async' show unawaited;
 import 'package:flutter/services.dart' show AssetManifest, HapticFeedback, rootBundle;
 import 'package:app_common_kit/app_common_kit.dart' show EntitlementState, ReviewPromptService;
 import 'package:flutter/foundation.dart';
@@ -204,6 +205,7 @@ class AppState extends ChangeNotifier {
       await prefs.setString(_lookKey, id);
     }
     notifyListeners();
+    unawaited(syncWidget());
   }
 
   /// いま使う見た目。持っていて、画像が同梱されているときだけ。
@@ -218,6 +220,7 @@ class AppState extends ChangeNotifier {
     if (owned == looksOwned) return;
     looksOwned = owned;
     notifyListeners();
+    unawaited(syncWidget());
   }
 
   bool get synergyHintSeen => prefs.getBool(_synergyHintKey) ?? false;
@@ -293,6 +296,7 @@ class AppState extends ChangeNotifier {
       streak: ui.t('stats.days', {'n': streak.currentOn(day)}),
       status: '${streak.doneOn(day) ? '✅' : '⬜'} ${s.t('daily')}',
       landmark: lm == null ? '' : landmarkName(lm.id),
+      skin: widgetSkinIndex(activeLook),
     ));
   }
 

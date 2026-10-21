@@ -12,11 +12,12 @@ struct StreakEntry: TimelineEntry {
     let streak: String
     let landmark: String
     let status: String
+    let skin: Int
 }
 
 struct StreakProvider: TimelineProvider {
     func placeholder(in context: Context) -> StreakEntry {
-        StreakEntry(date: Date(), streak: "3", landmark: "Terrimap", status: "")
+        StreakEntry(date: Date(), streak: "3", landmark: "Terrimap", status: "", skin: 0)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (StreakEntry) -> Void) {
@@ -34,7 +35,8 @@ struct StreakProvider: TimelineProvider {
             date: Date(),
             streak: d?.string(forKey: "streak") ?? "",
             landmark: d?.string(forKey: "landmark") ?? "",
-            status: d?.string(forKey: "status") ?? ""
+            status: d?.string(forKey: "status") ?? "",
+            skin: d?.integer(forKey: "skin") ?? 0
         )
     }
 }
@@ -63,8 +65,17 @@ struct StreakWidgetView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .padding(12)
-        .widgetBackground(Color(UIColor.systemBackground))
+        .foregroundColor(entry.skin > 0 ? .white : nil)
+        .widgetBackground(skinColor(entry.skin))
     }
+}
+
+/// 配色番号(Flutter 側 `widgetSkinIndex`)。0 は標準(システム背景)、1〜5 は衣装ごとの配色。
+func skinColor(_ i: Int) -> Color {
+    let hex: [UInt32] = [0, 0x2E7D32, 0x6A1B9A, 0xE65100, 0xAD1457, 0x37474F]
+    guard i > 0, i < hex.count else { return Color(UIColor.systemBackground) }
+    let h = hex[i]
+    return Color(red: Double((h >> 16) & 0xFF) / 255, green: Double((h >> 8) & 0xFF) / 255, blue: Double(h & 0xFF) / 255)
 }
 
 extension View {
