@@ -5,6 +5,7 @@ import 'package:terrimap_core/map/region_silhouette.dart';
 import 'package:terrimap_core/quiz/quiz_engine.dart';
 
 import '../app_state.dart';
+import 'region_guide_screen.dart';
 
 /// 出題リストを順に解く画面。終了時に正誤の一覧(true=正解)を返す。
 class QuizScreen extends StatefulWidget {
@@ -185,6 +186,13 @@ class _QuizScreenState extends State<QuizScreen> {
     return Column(children: [
       Text(ok ? s.t('correct') : '${s.t('wrong')} ${s.t('answerWas')} ${s.regionName(q.correctId)}',
           style: TextStyle(fontWeight: FontWeight.bold, color: ok ? widget.app.palette.textOk : widget.app.palette.textNg)),
+      if (widget.app.pack.regions.any((r) => r.id == q.correctId))
+        TextButton.icon(
+          key: const ValueKey('quiz-guide'),
+          icon: const Icon(Icons.menu_book_outlined),
+          label: Text(widget.app.s.t('guide.open')),
+          onPressed: () => openRegionGuide(context, widget.app, q.correctId),
+        ),
       const SizedBox(height: 8),
       FilledButton(
         onPressed: _next,

@@ -88,6 +88,12 @@ void main() {
     await t.tap(find.text(correct));
     await t.pumpAndSettle();
     expect(find.text('Correct!'), findsOneWidget);
+    // 答え合わせから、その州の解説ページを開ける
+    await t.tap(find.byKey(const ValueKey('quiz-guide')));
+    await t.pumpAndSettle();
+    expect(find.byKey(const ValueKey('guide-blurb')), findsOneWidget);
+    Navigator.of(t.element(find.byKey(const ValueKey('guide-blurb')))).pop();
+    await t.pumpAndSettle();
     await t.tap(find.text('Next'));
     await t.pumpAndSettle();
     expect(find.text('2 / 2'), findsOneWidget);

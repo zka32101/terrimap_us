@@ -19,6 +19,7 @@ import 'clear_legend.dart';
 import '../monetization.dart';
 import 'battle_screen.dart';
 import 'endless_screen.dart';
+import 'region_guide_screen.dart';
 import 'story_screen.dart';
 import 'replay_screen.dart';
 import 'unlock_sheet.dart';
@@ -294,7 +295,19 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
             Text(s.regionName(id), key: const ValueKey('stage-sheet-title'), style: Theme.of(ctx).textTheme.titleLarge),
             const SizedBox(height: 4),
             Text(ui.t('stage.base', {'capital': s.capitalName(id)})),
-            const SizedBox(height: 16),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                key: ValueKey('guide-$id'),
+                icon: const Icon(Icons.menu_book_outlined),
+                label: Text(s.t('guide.open')),
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  openRegionGuide(context, app, id);
+                },
+              ),
+            ),
+            const SizedBox(height: 8),
             Row(children: [
               for (final d in Difficulty.values) ...[
                 if (d != Difficulty.values.first) const SizedBox(width: 8),
