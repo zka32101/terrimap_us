@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/progress/region_progress.dart';
 
 /// 画面の色。通常は緑と赤、色覚に配慮するときは青とオレンジ（赤と緑を使わない）。
@@ -8,6 +9,15 @@ class A11yPalette {
 
   /// 地図の色（習得・ミス・未出題）。
   Color region(RegionState s) => colorBlind ? colorBlindRegionColor(s) : defaultRegionColor(s);
+
+  /// バトルの地図の色: その州をクリアした一番むずかしい難易度の色。クリアしていなければ薄い灰色。
+  /// 赤と緑を使わない色の組み合わせなので、色覚に配慮するときも同じ色を使う。
+  static Color clearColor(Difficulty? best) => switch (best) {
+        null => const Color(0xFFECEFF1),
+        Difficulty.easy => const Color(0xFF90CAF9),
+        Difficulty.normal => const Color(0xFFFFB74D),
+        Difficulty.hard => const Color(0xFF7E57C2),
+      };
 
   /// 地図の上の正解・不正解の強調。
   Color get mapOk => answerCorrectColor(colorBlind: colorBlind);

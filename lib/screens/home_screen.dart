@@ -9,7 +9,9 @@ import 'package:terrimap_core/map/region_map_view.dart';
 import 'package:terrimap_core/progress/region_progress.dart';
 import 'package:terrimap_core/quiz/quiz_engine.dart';
 
+import '../a11y.dart';
 import '../app_state.dart';
+import 'clear_legend.dart';
 import '../monetization.dart';
 import 'daily_landmark_card.dart';
 import 'landmark_quiz_summary.dart';
@@ -210,16 +212,20 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
               Expanded(
-                child: RegionMapView(
-                  pack: app.pack,
-                  showZoomControls: true,
-                  onTap: (id) {
-                    if (!isRegionUnlocked(id, premium: premium)) showUnlockSheet(context, app);
-                  },
-                  colorOf: (id) => isRegionUnlocked(id, premium: premium)
-                      ? app.palette.region(p.stateOf(id))
-                      : _lockedColor,
-                ),
+                child: Stack(children: [
+                  Positioned.fill(
+                    child: RegionMapView(
+                      pack: app.pack,
+                      showZoomControls: true,
+                      onTap: (id) {
+                        if (!isRegionUnlocked(id, premium: premium)) showUnlockSheet(context, app);
+                      },
+                      // 地図の色は、バトルでクリアした難易度だけで決まる(クイズでは変わらない)
+                      colorOf: (id) => isRegionUnlocked(id, premium: premium) ? A11yPalette.clearColor(app.bestClear(id)) : _lockedColor,
+                    ),
+                  ),
+                  ClearLegend(ui: app.ui),
+                ]),
               ),
               DailyLandmarkCard(app: app),
               Padding(
