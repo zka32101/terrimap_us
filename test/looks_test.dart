@@ -134,4 +134,13 @@ void main() {
     }
     expect(find.text(hero.name.of('en')[0]), findsOneWidget);
   });
+
+  test('ウィジェットの配色: 衣装なしは標準(0)、衣装ごとに1〜5で毎回同じ', () {
+    expect(widgetSkinIndex(null), 0);
+    for (final id in ['festival', 'winter', 'summer', 'night', 'x']) {
+      final i = widgetSkinIndex(id);
+      expect(i, inInclusiveRange(1, widgetSkinCount - 1));
+      expect(widgetSkinIndex(id), i);
+    }
+  });
 }
