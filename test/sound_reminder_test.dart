@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terrimap_us/app_state.dart';
@@ -89,5 +91,30 @@ void main() {
     await app.setReminder(true);
     // 21時前なら今日の21時、過ぎていれば予約なし
     expect(r.rescue, now.hour < 21 ? DateTime(now.year, now.month, now.day, 21) : isNull);
+  });
+
+  test('効果音の間引き: 同じ音は決めた間隔があくまで鳴らさない。間隔のない音は毎回鳴る', () {
+    final th = SfxThrottle();
+    final t0 = DateTime(2026, 1, 1);
+    expect(th.allow('kill', t0), isTrue);
+    expect(th.allow('kill', t0.add(const Duration(milliseconds: 50))), isFalse);
+    expect(th.allow('kill', t0.add(const Duration(milliseconds: 150))), isTrue);
+    expect(th.allow('breach', t0.add(const Duration(milliseconds: 160))), isTrue); // 別の音は別々に数える
+    expect(th.allow('boss_appear', t0), isTrue);
+    expect(th.allow('boss_appear', t0.add(const Duration(seconds: 1))), isFalse);
+    expect(th.allow('clear', t0), isTrue);
+    expect(th.allow('clear', t0), isTrue); // 間隔の指定がない音
+  });
+
+  test('戦いの効果音: 撃破・拠点被弾・ボス登場の wav が、読める形で同梱されている(短い音)', () {
+    for (final name in ['kill', 'breach', 'boss_appear']) {
+      final f = File('assets/sound/$name.wav');
+      expect(f.existsSync(), isTrue, reason: name);
+      final b = f.readAsBytesSync();
+      expect(String.fromCharCodes(b.sublist(0, 4)), 'RIFF', reason: name);
+      expect(String.fromCharCodes(b.sublist(8, 12)), 'WAVE', reason: name);
+      final bytes = b.length - 44; // 16bit モノラル 22050Hz
+      expect(bytes / 2 / 22050, inInclusiveRange(0.05, 1.5), reason: name);
+    }
   });
 }

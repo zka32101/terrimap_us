@@ -20,6 +20,7 @@ import 'package:terrimap_core/story/story.dart';
 import 'package:terrimap_core/i18n/ui_strings.dart';
 
 import '../app_state.dart';
+import '../sound.dart';
 import 'assist_dialog.dart';
 import 'replay_screen.dart';
 import 'story_screen.dart';
@@ -156,10 +157,27 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     }
   }
 
+  final SfxThrottle _sfxThrottle = SfxThrottle();
+
+  /// 戦いの効果音(撃破・拠点被弾・ボス登場)。短い間に重ならないよう間引く。
+  void _battleSfx(String name) {
+    if (_sfxThrottle.allow(name, DateTime.now())) widget.app.sfx(name);
+  }
+
   void _handle(BattleEvent e) {
     final ui = _ui;
     if (e.type == BattleEventType.breach) widget.app.haptic(heavy: e.isBoss);
     if (e.type == BattleEventType.kill && e.isBoss) widget.app.haptic(heavy: true);
+    switch (e.type) {
+      case BattleEventType.kill:
+        _battleSfx(e.isBoss ? 'breach' : 'kill'); // ボスを倒したときは、重い音
+      case BattleEventType.breach:
+        _battleSfx('breach');
+      case BattleEventType.spawn:
+        if (e.isBoss) _battleSfx('boss_appear');
+      default:
+        break;
+    }
     String weatherName() => ui.t('weather.${e.detail}');
     switch (e.type) {
       case BattleEventType.weatherWarning:
