@@ -251,7 +251,7 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
           if (_onMap)
             Expanded(child: Stack(children: [
               Positioned.fill(child: _stageMap(premium)),
-              ClearLegend(ui: ui),
+              ClearLegend(app: app, showLocked: !premium),
             ]))
           else
             Expanded(child: ListView(children: switch (_kind) {
@@ -275,7 +275,7 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
       pack: app.pack,
       showZoomControls: true, // 小さい州（都市州など）は拡大して選ぶ
       onTap: (id) => _openState(id, premium),
-      colorOf: (id) => isRegionUnlocked(id, premium: premium) ? A11yPalette.clearColor(app.bestClear(id)) : const Color(0xFFB0BEC5),
+      colorOf: (id) => isRegionUnlocked(id, premium: premium) ? A11yPalette.clearColor(app.bestClear(id)) : A11yPalette.lockedColor,
     );
   }
 

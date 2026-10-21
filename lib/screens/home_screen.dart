@@ -147,7 +147,6 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 
-  static const _lockedColor = Color(0xFFB0BEC5);
 
   String _titleLabel(RegionTitle t) => app.s.t(t.name);
 
@@ -221,10 +220,10 @@ class HomeScreen extends ConsumerWidget {
                         if (!isRegionUnlocked(id, premium: premium)) showUnlockSheet(context, app);
                       },
                       // 地図の色は、バトルでクリアした難易度だけで決まる(クイズでは変わらない)
-                      colorOf: (id) => isRegionUnlocked(id, premium: premium) ? A11yPalette.clearColor(app.bestClear(id)) : _lockedColor,
+                      colorOf: (id) => isRegionUnlocked(id, premium: premium) ? A11yPalette.clearColor(app.bestClear(id)) : A11yPalette.lockedColor,
                     ),
                   ),
-                  ClearLegend(ui: app.ui),
+                  ClearLegend(app: app, showLocked: !premium),
                 ]),
               ),
               DailyLandmarkCard(app: app),

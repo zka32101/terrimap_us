@@ -58,6 +58,15 @@ void main() {
     await t.tap(find.byKey(const ValueKey('stamp-US-CA')));
     await t.pumpAndSettle();
     expect(find.byKey(const ValueKey('notebook-page-title')), findsOneWidget);
+    // 手帳のページから、その州の解説ページへ
+    await t.ensureVisible(find.byKey(const ValueKey('notebook-guide')));
+    await t.tap(find.byKey(const ValueKey('notebook-guide')));
+    await t.pumpAndSettle();
+    expect(find.byKey(const ValueKey('guide-blurb')), findsOneWidget);
+    Navigator.of(t.element(find.byKey(const ValueKey('guide-blurb')))).pop();
+    await t.pumpAndSettle();
+    await t.tap(find.byKey(const ValueKey('stamp-US-CA')));
+    await t.pumpAndSettle();
     expect(find.text(app.s.regionName('US-CA')), findsWidgets);
     expect(find.byKey(const ValueKey('notebook-hero-line')), findsOneWidget);
     expect(find.text(app.s.t('notebook.hero.${NotebookScreen.heroLineIndex('US-CA')}')), findsOneWidget);
