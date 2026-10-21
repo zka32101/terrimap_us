@@ -72,4 +72,11 @@ void main() {
     final u = youtubeSearchUri('ノイシュヴァンシュタイン城 観光 & 旅');
     expect(Uri.parse(u.toString()).queryParameters['search_query'], 'ノイシュヴァンシュタイン城 観光 & 旅');
   });
+
+  test('検索に使う名前: 補足のかっこは外す。かっこだけの名前はそのまま', () {
+    expect(searchName('Zugspitze (highest mountain in Germany)'), 'Zugspitze');
+    expect(searchName('ツークシュピッツェ（ドイツ最高峰）'), 'ツークシュピッツェ');
+    expect(searchName('Neuschwanstein Castle'), 'Neuschwanstein Castle');
+    expect(searchName('(only)'), '(only)');
+  });
 }
