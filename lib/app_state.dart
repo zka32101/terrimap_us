@@ -3,7 +3,6 @@ import 'package:flutter/services.dart' show AssetManifest, HapticFeedback, rootB
 import 'package:app_common_kit/app_common_kit.dart' show EntitlementState, ReviewPromptService;
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 
 import 'package:terrimap_core/story/story.dart';
 
@@ -19,7 +18,6 @@ import 'package:terrimap_core/battle/weekly_battle.dart';
 import 'package:terrimap_core/daily/daily_landmark.dart';
 import 'package:terrimap_core/daily/daily_streak.dart';
 import 'package:terrimap_core/daily/streak_rescue.dart';
-import 'package:terrimap_core/battle/replay.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/battle/invite.dart';
@@ -53,7 +51,6 @@ const _colorBlindKey = 'color_blind_v1';
 const _reminderTimeKey = 'reminder_minutes_v1';
 const _tutorialKey = 'tutorial_done_v1';
 const _battleKey = 'battle_progress_v1';
-const _dailyKey = 'daily_battle_v1';
 const _streakKey = 'daily_streak_v1';
 const _weeklyKey = 'weekly_battle_v1';
 const _seenCardsKey = 'collection_seen_v1';
@@ -316,23 +313,15 @@ class AppState extends ChangeNotifier {
   /// 今日の日付(UTC の yyyy-MM-dd)。テストで差し替える。
   String Function() today = () => DateTime.now().toUtc().toIso8601String().substring(0, 10);
 
-  /// 今日のバトルの結果(日付→リプレイ)。直近の数日ぶんだけ残す。
-  Map<String, Replay> get _daily {
-    final raw = prefs.getString(_dailyKey);
-    if (raw == null) return {};
-    try {
-      return {
-        for (final e in (jsonDecode(raw) as Map<String, dynamic>).entries)
-          if (Replay.tryParse(e.value as String) != null) e.key: Replay.tryParse(e.value as String)!,
-      };
-    } catch (_) {
-      return {};
+  /// その州（通常のステージ）でクリアした一番むずかしい難易度。まだなら null。地図の色に使う。
+  Difficulty? bestClear(String regionId) {
+    for (final d in const [Difficulty.hard, Difficulty.normal, Difficulty.easy]) {
+      if (battle.isCleared(StageKind.normal, regionId, difficulty: d)) return d;
     }
+    return null;
   }
 
-  Replay? dailyReplay(String date) => _daily[date];
-
-  /// 毎日のバトルの連続記録（終えた日を数える。勝敗は問わない）。
+  /// バトルの連続記録（バトルを終えた日を数える。勝敗は問わない）。
   DailyStreak get streak {
     final raw = prefs.getString(_streakKey);
     if (raw == null) return const DailyStreak();
@@ -492,13 +481,9 @@ class AppState extends ChangeNotifier {
     );
   }
 
-  Future<void> saveDaily(String date, Replay r) async {
-    final all = _daily..[date] = r;
-    final keys = all.keys.toList()..sort();
-    for (final k in keys.take((keys.length - 7).clamp(0, keys.length))) {
-      all.remove(k);
-    }
-    await prefs.setString(_dailyKey, jsonEncode({for (final e in all.entries) e.key: e.value.toJsonString()}));
+  /// 今日バトルを終えたことを記録する(連続日数に数える。勝敗は問わない)。
+  Future<void> recordBattleDay() async {
+    final date = today();
     await prefs.setString(_streakKey, streak.record(date).toJson());
     await refreshRescue();
     notifyListeners();

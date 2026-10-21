@@ -4,7 +4,6 @@ import 'achievements_screen.dart';
 import 'collection_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:terrimap_core/battle/daily_battle.dart';
 import 'package:terrimap_core/battle/invite.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/battle/replay.dart';
@@ -12,7 +11,11 @@ import 'package:terrimap_core/battle/weekly_battle.dart';
 import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/pack/country_profile.dart';
 
+import 'package:terrimap_core/map/region_map_view.dart';
+
+import '../a11y.dart';
 import '../app_state.dart';
+import 'clear_legend.dart';
 import '../monetization.dart';
 import 'battle_screen.dart';
 import 'story_screen.dart';
@@ -31,39 +34,13 @@ class StagePickerScreen extends ConsumerStatefulWidget {
 class _StagePickerState extends ConsumerState<StagePickerScreen> {
   Difficulty _difficulty = Difficulty.normal;
   StageKind _kind = StageKind.normal;
+  bool _asList = false; // 州の選び方: 地図（初期）か一覧（スクリーンリーダー向け・招待のコピー用）
 
-  void _play(StageKind kind, String id, {Difficulty? difficulty, DailyBattle? daily, WeeklyBattle? weekly}) => Navigator.of(context).push(MaterialPageRoute(
-        builder: (_) => BattleScreen(app: widget.app, regionId: id, difficulty: difficulty ?? _difficulty, kind: kind, daily: daily, weekly: weekly),
+  void _play(StageKind kind, String id, {Difficulty? difficulty, WeeklyBattle? weekly}) => Navigator.of(context).push(MaterialPageRoute(
+        builder: (_) => BattleScreen(app: widget.app, regionId: id, difficulty: difficulty ?? _difficulty, kind: kind, weekly: weekly),
       ));
 
   void _watch(Replay r) => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ReplayScreen(app: widget.app, replay: r)));
-
-  /// 今日のバトル。無料の間は、無料の州だけから選ぶ。
-  DailyBattle _daily(bool premium) =>
-      DailyBattle.forDate(widget.app.pack, widget.app.today(), allowedIds: premium ? null : freeRegionIds);
-
-  Widget _dailyCard(bool premium) {
-    final app = widget.app, ui = app.ui;
-    final d = _daily(premium);
-    final done = app.dailyReplay(d.date);
-    final streak = app.streak.currentOn(app.today());
-    return Card(
-      margin: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-      child: ListTile(
-        key: const ValueKey('daily-battle'),
-        leading: const Icon(Icons.today),
-        title: Text(ui.t('daily.title')),
-        subtitle: Text([
-          done != null
-              ? '${ui.t('daily.done')}  ${done.result.won ? '✅' : '❌'} ♥${done.result.baseHp}'
-              : ui.t('daily.today', {'name': app.s.regionName(d.stageId), 'difficulty': ui.t('difficulty.${d.difficulty.name}')}),
-          if (streak > 0) '🔥 $streak',
-        ].join('  ')),
-        trailing: done != null ? const Icon(Icons.play_circle_outline, key: ValueKey('daily-watch')) : const Icon(Icons.chevron_right),
-        onTap: done != null ? () => _watch(done) : () => _play(d.kind, d.stageId, difficulty: d.difficulty, daily: d),
-      ),
-    );
-  }
 
   /// 今週のチャレンジ。1週に1回だけ。終えたら結果と、友だちへの共有を出す。
   Widget _weeklyCard(bool premium) {
@@ -193,6 +170,13 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
     final modes = [StageKind.normal, if (hasRegional) StageKind.regional, if (hasExtra) StageKind.extra];
     return Scaffold(
       appBar: AppBar(title: Text(s.t('battle')), actions: [
+        if (_kind == StageKind.normal)
+          IconButton(
+            key: const ValueKey('stage-view-toggle'),
+            tooltip: s.t(_asList ? 'stage.viewMap' : 'stage.viewList'),
+            icon: Icon(_asList ? Icons.map_outlined : Icons.list),
+            onPressed: () => setState(() => _asList = !_asList),
+          ),
         if (app.storyProgress != null)
           IconButton(
             key: const ValueKey('story'),
@@ -224,16 +208,16 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
       ]),
       body: SafeArea(
         child: Column(children: [
-          _dailyCard(premium),
           _weeklyCard(premium),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: SegmentedButton<Difficulty>(
-              segments: [for (final d in Difficulty.values) ButtonSegment(value: d, label: Text(ui.t('difficulty.${d.name}')))],
-              selected: {_difficulty},
-              onSelectionChanged: (v) => setState(() => _difficulty = v.first),
+          if (!_onMap)
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: SegmentedButton<Difficulty>(
+                segments: [for (final d in Difficulty.values) ButtonSegment(value: d, label: Text(ui.t('difficulty.${d.name}')))],
+                selected: {_difficulty},
+                onSelectionChanged: (v) => setState(() => _difficulty = v.first),
+              ),
             ),
-          ),
           if (modes.length > 1)
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
@@ -251,17 +235,80 @@ class _StagePickerState extends ConsumerState<StagePickerScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               _kind == StageKind.normal
-                  ? ui.t('stage.choose')
+                  ? ui.t(_onMap ? 'stage.chooseOnMap' : 'stage.choose')
                   : ui.t('stage.progress', {'n': app.battle.clearedStates([for (final r in app.pack.regions) r.id]), 'total': app.pack.regions.length}),
               style: Theme.of(context).textTheme.titleSmall,
             ),
           ),
-          Expanded(child: ListView(children: switch (_kind) {
-            StageKind.normal => _states(premium),
-            StageKind.regional => _regions(premium),
-            StageKind.extra => _extras(premium),
-          })),
+          if (_onMap)
+            Expanded(child: Stack(children: [
+              Positioned.fill(child: _stageMap(premium)),
+              ClearLegend(ui: ui),
+            ]))
+          else
+            Expanded(child: ListView(children: switch (_kind) {
+              StageKind.normal => _states(premium),
+              StageKind.regional => _regions(premium),
+              StageKind.extra => _extras(premium),
+            })),
         ]),
+      ),
+    );
+  }
+
+  /// 州を地図で選んでいる間か（通常のステージで、一覧に切り替えていないとき）。
+  bool get _onMap => _kind == StageKind.normal && !_asList;
+
+  /// 州を選ぶ地図。色は、その州をクリアした一番むずかしい難易度。タップでその州の難易度を選ぶ。
+  Widget _stageMap(bool premium) {
+    final app = widget.app;
+    return RegionMapView(
+      key: const ValueKey('stage-map'),
+      pack: app.pack,
+      showZoomControls: true, // 小さい州（都市州など）は拡大して選ぶ
+      onTap: (id) => _openState(id, premium),
+      colorOf: (id) => isRegionUnlocked(id, premium: premium) ? A11yPalette.clearColor(app.bestClear(id)) : const Color(0xFFB0BEC5),
+    );
+  }
+
+  /// 地図でタップした州: 難易度を選んで始める。無料枠の外なら購入の案内。
+  void _openState(String id, bool premium) {
+    final app = widget.app, s = app.s, ui = app.ui;
+    if (!isRegionUnlocked(id, premium: premium)) {
+      showUnlockSheet(context, app);
+      return;
+    }
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(s.regionName(id), key: const ValueKey('stage-sheet-title'), style: Theme.of(ctx).textTheme.titleLarge),
+            const SizedBox(height: 4),
+            Text(ui.t('stage.base', {'capital': s.capitalName(id)})),
+            const SizedBox(height: 16),
+            Row(children: [
+              for (final d in Difficulty.values) ...[
+                if (d != Difficulty.values.first) const SizedBox(width: 8),
+                Expanded(
+                  child: FilledButton.tonal(
+                    key: ValueKey('play-$id-${d.name}'),
+                    style: FilledButton.styleFrom(
+                      backgroundColor: A11yPalette.clearColor(app.battle.isCleared(StageKind.normal, id, difficulty: d) ? d : null),
+                      foregroundColor: d == Difficulty.hard && app.battle.isCleared(StageKind.normal, id, difficulty: d) ? Colors.white : Colors.black87,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                      _play(StageKind.normal, id, difficulty: d);
+                    },
+                    child: Text('${ui.t('difficulty.${d.name}')}${app.battle.isCleared(StageKind.normal, id, difficulty: d) ? ' ✓' : ''}'),
+                  ),
+                ),
+              ],
+            ]),
+          ]),
+        ),
       ),
     );
   }

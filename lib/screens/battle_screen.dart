@@ -7,7 +7,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:terrimap_core/battle/battle_engine.dart';
 import 'package:terrimap_core/battle/invite.dart';
-import 'package:terrimap_core/battle/daily_battle.dart';
 import 'package:terrimap_core/battle/replay.dart';
 import 'package:terrimap_core/battle/difficulty.dart';
 import 'package:terrimap_core/battle/grid.dart';
@@ -31,9 +30,8 @@ class BattleScreen extends StatefulWidget {
   final String regionId; // 種別に応じて 州・地方・エクストラ の id
   final Difficulty difficulty;
   final StageKind kind;
-  final DailyBattle? daily; // 今日のバトルのとき
   final WeeklyBattle? weekly; // 今週のチャレンジのとき（1週に1回。やり直しはない）
-  const BattleScreen({super.key, required this.app, required this.regionId, required this.difficulty, this.kind = StageKind.normal, this.daily, this.weekly});
+  const BattleScreen({super.key, required this.app, required this.regionId, required this.difficulty, this.kind = StageKind.normal, this.weekly});
   @override
   State<BattleScreen> createState() => _BattleScreenState();
 }
@@ -42,7 +40,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   late final Stage _stage = StageGenerator(widget.app.pack).generate(widget.regionId, widget.difficulty, kind: widget.kind);
   late final BattleSession _session = BattleSession(
     BattleEngine(_stage, profile: widget.app.pack.profile, pack: widget.app.pack, quizAssist: widget.app.quizAssist,
-        reviewWeights: widget.daily == null && widget.weekly == null ? widget.app.reviewWeights : null), // 毎日・毎週は全員同じ条件にする
+        reviewWeights: widget.weekly == null ? widget.app.reviewWeights : null), // 毎週のチャレンジは全員同じ条件にする
   );
   late final Ticker _ticker;
   Duration _last = Duration.zero;
@@ -59,7 +57,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   Replay? _replay; // 終わったバトルの記録(今日のバトルの保存・共有に使う)
 
   /// このステージの物語の章（毎日・毎週のバトルでは出さない）。
-  StoryChapter? get _chapter => widget.daily != null || widget.weekly != null ? null : widget.app.story?.forStage(widget.kind, widget.regionId);
+  StoryChapter? get _chapter => widget.weekly != null ? null : widget.app.story?.forStage(widget.kind, widget.regionId);
 
   BattleEngine get _engine => _session.engine;
   UiStrings get _ui => widget.app.ui;
@@ -134,7 +132,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
         _newCards = [for (final c in widget.app.collection.cards) if (c.unlocked && !before.contains(c.landmark.id)) c.landmark.nameIn(widget.app.lang)];
       }
       _replay = _session.recorder.toReplay(packId: widget.app.pack.packId, kind: widget.kind, stageId: widget.regionId, difficulty: widget.difficulty);
-      if (widget.daily != null) widget.app.saveDaily(widget.daily!.date, _replay!);
+      widget.app.recordBattleDay();
       if (widget.weekly != null) widget.app.saveWeekly(widget.weekly!.week, _replay!.result.won, _replay!.result.baseHp);
       WidgetsBinding.instance.addPostFrameCallback((_) => _showResult());
     }
@@ -294,12 +292,6 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
         content: Text('${ui.t('result.waves', {'n': _session.won ? _stage.waves.length : (st.wave - 1).clamp(0, 99)})}\n${ui.t('result.score', {'n': st.score})}'
             '${_newCards.isEmpty ? '' : '\n\n${ui.t('collection.new')}\n${_newCards.map((n) => '• $n').join('\n')}'}'),
         actions: [
-          if (widget.daily != null && _replay != null)
-            TextButton(
-              key: const ValueKey('share-daily'),
-              onPressed: () => _copy(widget.daily!.shareText(widget.app.s.t('appTitle'), _replay!.result, totalWaves: _stage.waves.length, maxBaseHp: _stage.baseHp), ui.t('daily.share')),
-              child: Text(ui.t('daily.share')),
-            ),
           if (_replay != null)
             TextButton(
               key: const ValueKey('watch-replay'),
@@ -323,7 +315,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
             onPressed: () {
               Navigator.pop(ctx);
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (_) => BattleScreen(app: widget.app, regionId: widget.regionId, difficulty: widget.difficulty, kind: widget.kind, daily: widget.daily),
+                builder: (_) => BattleScreen(app: widget.app, regionId: widget.regionId, difficulty: widget.difficulty, kind: widget.kind),
               ));
             },
             child: Text(ui.t('result.retry')),
