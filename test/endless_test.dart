@@ -38,15 +38,42 @@ void main() {
       child: MaterialApp(home: EndlessScreen(app: app, premium: false)),
     ));
     await t.pump();
-    expect(find.text('Best: 4 waves'), findsOneWidget);
+    expect(find.text('Best: 4 waves'), findsWidgets); // 一覧と、今日の州(たまたま同じ州のとき)
     // 記録のある州が先頭
-    final first = t.widget<ListTile>(find.byType(ListTile).first);
-    expect(first.key, const ValueKey('endless-US-CA'));
+    // 名前順ならAlaskaが先だが、記録のあるCaliforniaが上に来る
+    expect(t.getTopLeft(find.byKey(const ValueKey('endless-US-CA'))).dy, lessThan(t.getTopLeft(find.byKey(const ValueKey('endless-US-AK'))).dy));
     await t.tap(find.byKey(const ValueKey('endless-US-CA')));
     for (var i = 0; i < 4; i++) {
       await t.pump(const Duration(milliseconds: 300));
     }
     expect(find.byKey(const ValueKey('hud-wave')), findsOneWidget);
     expect(find.text('Wave 0/30'), findsOneWidget);
+  });
+
+  testWidgets('エンドレス画面: 今日の州と、続きの章(守った波数で解ける)', (t) async {
+    final app = await t.runAsync(AppState.load) as AppState;
+    await app.setLang('en');
+    await t.runAsync(() => app.recordEndless('US-CA', 12, 300));
+    await t.pumpWidget(MaterialApp(home: EndlessScreen(app: app, premium: false)));
+    await t.pump();
+    expect(find.byKey(const ValueKey('endless-today')), findsOneWidget);
+    expect(find.textContaining("Today's state"), findsOneWidget);
+    // 12波まで守った: 10波の章は読め、20・30波は鍵つき
+    expect(find.text('Reach 20 waves to read'), findsOneWidget);
+    expect(find.text('Reach 30 waves to read'), findsOneWidget);
+    expect(find.text('Reach 10 waves to read'), findsNothing);
+    await t.tap(find.byKey(const ValueKey('epilogue-10')));
+    await t.pump(const Duration(milliseconds: 400));
+    expect(find.byKey(const ValueKey('story-line')), findsOneWidget);
+  });
+
+  test('結果の共有文: アプリ名・州・波数・スコアが入る', () async {
+    final app = await AppState.load();
+    await app.setLang('en');
+    final txt = app.endlessShareText('US-CA', 14, 2500);
+    expect(txt, contains('14'));
+    expect(txt, contains('2500'));
+    expect(txt, contains(app.s.regionName('US-CA')));
+    expect(txt, isNot(contains('{')));
   });
 }

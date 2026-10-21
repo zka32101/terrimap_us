@@ -512,6 +512,17 @@ class AppState extends ChangeNotifier {
     return true;
   }
 
+  /// エンドレスの結果を友だちに送る文。
+  String endlessShareText(String regionId, int waves, int score) => s
+      .t('endless.shareText')
+      .replaceAll('{app}', s.t('appTitle'))
+      .replaceAll('{state}', s.regionName(regionId))
+      .replaceAll('{n}', '$waves')
+      .replaceAll('{score}', '$score');
+
+  /// エンドレスで守った波数の最高(州をまたいで)。まだなら 0。
+  int get endlessBestWaves => endless.best?.waves ?? 0;
+
   /// バトルのクリアを記録して保存する。
   Future<void> recordBattleClear(StageKind kind, String id, Difficulty difficulty) async {
     battle.recordClear(kind, id, difficulty);

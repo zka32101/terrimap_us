@@ -59,6 +59,8 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   late bool _tutorial = !widget.app.tutorialDone; // 初回のバトルの案内（終えるかスキップするまで）
   Replay? _replay; // 終わったバトルの記録(今日のバトルの保存・共有に使う)
   bool _newEndlessBest = false; // エンドレスで、この結果が自己ベスト
+  int _endlessWaves = 0; // エンドレスで守った波数
+  List<StoryEpilogue> _newEpilogues = const []; // この結果で新しく読めるようになった続きの章
 
   /// このステージの物語の章（毎日・毎週のバトルでは出さない）。
   StoryChapter? get _chapter => widget.weekly != null || widget.endless ? null : widget.app.story?.forStage(widget.kind, widget.regionId);
@@ -132,8 +134,11 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
       if (widget.endless) {
         final cleared = _session.won ? _stage.waves.length : (_session.state.wave - 1).clamp(0, _stage.waves.length);
         widget.app.recordBattleDay();
+        _endlessWaves = cleared;
+        final before = widget.app.endlessBestWaves;
         widget.app.recordEndless(widget.regionId, cleared, _session.state.score).then((v) {
           _newEndlessBest = v; // 保存が済んでから結果を出す(自己ベストの表示に使う)
+          _newEpilogues = widget.app.story?.newlyUnlocked(before, widget.app.endlessBestWaves) ?? const [];
           WidgetsBinding.instance.addPostFrameCallback((_) => _showResult());
         });
         return;
@@ -295,6 +300,10 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
       await showStoryLines(context, widget.app, title: ch.title.of(widget.app.lang), lines: ch.outro);
       if (!mounted) return;
     }
+    for (final e in _newEpilogues) {
+      await showStoryLines(context, widget.app, title: e.title.of(widget.app.lang), lines: e.lines);
+      if (!mounted) return;
+    }
     final ui = _ui;
     final st = _session.state;
     showDialog<void>(
@@ -306,6 +315,12 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
             '${widget.endless && _newEndlessBest ? '\n\n${widget.app.s.t('endless.newBest')}' : ''}'
             '${_newCards.isEmpty ? '' : '\n\n${ui.t('collection.new')}\n${_newCards.map((n) => '• $n').join('\n')}'}'),
         actions: [
+          if (widget.endless)
+            TextButton(
+              key: const ValueKey('share-endless'),
+              onPressed: () => _copy(widget.app.endlessShareText(widget.regionId, _endlessWaves, st.score), ui.t('invite.copied')),
+              child: Text(widget.app.s.t('endless.share')),
+            ),
           if (_replay != null)
             TextButton(
               key: const ValueKey('watch-replay'),
