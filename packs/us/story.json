@@ -867,5 +867,151 @@
         }
       ]
     }
+  ],
+  "endless": [
+    {
+      "id": "us_epi_10",
+      "waves": 10,
+      "title": {
+        "en": "Ten Waves Held",
+        "ja": "十の波を越えて",
+        "es": "Diez olas celebradas",
+        "fr": "Dix vagues tenues",
+        "it": "Tenute le dieci onde",
+        "ko": "10개의 파도가 개최됨",
+        "nl": "Tien golven vastgehouden",
+        "pt": "Dez Ondas Realizadas",
+        "tr": "On Dalga Düzenlendi",
+        "zh": "十波举行"
+      },
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Ten waves, and the line still stands. Word of the young surveyor's stand spreads along the roads.",
+            "ja": "十の波を越えても、防衛線は崩れません。若き測量士の奮闘は、街道づたいに広まっていきます。",
+            "es": "Diez olas y la línea sigue en pie. La noticia del puesto del joven topógrafo se extiende por las carreteras.",
+            "fr": "Dix vagues, et la ligne tient toujours. La nouvelle du stand du jeune géomètre se répand le long des routes.",
+            "it": "Dieci onde e la linea è ancora in piedi. La voce dello stand del giovane geometra si sparge per le strade.",
+            "ko": "10개의 파도가 있었지만 선은 여전히 ​​유효합니다. 젊은 측량사의 입소문이 길가에 퍼진다.",
+            "nl": "Tien golven, en de rij staat nog steeds. Het nieuws over het standpunt van de jonge landmeter verspreidt zich langs de wegen.",
+            "pt": "Dez ondas e a fila continua de pé. A notícia da posição do jovem agrimensor se espalha pelas estradas.",
+            "tr": "On dalga ve çizgi hâlâ duruyor. Genç haritacının standının haberi yollara yayılıyor.",
+            "zh": "十波，阵仍立。年轻测量员站的消息沿着道路传播开来。"
+          }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "Ten waves! My pencil hand is shaking, but the map is still clean.",
+            "ja": "十ウェーブ! 鉛筆を持つ手はふるえてるけど、地図はまだきれいだよ。",
+            "es": "¡Diez olas! La mano del lápiz me tiembla, pero el mapa sigue limpio.",
+            "fr": "Dix vagues ! Ma main de crayon tremble, mais la carte est toujours propre.",
+            "it": "Dieci onde! La mia mano con la matita trema, ma la mappa è ancora pulita.",
+            "ko": "열 개의 파도! 내 연필 손이 떨리고 있지만 지도는 여전히 깨끗하다.",
+            "nl": "Tien golven! Mijn potloodhand trilt, maar de kaart is nog steeds schoon.",
+            "pt": "Dez ondas! Minha mão de lápis está tremendo, mas o mapa ainda está limpo.",
+            "tr": "On dalga! Kalem elim titriyor ama harita hâlâ temiz.",
+            "zh": "十波！我的铅笔手在颤抖，但地图仍然干净。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "us_epi_20",
+      "waves": 20,
+      "title": {
+        "en": "Twenty Waves",
+        "ja": "二十の波の果て",
+        "es": "Veinte olas",
+        "fr": "Vingt vagues",
+        "it": "Venti Onde",
+        "ko": "스무 개의 파도",
+        "nl": "Twintig golven",
+        "pt": "Vinte Ondas",
+        "tr": "Yirmi Dalga",
+        "zh": "二十波"
+      },
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Twenty waves. The chronicles begin to list the surveyor beside the great defenders of old.",
+            "ja": "二十の波。年代記は、若き測量士を昔の名高い守り手たちと並べて書きはじめます。",
+            "es": "Veinte olas. Las crónicas comienzan a incluir al agrimensor junto a los grandes defensores de la antigüedad.",
+            "fr": "Vingt vagues. Les chroniques commencent à inscrire l'arpenteur aux côtés des grands défenseurs d'autrefois.",
+            "it": "Venti onde. Le cronache cominciano ad annoverare il geometra accanto ai grandi difensori dell'antichità.",
+            "ko": "20개의 파도. 연대기에서는 고대의 위대한 수호자 옆에 측량사를 나열하기 시작합니다.",
+            "nl": "Twintig golven. In de kronieken wordt de landmeter naast de grote verdedigers van weleer vermeld.",
+            "pt": "Vinte ondas. As crônicas começam a listar o agrimensor ao lado dos grandes defensores da antiguidade.",
+            "tr": "Yirmi dalga. Tarihler kadastrocuyu eskinin büyük savunucularının yanında listelemeye başlıyor.",
+            "zh": "二十波。编年史开始将测量员与古代伟大的捍卫者并列。"
+          }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "I never planned to be in a story. I just wanted to finish my map!",
+            "ja": "物語にのるつもりなんてなかったよ。地図を完成させたかっただけなのに!",
+            "es": "Nunca planeé estar en una historia. ¡Solo quería terminar mi mapa!",
+            "fr": "Je n'ai jamais prévu d'être dans une histoire. Je voulais juste finir ma carte !",
+            "it": "Non ho mai pensato di essere in una storia. Volevo solo finire la mia mappa!",
+            "ko": "나는 결코 이야기에 출연할 계획이 없었습니다. 난 그냥 내 지도를 완성하고 싶었어요!",
+            "nl": "Ik was nooit van plan om in een verhaal te spelen. Ik wilde gewoon mijn kaart afmaken!",
+            "pt": "Nunca planejei participar de uma história. Eu só queria terminar meu mapa!",
+            "tr": "Hiçbir zaman bir hikayede yer almayı planlamadım. Haritamı bitirmek istedim!",
+            "zh": "我从没想过要出现在故事​​里。我只是想完成我的地图！"
+          }
+        }
+      ]
+    },
+    {
+      "id": "us_epi_30",
+      "waves": 30,
+      "title": {
+        "en": "The Unbroken Line",
+        "ja": "破られなかった線",
+        "es": "La línea ininterrumpida",
+        "fr": "La ligne ininterrompue",
+        "it": "La linea ininterrotta",
+        "ko": "끊어지지 않은 선",
+        "nl": "De ononderbroken lijn",
+        "pt": "A linha ininterrupta",
+        "tr": "Kesintisiz Hat",
+        "zh": "不间断的线"
+      },
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": {
+            "en": "Thirty waves, and not one has broken through. The land itself seems to breathe easier.",
+            "ja": "三十の波、ひとつも突破させませんでした。大地そのものが、ほっと息をついたようです。",
+            "es": "Treinta olas y ninguna se ha abierto paso. La tierra misma parece respirar más tranquila.",
+            "fr": "Trente vagues, et aucune n’a percé. La terre elle-même semble respirer plus facilement.",
+            "it": "Trenta onde e nessuna è passata. La terra stessa sembra respirare più facilmente.",
+            "ko": "파도가 30번이나 왔는데, 파도가 한 번도 부서지지 않았습니다. 땅 자체가 더 쉽게 숨쉬는 것 같습니다.",
+            "nl": "Dertig golven, en er is er niet één doorgebroken. Het land zelf lijkt gemakkelijker te ademen.",
+            "pt": "Trinta ondas e nenhuma delas rompeu. A própria terra parece respirar com mais facilidade.",
+            "tr": "Otuz dalga var ve hiçbiri geçemedi. Toprağın kendisi daha kolay nefes alıyor gibi görünüyor.",
+            "zh": "三十波，没有一波突破。这片土地本身似乎呼吸更轻松了。"
+          }
+        },
+        {
+          "speaker": "hero",
+          "text": {
+            "en": "That's the last line on this page. Let's turn it over, there is always another map to draw.",
+            "ja": "このページの最後の線を引いたよ。ページをめくろう、描く地図はまだまだあるからね。",
+            "es": "Esa es la última línea de esta página. Demosle la vuelta, siempre hay otro mapa que dibujar.",
+            "fr": "C'est la dernière ligne de cette page. Retournons-le, il y a toujours une autre carte à dessiner.",
+            "it": "Questa è l'ultima riga di questa pagina. Giriamola, c'è sempre un'altra mappa da disegnare.",
+            "ko": "이것이 이 페이지의 마지막 줄입니다. 뒤집어 봅시다. 그려야 할 또 다른 지도가 항상 있습니다.",
+            "nl": "Dat is de laatste regel op deze pagina. Laten we het omdraaien, er is altijd een andere kaart om te tekenen.",
+            "pt": "Essa é a última linha desta página. Vamos virar, sempre há outro mapa para desenhar.",
+            "tr": "Bu sayfadaki son satır bu. Hadi çevirelim, her zaman çizilecek başka bir harita vardır.",
+            "zh": "这是本页的最后一行。我们把它翻过来吧，总有另一张地图要画。"
+          }
+        }
+      ]
+    }
   ]
 }
