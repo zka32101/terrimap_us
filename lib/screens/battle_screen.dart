@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:app_common_kit/app_common_kit.dart' show showReviewPrePrompt;
 import 'package:flutter/material.dart';
 import 'boss_intro_card.dart';
+import 'result_dialog.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:terrimap_core/battle/battle_engine.dart';
@@ -332,12 +333,19 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     showDialog<void>(
       context: context,
       barrierDismissible: false,
-      builder: (ctx) => AlertDialog(
-        title: Text(_session.won ? ui.t('result.victory') : ui.t('result.defeat')),
-        content: Text('${ui.t('result.waves', {'n': _session.won ? _stage.waves.length : (st.wave - 1).clamp(0, 99)})}\n${ui.t('result.score', {'n': st.score})}'
-            '${widget.endless && _newEndlessBest ? '\n\n${widget.app.s.t('endless.newBest')}' : ''}'
-            '${_newCards.isEmpty ? '' : '\n\n${ui.t('collection.new')}\n${_newCards.map((n) => '• $n').join('\n')}'}'),
-        actions: [
+      builder: (ctx) => ResultDialog(
+        won: _session.won,
+        title: _session.won ? ui.t('result.victory') : ui.t('result.defeat'),
+        stars: resultStars(won: _session.won, baseHp: st.baseHp, maxHp: _stage.baseHp),
+        score: st.score,
+        scoreText: (n) => ui.t('result.score', {'n': n}),
+        subtitle: ui.t('result.waves', {'n': _session.won ? _stage.waves.length : (st.wave - 1).clamp(0, 99)}),
+        backdrop: _art?.backdrop(_stage.backdrop),
+        extra: [
+          if (widget.endless && _newEndlessBest) widget.app.s.t('endless.newBest'),
+          if (_newCards.isNotEmpty) '${ui.t('collection.new')}\n${_newCards.map((n) => '• $n').join('\n')}',
+        ].join('\n\n'),
+        secondary: [
           if (widget.endless)
             TextButton(
               key: const ValueKey('share-endless'),
@@ -362,8 +370,10 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
               onPressed: () => _copy(widget.app.inviteText(Invite.fromReplay(_replay!)), ui.t('invite.copied')),
               child: Text(ui.t('invite.title')),
             ),
+        ],
+        primary: [
           if (widget.weekly == null) // 今週のチャレンジは1回きり
-          TextButton(
+          FilledButton(
             onPressed: () {
               Navigator.pop(ctx);
               Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -372,7 +382,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
             },
             child: Text(ui.t('result.retry')),
           ),
-          TextButton(
+          OutlinedButton(
             onPressed: () {
               final nav = Navigator.of(context);
               final review = widget.app.review;
