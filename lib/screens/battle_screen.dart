@@ -541,12 +541,24 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     );
   }
 
+  /// 施設の一覧やボタンの並び。横向き(右の列)は折り返し、縦向きは横スクロールの1行にして、下のパネルを低くする。
+  Widget _strip(bool side, List<Widget> items) {
+    if (side) return Wrap(spacing: 6, runSpacing: 6, children: items);
+    return SizedBox(
+      height: 44,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [for (final w in items) Padding(padding: const EdgeInsets.only(right: 8), child: w)],
+      ),
+    );
+  }
+
   Widget _panel(BattleState st, {bool side = false}) {
     final ui = _ui;
     final sel = _session.selected, f = _session.selectedFacility;
     final children = <Widget>[];
     if (_session.inPrep && st.wave < _stage.waves.length) {
-      children.add(Wrap(spacing: 8, runSpacing: 6, children: [
+      children.add(_strip(side, [
         FilledButton(key: const ValueKey('start-wave'), onPressed: _session.startWave, child: Text(ui.t('hud.startWave'))),
         if (_session.skillChoices.isNotEmpty)
           OutlinedButton.icon(
@@ -558,7 +570,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
       ]));
     }
     if (sel != null && f == null) {
-      children.add(Wrap(spacing: 6, runSpacing: 6, children: [
+      children.add(_strip(side, [
         for (final t in FacilityType.values)
           Tooltip(
             message: ui.t('facility.${t.name}.desc'),
@@ -579,7 +591,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
       final up = _engine.upgradeCostOf(f), rep = _engine.repairCostOf(f), max = _engine.maxHpOf(f);
       final name = f.exclusive != null ? '★ ${_exclusiveName(f.exclusive!)}' : _facilityName(f.type);
       children.add(Text('$name · ${ui.t('facility.level', {'n': f.level})}${max > 0 ? ' · HP ${f.hp}/$max' : ''}'));
-      children.add(Wrap(spacing: 6, runSpacing: 6, children: [
+      children.add(_strip(side, [
         if (f.exclusive == null)
           FilledButton.tonal(
             key: const ValueKey('upgrade'),
@@ -609,8 +621,9 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
         ]),
       );
     }
-    final panelHeight = (MediaQuery.of(context).size.height * 0.34).clamp(140.0, 300.0);
-    if (children.isEmpty) return SizedBox(height: panelHeight);
+    // 縦向き: 下のパネルは1〜2行の横並びに低く抑える(盤面を大きくするため)。高さは固定して盤面が動かないようにする。
+    const panelHeight = 132.0;
+    if (children.isEmpty) return const SizedBox(height: panelHeight);
     return SizedBox(
       height: panelHeight,
       child: SingleChildScrollView(
