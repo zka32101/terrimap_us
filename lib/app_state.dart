@@ -172,10 +172,19 @@ class AppState extends ChangeNotifier {
     return l == null || l.isEmpty ? '' : l.first.nameIn(_lang);
   }
 
-  ArtSet? _art;
+  ArtSet? _artBase;
 
-  /// 画像（`assets/art/`。今は図鑑カードの名所画像だけ）。画像が無いものはアイコンで出る。読み込みは初回だけ。
-  Future<ArtSet> art() async => _art ??= await ArtSet.load(rootBundle);
+  /// 画像（`assets/art/`）。バトル(背景・施設・敵・ボス)と図鑑の名所カードで使う。画像が無いものは図形やアイコンで出る。読み込みは初回だけ。
+  /// [bossId] はエクストラのボスの画像 id(ボスのいないステージは null)。
+  Future<ArtSet> art({String? bossId}) async {
+    _artBase ??= await ArtSet.load(
+      rootBundle,
+      facilitySkins: {for (final e in (pack.profile?.facilitySkins ?? const {}).entries) e.key: e.value.skin},
+      enemySkins: {for (final e in (pack.profile?.enemySkins ?? const {}).entries) e.key: e.value.skin},
+    );
+    final b = _artBase!;
+    return ArtSet(images: b.images, facilitySkins: b.facilitySkins, enemySkins: b.enemySkins, bossId: bossId);
+  }
 
   /// バトル画面の文言（その言語になければ英語）。
   UiStrings get ui => UiStrings.parse(_battleJson, lang: _lang);

@@ -14,6 +14,7 @@ import 'package:terrimap_core/battle/stage.dart';
 import 'package:terrimap_core/battle/stage_generator.dart';
 import 'package:terrimap_core/battle/tutorial.dart';
 import 'package:terrimap_core/battle/weekly_battle.dart';
+import 'package:terrimap_core/battle_ui/art_set.dart';
 import 'package:terrimap_core/battle_ui/battle_session.dart';
 import 'package:terrimap_core/battle_ui/battle_view.dart';
 import 'package:terrimap_core/story/story.dart';
@@ -52,6 +53,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
   BattleEvent? _lastEvent;
   String _message = '';
   String? _weather;
+  ArtSet? _art; // 画像（読み込み前・画像なしは図形で描く）
   bool _bossIntroShown = false, _bossIntroVisible = false; // エクストラのボスが出たとき、名前と事実の注記を1回だけ出す
   Timer? _bossIntroTimer;
   bool _bossMusic = false; // ボスが出たら BGM をボス用にする（画面を出るとき元に戻す）
@@ -80,6 +82,9 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     })..start();
     _session.fx.enabled = widget.app.battleFx;
     _session.addListener(_onChanged);
+    widget.app.art(bossId: _stage.extraId).then((a) {
+      if (mounted) setState(() => _art = a);
+    });
     final ch = _chapter;
     if (ch != null && ch.intro.isNotEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -404,6 +409,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
                 selected: _session.selected,
                 selectedRange: _session.selectedFacility == null ? null : _engine.facilityStats(_session.selectedFacility!).range,
                 facilityMaxHp: _engine.maxHpOf,
+                art: _art,
                 weather: _weather,
                 fx: _session.fx,
                 synergy: _engine.rules >= 2,

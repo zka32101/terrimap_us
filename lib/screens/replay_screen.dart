@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:terrimap_core/battle/battle_engine.dart';
 import 'package:terrimap_core/battle/grid.dart';
 import 'package:terrimap_core/battle/replay.dart';
+import 'package:terrimap_core/battle_ui/art_set.dart';
 import 'package:terrimap_core/battle_ui/battle_view.dart';
 import 'package:terrimap_core/battle_ui/replay_player.dart';
 import 'package:terrimap_core/i18n/ui_strings.dart';
@@ -21,6 +22,7 @@ class ReplayScreen extends StatefulWidget {
 class _ReplayScreenState extends State<ReplayScreen> with SingleTickerProviderStateMixin {
   late final ReplayPlayer _player = ReplayPlayer(widget.replay.buildEngine(widget.app.pack), widget.replay);
   late final Ticker _ticker;
+  ArtSet? _art; // 画像（読み込み前・画像なしは図形で描く）
   Duration _last = Duration.zero;
 
   UiStrings get _ui => widget.app.ui;
@@ -36,6 +38,9 @@ class _ReplayScreenState extends State<ReplayScreen> with SingleTickerProviderSt
     })..start();
     _player.fx.enabled = widget.app.battleFx;
     _player.addListener(_onChanged);
+    widget.app.art(bossId: _engine.stage.extraId).then((a) {
+      if (mounted) setState(() => _art = a);
+    });
   }
 
   @override
@@ -72,7 +77,7 @@ class _ReplayScreenState extends State<ReplayScreen> with SingleTickerProviderSt
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8),
-              child: BattleView(key: const ValueKey('replay-board'), stage: stage, state: st, facilityMaxHp: _engine.maxHpOf, fx: _player.fx, synergy: _engine.rules >= 2),
+              child: BattleView(key: const ValueKey('replay-board'), stage: stage, state: st, facilityMaxHp: _engine.maxHpOf, art: _art, fx: _player.fx, synergy: _engine.rules >= 2),
             ),
           ),
           if (_player.corrupt)
