@@ -1260,6 +1260,24 @@
   },
   "healer": {
    "ability": "regen"
+  },
+  "flyer": {
+   "ability": "flying",
+   "hp": 0.8,
+   "speed": 1.25
+  },
+  "saboteur": {
+   "action": "ranged_disable",
+   "speed": 1.1
+  },
+  "swarmer": {
+   "ability": "swarm",
+   "speed": 1.2,
+   "baseDamage": 1.2
+  },
+  "splitter": {
+   "hp": 0.9,
+   "speed": 1.15
   }
  },
  "attackActions": {
@@ -1460,53 +1478,166 @@
     "ja": "サボテンの看護師",
     "en": "Cactus Nurse"
    }
+  },
+  "flyer": {
+   "skin": "dust_crow",
+   "name": {
+    "ja": "ほこりのカラス",
+    "en": "Dust Crow"
+   }
+  },
+  "saboteur": {
+   "skin": "prairie_trickster",
+   "name": {
+    "ja": "大草原のいたずら者",
+    "en": "Prairie Trickster"
+   }
+  },
+  "swarmer": {
+   "skin": "locust_swarm",
+   "name": {
+    "ja": "イナゴの群れ",
+    "en": "Locust Swarm"
+   }
+  },
+  "splitter": {
+   "skin": "tar_blob",
+   "name": {
+    "ja": "タールのかたまり",
+    "en": "Tar Blob"
+   }
   }
  },
  "enemyVariants": {
   "normal": [
    {
     "skin": "dust_imp",
-    "name": {"en": "Dust Imp", "ja": "ほこりの小鬼"},
-    "when": {"groups": ["west", "midwest"]}
+    "name": {
+     "en": "Dust Imp",
+     "ja": "ほこりの小鬼"
+    },
+    "when": {
+     "groups": [
+      "west",
+      "midwest"
+     ]
+    },
+    "trait": {
+     "speed": 1.15
+    }
    },
    {
     "skin": "mud_gnome",
-    "name": {"en": "Mud Gnome", "ja": "ぬかるみの小人"},
-    "when": {"groups": ["south", "northeast"]}
+    "name": {
+     "en": "Mud Gnome",
+     "ja": "ぬかるみの小人"
+    },
+    "when": {
+     "groups": [
+      "south",
+      "northeast"
+     ]
+    },
+    "trait": {
+     "hp": 1.2,
+     "speed": 0.9
+    }
    }
   ],
   "speedy": [
    {
     "skin": "jackalope",
-    "name": {"en": "Jackalope", "ja": "ジャッカロープ"}
+    "name": {
+     "en": "Jackalope",
+     "ja": "ジャッカロープ"
+    },
+    "trait": {
+     "hp": 1.1,
+     "speed": 1.1
+    }
    },
    {
     "skin": "root_runner",
-    "name": {"en": "Root Runner", "ja": "走る木の根"},
-    "when": {"groups": ["northeast", "south"]}
+    "name": {
+     "en": "Root Runner",
+     "ja": "走る木の根"
+    },
+    "when": {
+     "groups": [
+      "northeast",
+      "south"
+     ]
+    },
+    "trait": {
+     "hp": 0.9,
+     "baseDamage": 1.2
+    }
    }
   ],
   "armored": [
    {
     "skin": "fossil_turtle",
-    "name": {"en": "Fossil Turtle", "ja": "化石の亀"},
-    "when": {"groups": ["west", "midwest"]}
+    "name": {
+     "en": "Fossil Turtle",
+     "ja": "化石の亀"
+    },
+    "when": {
+     "groups": [
+      "west",
+      "midwest"
+     ]
+    },
+    "trait": {
+     "hp": 1.3,
+     "speed": 0.8,
+     "armor": 1
+    }
    },
    {
     "skin": "scrap_bull",
-    "name": {"en": "Scrap Bull", "ja": "鉄くずの牛"},
-    "when": {"groups": ["midwest", "northeast"]}
+    "name": {
+     "en": "Scrap Bull",
+     "ja": "鉄くずの牛"
+    },
+    "when": {
+     "groups": [
+      "midwest",
+      "northeast"
+     ]
+    },
+    "trait": {
+     "baseDamage": 1.3,
+     "speed": 1.1
+    }
    }
   ],
   "healer": [
    {
     "skin": "honey_sprite",
-    "name": {"en": "Honey Sprite", "ja": "蜂蜜の精"}
+    "name": {
+     "en": "Honey Sprite",
+     "ja": "蜂蜜の精"
+    },
+    "trait": {
+     "action": "heal_aura"
+    }
    },
    {
     "skin": "rain_cloud_sprite",
-    "name": {"en": "Rain Cloud Sprite", "ja": "雨雲の精"},
-    "when": {"groups": ["south", "west"]}
+    "name": {
+     "en": "Rain Cloud Sprite",
+     "ja": "雨雲の精"
+    },
+    "when": {
+     "groups": [
+      "south",
+      "west"
+     ]
+    },
+    "trait": {
+     "hp": 0.9,
+     "speed": 1.1
+    }
    }
   ]
  },
@@ -1705,44 +1836,50 @@
     "ja": "月の番人"
    }
   },
- {
-  "id": "us_pony",
-  "basis": "history",
-  "regions": [
-   "US-MO",
-   "US-KS",
-   "US-NE",
-   "US-WY",
-   "US-UT",
-   "US-NV",
-   "US-CA"
-  ],
-  "center": "US-NE",
-  "seasons": [
-   "spring",
-   "summer",
-   "autumn",
-   "winter"
-  ],
-  "weatherEvent": "blizzard",
-  "backdrop": "plains",
-  "bossSkill": "speedBurst",
-  "waves": 10,
-  "title": {
-   "en": "Mail on the Gallop",
-   "ja": "駆けぬける郵便"
-  },
-  "summary": {
-   "en": "Pony Express riders raced mail across the West by relay. Defend the stations from dust creatures.",
-   "ja": "ポニー・エクスプレスの騎手たちは、リレーで西部に手紙を運びました。砂ぼこりの生き物たちから、駅を守りましょう。"
-  },
-  "fact": {
-   "en": "The Pony Express carried mail by relay riders between St. Joseph, Missouri, and Sacramento, California, from April 1860 to October 1861, in about ten days. The transcontinental telegraph made it unnecessary. The Dust Devil is a fantasy figure."
-  },
-  "bossName": {
-   "en": "The Dust Devil",
-   "ja": "砂ぼこりの精"
+  {
+   "id": "us_pony",
+   "basis": "history",
+   "regions": [
+    "US-MO",
+    "US-KS",
+    "US-NE",
+    "US-WY",
+    "US-UT",
+    "US-NV",
+    "US-CA"
+   ],
+   "center": "US-NE",
+   "seasons": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+   ],
+   "weatherEvent": "blizzard",
+   "backdrop": "plains",
+   "bossSkill": "speedBurst",
+   "waves": 10,
+   "title": {
+    "en": "Mail on the Gallop",
+    "ja": "駆けぬける郵便"
+   },
+   "summary": {
+    "en": "Pony Express riders raced mail across the West by relay. Defend the stations from dust creatures.",
+    "ja": "ポニー・エクスプレスの騎手たちは、リレーで西部に手紙を運びました。砂ぼこりの生き物たちから、駅を守りましょう。"
+   },
+   "fact": {
+    "en": "The Pony Express carried mail by relay riders between St. Joseph, Missouri, and Sacramento, California, from April 1860 to October 1861, in about ten days. The transcontinental telegraph made it unnecessary. The Dust Devil is a fantasy figure."
+   },
+   "bossName": {
+    "en": "The Dust Devil",
+    "ja": "砂ぼこりの精"
+   }
   }
+ ],
+ "enemyMixV3": {
+  "flyer": 0.12,
+  "saboteur": 0.05,
+  "swarmer": 0.14,
+  "splitter": 0.06
  }
- ]
 }
