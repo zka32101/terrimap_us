@@ -1273,7 +1273,8 @@
   "swarmer": {
    "ability": "swarm",
    "speed": 1.2,
-   "baseDamage": 1.2
+   "baseDamage": 1.2,
+   "hp": 1.4
   },
   "splitter": {
    "hp": 0.9,
