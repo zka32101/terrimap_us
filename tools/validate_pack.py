@@ -66,13 +66,15 @@ if prof_path.exists():
     try: prof = json.loads(prof_path.read_text())
     except Exception as e: prof = None; err.append(f"profile.json: 読込失敗 {e}")
     if prof is not None:
-        ENEMIES = {"normal", "speedy", "armored", "healer"}
+        NEW_ENEMIES = {"flyer", "saboteur", "swarmer", "splitter"}
+        HARD_ENEMIES = {"brute", "jammer"}
+        ENEMIES = {"normal", "speedy", "armored", "healer"} | NEW_ENEMIES | HARD_ENEMIES
         TERRAINS = {"sea", "mountain", "urban", "agriculture", "mixed"}
         if not prof.get("style"): err.append("profile.json: style が空")
         mix = prof.get("enemyMix") or {}
         if not mix: err.append("profile.json: enemyMix が空")
         for k, v in mix.items():
-            if k not in ENEMIES: err.append(f"profile.json: enemyMix の未知の敵 {k}")
+            if k not in ENEMIES or k in NEW_ENEMIES or k in HARD_ENEMIES: err.append(f"profile.json: enemyMix の未知の敵 {k}（新しい種類は enemyMixV3・enemyMixHard に書く）")
             if not isinstance(v, (int, float)) or v < 0: err.append(f"profile.json: enemyMix.{k} が負または数値でない")
         if mix and abs(sum(v for v in mix.values() if isinstance(v, (int, float))) - 1) > 0.01:
             err.append("profile.json: enemyMix の合計が1でない")
@@ -95,6 +97,29 @@ if prof_path.exists():
             if a is not None and (not isinstance(a, int) or not (0 <= a <= 3)): err.append(f"profile.json: enemies.{kind}.armor は0〜3の整数")
             if t.get("ability") is not None and t["ability"] not in ABIL: err.append(f"profile.json: enemies.{kind}.ability が不正")
             if t.get("action") is not None and t["action"] not in EACT: err.append(f"profile.json: enemies.{kind}.action が不正")
+        for k, x in (prof.get("enemyMixHard") or {}).items():
+            if k not in HARD_ENEMIES: err.append(f"profile.json: enemyMixHard の未知の敵 {k}")
+            if not isinstance(x, (int, float)) or x < 0: err.append(f"profile.json: enemyMixHard.{k} が負または数値でない")
+        _skins = {t.get("skin") for t in (prof.get("enemySkins") or {}).values() if isinstance(t, dict)}
+        for g, mb in (prof.get("miniBosses") or {}).items():
+            if g not in (prof.get("groups") or {}): err.append(f"profile.json: miniBosses の未知の地方 {g}")
+            if not mb.get("skin"): err.append(f"profile.json: miniBosses.{g} の skin が空")
+            elif mb["skin"] in _skins: err.append(f"profile.json: miniBosses の skin {mb['skin']} が重複")
+            else: _skins.add(mb["skin"])
+            if not (mb.get("name") or {}).get("en"): err.append(f"profile.json: miniBosses.{g} の name に英語がない")
+            if mb.get("skill") not in {"speedBurst", "hpRegen", "summon", "stunFacility"}: err.append(f"profile.json: miniBosses.{g}.skill が不正")
+        for kind, lst in (prof.get("enemyVariants") or {}).items():
+            for v in lst:
+                t = v.get("trait")
+                if not t: continue
+                lb = f"enemyVariants.{kind}.{v.get('skin')}.trait"
+                for k in ("hp", "speed", "baseDamage"):
+                    x = t.get(k)
+                    if x is not None and (not isinstance(x, (int, float)) or not (0.5 <= x <= 2.0)): err.append(f"profile.json: {lb}.{k} は0.5〜2.0")
+                a = t.get("armor")
+                if a is not None and (not isinstance(a, int) or not (0 <= a <= 3)): err.append(f"profile.json: {lb}.armor は0〜3の整数")
+                if t.get("ability") is not None and t["ability"] not in ABIL: err.append(f"profile.json: {lb}.ability が不正")
+                if t.get("action") is not None and t["action"] not in EACT: err.append(f"profile.json: {lb}.action が不正")
         for fac, t in (prof.get("attackActions") or {}).items():
             if fac not in FACS: err.append(f"profile.json: attackActions の未知の施設 {fac}")
             if t.get("action") not in FACT: err.append(f"profile.json: attackActions.{fac}.action が不正")
@@ -114,6 +139,23 @@ if prof_path.exists():
                 if k not in allowed: err.append(f"profile.json: {key} の未知の{label} {k}")
                 if not (t or {}).get("skin"): err.append(f"profile.json: {key}.{k} の skin が空")
                 if not ((t or {}).get("name") or {}).get("en"): err.append(f"profile.json: {key}.{k} の name に英語がない")
+        used = {t.get("skin") for t in (prof.get("enemySkins") or {}).values() if isinstance(t, dict)}
+        grp_ids = set((prof.get("groups") or {}).keys())
+        for kind, lst in (prof.get("enemyVariants") or {}).items():
+            if kind not in ENEMIES: err.append(f"profile.json: enemyVariants の未知の敵 {kind}")
+            if not isinstance(lst, list): err.append(f"profile.json: enemyVariants.{kind} が配列でない"); continue
+            for v in lst:
+                if not isinstance(v, dict): err.append(f"profile.json: enemyVariants.{kind} に、オブジェクトでない要素がある"); continue
+                sk = v.get("skin") or ""
+                if not sk: err.append(f"profile.json: enemyVariants.{kind} の skin が空")
+                elif sk in used: err.append(f"profile.json: enemyVariants の skin {sk} が重複")
+                used.add(sk)
+                if not (v.get("name") or {}).get("en"): err.append(f"profile.json: enemyVariants.{kind}.{sk} の name に英語がない")
+                w = v.get("when") or {}
+                for r in w.get("regions") or []:
+                    if r not in set(ids): err.append(f"profile.json: enemyVariants.{kind}.{sk} の未知の州 {r}")
+                for g in w.get("groups") or []:
+                    if g not in grp_ids: err.append(f"profile.json: enemyVariants.{kind}.{sk} の未知の地方 {g}")
         xseen = set()
         for e in (prof.get("extras") or []):
             xid = e.get("id")
@@ -156,8 +198,79 @@ if prof_path.exists():
             for k in (t.get("facilityBonus") or {}):
                 if k not in FACS: err.append(f"profile.json: {rid} の facilityBonus の未知の施設 {k}")
             if rid not in set(ids): err.append(f"profile.json: 未知の地域 {rid}")
+            if "blurb" in t and not (t["blurb"] or {}).get("en"): err.append(f"profile.json: {rid} の blurb に英語がない")
             if t.get("terrain") is not None and t["terrain"] not in TERRAINS: err.append(f"profile.json: {rid} の terrain が不正")
             for k, v in (t.get("facilityBonus") or {}).items():
                 if not isinstance(v, (int, float)) or not (1.0 <= v <= 2.0): err.append(f"profile.json: {rid} の facilityBonus.{k} は1.0〜2.0")
+# facts.json（任意）: 名所の地域が実在し、id が重複せず、英語の名前があること
+if (p/'facts.json').exists():
+    try: facts = json.loads((p/'facts.json').read_text())
+    except Exception as e: facts = {}; err.append(f"facts.json: 読込失敗 {e}")
+    if facts and facts.get("v") != 1: err.append("facts.json: v は 1")
+    seen = set()
+    for l in (facts.get("landmarks") or []):
+        lid = l.get("id")
+        if lid in seen: err.append(f"facts.json: 名所 id の重複 {lid}")
+        seen.add(lid)
+        if l.get("region") not in set(ids): err.append(f"facts.json: {lid} の未知の地域 {l.get('region')}")
+        if not (l.get("name") or {}).get("en"): err.append(f"facts.json: {lid} に英語の名前がない")
+        if l.get("check", "unchecked") not in ("unchecked", "checked"): err.append(f"facts.json: {lid} の check が不正")
+    seen_k = set()
+    for k in (facts.get("knowledge") or []):
+        kid = k.get("id")
+        if kid in seen_k: err.append(f"facts.json: 知識 id の重複 {kid}")
+        seen_k.add(kid)
+        if k.get("region") not in set(ids): err.append(f"facts.json: {kid} の未知の地域 {k.get('region')}")
+        if not (k.get("name") or {}).get("en"): err.append(f"facts.json: {kid} に英語の名前がない")
+        if k.get("kind") not in ("food", "product", "culture", "nature"): err.append(f"facts.json: {kid} の kind が不正 {k.get('kind')}")
+        if k.get("check", "unchecked") not in ("unchecked", "checked"): err.append(f"facts.json: {kid} の check が不正")
+# story.json（任意）: 章の id・ステージの参照・前提の章の順番・英語の文・伝説の章の注記（Dart の Story.validate と同じ規則）
+if (p/'story.json').exists():
+    try: story = json.loads((p/'story.json').read_text())
+    except Exception as e: story = {}; err.append(f"story.json: 読込失敗 {e}")
+    prof = {}
+    if (p/'profile.json').exists():
+        try: prof = json.loads((p/'profile.json').read_text())
+        except Exception: prof = {}
+    extras = {e.get("id"): e for e in (prof.get("extras") or [])}
+    groups = set((prof.get("groups") or {}).keys())
+    SPEAKERS = ("narrator", "boss", "note", "hero")
+    hero = story.get("hero")
+    if hero is not None and not (hero.get("name") or {}).get("en"): err.append("story.json: hero の名前の英語がない")
+    seen_ch = set(); seen_all = set()
+    for c in (story.get("chapters") or []):
+        cid = c.get("id")
+        if cid in seen_all: err.append(f"story.json: 章の id が重複 {cid}")
+        seen_all.add(cid)
+        if not (c.get("title") or {}).get("en"): err.append(f"story.json: {cid} の題名の英語がない")
+        lines = [l for k in ("intro", "beforeBoss", "outro") for l in (c.get(k) or [])]
+        for l in lines:
+            if l.get("speaker") not in SPEAKERS: err.append(f"story.json: {cid} の語り手が不正 {l.get('speaker')}")
+            if not (l.get("text") or {}).get("en"): err.append(f"story.json: {cid} に英語のない文がある")
+            if l.get("speaker") == "hero" and not hero: err.append(f"story.json: {cid} に主人公の文があるが、hero が定義されていない")
+        kind, sid = c.get("kind"), c.get("stageId")
+        if kind == "normal":
+            if sid not in set(ids): err.append(f"story.json: {cid} の未知の州 {sid}")
+        elif kind == "regional":
+            if sid not in groups: err.append(f"story.json: {cid} の未知の地方 {sid}")
+        elif kind == "extra":
+            e = extras.get(sid)
+            if e is None: err.append(f"story.json: {cid} の未知のエクストラ {sid}")
+            elif e.get("basis") == "legend" and not any(l.get("speaker") == "note" for l in (c.get("outro") or [])):
+                err.append(f"story.json: {cid} は伝説の章なので、実在と伝説を分ける注記（note）が要る")
+        else: err.append(f"story.json: {cid} の kind が不正 {kind}")
+        r = c.get("requires")
+        if r is not None and r not in seen_ch: err.append(f"story.json: {cid} の前提の章 {r} が先にない")
+        seen_ch.add(cid)
+    for e in (story.get("endless") or []):
+        eid = e.get("id")
+        if eid in seen_all: err.append(f"story.json: id が重複 {eid}")
+        seen_all.add(eid)
+        if not isinstance(e.get("waves"), int) or e["waves"] <= 0: err.append(f"story.json: {eid} の waves は1以上の整数")
+        if not (e.get("title") or {}).get("en"): err.append(f"story.json: {eid} の題名の英語がない")
+        for l in (e.get("lines") or []):
+            if l.get("speaker") not in SPEAKERS: err.append(f"story.json: {eid} の語り手が不正 {l.get('speaker')}")
+            if not (l.get("text") or {}).get("en"): err.append(f"story.json: {eid} に英語のない文がある")
+            if l.get("speaker") == "hero" and not hero: err.append(f"story.json: {eid} に主人公の文があるが、hero が定義されていない")
 print("\n".join(err) if err else f"OK {pack.get('packId')}: {len(ids)}地域")
 sys.exit(1 if err else 0)
