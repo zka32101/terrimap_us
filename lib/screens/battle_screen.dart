@@ -83,7 +83,7 @@ class _BattleScreenState extends State<BattleScreen> with SingleTickerProviderSt
     })..start();
     _session.fx.enabled = widget.app.battleFx;
     _session.addListener(_onChanged);
-    widget.app.art(bossId: _stage.extraId).then((a) {
+    widget.app.art(bossId: _stage.extraId, stage: _stage).then((a) {
       if (mounted) setState(() => _art = a);
     });
     final ch = _chapter;
