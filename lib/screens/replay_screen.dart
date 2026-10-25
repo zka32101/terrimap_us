@@ -38,7 +38,7 @@ class _ReplayScreenState extends State<ReplayScreen> with SingleTickerProviderSt
     })..start();
     _player.fx.enabled = widget.app.battleFx;
     _player.addListener(_onChanged);
-    widget.app.art(bossId: _engine.stage.extraId).then((a) {
+    widget.app.art(bossId: _engine.stage.extraId, stage: _engine.stage).then((a) {
       if (mounted) setState(() => _art = a);
     });
   }

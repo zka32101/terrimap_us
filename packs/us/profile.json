@@ -1462,6 +1462,54 @@
    }
   }
  },
+ "enemyVariants": {
+  "normal": [
+   {
+    "skin": "dust_imp",
+    "name": {"en": "Dust Imp", "ja": "ほこりの小鬼"},
+    "when": {"groups": ["west", "midwest"]}
+   },
+   {
+    "skin": "mud_gnome",
+    "name": {"en": "Mud Gnome", "ja": "ぬかるみの小人"},
+    "when": {"groups": ["south", "northeast"]}
+   }
+  ],
+  "speedy": [
+   {
+    "skin": "jackalope",
+    "name": {"en": "Jackalope", "ja": "ジャッカロープ"}
+   },
+   {
+    "skin": "root_runner",
+    "name": {"en": "Root Runner", "ja": "走る木の根"},
+    "when": {"groups": ["northeast", "south"]}
+   }
+  ],
+  "armored": [
+   {
+    "skin": "fossil_turtle",
+    "name": {"en": "Fossil Turtle", "ja": "化石の亀"},
+    "when": {"groups": ["west", "midwest"]}
+   },
+   {
+    "skin": "scrap_bull",
+    "name": {"en": "Scrap Bull", "ja": "鉄くずの牛"},
+    "when": {"groups": ["midwest", "northeast"]}
+   }
+  ],
+  "healer": [
+   {
+    "skin": "honey_sprite",
+    "name": {"en": "Honey Sprite", "ja": "蜂蜜の精"}
+   },
+   {
+    "skin": "rain_cloud_sprite",
+    "name": {"en": "Rain Cloud Sprite", "ja": "雨雲の精"},
+    "when": {"groups": ["south", "west"]}
+   }
+  ]
+ },
  "groups": {
   "northeast": {
    "name": {

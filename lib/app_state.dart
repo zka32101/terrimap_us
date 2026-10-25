@@ -10,6 +10,8 @@ import 'package:terrimap_core/story/story.dart';
 import 'leaderboard.dart';
 import 'looks.dart';
 import 'package:terrimap_core/battle/achievements.dart';
+import 'package:terrimap_core/battle/stage.dart';
+import 'package:terrimap_core/pack/country_profile.dart';
 import 'package:terrimap_core/battle/battle_progress.dart';
 import 'package:terrimap_core/battle/collection.dart';
 import 'package:terrimap_core/battle_ui/art_set.dart';
@@ -176,14 +178,24 @@ class AppState extends ChangeNotifier {
 
   /// 画像（`assets/art/`）。バトル(背景・施設・敵・ボス)と図鑑の名所カードで使う。画像が無いものは図形やアイコンで出る。読み込みは初回だけ。
   /// [bossId] はエクストラのボスの画像 id(ボスのいないステージは null)。
-  Future<ArtSet> art({String? bossId}) async {
+  /// [stage] を渡すと、その州・地方で出る敵の見た目違い（`enemyVariants`）も使う。
+  Future<ArtSet> art({String? bossId, Stage? stage}) async {
     _artBase ??= await ArtSet.load(
       rootBundle,
       facilitySkins: {for (final e in (pack.profile?.facilitySkins ?? const {}).entries) e.key: e.value.skin},
       enemySkins: {for (final e in (pack.profile?.enemySkins ?? const {}).entries) e.key: e.value.skin},
     );
     final b = _artBase!;
-    return ArtSet(images: b.images, facilitySkins: b.facilitySkins, enemySkins: b.enemySkins, bossId: bossId);
+    final profile = pack.profile;
+    final variants = <String, List<String>>{};
+    if (stage != null && profile != null) {
+      for (final kind in CountryProfile.enemyKinds) {
+        final base = profile.enemySkins[kind]?.skin;
+        final ids = profile.enemySkinIds(kind, regionId: stage.regionId, groupId: stage.groupId).where((id) => id != base).toList();
+        if (ids.isNotEmpty) variants[kind] = ids;
+      }
+    }
+    return ArtSet(images: b.images, facilitySkins: b.facilitySkins, enemySkins: b.enemySkins, enemyVariants: variants, bossId: bossId);
   }
 
   /// バトル画面の文言（その言語になければ英語）。
