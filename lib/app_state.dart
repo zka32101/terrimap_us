@@ -195,7 +195,9 @@ class AppState extends ChangeNotifier {
         if (ids.isNotEmpty) variants[kind] = ids;
       }
     }
-    return ArtSet(images: b.images, facilitySkins: b.facilitySkins, enemySkins: b.enemySkins, enemyVariants: variants, bossId: bossId);
+    // ミニボス（ルール版4）の画像は bosses/<skin>。なければ橙の縁の図形で出る。
+    final mini = stage == null ? null : profile?.miniBossFor(stage.regionId, groupId: stage.groupId);
+    return ArtSet(images: b.images, facilitySkins: b.facilitySkins, enemySkins: b.enemySkins, enemyVariants: variants, bossId: bossId, miniBossId: mini?.skin);
   }
 
   /// バトル画面の文言（その言語になければ英語）。

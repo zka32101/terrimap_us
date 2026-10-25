@@ -1278,6 +1278,15 @@
   "splitter": {
    "hp": 0.9,
    "speed": 1.15
+  },
+  "brute": {
+   "hp": 1.0,
+   "speed": 1.15,
+   "ability": "shield"
+  },
+  "jammer": {
+   "ability": "disrupt",
+   "speed": 1.2
   }
  },
  "attackActions": {
@@ -1505,6 +1514,20 @@
    "name": {
     "ja": "タールのかたまり",
     "en": "Tar Blob"
+   }
+  },
+  "brute": {
+   "skin": "canyon_troll",
+   "name": {
+    "ja": "峡谷のトロル",
+    "en": "Canyon Troll"
+   }
+  },
+  "jammer": {
+   "skin": "static_spirit",
+   "name": {
+    "ja": "静電気の精",
+    "en": "Static Spirit"
    }
   }
  },
@@ -1881,5 +1904,43 @@
   "saboteur": 0.05,
   "swarmer": 0.14,
   "splitter": 0.06
+ },
+ "enemyMixHard": {
+  "brute": 0.12,
+  "jammer": 0.08
+ },
+ "miniBosses": {
+  "west": {
+   "skin": "dust_storm_lord",
+   "name": {
+    "ja": "砂嵐の主",
+    "en": "Dust Storm Lord"
+   },
+   "skill": "speedBurst"
+  },
+  "northeast": {
+   "skin": "autumn_great_tree",
+   "name": {
+    "ja": "紅葉の大木",
+    "en": "Great Autumn Tree"
+   },
+   "skill": "summon"
+  },
+  "midwest": {
+   "skin": "prairie_wind_king",
+   "name": {
+    "ja": "大草原の風の王",
+    "en": "Prairie Wind King"
+   },
+   "skill": "hpRegen"
+  },
+  "south": {
+   "skin": "bayou_gator_king",
+   "name": {
+    "ja": "沼地の大ワニ",
+    "en": "Bayou Gator King"
+   },
+   "skill": "stunFacility"
+  }
  }
 }
